@@ -1,0 +1,12 @@
+<messaging:emailTemplate subject="Request Missing Documents For {!relatedTo.Cloufi__First_Name__c} {!relatedTo.Cloufi__Last_Name__c}" recipientType="Lead" relatedToType="Cloufi__Application__c">
+    <messaging:htmlEmailBody >
+        
+        Dear {!relatedTo.Cloufi__First_Name__c} {!relatedTo.Cloufi__Last_Name__c},<br /><br/>
+
+        The application for {!relatedTo.Cloufi__Business_DBA_Name__c} is missing below documents.<br/><br/>
+        
+        <c:MissingDocument AppLicationID="{!relatedTo.Id}"/>
+        
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

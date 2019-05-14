@@ -1,0 +1,21 @@
+<messaging:emailTemplate subject="Additional Documentation Request for {!relatedTo.Name}" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello {!relatedTo.Owner_1_First_Name__c},<br /><br/>
+
+        Thank you for the information you have provided. We have several other documents that are needed to continue with your Cash Advance application for <b>{!relatedTo.Name}</b>.<br/><br/>
+        
+        Below you will find the list of required documentation. You may click on the link to upload your documents, or reply to this email with attachments.<br/>
+        
+        <c:RequestedDocumentComp OpportunityId="{!relatedTo.Id}"/><br/>
+        
+        If you have any questions, we will be happy to answer them.<br/><br/><br/><br/>
+
+        Best Regards,<br/><br/>
+        <b>{!relatedTo.Owner.Name}</b><br/>
+        {!relatedTo.Owner.Phone}<br/>
+        {!relatedTo.Owner.Email}<br/>
+        <img src="{!relatedTo.Owner.Company_Logo__c}"/>
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

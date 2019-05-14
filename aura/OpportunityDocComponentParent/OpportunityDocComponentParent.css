@@ -1,0 +1,23 @@
+.THIS .Stip-message-blank {
+    color: rgb(0, 112, 210);
+    font-family: unset;
+    font-size: 17px;
+    text-align: center;
+}
+
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}
+
+.THIS .white-space .slds-truncate{
+	white-space: normal;
+}
+
+.THIS .doc-header {
+    font-size: 1em;
+    margin-bottom: 10px;
+    background-color: #f1f0f0;
+    padding: 6px;
+    padding-left: 10px;
+}

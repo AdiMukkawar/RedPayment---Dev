@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c}, 
+
+I just left you a message about an offer we have to discuss with you. Please email or call me back at your earliest convenience.
+
+Thanks,
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName} 
+{!Opportunity.Opportunity_Owner_Company_Name__c}
+{!Opportunity.OwnerPhone} 
+{!Opportunity.OwnerEmail}

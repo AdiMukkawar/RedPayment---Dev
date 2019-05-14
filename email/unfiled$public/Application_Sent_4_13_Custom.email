@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c}, <br/><br/>
+
+I just tried calling and left you a message. Please let me know if you need any help with the funding application linked <b><a href="{!Opportunity.Application_URL__c}">here</a></b> or if you have any questions. <br/><br/><br/>
+
+Thanks! <br/>
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName} <br/>
+{!Opportunity.Opportunity_Owner_Company_Name__c} <br/>
+{!Opportunity.OwnerPhone} <br/>
+{!Opportunity.OwnerEmail}<br/>

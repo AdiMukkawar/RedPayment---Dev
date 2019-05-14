@@ -1,0 +1,300 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd (Aditya Mukkawar)
+* Component Name: UWChatbox
+* Created Date: 03/27/2019
+* Description: UW Chatbox
+*******************************************************************
+/-->
+<aura:component controller="ChatboxController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!-- Aura Attributes Begin -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="userInfo" type="user"/>
+
+    <aura:attribute name="sourceComponent" type="String" default=""/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" description="show hide save and cancel" default="false"/>
+    <aura:attribute name="currentUserId" type="string"/>
+    <aura:handler name="cmpSaveCancelEvent" event="c:SaveCancelEvent" action="{!c.handleComponentEvent}"/>
+    <!-- Aura Attributes End -->
+    
+   <!-- Support to Lender Attributes Begin -->
+    <aura:attribute name="SupportLenderheaderlabel" type="String" default=""/>
+    <aura:attribute name="supportToLenderChatList" type="Chat__c[]" />
+    <aura:attribute name="supportToLenderDescription" type="String" default=""/>
+    <aura:attribute name="SendSupportLender" type="Boolean" default="true"/>
+    <!-- Support to Lender Attributes End -->
+    
+    <!-- Internal UW Notes Attributes Begin -->
+    <aura:attribute name="InternalUWNote" type="Chat__c[]" />
+    <aura:attribute name="InternalUWNoteDescription" type="String" default=""/>
+    <aura:attribute name="SaveInternalUW" type="Boolean" default="true"/>
+    <!-- Internal UW Notes Attributes End -->
+
+    <!-- Operational And UW Notes Attributes Begin -->
+    <aura:attribute name="OperationalAndUWNotes" type="Chat__c[]" />
+    <aura:attribute name="OperationalAndUWNotesDescription" type="String" default=""/>
+    <aura:attribute name="SaveOperationalUW" type="Boolean" default="true"/>
+    <!-- Operational And UW Notes Attributes End -->
+
+    <!-- Repyment Note Attributes Begin -->
+    <aura:attribute name="repymentNoteList" type="Chat__c[]" />
+    <aura:attribute name="repymentNoteDescription" type="String" default=""/>
+    <aura:attribute name="SaveRepaymentNote" type="Boolean" default="true"/>
+    <!-- Repyment Note Attributes End -->
+
+    <!-- Legal Note Attributes Begin -->
+    <aura:attribute name="legalNoteList" type="Chat__c[]" />
+    <aura:attribute name="legalNoteDescription" type="String" default=""/>
+    <aura:attribute name="SaveLegalNote" type="Boolean" default="true"/>
+    <!-- Legal Note Attributes End -->
+    
+    <!-- Chatbox Component for Sales support and Under Writing Begin -->
+    <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver')}">
+        <div class="container-fluid">
+            <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large chatBoxDesign skyblueBackground">
+                <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                    <ui:scrollerWrapper class="scrollerSize">
+                        <lightning:card>
+                            <aura:set attribute="title">
+                                <h2 class="chat-header skyblue-chat-header">
+                                    <lightning:icon iconName="utility:connected_apps" size="small" class="labelIcon"/>
+                                    {!v.SupportLenderheaderlabel}
+                                </h2>
+                            </aura:set>
+                            
+                            <p class="slds-p-horizontal_small">
+                                <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'Under Writing')}">
+                                    <span class="slds-form-element__label slds-m-bottom_none messageField slds-size_1-of-1">
+                                        <lightning:inputRichText aura:id="msgToSupportLender" label="Message" value="{!v.supportToLenderDescription}" placeholder="Type a message here...">
+                                            <lightning:insertImageButton/>
+                                        </lightning:inputRichText>
+                                        <br/>
+                                        <lightning:button variant="brand" label="Send" class="Float-right skyblueBackground" title="Send" onclick="{!c.SendMessageToSupportLender}" disabled="{!!v.SendSupportLender}"/>
+                                    </span><br/>
+                                </aura:renderIf>
+                                
+                                <!-- Message Section Begin -->
+                                    <div class="slds-p-around_small chat-main slds-size_1-of-1" id="modal-content-id-1">
+                                        <h2 class="chat-header skyblue-chat-header">Chat History</h2>
+                                        <div class="scroll-bar">
+                                            <aura:iteration items="{!v.supportToLenderChatList}" var="chat">
+                                                <aura:if isTrue="{!chat.Subject__c=='Message from Sales Support to Lender'}">
+
+                                                    <div class="slds-box slds-text-heading_small slds-grid slds-wrap message-box-first">
+                                                        <div class="slds-col slds-size_1-of-1 firstDiv">
+                                                            <a href="JavaScript:void(0);" style="pointer-events: none; cursor: default; color:#b54e4e;">{!chat.User__r.Name}</a>
+                                                            &nbsp;<ui:outputDateTime value="{!chat.CreatedDate}" timeZone="{!$Locale.timezone}"/><br/>
+                                                            <span class="description-Span">
+                                                                <!-- <ui:outputRichText aura:id="outputRT" value="{!chat.Message__c}" /> -->
+                                                                <dd class="slds-tile">
+                                                                    <p class="slds-text-longform tile__title red-txt">
+                                                                        <aura:unescapedHtml value="{!chat.Message__c}"/>
+                                                                    </p>  
+                                                                </dd>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                 </aura:if>
+                                                <aura:if isTrue="{!chat.Subject__c=='Message from Lender to Sales Support'}">
+                                                    <div class="slds-box slds-text-heading_small slds-grid slds-wrap message-box-second">                        
+                                                        <div class="slds-col slds-size_1-of-1 secondDiv">
+                                                            <a href="JavaScript:void(0);"  style="pointer-events: none; cursor: default;">{!chat.User__r.Name}</a>
+                                                            &nbsp;<ui:outputDateTime value="{!chat.CreatedDate}" timeZone="{!$Locale.timezone}"/><br/>
+                                                            <span class="description-Span">
+                                                                <!-- <ui:outputRichText value="{!chat.Message__c}" /> -->
+                                                                <dd class="slds-tile">
+                                                                    <p class="slds-text-longform tile__title red-txt">
+                                                                        <aura:unescapedHtml value="{!chat.Message__c}"/>
+                                                                    </p>  
+                                                                </dd>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                <!-- Message Section End -->
+                            </p>
+                        </lightning:card>
+                    </ui:scrollerWrapper>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:renderIf>
+    <!-- Chatbox Component for Sales support and Under Writing End -->
+
+    <!-- Chatbox Component for Internal UW Notes Begin -->
+    <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver')}">
+        <div class="container-fluid">
+            <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large chatBoxDesign peechBackground">
+                <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                    <ui:scrollerWrapper class="scrollerSize">
+                        <lightning:card>
+                            <aura:set attribute="title">
+                                <h2 class="chat-header peech-chat-header">
+                                    <lightning:icon iconName="utility:connected_apps" size="small" class="labelIcon"/>
+                                    Internal UW Notes
+                                </h2>
+                            </aura:set>
+                            
+                            <p class="slds-p-horizontal_small">
+                                <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver')}">
+                                    <span class="slds-form-element__label slds-m-bottom_none messageField slds-size_1-of-1">
+                                        <lightning:inputRichText aura:id="InternalUWNote" label="Message" value="{!v.InternalUWNoteDescription}" placeholder="Type a message here...">
+                                            <lightning:insertImageButton/>
+                                        </lightning:inputRichText>
+                                        <br/>
+                                        <lightning:button variant="brand" label="Save" class="Float-right peechBackground" title="Save" onclick="{!c.SendInternalUWNote}" disabled="{!!v.SaveInternalUW}"/>
+                                    </span><br/>
+                                </aura:renderIf>
+                                
+                                <!-- Message Section Begin -->
+                                    <div class="slds-p-around_small chat-main slds-size_1-of-1" id="modal-content-id-1">
+                                        <h2 class="chat-header peech-chat-header">Note History</h2>
+                                        <div class="scroll-bar">
+                                            <aura:iteration items="{!v.InternalUWNote}" var="chat">
+                                                <c:ChatboxInlineEdit singleChat="{!chat}" showSaveCancelBtn="{!v.showSaveCancelBtn}" index="{!index + 1}" sourceComponent="InternalUWNote" currentUserId="{!v.userInfo.Id}"/>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                <!-- Message Section End -->
+                            </p>
+                        </lightning:card>
+                    </ui:scrollerWrapper>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:renderIf>
+    <!-- Chatbox Component for Internal UW Notes End -->
+	
+    <!-- Chatbox Component for Operational and UW Notes Begin -->
+    <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver' || v.userInfo.Profile.Name == 'Customer Success' || v.userInfo.Profile.Name == 'Customer Success Manager' || v.userInfo.Profile.Name =='Cash Advance Sales Manager')}">
+        <div class="container-fluid">
+            <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large chatBoxDesign skyblueBackground">
+                <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                    <ui:scrollerWrapper class="scrollerSize">
+                        <lightning:card>
+                            <aura:set attribute="title">
+                                <h2 class="chat-header skyblue-chat-header">
+                                    <lightning:icon iconName="utility:connected_apps" size="small" class="labelIcon"/>
+                                    Operational Notes
+                                </h2>
+                            </aura:set>
+                            
+                            <p class="slds-p-horizontal_small">
+                                <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver' || v.userInfo.Profile.Name == 'Customer Success' || v.userInfo.Profile.Name == 'Customer Success Manager' || v.userInfo.Profile.Name =='Cash Advance Sales Manager')}">
+                                    <span class="slds-form-element__label slds-m-bottom_none messageField slds-size_1-of-1">
+                                        <lightning:inputRichText aura:id="OperationalUWNote" label="Message" value="{!v.OperationalAndUWNotesDescription}" placeholder="Type a message here...">
+                                            <lightning:insertImageButton/>
+                                        </lightning:inputRichText>
+                                        <br/>
+                                        <lightning:button variant="brand" label="Save" class="Float-right skyblueBackground" title="Save" onclick="{!c.SendOperationalUWNote}" disabled="{!!v.SaveOperationalUW}"/>
+                                    </span><br/>
+                                </aura:renderIf>
+                                
+                                <!-- Message Section Begin -->
+                                    <div class="slds-p-around_small chat-main slds-size_1-of-1" id="modal-content-id-1">
+                                        <h2 class="chat-header skyblue-chat-header">Note History</h2>
+                                        <div class="scroll-bar">
+                                            <aura:iteration items="{!v.OperationalAndUWNotes}" var="chat">
+                                                <c:ChatboxInlineEdit singleChat="{!chat}" showSaveCancelBtn="{!v.showSaveCancelBtn}" index="{!index + 1}" sourceComponent="OperationalNote" currentUserId="{!v.userInfo.Id}"/>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                <!-- Message Section End -->
+                            </p>
+                        </lightning:card>
+                    </ui:scrollerWrapper>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:renderIf>
+    <!-- Chatbox Component for Operational and UW Notes End -->
+
+    <!-- Chatbox Component for Repayment Notes Begin -->
+    <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver' || v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'System Administrator')}">
+        <div class="container-fluid">
+            <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large chatBoxDesign peechBackground">
+                <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                    <ui:scrollerWrapper class="scrollerSize">
+                        <lightning:card>
+                            <aura:set attribute="title">
+                                <h2 class="chat-header peech-chat-header">
+                                    <lightning:icon iconName="utility:connected_apps" size="small" class="labelIcon"/>
+                                    Repayment Notes
+                                </h2>
+                            </aura:set>
+                            
+                            <p class="slds-p-horizontal_small">
+                                <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver' || v.userInfo.Profile.Name == 'Under Writing')}">
+                                    <span class="slds-form-element__label slds-m-bottom_none messageField slds-size_1-of-1">
+                                        <lightning:inputRichText aura:id="repymentNote" label="Message" value="{!v.repymentNoteDescription}" placeholder="Type a message here...">
+                                            <lightning:insertImageButton/>
+                                        </lightning:inputRichText>
+                                        <br/>
+                                        <lightning:button variant="brand" label="Save" class="Float-right peechBackground" title="Save" onclick="{!c.SendRepaymentNote}" disabled="{!!v.SaveRepaymentNote}"/>
+                                    </span><br/>
+                                </aura:renderIf>                                
+                                <!-- Message Section Begin -->
+                                    <div class="slds-p-around_small chat-main slds-size_1-of-1" id="modal-content-id-1">
+                                        <h2 class="chat-header peech-chat-header">Note History</h2>
+                                        <div class="scroll-bar">
+                                            <aura:iteration items="{!v.repymentNoteList}" var="chat">
+                                                <c:ChatboxInlineEdit singleChat="{!chat}" showSaveCancelBtn="{!v.showSaveCancelBtn}" index="{!index + 1}" sourceComponent="RepaymentUWNote" currentUserId="{!v.userInfo.Id}"/>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                <!-- Message Section End -->
+                            </p>
+                        </lightning:card>
+                    </ui:scrollerWrapper>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:renderIf>
+    <!-- Chatbox Component for Repayment Notes End -->
+
+    <!-- Chatbox Component for Legal Notes Begin -->
+    <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver' || v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'System Administrator')}">
+        <div class="container-fluid">
+            <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large chatBoxDesign skyblueBackground">
+                <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                    <ui:scrollerWrapper class="scrollerSize">
+                        <lightning:card>
+                            <aura:set attribute="title">
+                                <h2 class="chat-header skyblue-chat-header">
+                                    <lightning:icon iconName="utility:connected_apps" size="small" class="labelIcon"/>
+                                    Legal Notes
+                                </h2>
+                            </aura:set>
+                            
+                            <p class="slds-p-horizontal_small">
+                                <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Funding Operations' || v.userInfo.Profile.Name == 'Funding Receiver')}">
+                                    <span class="slds-form-element__label slds-m-bottom_none messageField slds-size_1-of-1">
+                                        <lightning:inputRichText aura:id="legalNote" label="Message" value="{!v.legalNoteDescription}" placeholder="Type a message here...">
+                                            <lightning:insertImageButton/>
+                                        </lightning:inputRichText>
+                                        <br/>
+                                        <lightning:button variant="brand" label="Save" class="Float-right skyblueBackground" title="Save" onclick="{!c.SendLegalNote}" disabled="{!!v.SaveLegalNote}"/>
+                                    </span><br/>
+                                </aura:renderIf>                                
+                                <!-- Message Section Begin -->
+                                    <div class="slds-p-around_small chat-main slds-size_1-of-1" id="modal-content-id-1">
+                                        <h2 class="chat-header skyblue-chat-header">Note History</h2>
+                                        <div class="scroll-bar">
+                                            <aura:iteration items="{!v.legalNoteList}" var="chat">
+                                                <c:ChatboxInlineEdit singleChat="{!chat}" showSaveCancelBtn="{!v.showSaveCancelBtn}" index="{!index + 1}" sourceComponent="LegalNote" currentUserId="{!v.userInfo.Id}"/>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                <!-- Message Section End -->
+                            </p>
+                        </lightning:card>
+                    </ui:scrollerWrapper>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:renderIf>
+    <!-- Chatbox Component for Legal Notes End -->
+
+</aura:component>

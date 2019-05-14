@@ -1,0 +1,9 @@
+<messaging:emailTemplate subject="{!relatedTo.Name} - ACH Deposit Report" recipientType="User" relatedToType="CloufiServicing__Syndication__c">
+    <messaging:htmlEmailBody >
+        Hi,<br/><br/>
+
+        Please find the attached doc for today's settled payments.<br/><br/>
+        
+        Thank you!
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

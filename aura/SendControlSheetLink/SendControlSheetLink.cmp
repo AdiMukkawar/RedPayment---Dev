@@ -1,0 +1,24 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* Component Name: SendControlSheetLink
+* Created Date: 12-April-2019
+* Description:  Component used on Contact to send login details to Control sheet user
+*******************************************************************
+/-->
+<aura:component controller="SendControlSheetLinkController" 
+                implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,force:hasRecordId"  access="global" >
+    <!-- attribute -->
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!-- hide popup modal start -->
+    <aura:html tag="style">
+        .slds-backdrop {
+        background: rgba(43, 40, 38, 0) !important;  
+        }
+        .slds-fade-in-open {
+        display:none !important;
+        }
+    </aura:html>
+    <!-- hide popup modal end -->
+</aura:component>

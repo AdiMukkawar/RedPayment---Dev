@@ -1,0 +1,104 @@
+<!--
+Author      | Date        | Description
+Aditya      | 08/16/2018  | Send Contract
+-->
+
+<apex:page standardController="Opportunity" extensions="SendContract_Ctl" id="thepage" action="{!SendContract}">
+    <head>
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+        <style>
+            
+            #container {
+                background: #6699FF;
+                margin: auto;
+                width: 500px;
+                height: 700px;
+                padding-top: 30px;
+                font-family: helvetica, arial, sans-serif;
+                }
+                
+                
+            h1 {
+                color: #0C8EFF;
+                }
+                .message .messageText h4 {
+                display: -moz-inline-grid;
+
+            }
+            .message .messageText {
+                font-size: 1.0em;
+                color: #fff !important;
+            }
+            .message {
+                background-color:#04844b;
+                border-style:none;
+                color:#fff;
+            }
+            .body, td{
+                color:#fff;
+            }
+            
+        </style>
+    </head>
+    <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+     
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        var j$ = jQuery.noConflict();
+        j$(document).ready(function() { 
+            overridePageMessages();
+        });
+        
+        //Lightning Design System for Page Messages    
+        function overridePageMessages(){    
+                         
+            j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+            j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+            j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+            j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                             
+            j$('.errorM3').removeClass('errorM3'); 
+            j$('.confirmM3').removeClass('confirmM3'); 
+            j$('.infoM3').removeClass('infoM3');   
+            j$('.warningM3').removeClass('warningM3');  
+        }
+    </script>
+    <style>
+        .customMessage {
+            margin: 5px 0!important;
+            opacity: 1!important;
+            width: 100%;
+            font-size: 15px;
+            border: 0px;
+            border-radius: 6px;
+            padding-left: 10px;
+        }
+    </style>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+             <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="ie=edge" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+            <apex:form styleClass="slds-form" id="theform">
+                <apex:slds />
+                <apex:pageMessages />
+                <!--<div class="slds-scope">
+                    <div class="slds-page-header">
+                      <div class="slds-media">
+                        <div class="slds-media__body">
+                        <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">Opportunity Contract</h1>
+                        </div>
+                      </div>
+                    </div>
+                </div>-->
+                <br/>
+                <center>
+                    <!--<apex:commandButton value="Send" styleClass="slds-button slds-button_brand" action="{!SendContract}"/>-->
+                    <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button_brand"/>
+                </center>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

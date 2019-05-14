@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- This lead requires some action be taken by a rep --></help>
+        <label><!-- Conversica Action Required --></label>
+        <name>AVA__AVAAI_action_required__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time it was determined action is required --></help>
+        <label><!-- Conversica Action Required Date --></label>
+        <name>AVA__AVAAI_action_required_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The contact&apos;s phone number as verified or discovered by Conversica --></help>
+        <label><!-- Conversica Confirmed Phone 1 --></label>
+        <name>AVA__AVAAI_confirmed_phone_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- The contact&apos;s phone number as verified or discovered by Conversica --></help>
+        <label><!-- Conversica Confirmed Phone 2 --></label>
+        <name>AVA__AVAAI_confirmed_phone_2__c</name>
+    </fields>
+    <fields>
+        <help><!-- The current stage of the Conversica Conversation --></help>
+        <label><!-- Conversation Stage --></label>
+        <name>AVA__AVAAI_conversation_stage__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the current Conversation Stage changed --></help>
+        <label><!-- Conversation Stage Date --></label>
+        <name>AVA__AVAAI_conversation_stage_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The current status of the Conversica Conversation --></help>
+        <label><!-- Conversation Status --></label>
+        <name>AVA__AVAAI_conversation_status__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the current Conversation Status was set --></help>
+        <label><!-- Conversation Status Date --></label>
+        <name>AVA__AVAAI_conversation_status_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Conversation Status Detail --></label>
+        <name>AVA__AVAAI_conversation_status_detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Status Detail Date --></label>
+        <name>AVA__AVAAI_conversation_status_detail_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The current status of the contact in Conversica --></help>
+        <label><!-- Conversica Lead Status --></label>
+        <name>AVA__AVAAI_conversica_lead_status__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the current Conversation status was set --></help>
+        <label><!-- Conversica Lead Status Date --></label>
+        <name>AVA__AVAAI_conversica_lead_status_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica received the lead --></help>
+        <label><!-- Conversica Date Added --></label>
+        <name>AVA__AVAAI_date_added__c</name>
+    </fields>
+    <fields>
+        <help><!-- If a new email address is discovered in a Contact’s response, this field will be populated with the additional email address. --></help>
+        <label><!-- Conversica Discovered Email 1 --></label>
+        <name>AVA__AVAAI_discovered_email_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- If a second new email address is discovered in a Contact’s response, this field will be populated with the additional email address. --></help>
+        <label><!-- Conversica Discovered Email 2 --></label>
+        <name>AVA__AVAAI_discovered_email_2__c</name>
+    </fields>
+    <fields>
+        <help><!-- If a new first name is discovered in a Contact’s response, this field will be populated with the preferred first name. --></help>
+        <label><!-- Conversica Discovered Name --></label>
+        <name>AVA__AVAAI_discovered_name__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica first sent a message to the contact --></help>
+        <label><!-- Conversica First Message Date --></label>
+        <name>AVA__AVAAI_first_message_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Contact is determined by your Conversica Assistant to have further questions or that they are waiting on actions from their assigned contact. --></help>
+        <label><!-- Conversica Further Action --></label>
+        <name>AVA__AVAAI_further_action__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date and time the Contact became a Conversica Further Action lead. --></help>
+        <label><!-- Conversica Further Action Date --></label>
+        <name>AVA__AVAAI_further_action_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The contact is ready to be contacted by a rep --></help>
+        <label><!-- Conversica Hot Lead --></label>
+        <name>AVA__AVAAI_hot_lead__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the contact became &quot;Hot&quot; in Conversica --></help>
+        <label><!-- Conversica Hot Lead Date --></label>
+        <name>AVA__AVAAI_hot_lead_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica last sent a message to the contact --></help>
+        <label><!-- Conversica Last Message Date --></label>
+        <name>AVA__AVAAI_last_message_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica last received a response from the contact --></help>
+        <label><!-- Conversica Last Response Date --></label>
+        <name>AVA__AVAAI_last_response_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The contact  may lose interest if not contacted soon by a rep --></help>
+        <label><!-- Conversica Lead At Risk --></label>
+        <name>AVA__AVAAI_lead_at_risk__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the contact became &quot;At Risk&quot; in Conversica --></help>
+        <label><!-- Conversica Lead At Risk Date --></label>
+        <name>AVA__AVAAI_lead_at_risk_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- A link to the Conversica Lead Profile page for the selected Contact. --></help>
+        <label><!-- Conversica Lead Profile --></label>
+        <name>AVA__AVAAI_lead_profile__c</name>
+    </fields>
+    <fields>
+        <help><!-- Options field for this object in Conversica --></help>
+        <label><!-- Conversica Options --></label>
+        <name>AVA__AVAAI_options__c</name>
+        <picklistValues>
+            <masterLabel>Skip to follow-up</masterLabel>
+            <translation><!-- Skip to follow-up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stop</masterLabel>
+            <translation><!-- Stop --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Conversica Score --></label>
+        <name>AVA__AVAAI_score__c</name>
+        <picklistValues>
+            <masterLabel>Green</masterLabel>
+            <translation><!-- Green --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grey</masterLabel>
+            <translation><!-- Grey --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Red</masterLabel>
+            <translation><!-- Red --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yellow</masterLabel>
+            <translation><!-- Yellow --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Contact indicates they would no longer like to be messaged via SMS after having previously opted in. --></help>
+        <label><!-- Conversica SMS Opt Out --></label>
+        <name>AVA__AVAAI_sms_opt_out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Conversica Status --></label>
+        <name>AVA__AVAAI_status__c</name>
+        <picklistValues>
+            <masterLabel>AVA Stopped</masterLabel>
+            <translation><!-- AVA Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Awaiting Response</masterLabel>
+            <translation><!-- Awaiting Response --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CRM Stopped</masterLabel>
+            <translation><!-- CRM Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Client Stopped</masterLabel>
+            <translation><!-- Client Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation><!-- Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Conversica Stopped</masterLabel>
+            <translation><!-- Conversica Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate</masterLabel>
+            <translation><!-- Duplicate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Excluded</masterLabel>
+            <translation><!-- Excluded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Queue</masterLabel>
+            <translation><!-- In Queue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Messaging</masterLabel>
+            <translation><!-- Messaging --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Messaging Complete</masterLabel>
+            <translation><!-- Messaging Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Response</masterLabel>
+            <translation><!-- No Response --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Opt Out</masterLabel>
+            <translation><!-- Opt Out --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Preparing Lead</masterLabel>
+            <translation><!-- Preparing Lead --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received Appt.</masterLabel>
+            <translation><!-- Received Appt. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received Engagement</masterLabel>
+            <translation><!-- Received Engagement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received Social</masterLabel>
+            <translation><!-- Received Social --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rep Stopped</masterLabel>
+            <translation><!-- Rep Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Appt.</masterLabel>
+            <translation><!-- Sent Appt. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Engagement</masterLabel>
+            <translation><!-- Sent Engagement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Feedback</masterLabel>
+            <translation><!-- Sent Feedback --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Social</masterLabel>
+            <translation><!-- Sent Social --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Undeliverable</masterLabel>
+            <translation><!-- Undeliverable --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unsubscribed</masterLabel>
+            <translation><!-- Unsubscribed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Access Code Expiration --></label>
+        <name>Access_Code_Expiration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Access Code --></label>
+        <name>Access_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number In Use --></label>
+        <name>Cloufi_Twilio__Number_In_Use__c</name>
+        <picklistValues>
+            <masterLabel>MobilePhone</masterLabel>
+            <translation><!-- MobilePhone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- SMS Opt Out --></label>
+        <name>Cloufi_Twilio__SMS_Opt_Out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract --></label>
+        <name>Contract__c</name>
+    </fields>
+    <fields>
+        <label><!-- Control sheet Portal Access --></label>
+        <name>Control_sheet_Portal_Access__c</name>
+    </fields>
+    <fields>
+        <help><!-- The record owner&apos;s Salesforce ID. Used in Campaign source reports to distribute the records using the Record Owner Distribution feature --></help>
+        <label><!-- DS Owner ID --></label>
+        <name>DialSource__DS_Owner_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time stamp of when the last Disposition was clicked --></help>
+        <label><!-- Datetime of Last Disposition --></label>
+        <name>DialSource__Datetime_of_Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Call Campaign the record was last called from --></help>
+        <label><!-- Last Call Campaign Name --></label>
+        <name>DialSource__Last_Call_Campaign_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the last Disposition clicked --></help>
+        <label><!-- Last Disposition --></label>
+        <name>DialSource__Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Datetime field used to set the next call datetime for reference in automation or Reports/List Views --></help>
+        <label><!-- Next Call --></label>
+        <name>DialSource__Next_Call_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of calls made on this record --></help>
+        <label><!-- Total Call Count --></label>
+        <name>DialSource__Total_Call_Count_DS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Login Date --></label>
+        <name>Last_Login_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Password --></label>
+        <name>Password__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revision --></label>
+        <name>Revision__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submission --></label>
+        <name>Submission__c</name>
+    </fields>
+    <fields>
+        <help><!-- The number of times this record has been assigned via Distribution Engine --></help>
+        <label><!-- Distribution count --></label>
+        <name>n2de__Distribution_count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is distributed --></label>
+        <name>n2de__Is_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is reassigned --></label>
+        <name>n2de__Is_reassigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last distributed to user --></label>
+        <name>n2de__Last_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last auto reassigned --></label>
+        <name>n2de__Last_reassigned__c</name>
+    </fields>
+    <quickActions>
+        <label><!-- Send Login Link --></label>
+        <name>Send_Login_Link</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Lender --></label>
+        <name>Lender</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Merchant --></label>
+        <name>Merchant</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Referral Partner --></label>
+        <name>Referral_Partner</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- Send_Bulk_SMS --></label>
+        <name>Cloufi_Twilio__Send_Bulk_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_SMS --></label>
+        <name>Cloufi_Twilio__Send_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DS_InstaQueue --></label>
+        <name>DialSource__DS_InstaQueue</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DS_InstaQueue_List --></label>
+        <name>DialSource__DS_InstaQueue_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+</CustomObjectTranslation>

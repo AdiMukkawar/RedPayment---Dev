@@ -1,0 +1,113 @@
+<apex:page standardController="Opportunity" docType="html-5.0" extensions="DownloadUWDocCntl">
+    <html>
+        <head>
+            <apex:includeScript value="{!$Resource.FileSaver}"/>
+            <apex:includeScript value="{!$Resource.JavascriptZip}"/>
+            <script>
+                var zip;
+                var filePaths;
+                var a;
+                var i = 0;
+                var dropboxToken;
+                var map;
+                var folder;
+                window.onload = function(){
+                    zip = new JSZip();
+                    folder = zip.folder('Documents');
+                    map = new Map();
+                    dropboxToken = '{!$Setup.Cloufi__Dropbox_Settings__c.Cloufi__Access_Token__c}';
+                    filePaths = '{!filesPathList}';
+                    a = filePaths.replace('[','').replace(']','').split(",");
+                }
+                
+                function downloadSpecificFileZip(){
+                    if(a.length == 0){
+                        alert('No files to download');
+                    }else if(a.length > 0){
+                        getFiles(a[i].trim());
+                    }
+                }
+                
+                function getFiles(filePath){                    
+                    var xhr = new XMLHttpRequest();                    
+                    console.log(JSON.stringify({
+                        path: folderPath
+                    }));
+                    var fileName = filePath.split('/');
+                    xhr.open('POST', 'https://content.dropboxapi.com/2/files/download');
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + dropboxToken);
+                    xhr.setRequestHeader('Dropbox-API-Arg', JSON.stringify({
+                        path: filePath
+                    }));
+                    xhr.responseType = "arraybuffer";                       
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState == 4) {
+                            if(xhr.status === 200){
+                                console.log('fileName '+fileName[fileName.length-1]);
+                                map.set(fileName[fileName.length-1], xhr.response);
+                            }
+                            i++;
+                            console.log('map value '+map.size);
+                            if(i < a.length){
+                                getFiles(a[i].trim());
+                            }else if(i == a.length){
+                                a.forEach((url)=> {
+                                    var fileName = url.split('/');
+                                    if(map.has(fileName[fileName.length-1])){
+                                        folder.file(fileName[fileName.length-1], map.get(fileName[fileName.length-1]));
+                                    }
+                                })
+                                
+                                document.getElementById('mainHeading').innerHTML = "Zip document folder downloaded successfully";
+                                zip.generateAsync({type:"blob"})
+                                    .then(blob => saveAs(blob, '{!objOpportunity.Name}'))
+                                    .catch(e => document.getElementById('mainHeading').innerHTML = e);
+                            }
+                        }
+                    }
+                    xhr.send();
+                }
+                
+                function downloadAllFilesZip(){
+                    var xhr = new XMLHttpRequest();                
+                    
+                    var folderPath = '{!objOpportunity.Cloufi__Dropbox_Folder_Path__c}';
+                    xhr.open('POST', 'https://content.dropboxapi.com/2/files/download_zip');
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + dropboxToken);
+                    xhr.setRequestHeader('Dropbox-API-Arg', JSON.stringify({
+                        path: folderPath
+                    }));
+                    xhr.responseType = "arraybuffer";
+                    xhr.send();
+                    
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            var blob = new Blob([xhr.response], {type: 'application/zip'});
+                            saveAs(blob,'{!objOpportunity.Name}');
+                        }
+                    }
+                }
+                
+            </script>
+        </head>
+        <body>
+            <!-- Begin Default Content REMOVE THIS -->
+            <h1 id="mainHeading"> </h1>
+            <apex:form id="form">
+                <apex:commandButton value="Download Specific" onclick="downloadSpecificFileZip();" status="actionStatus" rerender="none"/>
+                <apex:commandButton value="Download All" onclick="downloadAllFilesZip();" status="actionStatus" rerender="none"/>
+                <apex:actionStatus id="status" startStyleClass="demoAction">
+                    <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                        &nbsp;
+                    </div>
+                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 30% 50%">
+                        <img src="http://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />
+                    </div>
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:form>
+            <!-- End Default Content REMOVE THIS -->
+        </body>
+    </html>
+</apex:page>

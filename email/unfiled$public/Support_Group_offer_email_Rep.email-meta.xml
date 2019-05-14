@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Sales Rep when Contract is uploaded</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Support Group offer email</name>
+    <style>none</style>
+    <subject>New Offer Available for {!Cloufi__Offers__c.Cloufi__Opportunity__c}</subject>
+    <type>custom</type>
+</EmailTemplate>

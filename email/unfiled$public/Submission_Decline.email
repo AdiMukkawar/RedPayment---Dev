@@ -1,0 +1,8 @@
+Hello,<br/><br/>
+
+Submission has been Declined for <b>{!Cloufi__Offers__c.Cloufi__Opportunity__c}</b><br/>
+
+Opportunity : <b><a target="_blank" href="{!$Label.Base_URL}/{!Cloufi__Submission__c.Cloufi__OpportunityId__c}">{!Cloufi__Submission__c.Cloufi__Opportunity__c}</a></b><br/><br/>
+
+Best Regards,<br/>
+<!--<img src="{!Cloufi__Offers__c.Company_Logo__c}"/>-->

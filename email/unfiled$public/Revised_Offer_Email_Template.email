@@ -1,0 +1,12 @@
+Hello,<br/><br/>
+
+We would like to make a revision to the offer that was provided for <b>{!Cloufi__Offers__c.Cloufi__Opportunity__c}</b>.<br/>
+Please let us know if the following revision is possible:<br/><br/>
+
+<b>Revision Note:</b><br/>
+{!Cloufi__Offers__c.Revision_Notes__c}<br/><br/>
+
+<b><a target="_blank" href ="{!Cloufi__Offers__c.Link}">Offer Link</a></b><br/><br/><br/>
+
+Thank you,<br/>
+<img src="{!Cloufi__Offers__c.Company_Logo__c}"/>

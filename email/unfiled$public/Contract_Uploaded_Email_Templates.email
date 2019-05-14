@@ -1,0 +1,16 @@
+<messaging:emailTemplate subject="Contract is now available for {!relatedTo.Cloufi__Opportunity__r.Name}" recipientType="User" relatedToType="Cloufi__UW_Document__c">
+    <messaging:htmlEmailBody >
+        Hello,<br/><br/>
+    
+        The contract for <b>{!relatedTo.Cloufi__Opportunity__r.Name}</b> is now available. Please review with your merchant along with any outstanding underwriting documents that are required.<br/><br/>
+                  
+        <c:ContractUploadedEmailComp OpportunityID="{!relatedTo.Cloufi__Opportunity__c}"/>
+        
+        If you have any questions, please contact your manager for assistance.<br/><br/><br/>
+        
+        
+        Best Regards,<br/>
+        <img src="{!relatedTo.Cloufi__Opportunity__r.Owner.Company_Logo__c}"/>
+
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

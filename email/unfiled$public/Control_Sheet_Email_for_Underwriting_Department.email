@@ -1,0 +1,7 @@
+Hello,<br/><br/>
+
+Please review the Control Sheet that is now available for <b>{!Cloufi__UW_Document__c.Cloufi__Opportunity__c}</b>. After reviewing the documentation, update sales force accordingly.<br/><br/>
+
+Control Sheet Document: <b><a href="https://merchantservices--dev.cs23.my.salesforce.com/{!Cloufi__UW_Document__c.Cloufi__OpportunityId__c}">{!Cloufi__UW_Document__c.Stip_Name__c}</a></b><br/><br/><br/>
+
+Thank you

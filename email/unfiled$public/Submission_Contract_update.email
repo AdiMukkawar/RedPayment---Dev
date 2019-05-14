@@ -1,0 +1,11 @@
+<messaging:emailTemplate subject="Contract update for {!relatedTo.Name}" recipientType="User" relatedToType="Cloufi__Submission__c">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br/><br/>
+
+        Contract Updates<br/><br/>
+
+        Thank you!
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

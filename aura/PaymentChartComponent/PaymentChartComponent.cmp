@@ -1,0 +1,275 @@
+<!--/*****************************************************************
+    * Author: Techila Global Services Pvt Ltd.
+    * Component Name: PaymentChartComponent
+    * Created Date: 26-Feb-2019
+    * Description:  Component used on opportunity to display list of Payments
+    *******************************************************************
+    *Author             | Date       | Description
+     Sheema Dhanraj     | 26-Feb-2019| Filter record fucntionality
+    /-->
+<aura:component controller = "Payment_Chart_Controller"
+                implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" 
+                access="global">
+    <!-- Declare Attributes -->
+    <aura:handler name="init" value="{!this}" action="{!c.initRecords}"/>
+    <aura:attribute name="paymentList" type="List" access="global"/>
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="recordType" type="List"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="Spinner" type="Boolean" default="false"/>
+    <aura:attribute name="syndiactionList" type="List" access="global"/>
+    <aura:attribute name="statusPicklistValues" type="List" access="global"/>
+    <aura:attribute name="typePicklistValues" type="List" access="global"/>
+    <aura:attribute name="element" type="String" />
+    <aura:attribute name="effFrom" type="String" />
+    <aura:attribute name="displayError1" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="displayError2" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="displayError3" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="displayError4" type="Boolean" access="global" default="false"/>
+    <aura:attribute name="recordType1" type="Boolean" default="false"/>
+    <aura:attribute name="recordType2" type="Boolean" default="false"/>
+    <aura:attribute name="paymentAmount" type="currency"/>
+    
+    <aura:attribute name="checkBox1" type="Boolean" default="false"/>
+    <aura:attribute name="checkBox2" type="Boolean" default="false"/>
+    
+    
+    <!-- Component Header Start -->
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="standard:account" alternativeText="Event" />
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="Payment Chart">Payment</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__name-meta"></p>
+                    </div>
+                    <div class="btn" style="float:right!important;">
+                        <lightning:button variant="brand" 
+                                          label="Show Payments" 
+                                          title="Payments" 
+                                          onclick="{!c.showFilteredRecords}"/>&nbsp;
+                        <lightning:button variant="neutral" 
+                                          label="Clear Filter" 
+                                          title="Payments" 
+                                          onclick="{!c.clearFilteredRecords}"/> 
+                    </div>
+                    <!-- Loading spinner start--> 
+                    <aura:if isTrue="{!v.Spinner}">
+                        <div aura:id="spinnerId" class="slds-spinner_container">
+                            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                                <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </aura:if>
+                    <!-- Loading spinner end--> 
+                </div>
+            </div>
+        </div>
+    </div><br/>
+    <!-- Component Header End -->
+    
+    <!-- Filter Section Start -->
+    <div class="slds-page-header" style="cursor: pointer;padding: 0.45rem 1rem;" onclick="{!c.fiterSection}">
+        <section class="slds-clearfix">
+            <div class="slds-float--left ">
+                <lightning:icon class="slds-show" aura:id="filter" iconName="utility:chevronright" size="x-small" alternativeText="Indicates chevronright"/>
+                <lightning:icon class="slds-hide" aura:id="filter" iconName="utility:chevrondown" size="x-small" alternativeText="Indicates chevrondown"/>
+            </div>
+            <div class="slds-m-left--large">Filter</div>
+        </section>
+    </div>
+    <div class="slds-hide slds-p-around--medium" aura:id="filter">
+        <!-- lightning layout for displayibg fields -->
+        <div class="demo-only" >
+            <div class="slds-form slds-form_compound">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__group">
+                        <div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large checkbox1">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <fieldset>
+                                        <label class="slds-form-element__label"><span>Record Type:</span></label>
+                                        <lightning:input name="Payment In"
+                                                         label="Payment In"
+                                                         type = "checkbox"
+                                                         onchange = "{!c.handleClick1}"
+                                                         value = "{!v.recordType1}"
+                                                         checked = "{!v.checkBox1}"/>
+                                        <lightning:input name="Payment Out"
+                                                         label="Payment Out"
+                                                         type = "checkbox"
+                                                         onchange = "{!c.handleClick2}"
+                                                         value = "{!v.recordType2}"
+                                                         checked = "{!v.checkBox2}"/>
+                                    </fieldset>
+                                    
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <lightning:select aura:id="syndication" name="Syndication" label="Syndication">
+                                        <option value="">Select a Syndication..</option>
+                                        <aura:iteration items="{!v.syndiactionList}" var="item">
+                                            <option value="{!item.Name}">{!item.Name}({!item.CloufiServicing__Syndicating_Account__r.Name})</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <lightning:select aura:id="type" name="type" label="Payment Type">
+                                        <option value="">Select a Payment Type..</option>
+                                        <aura:iteration items="{!v.typePicklistValues}" var="item">
+                                            <option value="{!item}">{!item}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <lightning:select aura:id="status" name="status" label="Payment Status">
+                                        <option value="">Select a Status..</option>
+                                        <aura:iteration items="{!v.statusPicklistValues}" var="item">
+                                            <option value="{!item}">{!item}</option>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-only" >
+            <div class="slds-form slds-form_compound">
+                <div class="slds-form-element">
+                    <div class="slds-form-element__group">
+                        <div class="slds-form-element__row">
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <ui:inputDate aura:id = "effFrom" 
+                                                  label="Effective Date From" 
+                                                  format="MM/DD/YYYY" 
+                                                  displayDatePicker="true"
+                                                  change="{!c.validateEffDateFrom}"/>
+                                <aura:if isTrue="{!v.displayError1}">
+                                        <div class="slds-text-body_small slds-text-color_error">Please Enter a Valid Date</div>
+                                </aura:if>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <ui:inputDate aura:id = "effTo" 
+                                                  label="Effective Date To"
+                                                  format="MM/DD/YYYY" 
+                                                  displayDatePicker="true"
+                                                  change="{!c.validateEffDateTo}"/>
+                                    <aura:if isTrue="{!v.displayError2}">
+                                        <div class="slds-text-body_small slds-text-color_error">Please Enter a Valid Date</div>
+                                </aura:if>
+                                    
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <ui:inputDate aura:id = "settFrom"
+                                                  label="Settlement Date From"
+                                                  format="MM/DD/YYYY" 
+                                                  displayDatePicker="true"
+                                                  change="{!c.validateSettDateFrom}"/>
+                                    <aura:if isTrue="{!v.displayError3}">
+                                        <div class="slds-text-body_small slds-text-color_error">Please Enter a Valid Date</div>
+                                </aura:if>
+                                </div>
+                            </div>
+                            <div class="slds-form-element slds-size_1-of-4">
+                                <div class="slds-p-left_xx-large">
+                                    &nbsp;&nbsp;<span class="asterisk_input"/>
+                                    <ui:inputDate aura:id = "settTo"
+                                                  label="Settlement Date To"
+                                                  format="MM/DD/YYYY" 
+                                                  displayDatePicker="true"
+                                                  change="{!c.validateSettDateTo}"/>
+                                    <aura:if isTrue="{!v.displayError4}">
+                                        <div class="slds-text-body_small slds-text-color_error">Please Enter a Valid Date</div>
+                                </aura:if>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    &nbsp;&nbsp;
+    <!-- Filter Section End -->
+    
+    <!-- Payment records table Start -->
+    <div class="slds-section slds-is-open">
+        <h3 class="slds-section__title slds-theme_shade">
+            <span class="slds-truncate slds-p-horizontal_small" title="Payment Records">Payment Records</span>
+        </h3>
+        <br/>
+        <aura:if isTrue="{!(v.paymentList == null) }">
+            No Payments At This Moment!!!
+        </aura:if>
+        <aura:if isTrue="{!(v.paymentList != null) }">
+            <div class="slds-m-horizontal_x-large">
+                <table class="slds-table slds-table--bordered slds-table--striped slds-table--cell-buffer slds-table--fixed-layout">
+                    <thead>
+                        <tr class="slds-text-heading--label">
+                            <th scope="col"><div class="slds-truncate" >Name</div></th>
+                            <th scope="col"><div class="slds-truncate" >Payment Type</div></th>
+                            <!--<th scope="col"><div class="slds-truncate" >Effective Date</div></th>-->
+                            <!--<th scope="col"><div class="slds-truncate" >Expected Settlement Date</div></th>-->
+                            <th scope="col"><div class="slds-truncate" >Status</div></th>
+                            <th scope="col"><div class="slds-truncate" >Payment Amount</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <aura:iteration items="{!v.paymentList}" var = "payment">
+                            <tr>
+                                <th scope="row"><div class="slds-truncate" >
+                                    <a href="{!'/one/one.app?#/sObject/'+ payment.Id + '/view'}" 
+                                       target="_blank">{! payment.Name }</a></div>
+                                </th>
+                                <td><div class="slds-truncate" >{!payment.Cloufi__Payment_Type__c}</div></td>
+                                <!--<td><div class="slds-truncate" >{!payment.Cloufi__Effective_Date__c}</div></td>-->
+                                <!--<td><div class="slds-truncate" >{!payment.CloufiServicing__Expected_Settlement_Date__c}</div></td>-->
+                                <td><div class="slds-truncate" >{!payment.Cloufi__Status__c}</div></td>
+                                <td><div class="slds-truncate" >{!payment.Cloufi__Payment_Amount__c}</div></td>
+                            </tr>
+                        </aura:iteration> 
+                         <tr>
+                            <td></td>
+                             <td></td>
+                              <td></td>
+                                <td><div class="slds-truncate"><strong>Total Amount: </strong> {!v.paymentAmount}</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </aura:if>
+    </div>
+    <!-- Payment records table End -->
+</aura:component>

@@ -1,0 +1,1140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Company (DBA)</value>
+        </caseValues>
+        <name>company_lead</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Description Notes</value>
+        </caseValues>
+        <name>description_lead</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Type of Business</value>
+        </caseValues>
+        <name>industry_lead</name>
+        <startsWith>Vowel</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Lead Path</value>
+        </caseValues>
+        <name>lead_status</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Cell Phone Number</value>
+        </caseValues>
+        <name>mobile_lead</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Business Phone</value>
+        </caseValues>
+        <name>phone_lead</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <help><!-- This lead requires some action be taken by a rep --></help>
+        <label><!-- Conversica Action Required --></label>
+        <name>AVA__AVAAI_action_required__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time it was determined action is required --></help>
+        <label><!-- Conversica Action Required Date --></label>
+        <name>AVA__AVAAI_action_required_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The lead&apos;s phone number as verified or discovered by Conversica --></help>
+        <label><!-- Conversica Confirmed Phone 1 --></label>
+        <name>AVA__AVAAI_confirmed_phone_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- The lead&apos;s phone number as verified or discovered by Conversica --></help>
+        <label><!-- Conversica Confirmed Phone 2 --></label>
+        <name>AVA__AVAAI_confirmed_phone_2__c</name>
+    </fields>
+    <fields>
+        <help><!-- The current stage of the Conversica Conversation --></help>
+        <label><!-- Conversation Stage --></label>
+        <name>AVA__AVAAI_conversation_stage__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the current Conversation Stage changed --></help>
+        <label><!-- Conversation Stage Date --></label>
+        <name>AVA__AVAAI_conversation_stage_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The current status of the Conversica Conversation --></help>
+        <label><!-- Conversation Status --></label>
+        <name>AVA__AVAAI_conversation_status__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the current Conversation Status was set --></help>
+        <label><!-- Conversation Status Date --></label>
+        <name>AVA__AVAAI_conversation_status_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Conversation Status Detail --></label>
+        <name>AVA__AVAAI_conversation_status_detail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Status Detail Date --></label>
+        <name>AVA__AVAAI_conversation_status_detail_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The current status of the lead in Conversica --></help>
+        <label><!-- Conversica Lead Status --></label>
+        <name>AVA__AVAAI_conversica_lead_status__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the current Conversation status was set --></help>
+        <label><!-- Conversica Lead Status Date --></label>
+        <name>AVA__AVAAI_conversica_lead_status_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica received the lead --></help>
+        <label><!-- Conversica Date Added --></label>
+        <name>AVA__AVAAI_date_added__c</name>
+    </fields>
+    <fields>
+        <help><!-- If a new email address is discovered in a Lead&apos;s response, this field will be populated with the additional email address. --></help>
+        <label><!-- Conversica Discovered Email 1 --></label>
+        <name>AVA__AVAAI_discovered_email_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- If a second new email address is discovered in a Lead’s response, this field will be populated with the additional email address --></help>
+        <label><!-- Conversica Discovered Email 2 --></label>
+        <name>AVA__AVAAI_discovered_email_2__c</name>
+    </fields>
+    <fields>
+        <help><!-- If a new first name is discovered in a Lead’s response, this field will be populated with the preferred first name. --></help>
+        <label><!-- Conversica Discovered Name --></label>
+        <name>AVA__AVAAI_discovered_name__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica first sent a message to the lead --></help>
+        <label><!-- Conversica First Message Date --></label>
+        <name>AVA__AVAAI_first_message_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Lead is determined by your Conversica Assistant to have further questions or that they are waiting on actions from their assigned contact. --></help>
+        <label><!-- Conversica Further Action --></label>
+        <name>AVA__AVAAI_further_action__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date and time the Lead became a Conversica Further Action lead. --></help>
+        <label><!-- Conversica Further Action Date --></label>
+        <name>AVA__AVAAI_further_action_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The lead is ready to be contacted by a rep --></help>
+        <label><!-- Conversica Hot Lead --></label>
+        <name>AVA__AVAAI_hot_lead__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the lead became &quot;Hot&quot; in Conversica --></help>
+        <label><!-- Conversica Hot Lead Date --></label>
+        <name>AVA__AVAAI_hot_lead_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica last sent a message to the lead --></help>
+        <label><!-- Conversica Last Message Date --></label>
+        <name>AVA__AVAAI_last_message_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time Conversica last received a response from the lead --></help>
+        <label><!-- Conversica Last Response Date --></label>
+        <name>AVA__AVAAI_last_response_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- The lead may lose interest if not contacted soon by a rep --></help>
+        <label><!-- Conversica Lead At Risk --></label>
+        <name>AVA__AVAAI_lead_at_risk__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date and time the lead became &quot;At Risk&quot; in Conversica --></help>
+        <label><!-- Conversica Lead At Risk Date --></label>
+        <name>AVA__AVAAI_lead_at_risk_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- A link to the Conversica Lead Profile page for the selected Lead. --></help>
+        <label><!-- Conversica Lead Profile --></label>
+        <name>AVA__AVAAI_lead_profile__c</name>
+    </fields>
+    <fields>
+        <help><!-- Options field for this object in Conversica --></help>
+        <label><!-- Conversica Options --></label>
+        <name>AVA__AVAAI_options__c</name>
+        <picklistValues>
+            <masterLabel>Skip to follow-up</masterLabel>
+            <translation><!-- Skip to follow-up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stop</masterLabel>
+            <translation><!-- Stop --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Conversica Score --></label>
+        <name>AVA__AVAAI_score__c</name>
+        <picklistValues>
+            <masterLabel>Green</masterLabel>
+            <translation><!-- Green --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grey</masterLabel>
+            <translation><!-- Grey --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Red</masterLabel>
+            <translation><!-- Red --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yellow</masterLabel>
+            <translation><!-- Yellow --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Lead indicates they would no longer like to be messaged via SMS after having previously opted in. --></help>
+        <label><!-- Conversica SMS Opt Out --></label>
+        <name>AVA__AVAAI_sms_opt_out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Conversica Status --></label>
+        <name>AVA__AVAAI_status__c</name>
+        <picklistValues>
+            <masterLabel>AVA Stopped</masterLabel>
+            <translation><!-- AVA Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Awaiting Response</masterLabel>
+            <translation><!-- Awaiting Response --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CRM Stopped</masterLabel>
+            <translation><!-- CRM Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Client Stopped</masterLabel>
+            <translation><!-- Client Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation><!-- Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Conversica Stopped</masterLabel>
+            <translation><!-- Conversica Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate</masterLabel>
+            <translation><!-- Duplicate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Excluded</masterLabel>
+            <translation><!-- Excluded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Queue</masterLabel>
+            <translation><!-- In Queue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Messaging</masterLabel>
+            <translation><!-- Messaging --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Messaging Complete</masterLabel>
+            <translation><!-- Messaging Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Response</masterLabel>
+            <translation><!-- No Response --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Opt Out</masterLabel>
+            <translation><!-- Opt Out --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Preparing Lead</masterLabel>
+            <translation><!-- Preparing Lead --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received Appt.</masterLabel>
+            <translation><!-- Received Appt. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received Engagement</masterLabel>
+            <translation><!-- Received Engagement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Received Social</masterLabel>
+            <translation><!-- Received Social --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rep Stopped</masterLabel>
+            <translation><!-- Rep Stopped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Appt.</masterLabel>
+            <translation><!-- Sent Appt. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Engagement</masterLabel>
+            <translation><!-- Sent Engagement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Feedback</masterLabel>
+            <translation><!-- Sent Feedback --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent Social</masterLabel>
+            <translation><!-- Sent Social --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Undeliverable</masterLabel>
+            <translation><!-- Undeliverable --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unsubscribed</masterLabel>
+            <translation><!-- Unsubscribed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Deprecated Conversica Campaign --></label>
+        <name>AVA__Campaign__c</name>
+    </fields>
+    <fields>
+        <label><!-- Accept Credit Cards --></label>
+        <name>Accept_Credit_Cards__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Agent Name --></label>
+        <name>Agent_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Application URL --></label>
+        <name>Application_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Are you in Bankruptcy/Consumer Proposal? --></label>
+        <name>Are_you_in_Bankruptcy_Consumer_Proposal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Attempted Contact Lead Stage Date --></label>
+        <name>Attempted_Contact_Lead_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Average Monthly Credit Card Sales --></label>
+        <name>Average_Monthly_Credit_Card_Sales__c</name>
+        <picklistValues>
+            <masterLabel>$0-$4,999</masterLabel>
+            <translation><!-- $0-$4,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$10,000-$19,999</masterLabel>
+            <translation><!-- $10,000-$19,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$20,000+</masterLabel>
+            <translation><!-- $20,000+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$5,000-$99999</masterLabel>
+            <translation><!-- $5,000-$99999 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Average Monthly Revenue --></label>
+        <name>Average_Monthly_Revenue__c</name>
+        <picklistValues>
+            <masterLabel>$0 - $4,999</masterLabel>
+            <translation><!-- $0 - $4,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$10,000 - $24,999</masterLabel>
+            <translation><!-- $10,000 - $24,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$100,000 - $249,999</masterLabel>
+            <translation><!-- $100,000 - $249,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$25,000 - $49,999</masterLabel>
+            <translation><!-- $25,000 - $49,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$250,000+</masterLabel>
+            <translation><!-- $250,000+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$5,000 - $9,999</masterLabel>
+            <translation><!-- $5,000 - $9,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$50,000 - $99,999</masterLabel>
+            <translation><!-- $50,000 - $99,999 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Base URL --></label>
+        <name>Base_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Call Duration --></label>
+        <name>Call_Duration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign Name --></label>
+        <name>Campaign_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Campaign --></label>
+        <name>Campaign__c</name>
+        <picklistValues>
+            <masterLabel>MapleAdvance.com Call</masterLabel>
+            <translation><!-- MapleAdvance.com Call --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MapleAdvance.com Form</masterLabel>
+            <translation><!-- MapleAdvance.com Form --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Number In Use --></label>
+        <name>Cloufi_Twilio__Number_In_Use__c</name>
+        <picklistValues>
+            <masterLabel>MobilePhone</masterLabel>
+            <translation><!-- MobilePhone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- SMS Opt Out --></label>
+        <name>Cloufi_Twilio__SMS_Opt_Out__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount Requested --></label>
+        <name>Cloufi__Amount_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- Application Received Date --></label>
+        <name>Cloufi__Application_Received_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Application Sent Date --></label>
+        <name>Cloufi__Application_Sent_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business DBA Name --></label>
+        <name>Cloufi__Business_DBA_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Score --></label>
+        <name>Cloufi__Credit_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expected Funding Date --></label>
+        <name>Cloufi__Expected_Funding_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Loan Term --></label>
+        <name>Cloufi__Loan_Term__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Gross Sale --></label>
+        <name>Cloufi__Monthly_Gross_Sale__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Partner Account --></label>
+        <name>Cloufi__Referral_Partner_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Partner --></label>
+        <name>Cloufi__Referral_Partner__c</name>
+        <relationshipLabel><!-- Leads (Referral Partner) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales Rep Commission --></label>
+        <name>Cloufi__Sales_Rep_Commission__c</name>
+    </fields>
+    <fields>
+        <label><!-- Years In Business --></label>
+        <name>Cloufi__Years_In_Business__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Estimated Credit Score --></label>
+        <name>CreditScore__c</name>
+        <picklistValues>
+            <masterLabel>501-600</masterLabel>
+            <translation><!-- 501-600 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>601-700</masterLabel>
+            <translation><!-- 601-700 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>700+</masterLabel>
+            <translation><!-- 700+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>&lt; 500</masterLabel>
+            <translation><!-- &lt; 500 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Current Payment Plan --></label>
+        <name>Current_Payment_Plan__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Current Provider --></label>
+        <name>Current_Provider__c</name>
+        <picklistValues>
+            <masterLabel>CPS</masterLabel>
+            <translation><!-- CPS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chase Payment Tech</masterLabel>
+            <translation><!-- Chase Payment Tech --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dejardins</masterLabel>
+            <translation><!-- Dejardins --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Elavon</masterLabel>
+            <translation><!-- Elavon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>First Data</masterLabel>
+            <translation><!-- First Data --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Global Payment</masterLabel>
+            <translation><!-- Global Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moneris</masterLabel>
+            <translation><!-- Moneris --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PayPal</masterLabel>
+            <translation><!-- PayPal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Square</masterLabel>
+            <translation><!-- Square --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stripe</masterLabel>
+            <translation><!-- Stripe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TD Merchant Services</masterLabel>
+            <translation><!-- TD Merchant Services --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Current Terminal Program --></label>
+        <name>Current_Terminal_Program__c</name>
+        <picklistValues>
+            <masterLabel>Lease</masterLabel>
+            <translation><!-- Lease --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Own</masterLabel>
+            <translation><!-- Own --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rent</masterLabel>
+            <translation><!-- Rent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- DNQ Lead Stage Date --></label>
+        <name>DNQ_Lead_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Submitted For Processing --></label>
+        <name>Date_Submitted_For_Processing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dead Lead Stage Date --></label>
+        <name>Dead_Lead_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description ROI --></label>
+        <name>Description_ROI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description of Business --></label>
+        <name>Description_of_Business__c</name>
+    </fields>
+    <fields>
+        <help><!-- The record owner&apos;s Salesforce ID. Used in Campaign source reports to distribute the records using the Record Owner Distribution feature --></help>
+        <label><!-- DS Owner ID --></label>
+        <name>DialSource__DS_Owner_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time stamp of when the last Disposition was clicked --></help>
+        <label><!-- Datetime of Last Disposition --></label>
+        <name>DialSource__Datetime_of_Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Call Campaign the record was last called from --></help>
+        <label><!-- Last Call Campaign Name --></label>
+        <name>DialSource__Last_Call_Campaign_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the last Disposition clicked --></help>
+        <label><!-- Last Disposition --></label>
+        <name>DialSource__Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Datetime field used to set the next call datetime for reference in automation or Reports/List Views --></help>
+        <label><!-- Next Call --></label>
+        <name>DialSource__Next_Call_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of calls made on this record --></help>
+        <label><!-- Total Call Count --></label>
+        <name>DialSource__Total_Call_Count_DS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Disposition --></label>
+        <name>Disposition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Follow Up Attempts --></label>
+        <name>Follow_Up_Attempts__c</name>
+    </fields>
+    <fields>
+        <label><!-- Full Name --></label>
+        <name>Full_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Interested within 2-4 weeks --></label>
+        <name>Interested_within_2_4_weeks__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Application Checklist Completed? --></label>
+        <name>Is_Application_Checklist_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Latest Follow Up Date --></label>
+        <name>Latest_Follow_Up_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Age --></label>
+        <name>Lead_Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Company Logo --></label>
+        <name>Lead_Owner_Company_Logo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Company Name --></label>
+        <name>Lead_Owner_Company_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Fax --></label>
+        <name>Lead_Owner_Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner: Role: Name --></label>
+        <name>Lead_Owner_Role_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Owner Name --></label>
+        <name>Lead_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Stage Age --></label>
+        <name>Lead_Stage_Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead Status --></label>
+        <name>Lead_Status__c</name>
+        <picklistValues>
+            <masterLabel>Bad / Wrong / Fax Number</masterLabel>
+            <translation><!-- Bad / Wrong / Fax Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bad Number</masterLabel>
+            <translation><!-- Bad Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Busy/Not Available</masterLabel>
+            <translation><!-- Busy/Not Available --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Call - No Answer</masterLabel>
+            <translation><!-- Call - No Answer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Contacted: Follow Up</masterLabel>
+            <translation><!-- Contacted: Follow Up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Contacted: Needs More Info</masterLabel>
+            <translation><!-- Contacted: Needs More Info --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNC</masterLabel>
+            <translation><!-- DNC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNC / Not In Biz / BK</masterLabel>
+            <translation><!-- DNC / Not In Biz / BK --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNQ - BK/Taxes/CRA</masterLabel>
+            <translation><!-- DNQ - BK/Taxes/CRA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNQ - Low Volume</masterLabel>
+            <translation><!-- DNQ - Low Volume --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNQ - No Biz Acct</masterLabel>
+            <translation><!-- DNQ - No Biz Acct --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNQ - TIB</masterLabel>
+            <translation><!-- DNQ - TIB --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNQ - TIB / Low Volume</masterLabel>
+            <translation><!-- DNQ - TIB / Low Volume --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DNQ - Volume</masterLabel>
+            <translation><!-- DNQ - Volume --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dropped Call</masterLabel>
+            <translation><!-- Dropped Call --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate</masterLabel>
+            <translation><!-- Duplicate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax Number</masterLabel>
+            <translation><!-- Fax Number --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Follow Up</masterLabel>
+            <translation><!-- Follow Up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Language Barrier</masterLabel>
+            <translation><!-- Language Barrier --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NI - Not Ready / High Rates / Competitor</masterLabel>
+            <translation><!-- NI - Not Ready / High Rates / Competitor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New</masterLabel>
+            <translation><!-- New --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Answer / Busy / Dropped</masterLabel>
+            <translation><!-- No Answer / Busy / Dropped --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested - Bad Ratings</masterLabel>
+            <translation><!-- Not Interested - Bad Ratings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested - High Rates</masterLabel>
+            <translation><!-- Not Interested - High Rates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested - Not Ready</masterLabel>
+            <translation><!-- Not Interested - Not Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Interested - With Competitor</masterLabel>
+            <translation><!-- Not Interested - With Competitor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not in Business</masterLabel>
+            <translation><!-- Not in Business --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Reengage</masterLabel>
+            <translation><!-- Reengage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wrong Number</masterLabel>
+            <translation><!-- Wrong Number --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Legal/Corporate Name --></label>
+        <name>Legal_Corporate_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Lead Stage Date --></label>
+        <name>New_Lead_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Answer Counter --></label>
+        <name>No_Answer_Counter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Not Interested Lead Stage Date --></label>
+        <name>Not_Interested_Lead_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Inbound Calls --></label>
+        <name>Number_of_Inbound_Calls__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Outbound Calls --></label>
+        <name>Number_of_Outbound_Calls__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opener Name --></label>
+        <name>Opener_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner Phone --></label>
+        <name>Owner_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner Profile Name --></label>
+        <name>Owner_Profile_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Purpose of Funding --></label>
+        <name>Purpose_of_Funding__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recording --></label>
+        <name>Recording__c</name>
+    </fields>
+    <fields>
+        <label><!-- SIC Code --></label>
+        <name>SIC_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SIC Description --></label>
+        <name>SIC_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Task Comment --></label>
+        <name>Task_Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Task Subject --></label>
+        <name>Task_Subject__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time Zone --></label>
+        <name>Time_Zone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time in Business --></label>
+        <name>Time_in_Business__c</name>
+        <picklistValues>
+            <masterLabel>0-3 Months</masterLabel>
+            <translation><!-- 0-3 Months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1-3 Years</masterLabel>
+            <translation><!-- 1-3 Years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10+ Years</masterLabel>
+            <translation><!-- 10+ Years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3-5 Years</masterLabel>
+            <translation><!-- 3-5 Years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 months – 1 year</masterLabel>
+            <translation><!-- 4 months – 1 year --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5-10 Years</masterLabel>
+            <translation><!-- 5-10 Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Activities --></label>
+        <name>Total_Activities__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Calls --></label>
+        <name>Total_Calls__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Dials --></label>
+        <name>Total_Dials__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Event --></label>
+        <name>Total_Event__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Task --></label>
+        <name>Total_Task__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type Of Business --></label>
+        <name>Type_Of_Business__c</name>
+        <picklistValues>
+            <masterLabel>Cooperative</masterLabel>
+            <translation><!-- Cooperative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Corporation</masterLabel>
+            <translation><!-- Corporation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partnership</masterLabel>
+            <translation><!-- Partnership --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sole Proprietorship</masterLabel>
+            <translation><!-- Sole Proprietorship --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Unconverted Lead ByPass --></label>
+        <name>Unconverted_Lead_ByPass__c</name>
+    </fields>
+    <fields>
+        <label><!-- Working Contacted Lead Stage Date --></label>
+        <name>Working_Contacted_Lead_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distribution action --></label>
+        <name>n2de__Action__c</name>
+        <picklistValues>
+            <masterLabel>Contacted</masterLabel>
+            <translation><!-- Contacted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- The number of times this record has been assigned via Distribution Engine --></help>
+        <label><!-- Distribution count --></label>
+        <name>n2de__Distribution_count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is archived --></label>
+        <name>n2de__Is_archived__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is distributed --></label>
+        <name>n2de__Is_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is auto reassigned --></label>
+        <name>n2de__Is_reassigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is rejected --></label>
+        <name>n2de__Is_rejected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trigger enabled --></label>
+        <name>n2de__Is_trigger_enabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is triggered --></label>
+        <name>n2de__Is_triggered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last archive date --></label>
+        <name>n2de__Last_archive_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last distributed --></label>
+        <name>n2de__Last_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last reassigned --></label>
+        <name>n2de__Last_reassigned__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date &amp; time that the DE assignment of this lead was last rejected --></help>
+        <label><!-- Last rejected --></label>
+        <name>n2de__Last_rejected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source queue --></label>
+        <name>n2de__Source_queue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time to action (mins) --></label>
+        <name>n2de__Time_to_action_mins__c</name>
+    </fields>
+    <layouts>
+        <layout>Lead Layout</layout>
+        <sections>
+            <label><!-- Call Information --></label>
+            <section>Call Information</section>
+        </sections>
+        <sections>
+            <label><!-- Conversica --></label>
+            <section>Conversica</section>
+        </sections>
+        <sections>
+            <label><!-- Conversica Status --></label>
+            <section>Conversica Status</section>
+        </sections>
+        <sections>
+            <label><!-- Credit Card Processing --></label>
+            <section>Credit Card Processing</section>
+        </sections>
+        <sections>
+            <label><!-- DialSource --></label>
+            <section>DialSource</section>
+        </sections>
+        <sections>
+            <label><!-- Lead Information --></label>
+            <section>Lead Information</section>
+        </sections>
+        <sections>
+            <label><!-- Qualifying Questions --></label>
+            <section>Qualifying Questions</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Raw Data</layout>
+        <sections>
+            <label><!-- Call Information --></label>
+            <section>Call Information</section>
+        </sections>
+        <sections>
+            <label><!-- Conversica --></label>
+            <section>Conversica</section>
+        </sections>
+        <sections>
+            <label><!-- Conversica Status --></label>
+            <section>Conversica Status</section>
+        </sections>
+        <sections>
+            <label><!-- Credit Card Processing --></label>
+            <section>Credit Card Processing</section>
+        </sections>
+        <sections>
+            <label><!-- DialSource --></label>
+            <section>DialSource</section>
+        </sections>
+        <sections>
+            <label><!-- Lead Information --></label>
+            <section>Lead Information</section>
+        </sections>
+        <sections>
+            <label><!-- Qualifying Questions --></label>
+            <section>Qualifying Questions</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Interested --></label>
+        <name>Interested</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Raw Data --></label>
+        <name>Raw_Data</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Sales Agent are not authorized to change the ownership. Please contact your Manager --></errorMessage>
+        <name>Agent_cannot_change_the_Record_Owner</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please Add an Opportunity in order to convert a Lead. --></errorMessage>
+        <name>Cloufi__AddOppOnConvLead</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Send_Bulk_SMS --></label>
+        <name>Cloufi_Twilio__Send_Bulk_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_SMS --></label>
+        <name>Cloufi_Twilio__Send_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DS_InstaQueue --></label>
+        <name>DialSource__DS_InstaQueue</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DS_InstaQueue_List --></label>
+        <name>DialSource__DS_InstaQueue_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Application --></label>
+        <name>Send_Application</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+</CustomObjectTranslation>

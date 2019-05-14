@@ -1,0 +1,4 @@
+Hi Sales Support, 
+
+UW has updated notes on Offer - {!Cloufi__Offers__c.Name} 
+Visit the Offer <a href="{!Cloufi__Offers__c.Link}">here </a>

@@ -1,0 +1,11 @@
+<apex:component controller="SendForFinalUW_Ctl" access="global">
+    <apex:attribute name="OpportunityId" type="Id" description="Id of the Opportunity" assignTo="{!oppid}"/>
+    
+    <div>
+        <apex:repeat value="{!CompletedDocs}" var="uw">
+            <li style="list-style-type:disc">{!uw}</li>
+        </apex:repeat><br/>
+    </div>
+        
+    <b><a style="color:#999999;" target="_blank" href = "{!MerchantStipPageLink}">Click Here</a> to see the Completed Documents.</b>
+</apex:component>

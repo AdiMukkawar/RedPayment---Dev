@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Base_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Base URL</shortDescription>
+        <value>https://merchantservices--dev.lightning.force.com</value>
+    </labels>
+    <labels>
+        <fullName>CPS_Sales_Support_Email</fullName>
+        <categories>Common email address used by Sales support group</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CPS Sales Support Email</shortDescription>
+        <value>redpayments@techilaservices.com</value>
+    </labels>
+    <labels>
+        <fullName>Default_Lead_Owner_for_OffShore</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Default Lead Owner for OffShore</shortDescription>
+        <value>005f4000002oREC</value>
+    </labels>
+    <labels>
+        <fullName>File_Limit_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>File Limit Message</shortDescription>
+        <value>Maximum Permissible size of a file is 9 MB. Please upload accordingly.</value>
+    </labels>
+    <labels>
+        <fullName>InitialAppFormHeading</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>InitialAppFormHeading</shortDescription>
+        <value>Over $1.7 Billion Provided to 30,000+ Businesses.</value>
+    </labels>
+    <labels>
+        <fullName>Invite_Funder_Lender_Missing</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invite Funder Lender Missing</shortDescription>
+        <value>No lenders are present for the country</value>
+    </labels>
+    <labels>
+        <fullName>NewLine</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>NewLine</shortDescription>
+        <value>-
+-</value>
+    </labels>
+    <labels>
+        <fullName>Renewal_Owner_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Renewal Owner ID</shortDescription>
+        <value>005f4000002oRF0</value>
+    </labels>
+    <labels>
+        <fullName>Revived_Opportunity_Assignment</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Revived Opportunity Assignment</shortDescription>
+        <value>005f4000002dMzc</value>
+    </labels>
+    <labels>
+        <fullName>Sales_Agent_Profile_ID</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sales Agent Profile ID</shortDescription>
+        <value>00ef4000000e7gq</value>
+    </labels>
+    <labels>
+        <fullName>Site_URL</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Site URL</shortDescription>
+        <value>http://dev-merchantservices.cs23.force.com</value>
+    </labels>
+</CustomLabels>

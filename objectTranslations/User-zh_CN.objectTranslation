@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Company Logo --></label>
+        <name>Company_Logo__c</name>
+    </fields>
+    <fields>
+        <label><!-- DS Technical Contact --></label>
+        <name>DialSource__DS_Technical_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- DialSource Development Endpoint --></label>
+        <name>DialSource__DialSource_Development_Endpoint__c</name>
+    </fields>
+    <fields>
+        <label><!-- DialSource Development Mode --></label>
+        <name>DialSource__DialSource_Development_Mode__c</name>
+    </fields>
+    <fields>
+        <label><!-- DialSource Minimize --></label>
+        <name>DialSource__DialSource_Minimize__c</name>
+    </fields>
+    <fields>
+        <label><!-- DialSource Testing Mode --></label>
+        <name>DialSource__DialSource_Testing_Mode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Support Email --></label>
+        <name>Sales_Support_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Team Lead --></label>
+        <name>Team_Lead__c</name>
+        <relationshipLabel><!-- Users --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- DSProSFUsername --></label>
+        <name>dsfs__DSProSFUsername__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, user has logged and is not available to receive distributions from the Distribution Engine --></help>
+        <label><!-- Is logged out --></label>
+        <name>n2de__Is_logged_out__c</name>
+    </fields>
+    <layouts>
+        <layout>Community Member Layout</layout>
+        <layoutType>CommunityMemberLayout</layoutType>
+        <sections>
+            <label><!-- Basic Information --></label>
+            <section>Basic Information</section>
+        </sections>
+        <sections>
+            <label><!-- Chatter Settings --></label>
+            <section>Chatter Settings</section>
+        </sections>
+        <sections>
+            <label><!-- Language And Locale Settings --></label>
+            <section>Language And Locale Settings</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>User Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>User Profile Layout</layout>
+        <layoutType>UserAlt</layoutType>
+        <sections>
+            <label><!-- About --></label>
+            <section>About</section>
+        </sections>
+        <sections>
+            <label><!-- Background --></label>
+            <section>Background</section>
+        </sections>
+        <sections>
+            <label><!-- Contact --></label>
+            <section>Contact</section>
+        </sections>
+    </layouts>
+</CustomObjectTranslation>

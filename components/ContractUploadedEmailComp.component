@@ -1,0 +1,11 @@
+<apex:component controller="ContractUploadedEmailComp_Ctl" access="global">
+    <apex:attribute name="OpportunityID" type="Id" description="Id of the opportunity" assignTo="{!oppId}"/>       
+
+    <apex:repeat value="{!RequestedDocs}" var="uw">
+        <li style="list-style-type:circle"> 
+            {!uw.Stip_Name__c}
+        </li>
+    </apex:repeat> <br/>
+    
+    <a style="color:#999999;" target="_blank" href = "{!OppLink}">Click Here</a> to view opportunity.<br/><br/>        
+</apex:component>

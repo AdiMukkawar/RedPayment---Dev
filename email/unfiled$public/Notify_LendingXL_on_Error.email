@@ -1,0 +1,11 @@
+Hi Team,<br/><br/>
+
+Here are the details of the error/issue came in Production:<br/><br/>
+
+<b>Error: {!CloufiServicing__Error_Log__c.CloufiServicing__ErrorMessage__c}</b><br/><br/>
+<b>Class Name: </b>{!CloufiServicing__Error_Log__c.CloufiServicing__Class_Name__c}<br/><br/>
+<b>Method Name:</b> {!CloufiServicing__Error_Log__c.CloufiServicing__Method_Name__c}<br/><br/>
+<b>Stack Trace: </b>{!CloufiServicing__Error_Log__c.CloufiServicing__Stack_Trace__c}<br/><br/>
+
+Thanks,<br/>
+{!CloufiServicing__Error_Log__c.OwnerFullName}

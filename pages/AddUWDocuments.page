@@ -1,0 +1,670 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd.
+* VF Page Name: AddUWDocuments
+* Created Date: 17-Jan-2018
+* Description: Page for adding Underwriting Documents for Opportunity
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<!--
+Author  | Date       | Description
+Neha    | 14/04/2018 | Updated page header and applied lightning CSS to the page message 
+-->
+
+<apex:page id="pge" standardController="Opportunity" extensions="AddUWDocumentsControllerX" sidebar="false" showHeader="false" ><!--standardStylesheets="false"-->    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+            <apex:stylesheet value="{!URLFOR($Resource.Cloufi__SLDS0105, '/assets/styles/salesforce-lightning-design-system-vf.css')}" />
+            <apex:includeScript value="{!URLFOR($Resource.Cloufi__wizardjs, '/js/jquery-1.11.1.min.js')}" />
+            
+            <script>
+                j$ = jQuery.noConflict();
+                var RecordId = '';
+                j$(document).ready(function() { 
+                    overridePageMessages();
+                });
+                
+                //Lightning Design System for Page Messages    
+                function overridePageMessages(){
+                    j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                    j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                    j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                    j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                                     
+                    j$('.errorM3').removeClass('errorM3'); 
+                    j$('.confirmM3').removeClass('confirmM3'); 
+                    j$('.infoM3').removeClass('infoM3');   
+                    j$('.warningM3').removeClass('warningM3');
+                }               
+            </script>
+            <style>
+                #container {
+                    background: #6699FF;
+                    margin: auto;
+                    width: 500px;
+                    height: 700px;
+                    padding-top: 30px;
+                    font-family: helvetica, arial, sans-serif;
+                }
+                .message .messageText h4 {
+                    display: -moz-inline-grid;
+                }
+                .message .messageText {
+                    font-size: 1.0em;
+                    color: #fff !important;
+                }
+                .message {
+                    //background-color:#04844b;
+                    background-color: indianred;
+                    border-style:none;
+                    //color:#fff;
+                }
+                .body, td{
+                    //color:#fff;
+                }
+                .customMessage {
+                    margin: 5px 0!important;
+                    opacity: 1!important;
+                    width: 100%;
+                    font-size: 15px;
+                    border: 0px;
+                    border-radius: 6px;
+                    padding-left: 10px;
+                }
+                
+            </style>
+            
+            <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+            <script src="/soap/ajax/20.0/connection.js" type="text/javascript"></script>
+
+
+            <script>
+                var j$ = jQuery.noConflict();
+                var uploadCount;
+                var files = [];
+                var filesToUpload = []; 
+                var currentFile;
+                var attNames = '';
+                var fileCount;
+                var access_token = '';
+                var folderName = '';
+                var inputFiles = [];
+                var cInputEle;
+                var uwDocumentName = '';
+                var stipsLengh = {!JSINHTMLENCODE(TEXT(lstStips.size))}
+                
+                // To set the VF page focus on top
+                $(window).load(function (){
+                    $('html,body').scrollTop(0);
+                });
+                
+                j$(document).ready(function() {
+                    // This would be handled by oAuth - hardcoding like this is unsecure 
+                    AddUWDocumentsControllerX.getDropboxToken(setToken);   
+                });
+                
+                function setToken(result){
+                    access_token = result;
+                    initFileUpload();
+                }
+                
+                function initFileUpload() {
+                    console.log('***in init***');                
+                }
+                                
+                var fileReader = new FileReader({
+                    'blob': true
+                });
+                function createAjax()
+                {
+                    var ajaxHttp = null;
+                    try
+                    {
+                        if(typeof ActiveXObject == 'function')
+                            ajaxHttp = new ActiveXObject("Microsoft.XMLHTTP");
+                        else if(window.XMLHttpRequest)
+                            ajaxHttp = new XMLHttpRequest();
+                    }
+                    catch(e)
+                    {
+                        alert(e.message);
+                        return null;
+                    }
+                    //-------------
+                    return ajaxHttp;
+                };
+                fileReader.onload = function(e) {
+                    
+                    // Get the raw file to PUT 
+                    var rawBytes = e.target.result;
+                    
+                    var newName = filesToUpload[fileCount].name;
+                    console.log('newName=>'+newName);
+                    var trimmedName='';
+                    if(newName.length>80){
+                        trimmedName = newName.substring(0,70) + '.' + newName.split('.').pop();
+                    }else{
+                        trimmedName = newName;
+                    }
+                    //trimmedName = trimmedName.split('\\').pop();
+
+                    //currentFile = trimmedName;
+                    currentFile = filesToUpload[fileCount];    
+                    cInputEle = inputFiles[fileCount];
+                    
+                    console.log('cInputEle Id ->'+cInputEle.id);
+                    
+                    var query = "SELECT Name FROM Cloufi__UW_Document__c WHERE Id='"+cInputEle.id+"'";
+                    var records = sforce.connection.query(query); 
+                    var records1 = records.getArray('records'); 
+                    var fileName = records1[0].Name;
+                    
+                    
+                    var uwDocName = getUWDocName(cInputEle.id);
+                    var inputParams;
+                    
+                    console.log('after getUW uwDocName>>'+uwDocName);
+
+                    // Raw XMLHttpRequest 
+                    var xmlhttp = createAjax();
+                    if(!xmlhttp){
+                        alert('Ajax is not supported on your browser');
+                        return null
+                    }
+                    //xmlhttp.addEventListener("progress", updateProgress, false);
+                    if(xmlhttp.upload)
+                        xmlhttp.upload.onprogress = updateProgress;
+                    else
+                        xmlhttp.progress = updateProgress;
+                    // Handle the httprequest completion 
+                    console.log('cInputEle ->'+cInputEle);
+                    xmlhttp.onreadystatechange = function() {
+                        if (xmlhttp.readyState == 4) {
+                            if (xmlhttp.status == 200) {
+                                var res = JSON.parse(xmlhttp.responseText);
+                                var request = new XMLHttpRequest();
+                            
+                                request.open('POST', 'https://api.dropboxapi.com/2/sharing/create_shared_link_with_settings', false);
+                                request.setRequestHeader("Authorization", 'Bearer ' + access_token);
+                                request.setRequestHeader("Content-Type","application/json");
+                                inputParams = '{\"path\": \"'+res.path_lower+'\",\"settings\": {\"requested_visibility\": \"public\"}}';
+                                console.log('res >>'+res);
+                                console.log('res name >>'+res.name);
+                                request.send(inputParams);
+                                if (request.status == 200) {
+                                    res = JSON.parse(request.responseText);
+                                    var pId = '#dpFile_' + cInputEle.id + ' input[type="hidden"]';
+                                    console.log('pId >>'+pId);
+                                    j$(pId).val(res.url.replace('?dl=0', '?dl=1'));
+                                    var fileNameFromDB = fileNameFromUrl( decodeURIComponent(res.url));
+                                    var dpFile = '#dpFileName_' + cInputEle.id + ' input[type="hidden"]';
+                                    console.log('fileNameFromDB >>'+fileNameFromDB);
+                                    console.log('dpFile >>'+dpFile);
+                                    j$(dpFile).val(fileNameFromDB);
+                                }
+                                uploadCount++;
+                                fileCount++;
+                                if (filesToUpload.length > fileCount){
+                                    uploadNext(filesToUpload[fileCount]);
+                                                                
+                                }else if (filesToUpload.length == uploadCount) {
+                                    //alert('All files uploaded successfully');                                                                   
+                                    j$('#successMsgBox').show();
+                                    
+                                    attNames='';
+                                    filesToUpload=[];
+                                    
+                                    updateDocs();
+                                    
+                                }
+                            } else {
+                                fileCount++;
+                                if (filesToUpload.length > fileCount)
+                                    uploadNext(filesToUpload[fileCount]);
+                            }
+                        }
+                    }
+                    // Open the connection
+                    console.log('fileName>>'+fileName);
+                    var leadFileName = currentFile.name.replace(/[<>:"\/\\|?*]+/g,'');
+                    //leadFileName =    getFileNameWithoutExt(leadFileName) +'_'+(new Date()).getTime()+'.'+getFileExt(leadFileName);
+                    leadFileName =  fileName+'_'+(new Date()).getTime()+'.'+getFileExt(leadFileName);
+                    console.log('leadFileName=>'+leadFileName);
+                    xmlhttp.open("POST", "https://content.dropboxapi.com/2/files/upload", true);
+                    
+                    
+                    // Set the headers so the transfer works 
+                    xmlhttp.setRequestHeader("Authorization", 'Bearer ' + access_token);
+                    xmlhttp.setRequestHeader("Content-Type", "application/octet-stream");
+                    var checkFileName='';
+                    checkFileName = leadFileName;
+                    if(isDoubleByte(leadFileName)){
+                        checkFileName = 'UploadedFile'+'_'+(new Date()).getTime()+'.'+getFileExt(leadFileName);//leadFileName.charCodeAt()+'.'+getFileExt(leadFileName);
+                    }else{
+                        checkFileName = leadFileName;
+                    }
+                    // Start Folder Path Changes 18th March
+                    var folderPath = '';
+                    folderPath = '{!Opportunity.Cloufi__Dropbox_Folder_Path__c}';
+                    if(folderPath !=null && folderPath!=''){
+                        inputParams = '{\"path\":\"'+'{!Opportunity.Cloufi__Dropbox_Folder_Path__c}'+'/'+checkFileName+'\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}';
+                    }else{
+                        inputParams = '{\"path\":\"/Salesforce%20Documents/'+checkFileName+'\",\"mode\": \"add\",\"autorename\": true,\"mute\": false}';
+                    }
+
+                    // End Folder Path Changes 
+
+                    xmlhttp.setRequestHeader("Dropbox-API-Arg",inputParams);//encodeURIComponent
+                    //xmlhttp.setRequestHeader( "Content-Length", currentFile.size);
+                    
+                    // Send the data
+                    xmlhttp.send(rawBytes);
+                };
+                
+                function getUWDocName(uwId) {
+                    uwDocumentName = '';
+                    Visualforce.remoting.Manager.invokeAction(
+                        '{!$RemoteAction.AddUWDocumentsControllerX.getUWDocumentName}',
+                        uwId, 
+                        function(result, event){
+                            if (event.status) {
+                                uwDocumentName = result;
+                                attNames += uwDocumentName;
+                                console.log('attNames >>'+attNames);
+                                j$('[Id$="AttachmentNameFile"]').val(attNames);
+                            }
+                        }, 
+                        {escape: true}
+                    );
+                }
+
+                function isDoubleByte(str) {
+                    for (var i = 0, n = str.length; i < n; i++) {
+                        if (str.charCodeAt(i) > 127) { return true; }
+                    }
+                    return false;
+                }
+                
+                function getFileExt(fName){
+                    return fName.substr(fName.lastIndexOf('.')+1); 
+                }
+                function getFileNameWithoutExt(fName){
+                    return fName.substr(0, fName.lastIndexOf('.'));
+                }
+                function uploadNext(file) {
+                    fileReader.readAsArrayBuffer(file);
+                }
+                
+                function startUpload() {
+                    sforce.connection.sessionId = "{!$Api.Session_ID}";
+                    uploadCount=0;
+                    fileCount=0;
+                    j$("input[type=file]").each(function(){
+                        if(j$(this)[0].files[0]){
+                            var uwRecordId = j$(this).next().val();
+                            console.log('uwRecordId>>'+uwRecordId);
+                            
+                            var file = j$(this)[0].files[0];
+                            var fileId = file.id;
+                            //var filename = file.name;
+                            
+                            var query = "SELECT Name FROM Cloufi__UW_Document__c WHERE Id='"+uwRecordId+"'";
+                            var records = sforce.connection.query(query); 
+                            var records1 = records.getArray('records'); 
+                            var fileName = records1[0].Name;
+                            
+                            j$('input[type=file]').name = filename;
+                            j$(this)[0].files[0].name = filename;
+                            file.name = filename;
+                            file.name.append = filename;
+
+                           
+                            filesToUpload.push(j$(this)[0].files[0]);
+                            inputFiles.push(j$(this)[0]);
+                            console.log('filesToUpload >>'+filesToUpload);
+                        }                           
+                    });
+                    console.log('filesToUpload.length>>'+filesToUpload.length);
+                    if(stipsLengh == 0 && filesToUpload.length == 0){
+                        alert('Please add at least one stip!');
+                        return; //end function
+                    }
+                    
+                    if (filesToUpload.length == 0){
+                        //alert('Please select a file!');
+                        updateDocs();
+                        //return false; //end function
+                    }  
+                    else{
+                        j$(".saveFiles").attr('disabled',true);
+                        j$(".filesInput").attr('disabled',true);
+                        j$(".btnAddStips").attr('disabled',true);
+                        j$(".btnBack").attr('disabled',true);
+                        uploadNext(filesToUpload[0]);
+                        //prepareSFDocuments();
+                        //alert('Success: Stips Added Successfully');
+                    }              
+                    return false;
+                }
+
+
+                function handleFiles(ele) {
+                    //alert('test');   
+                     var recId = j$(ele).next().val();
+                     console.log('recId=>'+recId);
+                     
+                     j$(ele).attr('id',recId);
+                     for(var i = 0; i < ele.files.length; i++){
+                        file=ele.files[i];
+                        filename=file.name;
+                        filename = getUWDocName(recId);
+                    } 
+                    //prepareSFDocuments(attNames);                                 
+                }
+                                
+                     
+                function updateProgress(oEvent) {
+                    if (oEvent.lengthComputable) {                    
+                        var percentComplete = (oEvent.loaded / oEvent.total) * 100;
+                        var pId = '#dpFileID_' + cInputEle.id + ' div';
+                        var pfId = '#dpFileID_' + cInputEle.id;
+                        j$(pfId).css('display','block');
+                        j$(pId).css('width', percentComplete + '%');
+                    }
+                }
+                function fileNameFromUrl(url) {
+                  var matches = url.match(/\/([^\/?#]+)[^\/]*$/);
+                  if (matches.length > 1) {
+                    return matches[1];
+                  }
+                  return null;
+                }
+
+                function disableButton(buttonId){
+                    var inputVal = document.getElementById(buttonId);
+                    if (inputVal != 'undefined'){
+                        inputVal.style.display = "none";
+                    } else {
+                        inputVal.style.display = "block";
+                    }
+                }
+
+            </script>
+            <title>Under writing Documents</title>
+        </head>
+
+        <apex:form id="frm" styleClass="slds-form">
+            <apex:slds />
+            <apex:pagemessages id="pgMsg" />
+            <apex:actionFunction name="prepareSFDocuments" action="{!prepareSFDocuments}" oncomplete="startUpload()" reRender="panel,customCheckboxPanel,selectedItems,msg, pgMsg" status="mystatus" ></apex:actionFunction>
+            <apex:actionStatus id="mystatus">
+                <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                    &nbsp;
+                </div>
+                <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                    <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px; margin-left: -60px;">
+                        <img src="/img/loading.gif" />
+                        <span>Please Wait...</span>                           
+                    </div>
+                </div>
+                </apex:facet>
+            </apex:actionStatus>            
+            <apex:actionFunction name="updateDocs" reRender="pgMsg, frm" action="{!updateDocs}"  oncomplete="initFileUpload()"/>
+      <!--      <body class="slds-scope" style="padding: 1%;">   -->
+             <body class="slds-scope">
+                <div>
+                    <div class="slds-page-header">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-has-flexi-truncate">
+                                <div class="slds-media slds-no-space slds-grow">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+                                            <svg aria-hidden="true" class="slds-icon">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <p class="slds-text-title_caps slds-line-height_reset">Underwriting Documents</p>
+                                        <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">{!Opportunity.Name}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                <!-- <apex:outputPanel rendered="{!!renderRequestDocument}"> -->
+                                    <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button--neutral" style="font-size:12px;margin-left:-10%;" />
+                                    <!-- <apex:commandButton value="Request Documents" action="{!sendStips}" status="mystatus" styleClass="slds-button slds-button--neutral"  style="font-size:12px;" immediate="true" reRender="frm, pgMsg" oncomplete="overridePageMessages()"/> -->
+                                <!-- </apex:outputPanel> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="successMsgBox" style="display:none"></div>
+                    <br/>
+                    <!-- <apex:outputPanel rendered="{!!renderRequestDocument}"> -->
+                    <apex:actionRegion >
+                        <apex:outputPanel id="Tbl">
+                            <apex:inputHidden value="{!attNames}" id="AttachmentNameFile"/>
+                            <div class="table-responsive">
+                                <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal" style="font-size:.75rem;" >
+                                    <div class="slds-page-header" role="banner">
+                                        <div class="slds-grid">
+                                            <div class="slds-col slds-has-flexi-truncate">
+                                                <div class="slds-media slds-no-space slds-grow">
+                                                    <div class="slds-media__figure"></div>
+                                                    
+                                                    <div class="slds-grid slds-type-focus slds-no-space">
+                                                        <h1 style="font-size:-1.5rem;" class="slds-text-heading--small">Existing Underwriting Document Types</h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                                <apex:outputPanel >
+                                                    <apex:commandButton value="Save Document" id="uploadDoc" action="{!prepareSFDocuments}" oncomplete="startUpload();" rendered="{!enableNewWrapper || showSubmitBtn}" styleClass="slds-button slds-button--brand" style="font-size:12px;" onclick="disableButton('{!$Component.uploadDoc}');" />    
+                                                </apex:outputPanel>
+                                            </div>                            
+                                        </div> 
+                                    </div> 
+                                </table>                             
+                                <table class="slds-table slds-table_bordered slds-table_cell-buffer">                              
+                                    <thead>
+                                        <tr class="slds-text-title_caps">
+                                            <th scope="col" class="slds-cell-buffer_right">
+                                                <div class="slds-truncate" title="Under writting Document Types">Underwriting Document Types</div>
+                                            </th>
+                                            <th scope="col" class="slds-cell-buffer_right">
+                                                <div class="slds-truncate" title="Action">Action</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:variable var="i" value="{!0}"/>
+                                        <apex:repeat value="{!lstStips}" var="list">
+                                            <tr>
+                                                <td style="width: 50%;">
+                                                    <apex:outputField value="{!list.Stip_Name__c }" />
+                                                </td>
+                                                <td style="width: 40%;">
+                                                    <apex:outputPanel rendered="{!list.Cloufi__URL__c != ''}">
+                                                        <apex:outputLink value="{!list.Cloufi__URL__c}">View</apex:outputLink>
+                                                    </apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!if(list.Cloufi__URL__c == '',true,false)}">
+                                                        <input type="file" class="filesInput"  name="file" onchange="handleFiles(this);"/>
+                                                        <input type="hidden" value="{!list.id}"/>
+                                                    </apex:outputPanel>                                                                                                                                           
+                                                </td>
+                                                <td>
+                                                    <div id="dpFile_{!list.Id}">
+                                                        <apex:inputHidden value="{!list.Cloufi__URL__c}"/>
+                                                    </div>
+                                                    <div id="dpFileName_{!list.Id}">
+                                                        <apex:inputHidden value="{!list.Name}"/>
+                                                    </div>
+                                                </td>
+                                                <td style="width: 10%;">
+                                                    <div id="dpFileID_{!list.Id}" style="width:150px; border:1px solid #ccc; height:13px; display:none;">
+                                                        <div style="height:13px; width:0px; background-color:#F5851f;"></div>
+                                                    </div>
+                                                    <apex:variable var="i" value="{!i+1}"/>
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:actionRegion><br/>
+                    
+                    <div class="slds-page-header" role="banner">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-has-flexi-truncate">
+                                <div class="slds-media slds-no-space slds-grow">
+                                    <div class="slds-media__figure"></div>
+                                    <div class="slds-grid slds-type-focus slds-no-space">
+                                        <h1 style="font-size:-1.5rem;" class="slds-text-heading--small">Create Bank/Processing Statements</h1>
+                                    </div>     
+                                </div>
+                            </div>
+                            <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                <apex:commandButton value="Create Statements" action="{!createStatements}" styleClass="slds-button slds-button--brand" style="font-size:12px;"/>                                    
+                            </div>                            
+                        </div> 
+                    </div> 
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">                              
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th scope="col" class="slds-cell-buffer_right">
+                                    <div class="slds-truncate" title="Type">Type</div>
+                                </th>
+                                <th scope="col" class="slds-cell-buffer_right">
+                                    <div class="slds-truncate" title="">Months</div>
+                                </th>                                    
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 50%;">
+                                    <apex:selectList value="{!selectedStatementType}" size="1" styleClass="slds-input">
+                                        <apex:selectOptions value="{!statementType}"/>
+                                    </apex:selectList>
+                                </td>
+                                <td style="width: 50%;">
+                                    <apex:inputText value="{!selectedMonths}" styleClass="slds-input"/>                                                                                                                                           
+                                </td>
+                            </tr>
+                        </tbody>                            
+                    </table><br/>
+
+                    <apex:outputPanel rendered="{!renderStipsQuestions}">
+
+                        <div class="slds-page-header" role="banner">
+                            <div class="slds-grid">
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="slds-media__figure"></div>
+                                        <div class="slds-grid slds-type-focus slds-no-space">
+                                            <h1 style="font-size:-1.5rem;" class="slds-text-heading--small">Select Underwriting Document Types</h1>
+                                        </div>     
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                    <apex:outputPanel >
+                                        <apex:commandButton value="Save Type" action="{!SaveAns}" styleClass="slds-button slds-button--brand" style="font-size:12px;"/>                                    
+                                    </apex:outputPanel>
+                                </div>                            
+                            </div> 
+                        </div>                         
+
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer">                              
+                            <thead>
+                                <tr class="slds-text-title_caps">
+                                    <th scope="col" class="slds-cell-buffer_right">
+                                        <div class="slds-truncate" title="Select">Select</div>
+                                    </th>
+                                    <th scope="col" class="slds-cell-buffer_right">
+                                        <div class="slds-truncate" title="Underwriting Document Types">Underwriting Document Types</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <apex:repeat value="{!reqStipsMap}" var="S">
+                                    <tr>
+                                        <td style="width: 50%;">
+                                            <apex:inputCheckbox value="{!reqStipsMap[S].IsSelected}"/>
+                                        </td>
+                                        <td style="width: 40%;">
+                                            <apex:outputText value="{!reqStipsMap[S].stipType}"/>
+                                        </td>
+                                        <td style="width: 10%;"></td>
+                                    </tr>
+                                </apex:repeat>
+                            </tbody>
+                        </table><br/>
+                    </apex:outputPanel><br/>
+                </div>
+                
+                    <div class="slds-media__body"></div>
+                    <div class="row">
+                        <div class="slds-page-header" role="banner">
+                            <div class="slds-grid">
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="slds-media__figure"></div>
+                                        <div class="slds-grid slds-type-focus slds-no-space">
+                                            <h1 style="font-size:-1.5rem;" class="slds-text-heading--small">Create Custom Underwriting Document</h1>
+                                        </div>                                            
+                                        <!-- <div class="slds-media__body">
+                                            <p class="slds-text-title_caps slds-line-height_reset">Select Underwriting Document Types</p>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                    <apex:outputPanel id="buttonSection">
+                                        <!-- <apex:commandButton value="Save Custom UWDocument" action="{!CreateUWCDocument}" oncomplete="startUpload();" rendered="{!enableNewWrapper || showSubmitBtn}" styleClass="slds-button slds-button--brand" style="font-size:12px;" status="mystatus"/>  -->
+                                        <apex:commandButton value="Save Custom UWDocument" action="{!CreateCustomUWCDocument}" styleClass="slds-button slds-button--brand" style="font-size:12px;" status="mystatus" reRender="customStipPanel,pgMsg1"/>                        
+                                    </apex:outputPanel>
+                                </div>                            
+                            </div>
+                        </div>
+
+                        <apex:outputPanel id="customStipPanel">
+                            <apex:pagemessages id="pgMsg1" />
+                            <apex:variable var="i" value="{!0}"/>
+                            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th scope="col" class="slds-cell-buffer_right">
+                                            <div class="slds-truncate" title="Under writting Document Types">Underwriting Document Types</div>
+                                        </th>
+                                        <th scope="col" class="slds-cell-buffer_right">
+                                            <div class="slds-truncate" title="UploadDocument">Comment</div>
+                                        </th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="width: 50%;">
+                                            <apex:inputText value="{!stipName}" styleClass="slds-textarea" style="border-left:2px solid red"/>
+                                        </td>
+                                        <td style="width: 40%;">
+                                            <apex:outputPanel >
+                                                <!-- <apex:inputFile id="filesInput" styleclass="filesInput" value="{!customStipFileBody}" filename="{!customStipFileName}" /> -->
+                                                <apex:inputText value="{!customUWDocumentComment}" styleClass="slds-textarea"/>
+                                            </apex:outputPanel>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                            <div class="sub-heading" style="text-align:center;"></div>
+                        </apex:outputPanel>
+                        <br></br>
+                        <br></br>
+                    </div>
+                <!-- Ending SLDS TAG -->
+            </body>
+        </apex:form>
+    </html>
+    
+</apex:page>

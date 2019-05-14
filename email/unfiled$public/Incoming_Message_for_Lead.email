@@ -1,0 +1,7 @@
+Hello {!Lead.FirstName} {!Lead.LastName},<br/><br/>
+
+Message - {!Task.Cloufi_Twilio__Message__c}<br/>
+
+To view your Lead <a href="{!Lead.Link}">click here</a><br/><br/>
+
+Thank you!

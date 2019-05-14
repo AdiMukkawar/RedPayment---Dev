@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>UW Document Share</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>UW Document Share</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- UW Document Share --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Control Sheet Contact --></label>
+        <name>Control_Sheet_Contact__c</name>
+        <relationshipLabel><!-- UW Document Share --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- UW Document Share --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- UW Documents --></label>
+        <name>UW_Documents__c</name>
+        <relationshipLabel><!-- UW Document Share --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>UW Document Share Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,261 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* VF Page Name: PaymentChart
+* Created Date: 23-Aug-2018
+* Description: 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
+Author  | Date       | Description
+
+-->
+
+<apex:page id="pge" standardController="Opportunity" extensions="PaymentChartController" sidebar="false" showHeader="false" standardStylesheets="false" applyBodyTag="False" applyHtmlTag="False" docType="html-5.0">
+    <head>
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+        <style>
+            .message .messageText {
+                font-size: 1.0em;
+                color: #fff !important;
+            }
+            .message {
+                background-color:#04844b;
+                border-style:none;
+                color:#fff;
+            }
+            .body, td{
+                color:#fff;
+            }
+            
+        </style>
+    </head>
+    <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <apex:includescript value="//code.jquery.com/jquery-1.12.4.js" / >
+    <apex:includescript value="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" />
+    <apex:stylesheet value="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <script>
+        var j$ = jQuery.noConflict();
+        j$(document).ready(function() { 
+            overridePageMessages();
+        });
+        
+        //Lightning Design System for Page Messages    
+        function overridePageMessages(){    
+                         
+            j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+            j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+            j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+            j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                             
+            j$('.errorM3').removeClass('errorM3'); 
+            j$('.confirmM3').removeClass('confirmM3'); 
+            j$('.infoM3').removeClass('infoM3');   
+            j$('.warningM3').removeClass('warningM3');  
+        }
+        
+        /*j$(document).ready(function() {
+            j$('#example').DataTable();
+        } );*/
+    </script>
+    
+    <style>
+        .customMessage {
+            margin: 5px 0!important;
+            opacity: 1!important;
+            width: 100%;
+            font-size: 15px;
+            border: 0px;
+            border-radius: 6px;
+            padding-left: 10px;
+        }
+        
+        .table_value_color{
+            color: #232020;
+        }
+        
+        .lookupInput a{
+            position: absolute;
+            width: 33px !important; 
+            margin-left: 5px;
+            background-image: url(/img/setup/search-icon.png) !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+            display: inline-flex !important;
+        }
+        .lookupInput a img{
+            display:none !important;
+        }
+    </style>
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+             <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="ie=edge" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+            <apex:form styleClass="slds-form slds-scope" id="theform">
+                <apex:slds />
+                <apex:pageMessages id="pgMsg"/>
+                <apex:actionstatus id="loadingStatus" >
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv" id="el_loading" style="z-index:3;background-color: #000;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                            <div role="status" class="slds-spinner slds-spinner--medium">
+                                <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionstatus>
+                <apex:pageMessages />
+                <div class="slds-scope">
+                    <div class="slds-page-header">
+                      <div class="slds-media">
+                        <div class="slds-media__body">
+                        <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">Payment Chart</h1>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                
+                <!-- Filter Section Start Here -->
+                <div class="slds-card">
+                    <div class="slds-p-around_medium">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-order_1">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Payment Record Type</label>
+                                    <apex:selectlist value="{!recordTypeId}" size="1" styleClass="slds-input" style="width: 75%;" >
+                                        <apex:selectOptions value="{!RecordTypes}" />
+                                    </apex:selectlist>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-order_2">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Account</label>
+                                    <!--<apex:inputField required="false" value="{!objPayment.Cloufi__Account__c}" styleClass="slds-lookup__search-input slds-input" style="width: 83%;"/>-->
+                                    <apex:selectlist value="{!accId}" size="1" styleClass="slds-input" style="width: 90%;" >
+                                        <apex:selectOptions value="{!Accounts}" />
+                                    </apex:selectlist>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-order_3">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Payment Type</label>
+                                    <apex:inputField value="{!objPayment.Cloufi__Payment_Type__c}" styleClass="slds-input" style="width: 84%;"/>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-order_4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Payment Status</label>
+                                    <apex:inputField value="{!objPayment.Cloufi__Status__c}" styleClass="slds-input" style="width: 84%;"/>
+                                </div>
+                            </div>
+                        </div><br/>
+                        <div class="slds-grid">
+                            <div class="slds-col slds-order_1">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Effective Date</label><br/>
+                                    <!--<apex:input type="date" value="{!effectiveDateFrom}" style="width: 75%;" styleClass="slds-input"/>-->
+                                    <apex:selectlist value="{!effDate}" size="1" styleClass="slds-input" style="width: 25%;" >
+                                        <apex:selectOptions value="{!EffectiveDate}" />
+                                    </apex:selectlist>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-order_2">
+                                <div class="form-group label-floating">
+                                    <!--<label class="control-label">Effective Date To</label><br/>
+                                    <apex:input type="date" value="{!effectiveDateTo}" style="width: 84%;" styleClass="slds-input"/>-->
+                                    <label class="control-label">Settlement Date</label><br/>
+                                    <apex:selectlist value="{!settDate}" size="1" styleClass="slds-input" style="width: 25%;" >
+                                        <apex:selectOptions value="{!SettlementDate}" />
+                                    </apex:selectlist>
+                                </div>
+                            </div>
+                            <!--<div class="slds-col slds-order_3">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Settlement Date From</label><br/>
+                                    <apex:input type="date" value="{!settlementDateFrom}" style="width: 84%;" styleClass="slds-input"/>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-order_4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Settlement Date To</label><br/>
+                                    <apex:input type="date" value="{!settlementDateTo}" style="width: 84%;" styleClass="slds-input"/>
+                                </div>
+                            </div>-->
+                        </div>
+                        <!--<div class="slds-grid">
+                            <div class="slds-form-element__control">
+                                <div class="slds-checkbox">
+                                  <label class="control-label">Is Internal</label><br/>
+                                  <apex:inputField value="{!objPayment.CloufiServicing__Is_Internal__c}" style="width: 75%;" styleClass="slds-checkbox" name="options" id="checkbox-2"/>
+                                  <label class="slds-checkbox__label" for="checkbox-2">
+                                    <span class="slds-checkbox_faux"></span>
+                                  </label>
+                                </div>
+                            </div>
+                        </div>-->
+                        
+                    </div>
+                </div><br/>
+                <!-- Filter Section End Here -->
+                
+                <!-- Buttons Start Here -->
+                <apex:commandButton value="Show Payments" action="{!showPaymentList}" styleClass="slds-button slds-button_brand" rerender="paymentTable,CSVPanel" status="loadingStatus"/>&nbsp;
+                <apex:outputPanel id="CSVPanel">
+                    <apex:outputPanel rendered="{!paymentList.size>0}">
+                        <apex:commandButton value="Download CSV" action="{!generateCSV}" styleClass="slds-button slds-button_brand" status="loadingStatus"/>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <br/><br/>
+                <!-- Buttons End Here -->
+                
+                <!-- Payment Table start Here -->
+                <apex:outputPanel id="paymentTable">
+                    <apex:outputPanel rendered="{!paymentList.size==0}">
+                        No Payments for now
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!paymentList.size>0}">
+                        <div>
+                            <table id="SubscribersTable" class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                <thead>
+                                    <tr class="slds-text-title_caps">
+                                        <th scope="col">
+                                            <div class="slds-truncate">Account</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate">Payment Type</div>
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate">Effective Date</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>                             
+                                    <apex:repeat value="{!paymentList}" var="p">
+                                        <tr>
+                                            <td>
+                                                <apex:outputfield value="{!p.Cloufi__Account__c}"/>
+                                            </td>
+                                            <td Class="table_value_color">
+                                                <apex:outputfield value="{!p.Cloufi__Payment_Type__c}" />
+                                            </td>
+                                            <td Class="table_value_color">
+                                                <!--<apex:outputText value="{!p.Cloufi__Effective_Date__c}" />-->
+                                                <apex:outputText value="{0,date,MM/dd/yy}" > 
+                                                    <apex:param value="{!p.Cloufi__Effective_Date__c}"/> 
+                                                </apex:outputText>
+                                            </td>
+                                        </tr>   
+                                    </apex:repeat>
+                                </tbody>  
+                            </table>
+                        </div>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+                <!-- Payment Table End Here -->
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

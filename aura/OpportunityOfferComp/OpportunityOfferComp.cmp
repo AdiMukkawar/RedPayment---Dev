@@ -1,0 +1,83 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd.
+* Component Name: OpportunityOfferComp
+* Created Date: 
+* Description:  Component used for Offer Inline edit
+*******************************************************************
+*Author  			| Date       | Description
+*
+/-->
+<aura:component Controller="OpportunityofferController">
+    <!-- on component load, fetch picklist values dynamically from apex controller -->  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--declare aura attributes-->
+    <aura:attribute name="objInfoForPicklistValues" type="Cloufi__Offers__c" default="{sobjectType : 'Cloufi__Offers__c'}" description="object information to fetch picklist values"/>
+    <aura:attribute name="ratingPicklistOpts" type="string[]" description="store picklist options values"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="showErrorClass" type="boolean" default="false"/>
+    <aura:attribute name="userInfo" type="user"/>
+    <aura:attribute name="singleRec" type="sobject" default="{'sobjectType' : 'Cloufi__Offers__c',
+                                                             'Name' : '',
+                                                             'Cloufi__Funder__c' : '',
+                                                             'Program__c' : '',
+                                                             'Cloufi__Funding_Amount__c' : '',
+															 'Program_Type__c' : '',
+                                                             'Cloufi__Terms_In_Months__c' :'',
+                                                             'Factor_Rate__c':'',
+                                                             'Broker_Fee__c':'',
+                                                             'CreatedDate':'',
+                                                             'Cloufi__Offer_Status__c': ''
+                                                             }"/>
+    <aura:attribute name="ratingEditMode" type="boolean" default="false" />
+    <aura:attribute name="currentOfferStatus" type="string" access="global"/>
+    <!--Table Row Start-->
+    <tr>
+        <td><div class="slds-truncate"><a href="{!'/one/one.app?#/sObject/'+ v.singleRec.Id + '/view'}" target="_blank">{!v.singleRec.Name}</a></div></td>        
+        <td><div class="slds-truncate"><a href="{!'/one/one.app?#/sObject/'+ v.singleRec.Cloufi__Funder__c + '/view'}" target="_blank">{!v.singleRec.Funder_Name__c}</a></div></td>
+        <td><div class="slds-truncate"><a href="{!'/one/one.app?#/sObject/'+ v.singleRec.Program__c + '/view'}" target="_blank">{!v.singleRec.Program_Name__c}</a></div></td>
+        <td><div class="slds-truncate">{!v.singleRec.Cloufi__Funding_Amount__c}</div></td>
+        <td><div class="slds-truncate">{!v.singleRec.Program_Type__c}</div></td>
+        <td><div class="slds-truncate">{!v.singleRec.Cloufi__Terms_In_Months__c}</div></td>
+        <td><div class="slds-truncate">{!v.singleRec.Factor_Rate__c}</div></td>
+        <td><div class="slds-truncate">{!v.singleRec.Broker_Fee__c}</div></td>
+        <td><div class="slds-truncate"><ui:outputDate value="{!v.singleRec.CreatedDate}" format="MM/DD/YYYY"/></div></td>
+        <aura:if isTrue="{!or(v.currentOfferStatus == 'Expired')}">
+            <td><div class="slds-truncate">{!v.singleRec.Cloufi__Offer_Status__c}</div></td>
+        </aura:if>
+        <aura:if isTrue="{!and(v.currentOfferStatus != 'Expired')}">
+            <td ondblclick="{!c.inlineEditRating}" class="slds-cell-edit" style="width: 187px;">
+                <span class="slds-grid slds-grid_align-spread">
+                    <!-- show input and output section based on boolean flag -->
+                    <aura:if isTrue="{!v.ratingEditMode == false}">
+                        <span class="slds-truncate" title="{!v.singleRec.Cloufi__Offer_Status__c}">{!v.singleRec.Cloufi__Offer_Status__c}</span>
+                        <!--<aura:if isTrue="{!and(v.currentOfferStatus != 'Expired')}">-->
+                            <button onclick="{!c.inlineEditRating}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Status" style="border-right-width: 20px;">
+                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                            </button>
+                        <!--</aura:if>-->
+                        <!-- Inline Edit Section in else case-->
+                        <aura:set attribute="else">
+                            <!--<aura:if isTrue="{!and(v.currentOfferStatus != 'Expired')}">-->
+                                <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px; width:90%; height:30%; margin-top:0px; padding-top:0px;">
+                                    <div class="slds-popover__body">
+                                        <div class="slds-form-element slds-grid slds-wrap">
+                                            <div class="slds-form-element__control slds-grow">
+                                                <label class="slds-form-element__label"></label>
+                                                <ui:inputSelect aura:id="accRating"
+                                                                class="slds-select inputFieldWidth"
+                                                                blur="{!c.closeRatingBox}"
+                                                                change="{!c.onRatingChange}"
+                                                                value="{!v.singleRec.Cloufi__Offer_Status__c}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span id="form-end" tabindex="0"></span>
+                                </section>
+                            <!--</aura:if> -->   
+                        </aura:set>
+                    </aura:if>
+                </span>
+            </td>
+        </aura:if>
+    </tr>
+</aura:component>

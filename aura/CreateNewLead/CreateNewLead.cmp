@@ -1,0 +1,102 @@
+<!--*****************************************************************
+ * Author: Techila Global Services Pvt Ltd. (Prashant Mahajan)
+ * Component Name: CreateNewLead
+ * Created Date: 26-July-2018
+ * Description: Lightning component to create new leads
+ *******************************************************************-->
+<aura:component controller="NewLeadController" 
+                implements="flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride,force:hasRecordId" access="global">
+    <aura:attribute name="recordId" type="Id" access="global"/>
+    <aura:attribute name="Lead" type="Lead" default="{ 'sobjectType': 'Lead'}"/>
+    <aura:attribute name="displayEmailError" type="Boolean" access="global" default="false"/>
+    <force:recordData fields="FirstName,LastName,Company,Email,MobilePhone,Phone"/>  
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="Spinner" type="Boolean" default="false"/>    
+    
+    <div class="slds-form--stacked">
+        <lightning:card title="Create New Lead">
+            <div class= "slds-align" style="margin-left:1%;margin-right: 1%;">
+                <aura:if isTrue="{!v.Spinner}">
+                    <div aura:id="spinnerId" class="slds-spinner_container">
+                        <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </aura:if>
+                <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                    <div class="slds-size_1-of-2">
+                        <lightning:input aura:id="leadField" 
+                                         name="FirstName" 
+                                         label="First Name" 
+                                         value="{!v.Lead.FirstName}" 
+                                         required="true" 
+                                         style="width:99%!important;"
+                                         onblur="{!c.validateFirstName}"/>	
+                    </div>
+                    <div class="slds-size_1-of-2">
+                        <lightning:input aura:id="leadField" 
+                                         name="LastName" 
+                                         label="Last Name" 
+                                         value="{!v.Lead.LastName}" 
+                                         required="true"
+                                         onblur="{!c.validateLastName}"/>
+                    </div>
+                </div>
+                
+                <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                    <div class="slds-size_1-of-2">
+                        <lightning:input aura:id="leadField" 
+                                         name="Company" 
+                                         label="Company" 
+                                         value="{!v.Lead.Company}" 
+                                         required="true" 
+                                         style="width:99%!important;"
+                                         onblur="{!c.validateCompany}"/>
+                    </div>
+                    <div class="slds-size_1-of-2">
+                        <div class="slds-form-element">  
+                            <div class="slds-form-element__control">
+                                <lightning:input aura:id="leadField" 
+                                                 name="Email" 
+                                                 label="Email" 
+                                                 value="{!v.Lead.Email}" 
+                                                 required="true" 
+                                                 onblur="{!c.validateEmail}"/>
+                                <aura:if isTrue="{!v.displayEmailError}">
+                                    <div class="slds-text-body_small slds-text-color_error">Please Enter a Valid Email Address</div>
+                                </aura:if>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                    <div class="slds-size_1-of-2">
+                        <lightning:input aura:id="leadField" name="MobilePhone" label="Cell Phone Number" value="{!v.Lead.MobilePhone}" style="width:99%!important;"/>
+                    </div>
+                    <div class="slds-size_1-of-2">
+                        <lightning:input aura:id="leadField" name="Phone" label="Business Phone Number" value="{!v.Lead.Phone}" />
+                    </div>
+                </div>
+
+                <div class="demo-only demo-only--sizing slds-grid slds-wrap">
+                    <div class="slds-size_1-of-2">
+                        <lightning:select aura:id="leadField" name="Country" label="Submission Country" value="{!v.Lead.Country__c}" required="true">
+                            <option value="">--None--</option>
+                            <option value="United States">United States</option>
+                            <option value="Canada">Canada</option>
+                            <option value="Puerto Rico">Puerto Rico</option>
+                        </lightning:select>
+
+                    </div>
+                </div>
+                <div align="center">
+                    <lightning:button label="Save" onclick="{!c.handleSaveLead}" variant="brand" class="slds-m-top--medium"/>	        	
+                </div>
+            </div>
+        </lightning:card>
+    </div>               
+</aura:component>

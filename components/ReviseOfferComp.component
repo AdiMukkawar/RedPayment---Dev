@@ -1,0 +1,4 @@
+<apex:component controller="ReviseOfferComp_Ctl" access="global">
+    <apex:attribute name="offerId" type="Id" description="Id of the Offer" assignTo="{!offrid}"/> 
+       Please <a style="color:#999999;" target="_blank" href = "{!OfferR}">Click Here</a> to Revise offer.
+</apex:component>

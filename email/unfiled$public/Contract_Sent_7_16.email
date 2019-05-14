@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c},
+
+I wanted to reach out because I still haven’t seen your funding agreement come in. Please call me so I can answer any questions you may have. As soon as we receive the agreement and final documents I will submit them to our funding department to get a wire to you right away! You can simply email or fax me the signed agreement and remaining documents necessary to fund your account. Let’s build a great long-term relationship!
+
+Best Wishes,
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName} 
+{!Opportunity.Opportunity_Owner_Company_Name__c}
+{!Opportunity.OwnerPhone} 
+{!Opportunity.OwnerEmail}

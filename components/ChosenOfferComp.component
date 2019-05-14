@@ -1,0 +1,10 @@
+<apex:component controller="ChosenOfferComp_Ctl" access="global">
+    <apex:attribute name="Opp" type="Id" description="Id of the Opportunity" assignTo="{!oppId}"/> 
+    
+        <apex:repeat value="{!OfferDocs}" var="uw">
+            <li style="list-style-type:circle"> <a href="{!uw.Cloufi__URL__c}">{!uw.Stip_Name__c}</a>
+            </li>
+        </apex:repeat><br/>
+       
+        
+</apex:component>

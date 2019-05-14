@@ -1,0 +1,9 @@
+{!Lead.FirstName},
+
+I’d like to talk with you about our financial programs that will help you find the funding needed to grow your business. We encourage you to use the money for day-to-day expenses, business expansion, equipment purchases, advertising, inventory purchases or general working capital. I tried calling you earlier today and was unable to reach you. I’d enjoy the opportunity to show you how you would benefit from our funding options. Please either email or call me at your earliest convenience to discuss.  
+
+Best Regards,
+{!Lead.OwnerFullName} 
+{!Lead_Owner_Company_Name__c}
+{!Lead.OwnerPhone} 
+{!Lead.OwnerEmail}

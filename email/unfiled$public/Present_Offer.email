@@ -1,0 +1,12 @@
+Hi, <br/><br/>
+
+Here is the offer for you: <br/><br/>
+
+Funding Amount : {!Cloufi__Offers__c.Cloufi__Funding_Amount__c} <br/>
+Factor Rate : {!Cloufi__Offers__c.Factor_Rate__c} <br/>
+Terms : {!Cloufi__Offers__c.Cloufi__Terms_In_Months__c} <br/>
+Payback Amount : {!Cloufi__Offers__c.Cloufi__Payback_Amount__c}<br/><br/>
+
+Regards,<br/>
+
+<img src="{!Cloufi__Offers__c.Company_Logo__c}"><br/><br/>

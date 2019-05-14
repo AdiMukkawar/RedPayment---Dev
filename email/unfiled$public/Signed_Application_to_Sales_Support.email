@@ -1,0 +1,7 @@
+Hello Team,<br/><br/>
+
+The application has been signed for {!Opportunity.Name}.<br/><br/>
+
+<a href="{!Opportunity.Link}">Click here</a>  to view the Opportunity.<br/><br/>
+
+Thank you!

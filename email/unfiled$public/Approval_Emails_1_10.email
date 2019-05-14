@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c},
+
+I just tried calling and left you a message. I am excited to offer you funding for your business! Please call me back to discuss your options. I’m looking forward to growing a long-term relationship with you.
+
+Best Wishes,
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName} 
+{!Opportunity.Opportunity_Owner_Company_Name__c}
+{!Opportunity.OwnerPhone} 
+{!Opportunity.OwnerEmail}

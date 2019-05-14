@@ -1,0 +1,1027 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* VF Page Name: ApplicationForm
+* Created Date: 14-June-2018
+* Description: Short Application form
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author       |      Date      |   Description 
+*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<apex:page standardController="Cloufi__Application__c" showHeader="false" sidebar="false" extensions="ApplicationForm_Ctl" standardStyleSheets="false" docType="html-5.0" cache="false">
+    <html lang="en">
+        <head>
+            <title>Application Form</title>
+            <meta charset="utf-8"/>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+            <!-- Bootstrap -->
+            <link rel="stylesheet" href="{!URLFOR($Resource.mapleapllicationresource,'css/material-bootstrap-wizard.css')}"/>
+            <link rel="stylesheet" href="{!URLFOR($Resource.mapleapllicationresource,'css/bootstrap.min.css')}"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+            <apex:stylesheet value="{!$Resource.datepickermin}"/>
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/jquery.min.js')}"></script>
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/bootstrap.min.js')}"></script>
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/jquery.bootstrap.js')}"></script>
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/material-bootstrap-wizard.js')}"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"/>
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/jquery.validate.min.js')}"></script>
+            <style>
+                body {
+                    background-color: transparent;
+                }
+                h6{
+                    font-family: 'Poppins', sans-serif !important;
+                    color: #2d4759;
+                    font-size: 30px;
+                    margin-bottom: 10px;
+                    font-weight: 700;
+                    margin: 0;
+                    line-height: 1.17;
+                    letter-spacing: -0.01em;
+                }
+                .padding0 {
+                    padding:0;
+                }
+                .input-group-addon {
+                    background-color: transparent;
+                    border: 1px solid #b7b7b7;
+                    border-radius: 2px;
+                }
+                .form-control {
+                    border: 1px solid #b7b7b7 !important;
+                    border-radius: 2px !important;
+                    height: 40px !important;
+                    background-color: transparent !important;
+                }
+                .title-text h2 label {
+                    color:#144559;
+                    text-align:center;
+                    font-size: 30px;
+                    line-height: 46px;
+                    margin: 10px 0;
+                }
+                .title-text h3 {
+                    color:#144559;
+                    text-align:center;
+                    font-size: 35px;
+                    line-height: 46px;
+                    margin: 45px 0;
+                }
+                .title-text h4 {
+                    color:#144559;
+                    text-align:center;
+                    margin: 30px 0;
+                }
+                .btn-primary {
+                    color: #333 !important;
+                    background-color: #f7bf16!important;
+                    border-color: #f7bf16 !important;
+                    text-transform: uppercase;
+                    padding: 18px 80px;
+                    border-radius: 6px;
+                    font-size: 17px;
+                    box-shadow: 0 1px 1px rgba(0,0,0,0.2) !important;
+                    font-weight: 500;
+                    letter-spacing: 0.5px;
+                }
+                .btn-primary:hover {
+                    background-color: #ffc003 !important;
+                    color: #222 !important;
+                }
+                .btn-default {
+                    color: #144559;
+                    background-color: #fff;
+                    border-color: #f7bf16;
+                    border: 2px solid #f7bf16;
+                    text-transform: uppercase;
+                    padding: 10px 20px;
+                    border-radius: 2px;
+                    margin-bottom: 40px;
+                    margin-top: 20px;
+                }
+                .input-group {
+                    margin-bottom: 30px;
+                    background-color:#fff;
+                }
+                .input-group-addon {
+                    background-color: transparent;
+                    border: 1px solid #b7b7b7;
+                    border-radius: 2px;
+                    min-width: 40px;
+                    padding: 6px;
+                }
+                .fa-check {
+                    color: #0ca00c;
+                    font-size:22px;
+                }
+                .security {
+                    text-align:center;
+                    padding-bottom:20px;
+                }
+                .security img {
+                    width:30px;
+                    margin-right:10px;
+                }
+                .form-group.label-static label.control-label, .form-group.label-floating.is-focused label.control-label, .form-group.label-floating:not(.is-empty) label.control-label {
+                    color:#144559;
+                }
+                .style{
+                    color: #666666;
+                    font-family: 'Open Sans', sans-serif;
+                    font-weight: 400;
+                    font-size: 17px;
+                    letter-spacing: -0.01em;
+                    line-height: 1.6;
+                }
+                .custom-select {
+                    width: 100%;
+                    border-radius: 2px;
+                    height: 40px;
+                }
+                .form-group.has-error label.control-label, .form-group.has-error .help-block {
+                    color: #AAAAAA!important;
+                }
+                .form-group.has-error.is-focused .form-control {
+                     background-image: linear-gradient(#FFFFFF, #FFFFFF), linear-gradient(#D2D2D2, #D2D2D2);
+                }
+                .timepicker .timepicker-picker {
+                    width:220px;
+                }
+                .timepicker .timepicker-picker .table-condensed .btn-primary {
+                    padding: 5px 10px;
+                }
+                .timepicker .timepicker-picker .table-condensed tr td {
+                    padding: 0px 10px;
+                    text-align: center;
+                }
+                .shadow{
+                    width:100%;
+                    margin-bottom: 20px;
+                }
+                
+                label.error {
+                    position: absolute;
+                    left: 48px;
+                    top: 45px;
+                    font-weight: normal;
+                    color: red !important;
+                }
+                
+                input.error {
+                    border: 1px solid red !important;
+                }
+                
+                select.error{
+                    border:1px solid red !important;
+                }
+                
+                .text-area-field label.error{
+                    top: 124px;
+                }
+                
+                textarea.error{
+                    border:1px solid red !important;
+                }
+                
+                @media screen and (max-width : 768px) {
+                     label.error {
+                        left: 48px;
+                        top: 40px;
+                    }
+                    .input-group {
+                        margin-bottom: 40px;
+                    }
+                }
+                .use-loan-align {
+                    margin-top:-70px;
+                }
+                @media screen and (max-width : 991px) {
+                    .use-loan-align {
+                        margin-top:0px;
+                    }
+                }
+                
+            </style>
+            
+            <script>
+                var $validator;
+                $(document).ready(function(){
+                    $('.customSelectId option[value=""]').text('');
+                    applyValidationRules();
+                    
+                    //method to validate a phone number
+                    $.validator.addMethod("validatePhone", function(value, element) {
+                        var rValue = value.replace(/[- )(]/g,'');
+                        console.log('rValue=>'+rValue);
+                        if(rValue.length!=10){
+                            return false;
+                        }else{
+                            return this.optional(element) || /^(\+91-|\+91|0)?\d{10}$/.test(rValue);
+                        }
+                    }, "Invalid Number!");
+					
+					//method to validate business Name
+                    $.validator.addMethod("busniessNameIncludeComma", function(value, element) {
+                        console.log('value includes=>'+value.includes(","));
+                        if(value.includes(",")){
+                            return false;
+                        }else{
+                            return true;
+                        }
+                    }, "Invalid Name!");
+                    
+                    // Add Dollar sign if value is populated
+                    $('.addDollar').each(function(){
+                        if($(this).val()!=undefined && $(this).val()!= 'undefined' && $(this).val()!= '' && $(this).val()!= null ){
+                            var inputVal = $(this).val();
+                            if($(this).val().indexOf("$") == -1){
+                                $(this).val('$'+inputVal);
+                            }
+                        }
+                    });
+                    
+                    //Tick mark if values populated
+                    $('.form-control').each(function(){
+                        if($(this).val()!=undefined && $(this).val()!= 'undefined' && $(this).val()!= '' && $(this).val()!= null ){
+                            var iconSpan = $(this).parent().parent().find("i");
+                            if (iconSpan != 'undefined'){
+                               iconSpan.css("display","block");
+                            } else {
+                               iconSpan.css("display","none");
+                            }
+                        }
+                    });
+                    
+                });
+                
+                function applyValidationRules(){
+                    $validator = $('[id$=frm]').validate({
+                        errorPlacement: function(error, element) {
+                        var placement = $(element).data('error');
+                        if (placement) {
+                            $(placement).append(error)
+                        } else {
+                            error.insertAfter($(element).parent());
+                        }
+                    }});
+                    
+                    $('[id$=busniessName]').rules("add",{
+                        required: {
+                            depends:function(){
+                                $(this).val($(this).val());
+                                return true;
+                            }
+                        },busniessNameIncludeComma:'$(this).val()',
+                        maxlength: 80,
+                        messages:{
+                            required:"This Field is Required",
+							busniessNameIncludeComma:"Don't use comma in Name",
+                            maxlength:"Maximum characters are 80"
+                        }  
+                    });
+                    
+                    $('[id$=MonthlyRev]').rules("add",{
+                        required: {
+                            depends:function(){
+                                $(this).val($.trim($(this).val()));
+                                return true;
+                            }
+                        },
+                        messages:{
+                            required:"This Field is Required"
+                        }  
+                    });
+                    
+                    $('[id$=TimeInBuss]').rules("add",{
+                        required: {
+                            depends:function(){
+                                $(this).val($.trim($(this).val()));
+                                return true;
+                            }
+                        },
+                        messages:{
+                            required:"This Field is Required"
+                        }  
+                    });
+                    
+                    $('[id$=BussPhone]').rules("add",{
+                        required: {
+                            depends:function(){
+                                $(this).val($.trim($(this).val()));
+                                return true;
+                            }
+                        },validatePhone:'$(this).val()',
+                        messages:{
+                            required:"This Field is Required",
+                            validatePhone:"Invalid Number"
+                        }  
+                    });
+                }
+                
+                function validateTabSecond(){
+                    var checkPhone_second = validatePhoneClass_second();
+                    var checkCurrency_second = validateCurrencyClass_second();
+                    var checkEmail_second = validateEmailClass_second();
+                    var checkLength_second = validateNameClass_second();
+                    $('.reqClass').each(function() {
+                        if ($(this).val() == '') {
+                            $(this).focusInvalid();
+                            return false;
+                        }
+                    });
+                    if(checkLength_second == 'true' && checkPhone_second == 'true' && checkCurrency_second =='true' && checkEmail_second =='true'){
+                        console.log('inside true');
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+
+                function validateNameClass_second(){
+                    var firstName = $('[id$=FirstName]').val();
+                    var lastName = $('[id$=LastName]').val();
+                    var loanPurpose = $('[id$=loanUse]').val();
+                    if(firstName.length>40 || lastName.length>40 || loanPurpose.length>80){
+                        console.log('false');
+                        return 'false';
+                    }else{
+                        console.log('true');
+                        return 'true';
+                    }
+                }
+                
+                function validatePhoneClass_second(){
+                    var businessPhone = $('[id$=PhoneNumber]').val();
+                    console.log('businessPhone=>'+businessPhone);
+                    var rBusinessPhone = businessPhone.replace(/[- )(]/g,'');
+                    if(!$.isNumeric(rBusinessPhone)){
+                        return 'false';
+                    }else if($.isNumeric(rBusinessPhone) && rBusinessPhone.length!=10){
+                        return 'false';
+                    }else{
+                        return 'true';
+                    }
+                }
+                
+                function validateCurrencyClass_second(){
+                    var amountRequested = $('[id$=Amount_Req]').val();
+                    var RamountRequested = amountRequested.replace(/,/g, '');
+                    RamountRequested = RamountRequested.replace('$', '');
+                    console.log('RamountRequested >>'+RamountRequested);
+                    if(!$.isNumeric(RamountRequested)){
+                        return 'false';
+                    }else{
+                        return 'true';
+                    }
+                }
+                
+                function validateEmailClass_second(){
+                    var emailValue = $('[id$=EmailId]').val();
+                    if(emailValue!= ''){
+                        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+                        if(!emailValue.match(emailPattern)){
+                            return 'false';
+                        }else{
+                            return 'true';
+                        }
+                    }else{
+                        return 'false';
+                    }
+                }
+                
+                function validateTab(){
+                    var checkPhone = validatePhoneClass();
+                    var checkName = validateNameClass();
+					console.log('checkPhone'+checkPhone);
+					console.log('checkName'+checkName);
+                    $('.reqClass').each(function() {
+                        if ($(this).val() == '') {
+                            $(this).focusInvalid();
+                            return false;
+                        }
+                    });
+                    if(checkPhone == 'true' && checkName == 'true'){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+                
+                function validatePhoneClass(){
+                    var businessPhone = $('[id$=BussPhone]').val();
+                    var rBusinessPhone = businessPhone.replace(/[- )(]/g,'');
+                    if(!$.isNumeric(rBusinessPhone)){
+                        return 'false';
+                    }else if($.isNumeric(rBusinessPhone) && rBusinessPhone.length!=10){
+                        return 'false';
+                    }else{
+                        return 'true';
+                    }
+                }
+            
+            	function validateNameClass(){
+                    var businessName = $('[id$=busniessName]').val();
+                    console.log('businessName'+businessName);
+                    console.log('businessName Length'+businessName.length);
+                    if(businessName.includes(',') || businessName.length>80){
+                        console.log('false');
+                        return 'false';
+                    }else{
+                        console.log('true');
+                        return 'true';
+                    }
+                }
+                
+                function checkInput(inputId) {
+                    console.log('inputId'+inputId);
+                    var inputVal = document.getElementById(inputId);
+                    var iconSpan = inputVal.parentElement.parentElement.parentElement.querySelectorAll("span")[0].children[0];
+                    console.log('iconSpan'+iconSpan);
+                    if (inputVal != 'undefined' && inputVal.value != '' && inputVal.value != null && iconSpan != 'undefined' && !inputVal.value.startsWith(" ")){
+                       iconSpan.style.display = "block";
+                    } else {
+                       iconSpan.style.display = "none";
+                    }
+                    if(inputVal != 'undefined' && inputVal.value != '' && inputVal.value != null){
+                        inputVal.parentElement.parentElement.classList.remove('is-empty');
+                    }else{
+                        inputVal.parentElement.parentElement.classList.add('is-empty');
+                    }
+                }
+                
+                function checkInputPresent(){
+                    $('.validateInput').each(function(){
+                        if($(this).val()!=undefined && $(this).val()!= 'undefined' && $(this).val()!= '' && $(this).val()!= null ){
+                            if($(this).parent().hasClass('requiredInput')){
+                                $(this).parent().parent().parent().find("i").css("display","block");
+                                $(this).parent().parent().removeClass('is-empty');
+                            }else{
+                                $(this).parent().parent().find("i").css("display","block");
+                                $(this).parent().removeClass('is-empty');
+                            }
+                        }else{
+                            iconSpan.css("display","none");
+                            $(this).parent().parent().addClass('is-empty');
+                        }
+                        //return true;
+                    });
+                }
+
+                // Remove space
+                function removeSpace(code) {
+                    var inputVal = document.getElementById(code);
+                    var valueArray = inputVal.value;
+                    console.log('valueArray=>'+valueArray);
+                    startWithSpace = valueArray.startsWith(" ");
+                    console.log('startWithSpace=>'+startWithSpace);
+                    if(startWithSpace){
+                       console.log('Inside=>');
+                       valueArray = valueArray.replace(/\s/g,'');
+                    }
+                    inputVal.value = valueArray;
+                }
+                
+                function goBack(){
+                    var submitSec = document.getElementById('submitSection');
+                    var assSec = document.getElementById('assistanceSection');
+                    submitSec.style.display = 'block';
+                    assSec.style.display = 'none';
+                }
+
+                //Function for phone number formating
+                function phoneFormating(event,code){
+                    var inputVal = document.getElementById(code);
+                    var valueArray = inputVal.value;
+                    valueArray = valueArray.replace(/\s/g,'').replace('(','').replace(')','').replace('-','');
+                    console.log('valueArray.length=>'+valueArray.length);
+                    if (window.event){
+                        key = window.event.keyCode; // IE & Chrome
+                        console.log('key 1->'+key);
+                    }else{
+                        key = event.keyCode;  // Firefox    
+                    }
+                    if(valueArray != null && valueArray != ""){                         
+                        if(valueArray.length == 3){
+                            if( key != 8 && key != 46 ){
+                                valueArray = '('+valueArray.substring(0,3)+') ';                                 
+                            }
+                        }else if(valueArray.length > 3 && valueArray.length <=6){
+                            valueArray = '('+valueArray.substring(0,3)+') '+''+valueArray.substring(3,6);
+                        }else if(valueArray.length > 6){
+                            valueArray = '('+valueArray.substring(0,3)+') '+''+valueArray.substring(3,6)+'-'+valueArray.substring(6,10);
+                        }
+                    }
+                   
+                    inputVal.value = valueArray;
+                }
+            </script>
+            <script>
+                $(function () {
+                    $('#datetimepicker6').datepicker({
+                        format: "yyyy-mm-dd",
+                        language: "en",
+                        autoclose: true,
+                        todayHighlight: true
+                    });
+                });
+                
+            </script>  
+            <style>
+            .inputheight{
+                heighnt:100px;
+            }
+            .form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
+                    left:0;
+            }
+            </style>
+        </head>
+        <body>
+            <apex:form id="frm">
+                <!--<apex:pageMessages />-->
+                <apex:actionStatus id="statusOne">
+                    <apex:facet name="start">
+                        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                            &nbsp;
+                        </div>
+                        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 20% 45%;">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Cursor_Windows_Vista.gif" />
+                        </div>
+                    </apex:facet>
+                </apex:actionStatus>                
+                <div class="container">
+                
+                    <apex:outputPanel rendered="{!!renderOffers && !isInvalid}" id="formPanel">
+                        <div class="row">
+                            <section>
+                                <div class="col-md-8 col-md-offset-2" style="background-color: #f7f7f7;margin-top:30px;margin-bottom:30px;">                       
+                                    <div class="col-md-12 title-text">                                    
+                                        <h2>
+                                            <apex:outputLabel style="color:#2d4759;font-size: 34px !important;" value="{!$Label.InitialAppFormHeading}"/>
+                                        </h2>
+                                        <h4>
+                                            <apex:outputLabel style="color:rgb(38, 164, 166);font-size:25px" value="See how much your business qualifies for"/>
+                                        </h4>                                        
+                                    </div>
+                                    
+                                    <div class="col-md-12 padding0">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true" id="busniessNameCheck" style="display: none;"></i></span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Business Name(DBA)</label>
+                                                    <apex:inputfield value="{!ObjApplication.Cloufi__Business_DBA_Name__c}" styleclass="form-control reqClass" onchange="checkInput('{!$Component.busniessName}'), removeSpace('{!$Component.busniessName}')" id="busniessName"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true"  style="display: none;"></i></span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Average Monthly Deposits</label>
+                                                    <apex:inputfield value="{!ObjApplication.Average_Monthly_Revenue__c}" styleclass="form-control customSelectId reqClass" id="MonthlyRev" onchange="checkInput('{!$Component.MonthlyRev}');"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                
+                                   
+                                    <div class="col-md-12 padding0" style="margin-top: 24px;">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true"  style="display: none;"></i></span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Time in Business</label>
+                                                    <apex:inputfield value="{!ObjApplication.Time_in_Business__c}" html-placeholder="Time in Business" styleclass="form-control customSelectId reqClass" id="TimeInBuss" onchange="checkInput('{!$Component.TimeInBuss}');"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true"  style="display: none;"></i></span>
+                                                <div class="form-group label-floating">
+                                                    <label class="control-label">Business Phone Number</label>
+                                                    <apex:inputfield value="{!ObjApplication.Business_Cell_Phone_Number__c}"  styleclass="form-control customSelectId reqClass BussPhoneClass" id="BussPhone" onchange="checkInput('{!$Component.BussPhone}');" onkeyup="phoneFormating(event, '{!$Component.BussPhone}')"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 padding0" style="text-align: center;margin: 30px 0;margin-top: 10px !important;">
+                                            <apex:commandButton value="Submit" action="{!Proceed}" onclick="if(!validateTab()){return false;}" styleclass="btn btn-primary" id="submitButton" reRender="frm, errorMessage" status="statusOne" oncomplete="applyValidationRules();"/>
+                                        </div>
+
+                                        <div class="col-md-12 padding0" style="text-align: justify;margin-bottom:20px;">                                            
+                                            <label style="font-size: 11px !important;">By clicking “SUBMIT”, you consent to the Terms of Application and receiving calls and messages, including autodialed or pre-recorded calls for marketing purposes, from Maple Advance and its participating partners using the information you provided above, including via cell phone, acknowledge that no purchase of goods or services is contingent upon such consent, acknowledge that telephone calls to and from Maple Advance or its partners may be recorded, and acknowledge that you have read Maple Advance’s&nbsp;<apex:outputLink value="https://mapleadvance.com/privacy-policy" target="_blank">Privacy Policy</apex:outputLink> and understand that you may opt out of receiving communications of your choice from Maple Advance as provided in the Privacy Policy.</label>
+                                        </div>
+
+                                        <!-- <div class="col-md-12 padding0" style="text-align: center;margin: 30px 0;margin-top: 10px !important;">
+                                            <apex:commandButton value="Submit" action="{!Proceed}" onclick="if(!validateTab()){return false;}" styleclass="btn btn-primary" id="submitButton" reRender="frm" status="statusOne" oncomplete="applyValidationRules();"/>
+                                        </div> -->
+                                        
+                                        <div class="col-md-12"><p class="security"><apex:image value="{!URLFOR($Resource.Iconsheldform)}" />Safe, Secure and Confidential</p></div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!renderOffers && !(isInvalid) && !(isSubmit)}">
+                        
+                        <div class="row">
+                            <section>
+                                <div class="col-md-8 col-md-offset-2" style="background-color: #f7f7f7;margin-top:30px;margin-bottom:30px;">
+                                    <div id="submitSection" style="display: block">
+                                        
+                                        <div class="col-md-12 title-text">
+                                            <h2>                                                
+                                                <apex:outputLabel value="Congratulations! Your business pre-qualifies for up to ${!formattedOfferValue}."/>                                                
+                                            </h2>                                        
+                                        </div>                                        
+                                    </div>
+                                    <div class="col-md-12 title-text">
+                                        <h4 style="margin-top: 5px !important;">Check your Financing Options:</h4>
+                                    </div>
+                                    <br/>
+                                    <br/>
+                                    
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('.customSelectId option[value=""]').text('');
+                                        });
+                                    </script>
+                                    <script>
+                                        function checkmark(){
+                                            var  busStarted = $('[id$=EmailId]').val();
+                                            var checkMkbuss = document.getElementById('EmailIdSpan');
+                                            if(busStarted != null && busStarted != '' && busStarted != 'undefined' && !busStarted.startsWith(" ")){
+                                                checkMkbuss.style.display = 'block';
+                                            }else{
+                                                checkMkbuss.style.display = 'none';
+                                            }
+                                            
+                                            var  busStarted = $('[id$=LastName]').val();
+                                            var checkMkbuss = document.getElementById('LastNameSpan');
+                                            if(busStarted != null && busStarted != '' && busStarted != 'undefined'){
+                                                checkMkbuss.style.display = 'block';
+                                            }else{
+                                                checkMkbuss.style.display = 'none';
+                                            }
+                                            
+                                            var  busStarted = $('[id$=Amount_Req]').val();
+                                            var checkMkbuss = document.getElementById('Amount_ReqSpan');
+                                            if(busStarted != null && busStarted != '' && busStarted != 'undefined'){
+                                                checkMkbuss.style.display = 'block';
+                                            }else{
+                                                checkMkbuss.style.display = 'none';
+                                            }
+                                            
+                                            
+                                        }
+                                        
+                                        function checkMarkPhone(){
+                                            var  PhoneNumber = $('[id$=PhoneNumber]').val();
+                                            var PhoneNumberSpan = document.getElementById('PhoneNumberSpan');
+                                            if(PhoneNumber != null && PhoneNumber != '' && PhoneNumber != 'undefined'){
+                                                PhoneNumberSpan.style.display = 'block';
+                                            }else{
+                                                PhoneNumberSpan.style.display = 'none';
+                                            }
+                                        }
+                                        
+                                        function checkMarkIndustry(){
+                                            var  Industry_Type = $('[id$=Industry_Type]').val();
+                                            var Industry_TypeSpan = document.getElementById('Industry_TypeSpan');
+                                            if(Industry_Type != null && Industry_Type != '' && Industry_Type != 'undefined'){
+                                                Industry_TypeSpan.style.display = 'block';
+                                            }else{
+                                                Industry_TypeSpan.style.display = 'none';
+                                            }
+                                        }
+                                        
+                                        $(document).ready(function(){
+                                            $('.customSelectId option[value=""]').text('');
+                                            // Check input value is number or not
+                                            $.validator.addMethod("currencyNumberValidation", function(value, element) {
+                                                var rValue = value.replace("$", "");
+                                                var r1Value = rValue.replace(/,/g , '');
+                                                console.log('r1Value=>'+r1Value);
+                                                return $.isNumeric(r1Value);
+                                            }, "Invalid Currency");
+                                            
+                                            //method to validate a phone number
+                                            $.validator.addMethod("validatePhone", function(value, element) {
+                                                var rValue = value.replace(/[- )(]/g,'');
+                                                console.log('rValue=>'+rValue);
+                                                if(rValue.length!=10){
+                                                    return false;
+                                                }else{
+                                                    return this.optional(element) || /^(\+91-|\+91|0)?\d{10}$/.test(rValue);
+                                                }
+                                            }, "Invalid Number!");
+                                            
+                                            // validateEmail
+                                            $.validator.addMethod("validateEmail", function(value, element) {
+                                                 return this.optional(element) || /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(value);
+                                            }, "Invalid Email");
+                                            
+                                        });
+
+                                        //Function for phone number formating
+                                        function phoneFormating(event,code){
+                                            var inputVal = document.getElementById(code);
+                                            var valueArray = inputVal.value;
+                                            valueArray = valueArray.replace(/\s/g,'').replace('(','').replace(')','').replace('-','');
+                                            console.log('valueArray.length=>'+valueArray.length);
+                                            if (window.event){
+                                                key = window.event.keyCode; // IE & Chrome
+                                                console.log('key 1->'+key);
+                                            }else{
+                                                key = event.keyCode;  // Firefox    
+                                            }
+                                            if(valueArray != null && valueArray != ""){                         
+                                                if(valueArray.length == 3){
+                                                    if( key != 8 && key != 46 ){
+                                                        valueArray = '('+valueArray.substring(0,3)+') ';                                 
+                                                    }
+                                                }else if(valueArray.length > 3 && valueArray.length <=6){
+                                                    valueArray = '('+valueArray.substring(0,3)+') '+''+valueArray.substring(3,6);
+                                                }else if(valueArray.length > 6){
+                                                    valueArray = '('+valueArray.substring(0,3)+') '+''+valueArray.substring(3,6)+'-'+valueArray.substring(6,10);
+                                                }
+                                            }
+                                           
+                                            inputVal.value = valueArray;
+                                        }
+                                        
+                                        function addDollarSign(e) {
+                                            //debugger;
+                                            var inputVal = document.getElementById(e);
+                                            var valueArray = inputVal.value;
+                                            console.log('valueArray=>'+valueArray);
+                                            if(!valueArray.includes("$")){
+                                                inputVal.value = '$'+valueArray;
+                                            }
+                                        }
+
+                                        // Remove space
+                                        function removeSpace(code) {
+                                            var inputVal = document.getElementById(code);
+                                            var valueArray = inputVal.value;
+                                            console.log('valueArray=>'+valueArray);
+                                            startWithSpace = valueArray.startsWith(" ");
+                                            console.log('startWithSpace=>'+startWithSpace);
+                                            if(startWithSpace){
+                                               console.log('Inside=>');
+                                               valueArray = valueArray.replace(/\s/g,'');
+                                            }
+                                            inputVal.value = valueArray;
+                                        }
+                                        
+                                        function Comma(Num) { 
+                                            Num += '';
+                                            Num = Num.replace(',', ''); Num = Num.replace(',', ''); Num = Num.replace(',', '');
+                                            Num = Num.replace(',', ''); Num = Num.replace(',', ''); Num = Num.replace(',', '');
+                                            x = Num.split('.');
+                                            x1 = x[0];
+                                            x2 = x.length > 1 ? '.' + x[1] : '';
+                                            var rgx = /(\d+)(\d{3})/;
+                                            while (rgx.test(x1))
+                                                x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                                            return x1 + x2
+                                        }
+                                        
+                                        function applyValidationRules(){
+                                            $validator = $('[id$=frm]').validate({
+                                                errorPlacement: function(error, element) {
+                                                var placement = $(element).data('error');
+                                                if (placement) {
+                                                    $(placement).append(error)
+                                                } else {
+                                                    error.insertAfter($(element).parent());
+                                                }
+                                            }});
+                                            $('[id$=FirstName]').rules("add",{
+                                                required: {
+                                                    depends:function(){
+                                                        $(this).val($(this).val());
+                                                        return true;
+                                                    }
+                                                },maxlength: 40,
+                                                messages:{
+                                                    required:"This Field is Required",
+                                                    maxlength:"Maximum characters are 40"
+                                                }  
+                                            });
+                                            
+                                            $('[id$=LastName]').rules("add",{
+                                                required: {
+                                                    depends:function(){
+                                                        $(this).val($(this).val());
+                                                        return true;
+                                                    }
+                                                },maxlength: 40,
+                                                messages:{
+                                                    required:"This Field is Required",
+                                                    maxlength:"Maximum characters are 40"
+                                                }  
+                                            });
+                                            
+                                            $('[id$=EmailId]').rules("add",{
+                                                required: {
+                                                    depends:function(){
+                                                        $(this).val($.trim($(this).val()));
+                                                        return true;
+                                                    }
+                                                },validateEmail:true,
+                                                messages:{
+                                                    required:"This Field is Required",
+                                                    validateEmail:"Invalid Email"
+                                                }  
+                                            });                                                 
+                                            
+                                            $('[id$=PhoneNumber]').rules("add",{
+                                                required: {
+                                                    depends:function(){
+                                                        $(this).val($.trim($(this).val()));
+                                                        return true;
+                                                    }
+                                                },validatePhone:'$(this).val()',
+                                                messages:{
+                                                    required:"This Field is Required",
+                                                    validatePhone:"Invalid Number"
+                                                }
+                                            });
+                                            
+                                            $('[id$=Industry_Type]').rules("add",{
+                                                required: {
+                                                    depends:function(){
+                                                        $(this).val($.trim($(this).val()));
+                                                        return true;
+                                                    }
+                                                },
+                                                messages:{
+                                                    required:"This Field is Required"
+                                                }  
+                                            });
+                                            
+                                            $('[id$=Amount_Req]').rules("add",{
+                                                required: {
+                                                    depends:function(){
+                                                        $(this).val($.trim($(this).val()));
+                                                        return true;
+                                                    }
+                                                },currencyNumberValidation: '$(this).val()',
+                                                messages:{
+                                                    required:"This Field is Required",
+                                                    currencyNumberValidation:"Invalid Currency"
+                                                }
+                                            });
+                                                                                                
+                                            $('[id$=loanUse]').rules("add",{
+                                                required: {
+                                                    depends:function(){
+                                                        $(this).val($(this).val());
+                                                        return true;
+                                                    }
+                                                },maxlength: 5000,
+                                                messages:{
+                                                    required:"This Field is Required",
+                                                    maxlength:"Maximum characters are 5000"
+                                                }
+                                            });
+                                        }
+                                    </script> 
+                                    <!-- First Column Starts Here -->
+                                    <div class="col-md-12 padding0">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true"  style="display: none;"></i></span>
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">First Name</label>
+                                                    <apex:inputfield value="{!ObjApplication.Cloufi__First_Name__c}" styleclass="form-control validateInput" id="FirstName" onchange="checkInput('{!$Component.FirstName}'), removeSpace('{!$Component.FirstName}')"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group" style="margin-top: 0px;">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true" style="display: none;" id="LastNameSpan"></i></span>
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Last Name</label>
+                                                    <apex:inputfield value="{!ObjApplication.Cloufi__Last_Name__c}" styleclass="form-control validateInput reqClass" id="LastName" onchange="checkInput('{!$Component.LastName}'), removeSpace('{!$Component.LastName}')" onkeyup="checkmark();"/>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-12 padding0">
+                                        <div class="col-md-6">                                             
+                                            <div class="input-group" style="margin-top: 20px;">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true" style="display: none;" id="EmailIdSpan"></i></span>
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Email Address</label>
+                                                    <apex:inputfield value="{!ObjApplication.Cloufi__Email__c}" styleclass="form-control validateInput reqClass" id="EmailId" onkeyup="checkmark();"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group" style="margin-top: 20px;">
+                                                <span class="input-group-addon" ><i class="fa fa-check" aria-hidden="true" style="display: none;" id="PhoneNumberSpan"></i></span>
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Cell Phone Number</label>
+                                                    <apex:inputfield value="{!ObjApplication.Telephone_Number__c}" styleclass="form-control validateInput reqClass" id="PhoneNumber" onchange="checkMarkPhone();" onkeyup="phoneFormating(event, '{!$Component.PhoneNumber}')"/>
+                                                    <!--onchange="checkInput('{!$Component.PhoneNumber}');"-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 padding0">
+                                        <div class="col-md-6">
+                                            <div class="input-group" style="margin-top: 20px;">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true"  style="display: none;" id="Industry_TypeSpan"></i></span>
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">Type of Business</label>
+                                                    <apex:inputfield value="{!ObjApplication.Cloufi__Type_Of_Business__c}"  styleclass="form-control validateInput customSelectId reqClass" id="Industry_Type" onchange="checkMarkIndustry();"/><!--checkInput('{!$Component.Industry_Type}');-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 padding0">
+                                        <div class="col-md-6">       
+                                            <div class="input-group" style="margin-top: 20px;">
+                                                <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true" style="display: none;" id="Amount_ReqSpan"></i></span>
+                                                <div class="form-group label-floating is-empty">
+                                                    <label class="control-label">How much funding do you need?</label>
+                                                    <apex:inputfield value="{!ObjApplication.Cloufi__Amount_Requested__c}" styleclass="form-control validateInput reqClass addDollar" id="Amount_Req" onchange="checkInput('{!$Component.Amount_Req}');" onkeyup="checkmark();this.value=Comma(this.value); addDollarSign('{!$Component.Amount_Req}');"/><!--addDollarSign('{!$Component.Amount_Req}');-->
+                                                </div>
+                                            </div>   
+                                        </div>
+                                        <div class="col-md-6">
+                                            
+                                                <div class="input-group text-area-field use-loan-align">
+                                                    <span class="input-group-addon"><i class="fa fa-check" aria-hidden="true" style="display: none;"></i></span>
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="control-label">How will you use the loan?</label>
+                                                        <apex:inputTextarea value="{!ObjApplication.How_will_you_use_the_loan__c}" style="min-height:122px;" styleclass="form-control inputheight validateInput reqClass" id="loanUse" onchange="checkInput('{!$Component.loanUse}'), removeSpace('{!$Component.loanUse}')"/>
+                                                    </div>
+                                                </div>
+                                           
+                                        </div>
+                                        
+                                    </div>
+                                    <br/>
+                                    <div class="col-md-12">
+                                        <p class="security" style="line-height: 1.2;color: #666666;font-size: 18px;margin-bottom:-30px;">
+                                            <apex:image value="{!URLFOR($Resource.IconTimeForm)}" />Funding could be in your account<br/><font style="margin-left:22px;">by<b> {!settlementDay} at 5:00 PM EST</b></font>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-12 padding0" style="text-align: center;margin: 30px 0;">
+                                        <apex:commandButton value="Submit" action="{!createApplication}" onclick="if(!validateTabSecond()){return false;}" styleclass="btn btn-primary" oncomplete="checkInputPresent();" id="submitButton1" reRender="frm" status="statusOne"/>
+                                    </div> 
+                                    <div class="col-md-12"><p class="security"><apex:image value="{!URLFOR($Resource.Iconsheldform)}" />Safe, Secure and Confidential</p></div>
+                                </div>
+                            </section>
+                        </div>
+                    </apex:outputPanel>
+                    
+                    <apex:outputPanel id="errorMessage">
+                        <apex:outputPanel rendered="{!isInvalid}">
+                            <div class="row">
+                                <section>
+                                    <div class="col-md-8 col-md-offset-2" style="background-color: #f7f7f7;margin-top:30px;margin-bottom:30px;padding: 5%;">
+                                        <h6><font style="font-family: 'Poppins', sans-serif;text-transform: capitalize;">Sorry...</font></h6>
+                                        <p class="style">Unfortunately, Maple Advance's lending partners require that your business be operating for at least 4 months and have a minimum of $5 000 per month in business bank deposits. For more information, please call us at <span style="white-space: nowrap;">(866) 820-2270</span></p>                                                          
+                                        <div class="col-md-12 padding0" style="text-align:left">
+                                            <apex:commandlink action="{!goBack}">
+                                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"> <b style="word-spacing: -10px;font-size: 16px;color: #8193a8;">Go Back</b></span>
+                                            </apex:commandlink>                                     
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                    <!---Thank you message for submit 07/18/2018-->
+                    <!-- <apex:outputPanel rendered="{!isSubmit}">
+                        <div class="row" style="position: fixed;top: 40%;left: 50%;transform: translate(-50%, -50%);">
+                            <section>
+                                <div align="center" style="margin-top:20px;">                            
+                                    <apex:outputLabel value="Thank You!" style="font-size: xx-large;font-family: 'Poppins',sans-serif;color: #26a4a6;font-weight: 700;margin: 0;line-height: 1.17;letter-spacing: -0.01em;"/><br/>
+                                    <apex:outputLabel value="A MEMBER OF OUR GROW TEAM WILL CONTACT YOU SHORTLY" style="margin-top: 20px;font-size: 19px;line-height: 1.35;font-weight: 700;text-transform: uppercase;letter-spacing: -0.025em;color: #394959;"/>
+                                </div>
+                                
+                                <apex:image value="{!URLFOR($Resource.mapleapllicationresource,'img/bottom-shadow.png')}" styleclass="shadow" style="margin-bottom: 0% !important;margin-top: 5% !important;"/>
+                                
+                                
+                                <div class="col-md-12 padding0" style="text-align: center;margin: 30px 0;">
+                                    <apex:commandlink action="{!submitApplication}" target="_blank">
+                                        <apex:commandButton value="START FILLING THE APPLICATION NOW" styleclass="btn btn-primary" reRender="frm" status="statusOne"/>
+                                    </apex:commandLink>
+                                </div>
+                            </section>
+                        </div>
+                    </apex:outputPanel> -->
+                </div>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

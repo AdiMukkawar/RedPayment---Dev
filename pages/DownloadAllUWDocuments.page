@@ -1,0 +1,8 @@
+<apex:page standardController="Opportunity" extensions="DownloadAllUWDocumentsControllerX">
+	<apex:pageMessages />
+	<apex:form >
+	<!-- <input type="button" value="Download Attachments" onclick="{!downloadAllUWDocs}"  id="dAllAtts" class="btn"/> -->
+		<apex:commandButton value="Download" action="{!downloadOneUWDoc}"/><br/>
+		<apex:commandButton value="Download All" action="{!downloadAllUWDocs}"/>
+	</apex:form>
+</apex:page>

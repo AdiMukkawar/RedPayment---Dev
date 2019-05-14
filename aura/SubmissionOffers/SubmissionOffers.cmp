@@ -1,0 +1,97 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd.(Prashant Mahajan)
+* Component Name: SubmissionOffers
+* Created Date: 28-August-2018
+* Description:  Component used on Submissions to display list of Offers
+*******************************************************************/-->
+<aura:component controller="SubmissionOfferCompController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:appHostable">
+    <aura:handler name="init" value="{!this}" action="{!c.initRecords}"/>
+    <!--aura:handler event="force:refreshView" action="{!c.doInit}" />-->
+    <aura:attribute name="OfferList" type="Cloufi__Offers__c[]" description="store account records list"/>
+    <aura:attribute name="recordId" type="Id" access="global"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" description="show hide save and cancel" default="false"/>
+    
+	<aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+	<aura:attribute name="Spinner" type="boolean" default="false"/>
+    <aura:attribute name="currentOfferStatus" type="string" access="global"/>
+	
+    <!-- Component Header Start -->
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="standard:account" alternativeText="Event" />
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="Offer">Offer</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__name-meta"></p>
+                    </div>
+                    <!-- Buttons Section Start -->
+					
+					<!--loading spinner start... style=Brand Medium (blue dots)-->
+					<aura:if isTrue="{!v.Spinner}">
+						<div aura:id="spinnerId" class="slds-spinner_container">
+							<div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+								<span class="slds-assistive-text">Loading</span>
+								<div class="slds-spinner__dot-a"></div>
+								<div class="slds-spinner__dot-b"></div>
+							</div>
+						</div>
+					</aura:if>
+					<!-- Loading spinner end--> 
+					
+                    <div class="btn" style="float:right!important;">
+                        <!--<ui:button label="New Offer" press="{!c.createRecord}" />-->
+                        <aura:if isTrue="{!v.showSaveCancelBtn}">
+                            <lightning:buttonGroup class="slds-m-around_medium">
+                                <lightning:button label="Save" onclick="{!c.save}" /> &nbsp;
+                                <lightning:button label="Cancel" onclick="{!c.cancel}"/>
+                            </lightning:buttonGroup>
+                        </aura:if>
+                    </div> 
+                    <!-- Buttons Section End -->
+                </div>
+            </div>
+        </div>
+    </div><br/>
+	<!-- Component Header End -->
+    
+	<!-- Offer section start -->
+    <aura:if isTrue="{!(v.OfferList == null) }">
+        No Offers At This Moment!!!
+    </aura:if>
+    <aura:if isTrue="{!(v.OfferList != null) }">
+        <div class="slds-m-around_large" style="margin-top: 0px; margin-right: 0px; margin-left: 0px;">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer" style="table-layout:fixed">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" style="width:13%"><div class="slds-truncate" title="Name">Name</div></th>
+                        <th scope="col" style="width:13%"><div class="slds-truncate" title="Funder">Funder</div></th>
+                        <th scope="col" style="width:14%"><div class="slds-truncate" title="Program">Program</div></th>
+                        <th scope="col" style="width:12%"><div class="slds-truncate" title="Funding Amount">Funding Amount</div></th>
+                        <th scope="col" style="width:10%"><div class="slds-truncate" title="Program Type">Program Type</div></th>
+                        <th scope="col" style="width:10%"><div class="slds-truncate" title="Terms">Terms</div></th>
+                        <th scope="col" style="width:10%"><div class="slds-truncate" title="Factor Rate">Factor Rate</div></th>
+                        <th scope="col" style="width:10%"><div class="slds-truncate" title="Broker Fee">Broker Fee</div></th>
+                        <th scope="col" style="width:18%"><div class="slds-truncate" title="Created Date">Created Date</div></th>
+                        <th scope="col" style="width:18%"><div class="slds-truncate" title="Status">Status</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.OfferList}" var="o" indexVar="index">
+                        <c:OpportunityOfferComp singleRec="{!o}" showSaveCancelBtn="{!v.showSaveCancelBtn}" currentOfferStatus="{!o.Cloufi__Offer_Status__c}"/>
+                    </aura:iteration>
+                </tbody>
+            </table>           
+        </div>
+    </aura:if>
+	<!-- Offer section End -->
+</aura:component>

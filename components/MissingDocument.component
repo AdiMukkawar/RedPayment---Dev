@@ -1,0 +1,11 @@
+<apex:component controller="MissingDocument_Ctl" access="global">
+    <apex:attribute name="AppLicationID" type="Id" description="Id of the Application" assignTo="{!appid}"/> 
+    
+    <div>
+        <apex:repeat value="{!MissingDocs}" var="uw">
+            <!--<div>• {!uw}</div>-->
+            <li style="list-style-type:circle">{!uw}</li>
+        </apex:repeat><br/>
+        <a style="color:#999999;" target="_blank" href = "{!Lead}">Click Here </a>to upload remaining documents and to move forward with an application process.
+    </div>
+</apex:component>

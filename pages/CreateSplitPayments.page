@@ -1,0 +1,229 @@
+<!--
+Author  | Date       | Description
+Prashant| 16/04/2018 | Payments Vf page to create split payments on Opportunity
+-->  
+<apex:page standardController="Opportunity" extensions="CreateSplitPaymentControllerX"  sidebar="false" showHeader="false" id="pge" cache="false" docType="html-5.0">
+   <apex:form id="frm">
+      <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+         <head>
+            <apex:slds />
+            <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js" />
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js" />
+            <script type="text/javascript" src="https://cdn.datatables.net/1.10.16/js/dataTables.jqueryui.min.js" />           
+             <apex:stylesheet value="https://cdn.datatables.net/1.10.0/css/jquery.dataTables.css"/>
+            <!--  For DataTable -->
+            
+            <script>
+                $(document).ready(function() {
+                    $('#example').DataTable();
+                } );
+                j$(window).load(function (){
+                    $('#example').DataTable();
+                });
+            </script>
+            <!--<script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script> 
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+            <script>
+                $(document).ready(function(){
+                   overridePageMessages();    
+                });
+        
+                function overridePageMessages(){    
+                    var textureEffect = '';
+                    $('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage '+textureEffect);          
+                    $('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success  customMessage '+textureEffect);    
+                    $('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage '+textureEffect);                  
+                    $('.infoM3').addClass('slds-notify slds-notify--toast customMessage '+textureEffect);    
+                    $('.errorM3').removeClass('errorM3'); 
+                    $('.confirmM3').removeClass('confirmM3'); 
+                    $('.infoM3').removeClass('infoM3');   
+                    $('.warningM3').removeClass('warningM3');  
+                }
+            </script>
+            <style>
+               .msgIcon {
+                display: none!important
+            }
+            .customMessage * {
+                color: #fff!important
+            }
+            .customMessage {
+                margin: 5px 0!important;
+                opacity: 1!important;
+                width: 100%;
+                font-size: 12px;
+                border: 0px;
+                padding-left: 10px;
+            }
+              
+            </style>
+            <!-- processing mark CSS Start -->
+            <style>
+               #spinner{
+               display: none;
+               width:200px;
+               height: 50px;
+               position: fixed;
+               top: 50%;
+               left: 50%;
+               text-align:center;
+               padding:10px;
+               font:normal 16px Tahoma, Geneva, sans-serif;
+               margin-left: -100px;
+               margin-top: -100px;
+               z-index:2;
+               overflow: auto;
+               z-index:100;
+               padding:5px;
+               line-height:10px;
+               }
+               #opaque {
+               position: fixed;
+               top: 0px;
+               left: 0px;
+               width: 100%;
+               height: 100%;
+               z-index: 1;
+               display: none;
+               background-color: gray;
+               filter: alpha(opacity=30);
+               opacity: 0.3;
+               -moz-opacity:0.3;
+               -khtml-opacity:0.3
+               }
+               * html #opaque {
+               position: absolute;
+               }
+            </style>
+            <!-- processing mark CSS End-->
+         </head>
+         <body class="slds-scope"> 
+            <apex:pageMessages id="msg"/>
+            <div>
+               <div class="slds-page-header">
+                  <div class="slds-grid">
+                     <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                           <div class="slds-media__figure">
+                              <span class="slds-icon_container slds-icon_container_circle slds-icon-action-download" title="">
+                                 <svg class="slds-icon" aria-hidden="true">
+                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/action-sprite/svg/symbols.svg#download"></use>
+                                 </svg>
+                              </span>
+                           </div>
+                           <div class="slds-media__body">
+                              <p class="slds-text-title_caps slds-line-height_reset">Payments</p>
+                              <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">
+                                 <apex:outputText value="Upload Payments"/>
+                              </h1>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                        <apex:commandButton value="Back" action="{!cancel}" immediate="true" html-formnovalidate="formnovalidate" styleClass="slds-button slds-button--brand" style="font-size:12px;margin-left:-10%;" />
+                     </div>
+                  </div>
+               </div>
+               <br/>
+               <div class="slds-grid slds-gutters" style="padding:0.5%;">
+                     <div class="slds-col slds-size_1-of-3">
+                         <label class="slds-form-element__label" for="legalname"><b>Credit Card Processor:</b></label>
+                         <!--<apex:inputField id="legalname" value="{!objOpp.Credit_Card_Processor__c}" styleClass="slds-input" required="true">
+                         
+                         </apex:inputField>-->
+                         <apex:selectList id="countries" value="{!paymentProcessorId}" size="1" styleClass="slds-input" required="true">
+                            <apex:selectOptions value="{!PaymentProcessor}"/>
+                        </apex:selectList>
+                      </div>                    
+                    <div class="slds-col slds-size_2-of-3">
+                         <apex:inputFile value="{!contentFile}" contentType="{!contentType}" filename="{!nameFile}" />                    
+                        <apex:commandButton value="Upload File" id="theButton" action="{!uploadFile}" onclick="overridePageMessages(),showSpinner()" />                     
+                         <br/> <br/> <font color="red"> <b>Note: <br/> 1. Please use the standard CSV template to upload document.<br/> 2. Use proper Credit Card Processor.<br/> 3. Make sure there is no comma in any cell of the file.</b> </font>
+                      </div>
+                
+               </div>
+            </div>
+            <hr/>
+            <div style="text-align:center;">
+            <apex:outputPanel rendered="{! IF(successPayList.size > 0, true, false)}">
+               <apex:commandButton styleClass="slds-button slds-button_brand" value="Export Successfull Records To Excel" action="/apex/ShowSuccessfullSplitPayments"/> &nbsp;&nbsp;
+               
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{! IF(errorPayList.size > 0, true, false)}">
+                <apex:commandButton styleClass="slds-button slds-button_brand" value="Export Failure Records To Excel" action="/apex/ShowFailureSplitPayments"/>
+            </apex:outputPanel>
+            </div><br/>
+            <apex:outputPanel rendered="{! IF(successPayList.size > 0, true, false)}">
+            <div class="slds-page-header">
+                <div class="slds-grid">
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure"></div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-title_caps slds-line-height_reset">Successfully Inserted Records</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </apex:outputPanel>
+            <table id="example" class="slds-table slds-table_bordered slds-table_cell-buffer">
+                            <!-- Table Header start -->
+                            <thead>
+                              <tr class="slds-text-title_caps">
+                                 <apex:outputPanel rendered="{!NOT(ISNULL(uploadedRecords))}">
+                                    <apex:repeat value="{!$ObjectType.Cloufi__Payments__c.FieldSets.SplitFunctionality}" var="f">
+                                       <th scope="col">
+                                          <div class="slds-truncate">{!f.Label}</div>
+                                       </th>
+                                    </apex:repeat>
+                                 </apex:outputPanel>
+                              </tr>
+                            </thead>
+                            <!-- Table Header End -->
+                            <tbody>
+                                                                                             
+                              <apex:repeat value="{!uploadedRecords}" var="App" >
+                                 <tr>
+                                    <apex:repeat value="{!$ObjectType.Cloufi__Payments__c.fieldsets.SplitFunctionality}" var="fieldValue">
+                                       <!-- <apex:column value="{!App[fieldValue]}" /> -->
+                                       <td>
+                                       <apex:outputLink value="/{!URLFOR(App['Id'])}" rendered="{!fieldValue.Label=='Payment#'}">                       
+                                                <div class="slds-truncate">{!App[fieldValue]}</div>
+                                            </apex:outputLink>
+                                          <apex:outputLabel rendered="{!(fieldValue.Label!='Payment#') && (fieldValue.Label!='Effective Date') && (fieldValue.Label!='Expected Settlement Date')}">
+                                             <div class="slds-truncate">{!App[fieldValue]}</div>
+                                          </apex:outputLabel>
+                                          <apex:outputText value="{0,date,dd/MM/yy}" rendered="{!(CONTAINS(fieldValue, 'Date'))}">
+                                                <apex:param value="{!App[fieldValue]}" />
+                                            </apex:outputText>
+                                       </td>
+                                    </apex:repeat>
+                                 </tr>
+                              </apex:repeat>
+                                <!-- List to show All Subscribers related to Account End -->
+                            </tbody>  
+                        </table>
+            
+        
+            <div id="opaque"/>
+            <div id="spinner">
+               <p align="center" style='{font-family:"Arial", Helvetica, sans-serif; font-size:10px;}'>
+                  <apex:image value="/img/loading.gif"/>
+                  &nbsp;Please wait
+               </p>
+            </div>
+         </body>
+         <script type="text/javascript">
+            //processing mark Script Start
+            function showSpinner(){
+                document.getElementById('opaque').style.display='block';
+                var popUp = document.getElementById('spinner');
+                popUp.style.display = 'block';
+                overridePageMessages();
+            }
+            //processing mark Script End
+         </script>
+      </html>
+   </apex:form>
+</apex:page>

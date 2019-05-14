@@ -1,0 +1,356 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd.
+* Component Name: OpportunityOfferCompParent
+* Created Date: 
+* Description:  Component used on opportunity to display list of Offers
+*******************************************************************
+*Author  			| Date       | Description
+ Neha				| 26-Jan-2019| New Offer button fucntionality
+/-->
+<aura:component controller="OpportunityofferController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:appHostable">  
+    <!--Init handler To Get the records on load--> 
+    <aura:handler name="init" value="{!this}" action="{!c.initRecords}"/>
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+	<aura:attribute name="Spinner" type="boolean" default="false"/>
+	<aura:attribute name="OfferList" type="Cloufi__Offers__c[]" description="store account records list"/>
+    <aura:attribute name="recordId" type="Id" access="global"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" description="show hide save and cancel" default="false"/>
+    <aura:attribute name="currentOfferStatus" type="string" access="global"/>
+    <aura:attribute name="oppApprovedStage" type="Boolean" default="false"/>
+    <aura:attribute name="isSave" type="Boolean" default="false"/>
+    
+    <aura:attribute name="showPopup" type="Boolean" default="false"/>
+    <aura:attribute name="RemainingStips" type="Cloufi__UW_Document__c[]"/>
+    <aura:attribute name="userInfo" type="user"/>
+    <aura:attribute name="isOfferChosen" type="Boolean" default="false"/>
+    <aura:attribute name="requDocsAvailable" type="Boolean" default="false"/>
+	<aura:attribute name="isdisable" type="Boolean" default="true" />
+    <!-- New Offer Button Attributes Begin -->
+    <aura:attribute name="showNewOfferPopup" type="Boolean" default="false"/>
+    <aura:attribute name="Offer" type="Cloufi__Offers__c" default="{ 'sobjectType': 'Cloufi__Offers__c' }" access = "public"/>
+    <aura:attribute name="loan" type="Opportunity"/>
+    <aura:attribute name="programsList" type="OpportunityofferController.programInformation[]" access="global"/>
+    <aura:attribute name="selectedProgram" type="String"/>
+    <aura:attribute name="showHideDailyPB" type="Boolean" default="false"/>
+    <aura:handler event="force:refreshView" action="{!c.initRecords}" />
+    <!--<aura:handler event="force:editRecord" action="{!c.initRecords}" />
+    <aura:handler event="force:createRecord" action="{!c.initRecords}" />-->
+    <aura:attribute name="isSignedApp" type="Boolean"/>
+    <!-- New Offer Button Attributes End -->
+	<aura:attribute name="popupSpinner" type="boolean" default="false"/>
+      
+    <!-- New Offer popup start -->
+    <aura:renderIf isTrue="{!v.showNewOfferPopup}">
+        <!--loading spinner start... style=Brand Medium (blue dots)-->
+     
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!--  MODAL BOX HEADER Start -->
+                
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" alternativeText="close" variant="bare-inverse" class="slds-modal__close" onclick="{!c.closeNewOfferPopup}"/>
+                        <div class="slds-page-header">
+                            <p class="slds-page-header__title slds-truncate" title="">Create New Offer</p>
+                        </div>
+                    </header>
+                    <!--  MODAL BOX HEADER End -->
+                    <!-- MODAL BOX BODY Part Start-->
+                   
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                <tbody>
+                                    <tr>
+                                        <td>Funder</td>
+                                        <td>
+                                            <lightning:recordEditForm  objectApiName="Cloufi__Offers__c" class="labelCLass">
+                                                <lightning:messages />
+                                                <lightning:inputField fieldName="Funder_Dev__c" aura:id="Funder" variant = "label-hidden" onchange="{!c.getFunder}"/>
+                                            </lightning:recordEditForm>
+                                        </td>
+                                    </tr>
+                                     <tr>
+                                        <td>Program</td>
+                                        <td>
+                                            <lightning:select label="Notify To" class="single" aura:id="InputSelectSingle" value="{!v.selectedProgram}" >
+                                                <option value="">...Select a Program...</option>
+                                                <aura:iteration items="{!v.programsList}" var="member">
+                                                    <option value="{!member.programId}">{!member.programName}</option>
+                                                </aura:iteration>
+                                            </lightning:select>
+                                             
+                                        </td>
+                                    </tr>
+                                    <!-- <aura:renderIf isTrue="{!and(v.Offer.Cloufi__Funder__c!=null,v.Offer.Cloufi__Funder__c!='')}"> -->
+                                        <tr>
+                                            <td>Product Name</td>
+                                            <td>
+                                                <force:inputField aura:id="Product_Name" value="{!v.Offer.Product_Name__c}" />
+                                            </td>
+                                        </tr>
+                                       
+                                        <tr>
+                                            <td>Program Type</td>                                        
+                                            <td>
+                                                <div class="slds-select_container">
+                                                     <ui:inputSelect  aura:id="programType" class="slds-select"  change="{!c.onPicklistChange}"/>
+                                                  </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payment Schedule</td>
+                                            <td>
+                                                <force:inputField aura:id="Payment_Schedule" value="{!v.Offer.Payment_Schedule__c}" Class="paySchedule"/> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Term</td>
+                                            <td>
+                                                <lightning:input value="{!v.Offer.Cloufi__Terms_In_Months__c}" type="text" aura:id="Terms_In_Months" onchange="{!c.onchangeFunding}" class="OfferTermClass"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Advance Amount</td>
+                                            <td>
+                                                <lightning:input value="{!v.Offer.Cloufi__Funding_Amount__c}" aura:id="Funding_Amount" onchange="{!c.onchangeFunding}" class="OfferFundedClass" type="number" formatter="currency"/>
+                                            	
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Factor</td>
+                                            <td>
+                                                <lightning:input value="{!v.Offer.Factor_Rate__c}" type="text" aura:id="Factor_Rate" onchange="{!c.onchangeFunding}" class="OfferFactorClass"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payback Amount</td>
+                                            <td>
+                                                <lightning:input value="{!v.Offer.Cloufi__Payback_Amount__c}" aura:id="Payback_Amount" disabled="{!v.isdisable}" type="number" formatter="currency"/>
+                                            </td>
+                                        </tr>
+                                        <aura:renderIf isTrue="{!!v.showHideDailyPB}">
+                                            <tr>
+                                                <td>Daily Payback Amount</td>
+                                                <td>
+                                                	<lightning:input value="{!v.Offer.Cloufi__Daily_PB_Amount__c}" aura:id="Daily_PB_Amount" disabled="{!v.isdisable}" type="number" formatter="currency"/>
+                                                </td>
+                                            </tr>
+                                        </aura:renderIf>
+                                    	<aura:renderIf isTrue="{!v.showHideDailyPB}">
+                                            <tr>
+                                                <td>Holdback %</td>
+                                                <td>
+                                                    <force:inputField aura:id="Holdback_Per" value="{!v.Offer.Holdback_Per__c}" class="holdbackPer1"/> 
+                                                </td>
+                                            </tr>
+                                    	</aura:renderIf>
+                                        <tr>
+                                            <td>Origination Fee</td>
+                                            <td>
+                                                <lightning:input value="{!v.Offer.Origination_Fee__c}" aura:id="Origination_Fee" type="number" formatter="currency"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Additional Fee</td>
+                                            <td>
+                                                <lightning:input value="{!v.Offer.Additional_Fees__c}" aura:id="Additional_Fees" type="number" formatter="currency"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Monthly Average Revenue</td>
+                                            <td>
+                                                $<ui:outputText aura:id="Gross_Profit" value="{!v.loan.Cloufi__Gross_Profit__c}" class="slds-output" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Percentage Of Gross</td>
+                                            <td>
+                                                
+                                                <lightning:input value="{!v.Offer.Cloufi__Percentage_Of_Gross__c}" aura:id="Percentage_Of_Gross" disabled="{!v.isdisable}" formatter="percent" step="000.00"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Notes</td>
+                                            <td>
+                                                <force:inputField aura:id="Notes" value="{!v.Offer.Cloufi__Notes__c}"/> 
+                                            </td>
+                                        </tr>
+                                   <!--  </aura:renderIf> -->
+                                </tbody>
+                            </table>
+                        </div>
+                    
+                    <!-- MODAL BOX BODY Part End-->
+                    <!-- MODAL BOX FOOTER Part Start -->
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.closeNewOfferPopup}"/>
+                        <lightning:button variant="neutral" label="Save" title="Save" onclick="{!c.saveNewOffer}" disabled="{!v.isSave}"/>
+                        
+                    </footer>
+                
+                <!-- MODAL BOX FOOTER Part End -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:renderIf>
+    <!-- New Offer popup End -->
+    
+    <!-- Component Header Start -->
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="standard:account" alternativeText="Event" />
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Offer</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__name-meta"></p>
+                    </div>
+                    <!-- Buttons Section Start -->
+					
+					
+                    
+					<!-- Loading spinner end--> 
+					
+					<!--<aura:if isTrue="{!v.Spinner}">
+                        <lightning:spinner variant="brand"  size="large" />
+                    </aura:if> -->
+                    <aura:if isTrue="{!v.Spinner}">
+                    <div aura:id="spinnerId" class="slds-spinner_container">
+                        <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </aura:if>
+                    <div class="btn" style="float:right!important;">
+                        <!-- <ui:button label="New Offer" press="{!c.createRecord}" /> -->
+                        <aura:if isTrue="{!v.showSaveCancelBtn}">
+                            <lightning:buttonGroup class="slds-m-around_medium">
+                                <lightning:button label="Save" onclick="{!c.save}" /> &nbsp;
+                                <lightning:button label="Cancel" onclick="{!c.cancel}"/>
+                            </lightning:buttonGroup>
+                        </aura:if>
+                        <aura:if isTrue="{!(v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator')}">
+                        	<lightning:button disabled="{!!and(v.isOfferChosen,v.oppApprovedStage)}" variant="brand" label="Request Contract" title="Success" onclick="{!c.openFinalUWPopUp}"/>
+                            <lightning:button variant="brand" label="New Offer" title="{!(v.isSignedApp ? 'Success' : 'Please upload and complete signed application and bank statements')}" onclick="{!c.openNewOfferPopUp}" disabled="{!!v.isSignedApp}"/>
+                             <!--<lightning:helptext content="Please upload and complete signed application"/>-->
+                        </aura:if>
+                       
+                    </div>
+                    <!-- Buttons Section End -->
+                </div>
+            </div>
+        </div>
+    </div><br/>
+    
+    <aura:if isTrue="{!(v.OfferList == null) }">
+        No Offers At This Moment!!!
+    </aura:if>
+    <aura:if isTrue="{!(v.OfferList != null) }">
+        
+        <div class="slds-m-around_large" style="margin-top: 0px; margin-right: 0px; margin-left: 0px;">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer" style="table-layout:fixed">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <th scope="col" style="width:13%"><div class="slds-truncate" title="Id">Name</div></th>
+						<th scope="col" style="width:13%"><div class="slds-truncate" title="Funder">Funder</div></th>
+                        <th scope="col" style="width:14%"><div class="slds-truncate" title="Program">Program</div></th>
+                        <th scope="col" style="width:12%"><div class="slds-truncate" title="Funding Amount">Funding Amount</div></th>
+                        <th scope="col" style="width:10%"><div class="slds-truncate" title="Program Type">Program Type</div></th>
+                        <th scope="col" style="width:10%"><div class="slds-truncate" title="Terms">Terms</div></th>
+                        <th scope="col" style="width:10%"><div class="slds-truncate" title="Factor Rate">Factor Rate</div></th>
+                        <th scope="col" style="width:18%"><div class="slds-truncate" title="Status">Status</div></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.OfferList}" var="o" indexVar="index">
+                        <c:OpportunityOfferComp singleRec="{!o}" showSaveCancelBtn="{!v.showSaveCancelBtn}" currentOfferStatus="{!o.Cloufi__Offer_Status__c}"/>
+                    </aura:iteration>
+                </tbody>
+            </table>           
+        </div>
+    </aura:if>
+
+    <!-- Request Contract popup start -->
+    <aura:if isTrue="{!v.showPopup}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!--  MODAL BOX HEADER Start -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" alternativeText="close" variant="bare-inverse" class="slds-modal__close" onclick="{!c.closePopup}"/>
+                    <div class="slds-page-header">
+                        <p class="slds-page-header__title slds-truncate" title="">Send Documents to Lender</p>
+                    </div>
+                </header>
+                <!--  MODAL BOX HEADER End -->
+                <!-- MODAL BOX BODY Part Start-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                <aura:if isTrue="{!not(empty(v.RemainingStips))}">
+                    <aura:if isTrue="{!v.requDocsAvailable}">
+                        <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                            <thead>
+                                <tr class="slds-text-title--caps">
+                                    <th scope="col">
+                                        
+                                    </th>
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="Stip Name">Stip Name</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <aura:iteration items="{!v.RemainingStips}" var="stip">
+                                    <tr>
+                                        <td scope="row" class="slds-text-align--right" style="width:3.25rem;">
+                                            <div class="slds-form-element">
+                                                <div class="slds-form-element__control">
+                                                    <label class="slds-checkbox">
+                                                        <ui:inputCheckbox text="{!stip.Id}" aura:id="selectedCheckbox" value="true"/>
+                                                        <span class="slds-checkbox--faux"></span>
+                                                        <span class="slds-form-element__label text"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <th scope="row">
+                                            <div class="slds-truncate" title="{!stip.Stip_Name__c}">{!stip.Stip_Name__c}</div>
+                                        </th>
+                                    </tr>
+                                </aura:iteration>
+                            </tbody>
+                        </table>
+                        <aura:set attribute="else">
+                          <p class="Stip-message-blank" title="">Drivers License/Voided Check are not Available/Completed</p>
+                        </aura:set>
+                    </aura:if>
+                    
+                    <aura:set attribute="else">
+                        <p class="Stip-message-blank" title="">There are no complete stips to Send</p>
+                    </aura:set>
+                </aura:if> 
+                  
+                </div>
+                <!-- MODAL BOX BODY Part End-->
+                <!-- MODAL BOX FOOTER Part Start -->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.closePopup}"/>
+                    <aura:if isTrue="{!and(not(empty(v.RemainingStips)),v.requDocsAvailable)}"><!-- {!not(empty(v.RemainingStips))} -->
+                        <button class="slds-button slds-button--brand" onclick="{!c.sendMailForSelectedStips}">Request Contract</button>
+                    </aura:if>
+                </footer>
+                <!-- MODAL BOX FOOTER Part End -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!-- Request Contract popup End -->
+</aura:component>

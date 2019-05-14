@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email trigger when Opportunity is Revived - Used in Process builder &quot;Opportunity Revival Flow&quot;</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Revived Opportunity Email Notification</name>
+    <style>none</style>
+    <subject>Opportunity is Revived - {!Opportunity.Name}</subject>
+    <type>custom</type>
+</EmailTemplate>

@@ -1,0 +1,14 @@
+<messaging:emailTemplate subject="Contract for {!relatedTo.Cloufi__Opportunity__r.Name} is Signed" recipientType="User" relatedToType="Cloufi__UW_Document__c">
+    <messaging:htmlEmailBody >  
+          
+        Hello,<br/><br/>
+        
+        The contract for <b>{!relatedTo.Cloufi__Opportunity__r.Name}</b> has been signed. Please review it along with the uploaded underwriting documents.<br/><br/>
+        
+        Opportunity: <b><a style="color:#999999;" target="_blank" href="https://merchantservices.my.salesforce.com/{!relatedTo.Cloufi__Opportunity__r.Id}">{!relatedTo.Cloufi__Opportunity__r.Name}</a></b><br/><br/><br/>
+
+        Best Regards,<br/>
+        <img src="{!relatedTo.Cloufi__Opportunity__r.Company_Logo__c}"/>    
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

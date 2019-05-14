@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c}, <br/><br/>
+
+I just left you a message about getting your application and bank statements over to us. Please complete your funding application <b><a href="{!Opportunity.Application_URL__c}">here</a></b> and let me know if you need any help. <br/><br/><br/>
+
+Best Regards, <br/>
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName} <br/>
+{!Opportunity.Opportunity_Owner_Company_Name__c} <br/>
+{!Opportunity.OwnerPhone} <br/>
+{!Opportunity.OwnerEmail}<br/>

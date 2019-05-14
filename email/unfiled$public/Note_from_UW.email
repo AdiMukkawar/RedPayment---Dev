@@ -1,0 +1,15 @@
+<messaging:emailTemplate subject="Note from Under Writting for {!relatedTo.Name}" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br /><br/>
+
+        <b>Under Writting</b> has sent you a note.<br/><br/>
+        <b>Message -</b><br/>
+        MessageText
+        <br/><br/>
+        
+        Opportunity: <b><a target="_blank" href="{!$Label.Base_URL}/{!relatedTo.Id}">{!relatedTo.Name}</a></b><br/><br/>
+        Thank you,<br/>
+        <img src="{!relatedTo.Company_Logo__c}"/>        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

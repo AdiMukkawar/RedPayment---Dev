@@ -1,0 +1,189 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya)
+* VF Page Name: ApplicationForm
+* Created Date: 13-Aug-2018
+* Description: To Upload Missing Documnets
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author       |      Date      |   Description 
+*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<apex:page standardController="Cloufi__Application__c" extensions="MissingDocumentsController" sidebar="false" showHeader="false">
+   <apex:slds />
+   <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+      <head>
+         <title>Upload Documents</title>
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script>
+               $(document).ready(function(){
+                  overridePageMessages();    
+               });
+               
+               function overridePageMessages(){    
+                   var textureEffect = '';
+                   $('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage '+textureEffect);          
+                   $('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success  customMessage '+textureEffect);    
+                   $('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage '+textureEffect);                  
+                   $('.infoM3').addClass('slds-notify slds-notify--toast customMessage '+textureEffect);    
+                   $('.errorM3').removeClass('errorM3'); 
+                   $('.confirmM3').removeClass('confirmM3'); 
+                   $('.infoM3').removeClass('infoM3');   
+                   $('.warningM3').removeClass('warningM3');  
+               }
+            </script>
+            <style>
+               .msgIcon {
+               display: none!important
+               }
+               .customMessage * {
+               color: #fff!important
+               }
+               .customMessage {
+               margin: 5px 0!important;
+               opacity: 1!important;
+               width: 100%;
+               font-size: 12px;
+               border: 0px;
+               padding-left: 10px;
+               }
+            </style>
+      </head>
+    <body>
+        <apex:slds />
+        <apex:pagemessages id="pgMsg"/>
+        <apex:form >
+            <apex:actionStatus id="actionStatus">
+                <apex:facet name="start">
+                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                    &nbsp;
+                </div>
+                <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                    <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px; margin-left: -60px;">
+                        <img src="/img/loading.gif" />
+                        <span>Please Wait...</span>
+                    </div>
+                </div>
+                </apex:facet>
+            </apex:actionStatus>
+            
+            <!-- Header Starts Here -->
+            <div class="slds-page-header">
+                <div class="slds-grid">
+                    <div class="slds-col slds-has-flexi-truncate">
+                        <div class="slds-media slds-no-space slds-grow">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+                                    <svg aria-hidden="true" class="slds-icon">
+                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                               <p class="slds-text-title_caps slds-line-height_reset">Upload Documents</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                        <!--<apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button_brand" style="font-size:12px;margin-left:-10%;" />-->
+                        <apex:commandButton value="Upload Documents" action="{!uploadDocuments}" styleClass="slds-button slds-button_brand"  style="font-size:12px;" status="actionStatus"/>
+                    </div>
+                </div>
+            </div>
+            <!-- Header Ends Here  -->
+            <!-- Documents Section Starts Here -->
+            <!-- Bank Statements Section Starts Here -->
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+               <thead>
+               </thead>
+               <br/>
+                <tbody>
+                    <h3 class="slds-section-title--divider">Bank Statements</h3>
+                    <apex:outputPanel id="mainPanel">
+                        <apex:repeat value="{!listStipAttachment}" var="list">
+                            <apex:outputPanel rendered="{!CONTAINS(list.stip.Stip_Name__c, 'Bank Statement')}">
+                                <tr>
+                                    <td style="width: 50%;">
+                                       <apex:outputField value="{!list.stip.Stip_Name__c }" />
+                                    </td>
+                                    <td style="width: 40%;">
+                                       <apex:outputPanel rendered="{!list.stip.Cloufi__URL__c==null}">
+                                          <apex:inputFile value="{!list.attachment.body}" filename="{!list.attachment.name}" id="file"/>
+                                       </apex:outputPanel>
+                                       <apex:outputPanel rendered="{!list.stip.Cloufi__URL__c!=null}">
+                                          <apex:outputLink value="{!list.stip.Cloufi__URL__c}">Success</apex:outputLink>
+                                       </apex:outputPanel>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                        </apex:repeat>
+                    </apex:outputPanel><br/>
+                </tbody>
+            </table>
+            <!-- Bank Statements Section Ends Here -->
+            
+            <!-- Bank Processing Section Starts Here -->
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+               <thead>
+               </thead>
+               <br/>
+                <tbody>
+                    <h3 class="slds-section-title--divider">Processing Statements</h3>
+                    <apex:outputPanel id="inputFileSection1">
+                        <apex:repeat value="{!listStipAttachment}" var="list">
+                            <apex:outputPanel rendered="{!CONTAINS(list.stip.Stip_Name__c, 'Processing Statement')}">
+                                <tr>
+                                    <td style="width: 50%;">
+                                       <apex:outputField value="{!list.stip.Stip_Name__c }" />
+                                    </td>
+                                    <td style="width: 40%;">
+                                       <apex:outputPanel rendered="{!list.stip.Cloufi__URL__c==null}">
+                                          <apex:inputFile value="{!list.attachment.body}" filename="{!list.attachment.name}" id="file"/>
+                                       </apex:outputPanel>
+                                       <apex:outputPanel rendered="{!list.stip.Cloufi__URL__c!=null}">
+                                          <apex:outputLink value="{!list.stip.Cloufi__URL__c}">Success</apex:outputLink>
+                                       </apex:outputPanel>
+                                    </td>
+                                </tr>
+                            </apex:outputPanel>
+                        </apex:repeat>
+                    </apex:outputPanel><br/>
+                </tbody>
+            </table>
+            <!-- Bank Processing Section Ends Here -->
+            
+            <!-- Additional Documents Section Starts Here -->
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <apex:outputPanel rendered="{!lstCustomSet.size>0}">
+                   <thead>
+                   </thead>
+                   <br/>
+                    <tbody>
+                        <h3 class="slds-section-title--divider">Additional Documents</h3>
+                        <apex:outputPanel id="inputFileSection2">
+                            <apex:repeat value="{!listStipAttachment}" var="list">
+                                <apex:outputPanel rendered="{!!(CONTAINS(list.stip.Stip_Name__c, 'Processing Statement') || CONTAINS(list.stip.Stip_Name__c, 'Bank Statement'))}">
+                                    <tr>
+                                        <td style="width: 50%;">
+                                           <apex:outputField value="{!list.stip.Stip_Name__c }" />
+                                        </td>
+                                        <td style="width: 40%;">
+                                           <apex:outputPanel rendered="{!list.stip.Cloufi__URL__c==null}">
+                                              <apex:inputFile value="{!list.attachment.body}" filename="{!list.attachment.name}" id="file"/>
+                                           </apex:outputPanel>
+                                           <apex:outputPanel rendered="{!list.stip.Cloufi__URL__c!=null}">
+                                              <apex:outputLink value="{!list.stip.Cloufi__URL__c}">Success</apex:outputLink>
+                                           </apex:outputPanel>
+                                        </td>
+                                    </tr>
+                                </apex:outputPanel>
+                            </apex:repeat>
+                        </apex:outputPanel><br/>
+                    </tbody>
+                </apex:outputPanel>
+            </table>
+            <!-- Additional Documents Section Ends Here -->
+            <!-- Documents Section Ends Here -->
+        </apex:form>
+    </body>
+   </html>
+</apex:page>

@@ -1,0 +1,24 @@
+.THIS .button-section .slds-button_neutral {
+	margin: 4px 6px;
+    min-width: 156px;
+}
+.THIS .email-section{
+    padding: 12px;
+}
+.THIS .header{
+    padding: 12px;
+    font-size: medium;
+    color: #404373;
+}
+.THIS .option-button-section .slds-select_container {
+    width: 78%;
+    float: left;
+    margin-right: 2%;
+}
+
+@media all and (max-width: 1024px) {
+	.THIS .option-button-section .slds-select_container {
+		width: 72%;
+	}
+  
+}

@@ -1,0 +1,7 @@
+Hi {!User.Name},
+<br/><br/>
+
+Below opportunity has been submitted to sales support.
+<a href="https://redpaymentsorg2--dev.cs70.my.salesforce.com/id={!Opportunity.Id}">{!Opportunity.Name}</a>
+<br/><br/>
+Thank You

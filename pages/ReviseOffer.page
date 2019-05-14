@@ -1,0 +1,1148 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd (Aditya)
+* VF Page Name: ReviseOffer
+* Created Date: 24-Aug-2018
+* Description: Page hosted on sites for Revise Offer
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<apex:page sidebar="false" tabStyle="Opportunity" Controller="ReviseOfferController" id="PriceCal" docType="html-5.0" standardStylesheets="true" showHeader="false" cache="false">
+    
+    <apex:form enctype="multipart/form-data" id="FormId">
+        <title>Revise Offer</title>
+        <apex:slds />
+        <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <apex:pagemessages id="msg"/>
+        <apex:stylesheet value="{!URLFOR($Resource.Cloufi__SLDS0105, '/assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Cloufi__wizardjs, '/js/jquery-1.11.1.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.Cloufi__wizardjs, '/js/jquery-ui-1.10.3.js')}" />
+        <apex:includeScript value="{!$Resource.FileSaver}"/>
+        <apex:includeScript value="{!$Resource.JavascriptZip}"/>
+        <apex:stylesheet value="{!$Resource.Cloufi__RepaymentListingCSS}"/>
+        <link rel="stylesheet" href="/resources/demos/style.css" />
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <!-- JS to update field Starts Here -->  
+            <script>
+                var j$ = jQuery.noConflict();
+                    j$(document).ready(function() { 
+                        overridePageMessages();
+                    });
+                    //Lightning Design System for Page Messages    
+                function overridePageMessages(){    
+                                 
+                    j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                    j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                    j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                    j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                                     
+                    j$('.errorM3').removeClass('errorM3'); 
+                    j$('.confirmM3').removeClass('confirmM3'); 
+                    j$('.infoM3').removeClass('infoM3');   
+                    j$('.warningM3').removeClass('warningM3');  
+                }
+                var zip;
+                var filePaths;
+                var a;
+                var i = 0;
+                var dropboxToken;
+                var map;
+                var folder;
+                //window.onload = function(){
+                    zip = new JSZip();
+                    folder = zip.folder('{!loan.Name}');
+                    map = new Map();
+                    dropboxToken = '{!$Setup.Cloufi__Dropbox_Settings__c.Cloufi__Access_Token__c}';
+                    filePaths = '{!filesPathList}';
+                    a = filePaths.replace('[','').replace(']','').split(",");
+                //}
+                
+                function downloadSpecificFileZip(){
+                    document.getElementById("sldsSpinner").style.display = "block";
+                    //console.log('Spinner=>');
+                    if(a.length == 0){
+                        alert('No files to download');
+                    }else if(a.length > 0){
+                        if(a[i] != null && a[i] !='')
+                            getFiles(decodeURIComponent(a[i].trim()));
+                    }
+                }
+                
+                function getFiles(filePath){                    
+                    var xhr = new XMLHttpRequest();                    
+                    console.log(JSON.stringify({
+                        path: filePath
+                    }));
+                    var fileName = filePath.split('/');
+                    xhr.open('POST', 'https://content.dropboxapi.com/2/files/download');
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + dropboxToken);
+                    xhr.setRequestHeader('Dropbox-API-Arg', JSON.stringify({
+                        path: filePath
+                    }));
+                    xhr.responseType = "arraybuffer";                       
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState == 4) {
+                            if(xhr.status === 200){
+                                console.log('fileName '+fileName[fileName.length-1]);
+                                map.set(fileName[fileName.length-1], xhr.response);
+                            }
+                            i++;
+                            console.log('map value '+map.size);
+                            console.log('value of I ->  '+i);
+                            console.log('a.length '+a.length);
+                            if(i < a.length){
+                                getFiles(decodeURIComponent(a[i].trim()));
+                            }else if(i == a.length){
+                                a.forEach((url)=> {
+                                    var fileName = decodeURIComponent(url).split('/');
+                                    if(map.has(fileName[fileName.length-1])){
+                                        folder.file(fileName[fileName.length-1], map.get(fileName[fileName.length-1]));
+                                    }
+                                })
+                                zip.generateAsync({type:"blob"})
+                                    .then(blob => saveAs(blob, '{!loan.Name}'))
+                                    .catch(e => document.getElementById('mainHeading').innerHTML = e);
+                                    document.getElementById("sldsSpinner").style.display = "none";
+                                    window.location.reload();
+                            }
+                        }
+                    }
+                    xhr.send();
+                }
+                
+                var Flag = true;
+                var Percentage = '';
+                var grossPer ='';
+                var originalGross = '';
+                var originalGross1 = '';
+                $(document).ready(function(){
+                    //var payScedule = $('.paySchedule ').val();
+                    //console.log('payScedule=>'+payScedule);
+                    var pType = $('.progType ').val();
+                    if(pType == 'Loan'){
+                         $(".holdbackPercent").css("display","none"); 
+                    }
+                    if(pType == 'MCA'){
+                        $(".OfferPerGrossClass").val("0");   
+                        $(".OfferPerGrossClass").css("display","block"); 
+                    }
+                });
+                function addOffer() {
+                    console.log('In Function')
+                    
+                    //$(".holdbackPercent").css("display","none");
+                    leaveChange();
+                    if (Flag) {
+                        copyTerm();
+                        Flag = false;
+                    }
+                }
+
+                function copyTerm() {
+                    var termList = document.getElementsByClassName(
+                        'OfferTermClass');
+                    console.log(termList[termList.length - 1].id);
+                    termList[termList.length - 1].value = $(
+                        "[id$='LoanTermID']").text();
+                    copyRate();
+                }
+
+                function copyRate() {
+
+                    var FactorList = document.getElementsByClassName(
+                        'OfferFactorClass');
+                    var Fact = $("[id$='LoanRateID']").text();
+                    Fact = Fact.replace(/,/g, '');
+                    Fact = Fact.replace(/\s/g,'');
+                    FactorList[FactorList.length - 1].value = Fact
+                    copyFunded();
+                }
+
+                function copyFunded() {
+                    var FunderList = document.getElementsByClassName(
+                        'OfferFundedClass');
+                    console.log(FunderList[FunderList.length - 1].id);
+                    var Fund = $("[id$='LoanFundID']").text();
+                    Fund = Fund.replace('$', '');
+                    Fund = Fund.replace(/,/g, '');
+                    Fund = Fund.replace(/\s/g,'');
+                    FunderList[FunderList.length - 1].value = Fund;
+                    calculatePayback();
+                }
+
+                function calculatePayback() {
+                    var PaybackList = document.getElementsByClassName(
+                        'OfferPaybackClass');
+                    var FunderList = document.getElementsByClassName(
+                        'OfferFundedClass');
+                    var FactorList = document.getElementsByClassName(
+                        'OfferFactorClass');
+                    var PercentageList = document.getElementsByClassName(
+                        'OfferPerGrossClass');
+                    var Fund = FunderList[FunderList.length - 1].value;
+                    var Fact = FactorList[FactorList.length - 1].value;
+                    var MonthlyGross = $("[id$='LoanMonthSale']").val();
+                    var pType = $('.progType ').val();
+                    console.log('pType'+pType);
+                    Fund = Fund.replace('$', '');
+                    Fund = Fund.replace(/,/g, '');
+                    Fund = Fund.replace(/\s/g,'');
+                    MonthlyGross = MonthlyGross.replace('$', '');
+                    MonthlyGross = MonthlyGross.replace(/,/g, '');
+                    MonthlyGross = MonthlyGross.replace(/\s/g,'');
+
+                    if (Fund != null && Fact != null) {
+                        var Payback = (parseFloat(Fund) * parseFloat(Fact))
+                            .toFixed(2);
+                        PaybackList[PaybackList.length - 1].value = Payback
+                    }
+                    if (isNaN(Payback) || !isFinite(Payback)) {
+                        PaybackList[PaybackList.length - 1].value = 0;
+                    }
+
+                    //calculate DailyPB amount
+                    var termList = document.getElementsByClassName(
+                        'OfferTermClass');
+                    var DailyPBList = document.getElementsByClassName(
+                        'OfferDailyClass');
+                    var term = termList[termList.length - 1].value;
+                    term = term.replace(/,/g, '');
+                    var paySchedule = $('.paySchedule ').val();
+
+                    if (term != null && Payback != null) {
+                        var DailyPB = (parseFloat(Payback) / parseFloat(term*20)).toFixed(2);
+                        console.log('DailyPB ->'+DailyPB);
+                        console.log('DailyPBList.length ->'+DailyPBList.length);
+                        console.log('DailyPBList ->'+DailyPBList[0]);
+                        if(DailyPBList.length > 0){
+                            if(DailyPBList[DailyPBList.length - 1]){
+                                DailyPBList[DailyPBList.length - 1].value = DailyPB;
+                            }
+                            if(paySchedule == 'Weekly')
+                            {
+                                DailyPBList[DailyPBList.length - 1].value = (DailyPBList[DailyPBList.length - 1].value*5).toFixed(2);//Math.round(DailyPBList[DailyPBList.length - 1].value*5);
+                            }
+                        }else{
+                            if(DailyPBList[0]){
+                                DailyPBList[DailyPBList.length].value = DailyPB;
+                            }
+                        }
+                    }
+                    if (isNaN(DailyPB) || !isFinite(DailyPB)) {
+                        if(DailyPBList.length > 0){
+                            if(DailyPBList[DailyPBList.length - 1]){
+                                DailyPBList[DailyPBList.length - 1].value = 0;
+                            }
+                        }else{
+                            if(DailyPBList[0]){
+                                DailyPBList[0].value = 0;
+                            }
+                        }
+                    }
+                    console.log(':::DailyPB::', DailyPB);
+                    console.log(':::MonthlyGross::', MonthlyGross);
+                    console.log(':::PercentageList::', PercentageList);
+                    if (DailyPB != null && '{!loan.Cloufi__Gross_Profit__c}' != null && pType != 'MCA') {
+                        Percentage = (parseFloat(DailyPB * 20) / parseFloat('{!loan.Cloufi__Gross_Profit__c}')).toFixed(2);
+                        PercentageList[PercentageList.length - 1].value = Percentage;                                            
+                    }else if(pType == 'MCA'){
+                        $(".OfferPerGrossClass").val("0");
+                        $(".OfferDailyClass").val("0");
+                        
+                    }
+                    if (isNaN(Percentage) || !isFinite(Percentage)) {
+                        PercentageList[PercentageList.length - 1].value = 0;
+                    }
+
+                }
+                
+                function leaveChange(ele) {
+                    calculatePayback();
+                    var type = $(ele).val();                    
+                    var pType = $('.progType ').val();                  
+                    //alert('%'+Percentage);                    
+                    originalGross = $('.OfferPerGrossClass ').val();
+
+                    console.log('originalGross'+originalGross);
+                    
+                    if(type == 'MCA' || pType == 'MCA'){
+                        grossPer = $('.OfferPerGrossClass ').val();
+                        var sum = '{!objOffer.Cloufi__Percentage_Of_Gross__c}'; //'{!objOffer.Cloufi__Percentage_Of_Gross__c}';
+                        
+                        console.log('sum-->'+sum);
+                        console.log('grossPer'+grossPer);
+                        if(originalGross == null){
+                            originalGross = $('.OfferPerGrossClass ').val(); 
+                        }
+                        console.log('originalGross--- After'+originalGross);
+                        console.log('originalGross1 new-->'+originalGross1);
+                        $(".OfferPerGrossClass").val("0");   
+                        $(".OfferPerGrossClass").css("display","block");  
+                        //$('.OfferPerGrossClass').removeAttr("disabled");                        
+                        $(".payAmount").css("display", "none");
+                        $(".holdbackPercent").css("display","block");                    
+                    }else {
+                        if(originalGross == null){                            
+                            originalGross = $(".OfferPerGrossClass").val("0");
+                        }
+                        if (isNaN(originalGross) || !isFinite(originalGross)) {
+                                originalGross = $(".OfferPerGrossClass").val("0"); //$('.OfferPerGrossClass ').val();
+                                //PercentageList[PercentageList.length - 1].value = 0;
+                        }
+                        //$('.OfferPerGrossClass ').val( originalGross );
+                        console.log('$(".payAmount") ->'+$(".payAmount"));
+                        console.log('$(".holdbackPercent") ->'+$(".holdbackPercent"));
+                        $(".payAmount").css("display", "block");
+                        $(".holdbackPercent").css("display","none");                            
+                        $('.OfferPerGrossClass').attr("disabled", "disabled");
+                    }
+                }
+
+                function onChangeFactor(rateObj) {
+                    
+                    var Fact = rateObj.value;
+                    rateObj.value = Fact.replace(/\s/g,'');
+                    rateObj.value = Fact.replace(/-/g,'');
+                    var FunderList = document.getElementsByClassName(
+                        'OfferFundedClass');
+                    var PaybackList = document.getElementsByClassName(
+                        'OfferPaybackClass');
+                    var paySchedule = $('.paySchedule ').val();
+                    var Funded = FunderList[FunderList.length - 1].value;
+                    Funded = Funded.replace(/,/g, '');
+                    Funded = Funded.replace(/\s/g,'');
+                    FunderList[FunderList.length - 1].value = Funded;
+                     
+                    Fact = Fact.replace(/,/g, '');
+                    Fact = Fact.replace(/\s/g,'');
+
+                    if (Funded != null || Fact != null) {
+                        var Payback = (parseFloat(Funded) * parseFloat(Fact))
+                            .toFixed(2);
+                        PaybackList[PaybackList.length - 1].value = Payback;
+                    }
+                    if (isNaN(Payback) || !isFinite(Payback)) {
+                        PaybackList[PaybackList.length - 1].value = 0;
+                    }
+                    updatePerGross();
+                    onchangePayback(Payback);
+                    
+                }
+
+                function onchangeFunding(fundObj) {
+                    updatePerGross();
+                    var Fund = fundObj.value;
+                    Fund = Fund.replace(/\s/g,'');
+                    Fund = Fund.replace(/-/g,'');
+                    fundObj.value = Fund;
+
+                    var FactorList = document.getElementsByClassName(
+                        'OfferFactorClass');
+                    var PaybackList = document.getElementsByClassName(
+                        'OfferPaybackClass');
+                    var Fact = FactorList[FactorList.length - 1].value;
+                    if (Fund.indexOf(",") != -1) {
+                        Fund = Fund.replace(/,/g, '');
+                        Fund = Fund.replace(/\s/g,'');
+                        Fact = Fact.replace(/,/g, '');
+                        Fact = Fact.replace(/\s/g,'');
+                    }
+                    if (Fund != null || Fact != null) {
+                        var Payback = (parseFloat(Fund) * parseFloat(Fact))
+                            .toFixed(2);
+                        PaybackList[PaybackList.length - 1].value = Payback;
+                    }
+
+                    if (isNaN(Payback) || !isFinite(Payback)) {
+                        PaybackList[PaybackList.length - 1].value = 0;
+                    }
+                    onchangePayback(Payback);
+                    
+                }
+
+                function onchangePayback(val) {
+                    updatePerGross();
+                    var Payback = val;
+                    var termList = document.getElementsByClassName(
+                        'OfferTermClass');
+                    var DailyPBList = document.getElementsByClassName(
+                        'OfferDailyClass');
+                    var PercentageList = document.getElementsByClassName(
+                        'OfferPerGrossClass');
+                    var pType = $('.progType ').val();
+                    var paySchedule = $('.paySchedule ').val();
+                    var term = termList[termList.length - 1].value;
+                    term = term.replace(/,/g, '');
+                    term = term.replace(/\s/g,'');
+
+                    if (term != null && Payback != null) {
+                        var DailyPB = (parseFloat(Payback) / parseFloat(term*20)).toFixed(2);
+                        if(DailyPBList.length > 0){
+                            if(DailyPBList[DailyPBList.length - 1]){
+                                DailyPBList[DailyPBList.length - 1].value = DailyPB;
+                            }
+                            if(paySchedule == 'Weekly')
+                            {
+                                DailyPBList[DailyPBList.length - 1].value = (DailyPBList[DailyPBList.length - 1].value*5).toFixed(2);//Math.round(DailyPBList[DailyPBList.length - 1].value*5)
+                            }
+                        }else{
+                            if(DailyPBList[0]){
+                                DailyPBList[DailyPBList.length].value = DailyPB;
+                            }
+                        }
+                    }
+
+                    if (isNaN(DailyPB) || !isFinite(DailyPB)) {
+                        if(DailyPBList.length > 0){
+                            if(DailyPBList[DailyPBList.length - 1]){
+                                DailyPBList[DailyPBList.length - 1].value = 0;
+                            }
+                        }else{
+                            if(DailyPBList[0]){
+                                DailyPBList[0].value = 0;
+                            }
+                        }
+                    }
+
+                    var MonthlyGross = $("[id$='LoanMonthSale']").val();
+                    MonthlyGross = MonthlyGross.replace('$', '');
+                    MonthlyGross = MonthlyGross.replace(/,/g, '');
+                    MonthlyGross = MonthlyGross.replace(/\s/g,'');
+
+                    if ('{!loan.Cloufi__Gross_Profit__c}' != null && DailyPB != null && pType != 'MCA') {
+                        var Percentage = (parseFloat(DailyPB * 20) / parseFloat('{!loan.Cloufi__Gross_Profit__c}')).toFixed(2);
+                        console.log('Per%->'+Percentage);
+                        PercentageList[PercentageList.length - 1].value = Percentage;                                            
+                    }
+                    if (isNaN(Percentage) || !isFinite(Percentage)) {
+                        PercentageList[PercentageList.length - 1].value = 0;
+                    }
+                    
+                }
+
+                 function updatePerGross(){
+                    console.log('in update gross');
+                    var type = $('.progType ').val();
+                    var perGross = document.getElementsByClassName('OfferPerGrossClass');
+                    console.log('type'+type);
+                    if(type =='MCA'){
+                        $(".OfferPerGrossClass").val("0");
+                    }
+                }
+
+                function onChangeTerm(termObj) {
+                    var Term = termObj.value;
+                    console.log('Term=>'+Term);
+                    Term = Term.replace(/-/g,'');
+                    console.log('Term=>'+Term);
+                    termObj.value = Term;
+                    var PaybackList = document.getElementsByClassName(
+                        'OfferPaybackClass');
+                    var Payback = PaybackList[PaybackList.length - 1].value;
+                    Payback = Payback.replace(/,/g, '');
+                    var DailyPBList = document.getElementsByClassName(
+                        'OfferDailyClass');
+                    var PercentageList = document.getElementsByClassName(
+                        'OfferPerGrossClass');
+                    var pType = $('.progType ').val();
+                    var paySchedule = $('.paySchedule ').val();
+
+                    if (Term != null && Payback != null) {
+                        var DailyPB = (parseFloat(Payback) / parseFloat(Term*20)).toFixed(2);
+                        if(DailyPBList.length > 0){
+                            if(DailyPBList[DailyPBList.length - 1]){
+                                DailyPBList[DailyPBList.length - 1].value = DailyPB;
+                            }
+                            if(paySchedule == 'Weekly'){
+                                DailyPBList[DailyPBList.length - 1].value = (DailyPBList[DailyPBList.length - 1].value*5).toFixed(2);//Math.round(DailyPBList[DailyPBList.length - 1].value*5);
+                            }
+                        }else{
+                            if(DailyPBList[0]){
+                                DailyPBList[DailyPBList.length].value = DailyPB;
+                            }
+                        }
+                    }
+                    
+                    
+                    if (isNaN(DailyPB) || !isFinite(DailyPB)) {
+                        if(DailyPBList.length > 0){
+                            if(DailyPBList[DailyPBList.length - 1]){
+                                DailyPBList[DailyPBList.length - 1].value = 0;
+                            }
+                        }else{
+                            if(DailyPBList[0]){
+                                DailyPBList[0].value = 0;
+                            }
+                        }                        
+                        //DailyPBList[DailyPBList.length - 1].value = 0;
+                    }
+                    
+
+
+                    var MonthlyGross = $("[id$='LoanMonthSale']").text();
+                    MonthlyGross = MonthlyGross.replace('$', '');
+                    MonthlyGross = MonthlyGross.replace(/,/g, '');
+                    MonthlyGross = MonthlyGross.replace(/\s/g,'');
+
+                    if ('{!loan.Cloufi__Gross_Profit__c}' != null && DailyPB != null && pType != 'MCA') {
+                        /*var Percentage = (parseFloat(DailyPB * 22) /
+                            parseFloat(MonthlyGross)).toFixed(2);
+                        PercentageList[PercentageList.length - 1].value =
+                            Percentage; */
+                        var Percentage = (parseFloat(DailyPB * 20) / parseFloat('{!loan.Cloufi__Gross_Profit__c}')).toFixed(2);
+                        console.log('Per%->'+Percentage);
+                        PercentageList[PercentageList.length - 1].value = Percentage;                                                                                        
+                    }
+                    if (isNaN(Percentage) || !isFinite(Percentage)) {
+                        PercentageList[PercentageList.length - 1].value = 0;
+                    }
+                    updatePerGross();
+                }
+                
+                function onChangeOriginationFee(originationVal){
+                    var originationFee = originationVal.value;
+                    originationVal.value = originationFee.replace(/-/g,'');
+                }
+                
+                function onChangeAdditionFee(addVal){
+                    var additionalFee = addVal.value;
+                    addVal.value = additionalFee.replace(/-/g,'');
+                }
+
+            </script>
+            <style>
+                .customMessage {
+                    margin: 5px 0!important;
+                    opacity: 1!important;
+                    width: 100%;
+                    font-size: 15px;
+                    border: 0px;
+                    border-radius: 6px;
+                    padding-left: 10px;
+                }
+            </style>
+            <!--<head>
+                <title>Revise Offer</title>
+                
+                <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>     
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script>
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function() { 
+                    overridePageMessages();
+                });
+                
+                //Lightning Design System for Page Messages    
+                function overridePageMessages(){    
+                                 
+                    j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                    j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                    j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                    j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                                     
+                    j$('.errorM3').removeClass('errorM3'); 
+                    j$('.confirmM3').removeClass('confirmM3'); 
+                    j$('.infoM3').removeClass('infoM3');   
+                    j$('.warningM3').removeClass('warningM3');  
+                }
+            </script>
+            <style>
+                .customMessage {
+                    margin: 5px 0!important;
+                    opacity: 1!important;
+                    width: 100%;
+                    font-size: 15px;
+                    border: 0px;
+                    border-radius: 6px;
+                    padding-left: 10px;
+                }
+            </style>
+            </head>-->
+            <body>
+            <apex:outputPanel id="panelId" rendered="{!showOfferPage}">
+                <div class="slds">
+                    <!-- SPINNER -->
+                        <div id="sldsSpinner" class="slds-spinner_container slds-is-relative" style="display: none;z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                            <div role="status" class="slds-spinner slds-spinner--large slds-spinner--brand">
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    <!-- / SPINNER -->
+                    <apex:actionstatus id="actionStatus">
+                        <apex:facet name="start">
+                            <div class="waitingSearchDiv" id="el_loading" style="z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                                <div id="spinner" class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                </div>
+                            </div>
+                        </apex:facet>
+                    </apex:actionstatus>
+                    
+                <div class="slds-page-header" role="banner">
+                    <div class="slds-grid">               
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+                                        <svg aria-hidden="true" class="slds-icon">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-text-title_caps slds-line-height_reset">Revise Offer</p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">
+                                        <apex:outputText value="{!loan.Name}" rendered="{!$ObjectType.Opportunity.fields.Name.Accessible}" />
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                              
+                </div>
+                <br/>
+                    <div class="slds-page-header" role="banner">
+                        <br/>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-section__title,font-size:40px">
+                                <b>Merchant Snapshot</b>
+                            </div>
+                            <table class="slds-table slds-table--bordered slds-table--striped" style="font-size:12px;">
+                                <thead>
+                                    <tr class="slds-text-title--caps">
+                                        <apex:repeat value="{!fields}" var="f">
+                                            <th>
+                                                <b>
+                                                    <apex:outputText value="{!f.label}" rendered="{!$ObjectType.Opportunity.Accessible}"/>
+                                                </b>
+                                            </th>
+                                        </apex:repeat>
+                                        <th >
+                                            <b>Amount Requested</b>
+                                        </th>
+                                        <th>
+                                            <b>Monthly Gross Sale</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <apex:repeat value="{!fields}" var="f">
+                                            <td>
+                                                <apex:outputField value="{!loan[f.fieldPath]}" rendered="{!$ObjectType.Opportunity.Accessible}"/>
+                                            </td>
+                                        </apex:repeat>
+                                        <td >
+                                            <apex:outputField value="{!loan.Amount_Requested__c}" id="LoanFundID"/>
+                                        </td>
+                                        <td>
+                                            <apex:outputField value="{!loan.Cloufi__Monthly_Gross_Sale__c}" id="LoanMonthSale" rendered="{!$ObjectType.Opportunity.fields.Cloufi__Monthly_Gross_Sale__c.Accessible}" styleClass="slds-output"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <apex:outputPanel id="outputPanelOne" rendered="{!accountId !=null}">
+                        <div class="slds-tabs--default slds-p-horizontal--medium">
+                            <ul class="slds-tabs--default__nav" role="tablist">
+                                <li class="slds-tabs--default__item slds-text-title--caps" title="Loan Details" role="presentation">
+                                    <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Loan Details</a>
+                                </li>
+                                <li class="slds-tabs--default__item slds-text-title--caps" title="UW Documents" role="presentation">
+                                    <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">UW Documents</a>
+                                </li>
+                                <li class="slds-tabs--default__item slds-text-title--caps slds-active" title="Offers" role="presentation">
+                                    <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-2__item">Revise Offer</a>
+                                </li>
+                            </ul>
+                            <div id="tab-default-1" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-1__item">
+                                <div class="slds-grid slds-wrap">
+                                    <div class="slds-form--inline">
+                                        <apex:repeat value="{!$ObjectType.Opportunity.FieldSets.Cloufi__Funder_Offer_Calculate}" var="f">
+                                            <div class="slds-form-element slds-p-horizontal--small  slds-size--1-of-2 slds-medium-size--1-of-4 slds-large-size--1-of-4" style="border: 1px solid lightgray;padding: 4px 10px;margin-bottom:10px">
+                                                <label class="slds-form-element__label" for="{!f.Label}">
+                                                    <b>
+                                                        <apex:outputText value="{!f.Label}" rendered="{!$ObjectType.Opportunity.Accessible}" />
+                                                    </b>
+                                                </label>
+                                                <div class="slds-form-element__control" >
+                                                   <apex:outputField value="{!loan[f]}" rendered="{!$ObjectType.Opportunity.Accessible}"/>
+                                                </div>
+                                            </div>
+                                        </apex:repeat>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="tab-default-2" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+                                <apex:outputpanel id="Panel">
+                                    <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                        <thead>
+                                            <tr class="slds-text-title--caps">
+                                                <th scope="col">
+                                                    <div class="slds-truncate" title="UW Document Name">
+                                                        <b>UW Document Name</b>
+                                                    </div>
+                                                </th>
+                                                <th scope="col">
+                                                    <div class="slds-truncate" title="View"></div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <apex:repeat value="{!stipsToShare}" var="stip">
+                                                <tr>
+                                                    <td data-label="Stip Name">
+                                                        <div class="" title="{!stip.UW_Documents__r.Stip_Name__c}">
+                                                            <apex:outputText value="{!stip.UW_Documents__r.Stip_Name__c}" rendered="{!$ObjectType.Cloufi__UW_Document__c.fields.Stip_Name__c.Accessible}"/>
+                                                        </div>
+                                                    </td>
+                                                    <td data-label="View">
+                                                        <div class="" title="{!stip.UW_Documents__r.Cloufi__URL__c}">
+                                                            <apex:outputLink target="_blank" value="{!stip.UW_Documents__r.Cloufi__URL__c}" rendered="{!AND(stip.UW_Documents__r.Cloufi__URL__c!=null,$ObjectType.Cloufi__UW_Document__c.fields.Cloufi__URL__c.Accessible)}">View</apex:outputLink>
+                                                            <apex:outputText rendered="{!AND(stip.UW_Documents__r.Cloufi__URL__c==null , $ObjectType.Cloufi__UW_Document__c.fields.Cloufi__URL__c.Accessible)}">Requested</apex:outputText>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </apex:repeat>
+                                        </tbody>
+                                    </table>
+                                </apex:outputpanel><br/>
+                                <apex:commandButton value="Download All" onclick="downloadSpecificFileZip();" rendered="{!showHideButton}" styleClass="slds-button slds-button--brand" style="margin-top:15px;" disabled="{!isDownloadSpecificButtonDisabled}" rerender="none" /><!-- status="actionStatus" -->
+                                
+                            </div>
+                            <div id="tab-default-3" class="slds-tabs--default__content slds-show" role="tabpanel" aria-labelledby="tab-default-3__item">
+                                <apex:actionRegion >
+                                    <apex:outputPanel id="OfferTbld" >
+                                       <apex:outputPanel rendered="{!relatedOffer}">
+                                            <div class="">
+                                                <div class="slds-notify slds-notify--alert slds-theme--alert-texture" role="alert">
+                                                    <span class="slds-assistive-text">Info</span>
+                                                    <h2>Offer has been Revised for this offer</h2>
+                                                </div>
+                                            </div>
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!!relatedOffer}"><br/>
+                                            <apex:outputPanel rendered="{!OfferWrapperList.size>0}">
+                                                <div class="slds-grid slds-wrap table-responsive slds-scrollable--x ">
+                                                    <apex:outputPanel id="myCustomOfferId">
+                                                        <apex:outputPanel rendered="{!OfferWrapperList.size>0}" id="offerPanel">
+                                                            <div class="">
+                                                                <b>Offer Options</b>
+                                                            </div>
+                                                            <table class="slds-table slds-table--bordered slds-table--striped offer-table">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Product Name</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="ProductNameOffer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Product_Name__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td rowspan="14" style="vertical-align: top;">
+                                                                                <apex:outputField value="{!O.Offer.Revision_Notes__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="ProductNameOffer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Product_Name__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputField value="{!O.Offer.Product_Name__c}" styleClass="slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr> 
+                                                                    <tr>
+                                                                        <td>Program Type</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="ProgramType{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Program_Type__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <!-- <apex:inputField value="{!O.Offer.Program_Type__c}" styleClass="progType1 slds-input" rendered="{!!O.IsEditable}" id="programType" onchange="leaveChange(this);" > 
+                                                                                     <apex:actionSupport event="onchange" reRender="offerPanel"/>
+                                                                                </apex:inputField> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="ProgramType{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Program_Type__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputField value="{!O.Offer.Program_Type__c}" styleClass="progType slds-input" rendered="{!!O.IsEditable}" id="programType" onchange="leaveChange(this);" > 
+                                                                                     <apex:actionSupport event="onchange" reRender="offerPanel"/>
+                                                                                </apex:inputField>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Payment Schedule</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="PaymentSchedule{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Payment_Schedule__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="PaymentSchedule{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Payment_Schedule__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputField value="{!O.Offer.Payment_Schedule__c}" styleClass="paySchedule slds-input" onchange="calculatePayback();" rendered="{!!O.IsEditable}">
+                                                                                    <apex:actionSupport event="onchange" reRender="offerPanel"/>
+                                                                                </apex:inputField>
+                                                                                    
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td>Term</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="TermOffer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Terms_In_Months__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <!-- <apex:inputField value="{!O.Offer.Cloufi__Terms_In_Months__c}" styleClass="OfferTermClass1 slds-input" onkeyup="onChangeTerm(this.value);" rendered="{!!O.IsEditable}"/> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="TermOffer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Terms_In_Months__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <apex:inputField value="{!O.Offer.Cloufi__Terms_In_Months__c}" styleClass="OfferTermClass slds-input" onkeyup="onChangeTerm(this);" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Advance Amount</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="AdvanceOffer{!O.Index}" class="{!O.Offer.Id}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Funding_Amount__c}" styleClass="slds-output" rendered="{!O.IsEditable}" />
+                                                                                
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="AdvanceOffer{!O.Index}" class="{!O.Offer.Id}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Funding_Amount__c}" styleClass="slds-output" rendered="{!O.IsEditable}" />
+                                                                                <apex:inputField value="{!O.Offer.Cloufi__Funding_Amount__c}" onkeyup="onchangeFunding(this);" styleClass="OfferFundedClass slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Factor</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="Factor{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Factor_Rate__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <!-- <apex:inputField value="{!O.Offer.Factor_Rate__c}" onkeyup="onChangeFactor(this);" styleClass="OfferFactorClass1 slds-input" rendered="{!!O.IsEditable}"/> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="Factor{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Factor_Rate__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <apex:inputField value="{!O.Offer.Factor_Rate__c}" onkeyup="onChangeFactor(this);" styleClass="OfferFactorClass slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>                                                                        
+                                                                    <tr>
+                                                                        <td>Payback Amount</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="PaybackOffer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Payback_Amount__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <!-- <apex:inputField value="{!O.Offer.Cloufi__Payback_Amount__c}" html-disabled="true" styleClass="OfferPaybackClass1 slds-input" rendered="{!!O.IsEditable}"/> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="PaybackOffer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Payback_Amount__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <apex:inputField value="{!O.Offer.Cloufi__Payback_Amount__c}" html-disabled="true" styleClass="OfferPaybackClass slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Daily Payback Amount</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="DailyPB{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Daily_PB_Amount__c}" styleClass="slds-output" rendered="{!(O.Offer.Program_Type__c!='MCA' && O.IsEditable)}" />
+                                                                                <div class="payAmount" id="pbDiv">
+                                                                                  <!--   <apex:inputField value="{!O.Offer.Cloufi__Daily_PB_Amount__c}" id="paymentAmount" html-disabled="true" styleClass="OfferDailyClass1 slds-input payAmount" rendered="{!!O.IsEditable}" /> -->
+                                                                                </div>
+                                                                                    
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="DailyPB{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Daily_PB_Amount__c}" styleClass="slds-output" rendered="{!(O.Offer.Program_Type__c!='MCA' && O.IsEditable)}" />
+                                                                                <div class="payAmount" id="pbDiv1">
+                                                                                    <apex:inputField value="{!O.Offer.Cloufi__Daily_PB_Amount__c}" id="paymentAmount" html-disabled="true" styleClass="OfferDailyClass slds-input payAmount" rendered="{!!O.IsEditable}" />
+                                                                                </div>
+                                                                                    
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Holdback %</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="HoldbackPer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Holdback_Per__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <div class="holdbackPercent1" id="holdPer">
+                                                                                    <!-- <apex:inputField value="{!O.Offer.Holdback_Per__c}" styleClass="slds-input holdbackPer" rendered="{!!O.IsEditable}" id="hole"/> -->
+                                                                                </div>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="HoldbackPer{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Holdback_Per__c}" styleClass="slds-output" rendered="{!O.IsEditable}"/>
+                                                                                <div class="holdbackPercent" id="holdPer">
+                                                                                    <apex:inputField value="{!O.Offer.Holdback_Per__c}" styleClass="slds-input holdbackPer1" rendered="{!!O.IsEditable}" id="hole"/>
+                                                                                </div>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+
+                                                                    <!--tr>
+                                                                        <td>Risk Assessment Fee $</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="RiskFee{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Risk_Assessment_Fee__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputField value="{!O.Offer.Risk_Assessment_Fee__c}" styleClass="slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="RiskFee{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Risk_Assessment_Fee__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputField value="{!O.Offer.Risk_Assessment_Fee__c}" styleClass="slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr-->
+                                                                    <tr>
+                                                                        <td>Origination Fee</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="OriginationFee{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Origination_Fee__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <!-- <apex:inputField value="{!O.Offer.Origination_Fee__c}" styleClass="slds-input" rendered="{!!O.IsEditable}"/> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="OriginationFee{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Origination_Fee__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputField value="{!O.Offer.Origination_Fee__c}" onkeyup="onChangeOriginationFee(this);" styleClass="slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Additional Fee</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="RiskFee{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Additional_Fees__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <!-- <apex:inputField value="{!O.Offer.Additional_Fees__c}" styleClass="slds-input" rendered="{!!O.IsEditable}"/> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="RiskFee{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Additional_Fees__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputField value="{!O.Offer.Additional_Fees__c}" onkeyup="onChangeAdditionFee(this);" styleClass="slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Monthly Average Revenue</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="MonthlyAvgRev{!O.Index}">
+                                                                                <apex:outputField value="{!loan.Cloufi__Gross_Profit__c}" html-disabled="true" styleClass="slds-input"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="MonthlyAvgRev{!O.Index}">
+                                                                                <apex:inputField value="{!loan.Cloufi__Gross_Profit__c}" html-disabled="true" styleClass="slds-input"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>                                                                         
+                                                                    <tr>
+                                                                        <td>Percentage Of Gross</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="Percentage{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Percentage_Of_Gross__c}" styleClass="slds-output grossValue" rendered="{!O.IsEditable}" id="grossValue"/>
+                                                                                <!-- <apex:inputField value="{!O.Offer.Cloufi__Percentage_Of_Gross__c}" html-disabled="true" styleClass="OfferPerGrossClass1 slds-input updateVal" rendered="{!!O.IsEditable}" id="grossValue1" /> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="Percentage{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Percentage_Of_Gross__c}" styleClass="slds-output grossValue" rendered="{!O.IsEditable}" id="grossValue"/>
+                                                                                <apex:inputField value="{!O.Offer.Cloufi__Percentage_Of_Gross__c}" html-disabled="true" styleClass="OfferPerGrossClass slds-input updateVal" rendered="{!!O.IsEditable}" id="grossValue1" />
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Notes</td>
+                                                                        <apex:repeat value="{!OfferWrapperListOutput}" var="O">
+                                                                            <td id="Notes{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Notes__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <!-- <apex:inputTextarea rows="3" value="{!O.Offer.Cloufi__Notes__c}" styleClass="OfferTermClass slds-input" rendered="{!!O.IsEditable}"/> -->
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                            <td id="Notes{!O.Index}">
+                                                                                <apex:outputField value="{!O.Offer.Cloufi__Notes__c}" rendered="{!O.IsEditable}" styleClass="slds-output"/>
+                                                                                <apex:inputTextarea rows="3" value="{!O.Offer.Cloufi__Notes__c}" styleClass=" slds-input" rendered="{!!O.IsEditable}"/>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>
+
+                                                                    <!--<tr>
+                                                                        <td>Action</td>
+                                                                        <apex:repeat value="{!OfferWrapperList}" var="O">
+                                                                        
+                                                                            <td id="Action{!O.Index}">
+                                                                                <apex:outputPanel rendered="{! IF(O.Offer.Cloufi__Offer_Status__c=='New',true,false)}">
+                                                                                <apex:commandLink value="Edit" onclick="Flag=false" action="{!EditOffer}" status="loadingStatus" reRender="OfferTbld,msg" rendered="{!O.IsEditable}">
+                                                                                    <apex:param name="idx" value="{!O.Index}" assignTo="{!getIndex}"/>
+                                                                                </apex:commandLink>&nbsp;
+                                                                                </apex:outputPanel>
+                                                                            </td>
+                                                                        </apex:repeat>
+                                                                    </tr>-->
+                                                                </tbody>
+                                                            </table>
+                                                            <br/>
+                                                            <apex:commandButton value="Save Revise Offer" action="{!SaveOffer}" onclick="Flag=true" styleClass="slds-button slds-button--brand" status="actionStatus" reRender="OfferTbld,msg" rendered="{!showButton}">
+                                                                <apex:param name="idx" value="0" assignTo="{!getIndex}" />
+                                                            </apex:commandButton><br/>
+                                                        </apex:outputPanel>
+                                                    </apex:outputPanel>
+                                                    <br/>
+                                                    <br/>
+                                                </div>
+                                            </apex:outputPanel>
+                                        </apex:outputPanel>
+                                    </apex:outputPanel>
+                                </apex:actionRegion>
+                            </div>
+                            <!--Section to add one default offer when there is no offer in Loan-->
+                        </div>
+                       
+                    </apex:outputPanel>
+                </div>
+                <!-- Ending SLDS TAG -->
+                <!-- Other JS plugins can be included here -->
+                <script>
+                /*SLDS Tabs JS*/
+                $('.slds-tabs--default__link,.slds-tabs--scoped__link').click(function(){
+                  $(this).parent().parent().find('.slds-tabs--default__link,.slds-tabs--scoped__link').attr('aria-selected','false');
+                  $(this).attr('aria-selected','true');
+                  $(this).parent().parent().find('.slds-tabs--default__link,.slds-tabs--scoped__link').attr('tabindex','-1');
+                  $(this).attr('tabindex','0');
+                  $(this).parent().addClass('slds-active').siblings().removeClass('slds-active');
+                  $(this).parent().parent().parent().find('.'+$(this).parent().parent().parent().find('.slds-tabs--default__content,.slds-tabs--scoped__content')[0].classList[0]).removeClass('slds-show').addClass('slds-hide');
+                  $(this).parent().parent().parent().find('#'+$(this).attr('aria-controls')).removeClass('slds-hide').addClass('slds-show');
+                }); 
+            /*SLDS Tabs JS*/
+            </script>
+            </apex:outputPanel>
+            </body>
+        </html>
+    </apex:form>
+    <style>
+            [hidden],
+            template {
+                display: block !important;
+            }
+            
+            .headerwrapper {
+                background-color: #6c6c6c;
+                min-height: 60px;
+                position: absolute;
+                width: 100%;
+                z-index: 1000;
+                .popupBackground {
+                    /* Background color */
+                    background-color: black;
+                    opacity: 0.20;
+                    filter: alpha(opacity=20);
+                    /* Dimensions */
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    z-index: 998;
+                    position: absolute;
+                    /* Mouse */
+                    cursor: wait;
+                }
+                /* This is for the message DIV */
+                .PopupPanel {
+                    /* Background color */
+                    border: solid 2px blue;
+                    background-color: white;
+                    /* Dimensions */
+                    left: 50%;
+                    width: 200px;
+                    margin-left: -100px;
+                    top: 50%;
+                    height: 50px;
+                    margin-top: -25px;
+                    z-index: 999;
+                    position: fixed;
+                    /* Mouse */
+                    cursor: pointer;
+                }
+            }
+            
+            .slds .slds-table td {
+                white-space: normal;
+            }
+            
+            .slds .offer-table {
+                border-collapse: initial;
+            }
+            
+            .offer-table tr td:first-child {
+                width: 220px;
+            }
+            
+            .offer-table tr td {
+                width: 220px;
+            }
+            
+            .slds .offer-table th {
+                border-right: 1px solid #d8dde6;
+            }
+            
+            .slds .offer-table td {
+                border-right: 1px solid #d8dde6;
+            }
+            
+            .slds-grid {
+                padding: 0 10px;
+            }
+            
+            .message .messageText h4 {
+                display: -moz-inline-grid;
+            }
+            
+            .message .messageText {
+               /* font-size: 0.5em;*/
+                color: #fff !important;
+            }
+            
+            .message {
+                background-color: #04844b;
+                border-style: none;
+                color: #fff;
+            }
+            
+            .slds-text-heading--large {
+                padding: 0 10px;
+            }
+            
+            .ui-state-default,
+            .ui-widget-content .ui-state-default,
+            .ui-widget-header .ui-state-default {
+                background: #0070d2 none repeat scroll 0 0;
+                border: 1px solid #0070d2;
+            }
+            
+            .ui-widget-content {
+                border: 1px solid #d8dde6;
+            }
+            
+            .slider-success {
+                margin-right: 20px;
+            }
+            /*Css update for this page only*/
+            .slds .slds-large-size--1-of-4 {
+                width: 24%;
+            }
+        </style>
+</apex:page>

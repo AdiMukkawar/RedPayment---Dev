@@ -1,0 +1,108 @@
+Hello,<br/><br/>
+
+
+We are pleased to announce that our merchant <b>{!Opportunity.Name}</b> has chosen the following offer:<br/><br/>
+<table border="1">
+	<tr>
+		<td>
+			Product Name
+		</td>
+		<td>
+			{!Opportunity.Product_Name__c}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Program Type
+		</td>
+		<td>
+			{!Opportunity.Program_Type__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>Advance Amount
+		</td>
+		<td>
+			{!Opportunity.Amount}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Factor
+		</td>
+		<td>
+			{!Opportunity.Cloufi__Factor_Rate__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Term
+		</td>
+		<td>
+			{!Opportunity.Cloufi__Loan_Term__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Payback Amount
+		</td>
+		<td>
+			{!Opportunity.Cloufi__Payback_Amount__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Daily Payback Amount
+		</td>
+		<td>
+			{!Opportunity.CloufiServicing__Payment_Installment__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Origination Fee
+		</td>
+		<td>
+			{!Opportunity.CloufiServicing__Origination_Fee__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Holdback %
+		</td>
+		<td>
+			{!Opportunity.Hold_Back__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Payment Schedule
+		</td>
+		<td>
+			{!Opportunity.Cloufi__Frequency__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Notes
+		</td>
+		<td>
+			{!Opportunity.Offer_Notes__c}
+		</td>
+	</tr>
+</table><br/><br/>
+<b><a href="{!$Label.Site_URL}/LenderStips?id={!Opportunity.Id}&funderId={!Opportunity.Cloufi__FunderId__c}">Click Here</a></b> to see the Completed Documents.<br/><br/>
+
+Please provide us with a contract at your earliest convenience along with any additional requested documentation.<br/><br/>
+
+Best Regards,<br/>
+<img src="{!Opportunity.Company_Logo__c}"><br/><br/>

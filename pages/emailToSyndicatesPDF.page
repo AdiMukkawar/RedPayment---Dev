@@ -1,0 +1,142 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* VF Page Name: emailToSyndicatesPDF
+* Created Date: 12/14/2018
+* Description: Generate PDF for Syndication alert
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<apex:page standardController="CloufiServicing__Syndication__c" extensions="EmailToSyndicatesPDF_Ctl" renderAs="PDF">
+    <html>
+        <body>
+            <table style="border-collapse: collapse;width:100%;" border="1" bordercolor="#3374FF">
+                <tbody>
+                    <tr>
+                        <td style="padding: 6px;" colspan="6" bgcolor="#3374FF">
+                            <p style="color:white; font-family: sans-serif; font-weight: bold; font-size: 22pt;">Daily ACH Deposit Report</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px;" colspan="3">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 7pt;">Activity Date</p>
+                            <p style="font-family: sans-serif; font-weight: bold; font-size: 14pt;">{!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}</p>
+                        </td>
+                        <td style="padding: 6px;" colspan="3">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 7pt;">Syndicate Name</p>
+                            <p style="font-family: sans-serif; font-weight: bold; font-size: 14pt;">{!objSynd.CloufiServicing__Syndicating_Account__r.Name}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px;" colspan="6" bgcolor="#3374FF">
+                        <p style="font-family: sans-serif; font-weight: bold; font-size: 14pt; color:white;">
+                            Daily ACH Portfolio Activity (Totals for all Merchants)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px;" colspan="3">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Total ACH Amt Collected from all Clients $</p>
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 15.5pt;">$<span style="font-family: sans-serif; font-weight: bold; font-size: 14pt;">
+                            <apex:outputText value="{0,number,###,##0.00}">
+                                <apex:param value="{!totalACHAmnt}"/>
+                            </apex:outputText>
+                            </span></p>
+                        </td>
+                        <td style="padding: 6px;" colspan="3">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Total Management Fee Deduction for all Merchants</p>
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 15.5pt;">$<span style="font-family: sans-serif; font-weight: bold; font-size: 14pt;">
+                            <apex:outputText value="{0,number,###,##0.00}">
+                                <apex:param value="{!totalMngFee}"/>
+                            </apex:outputText>
+                        </span></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px;" colspan="3">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Total Amount Transferred (Today)</p>
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 15.5pt;">$<span style="font-family: sans-serif; font-weight: bold; font-size: 14pt;">
+                                <apex:outputText value="{0,number,###,##0.00}">
+                                    <apex:param value="{!totalACHTodayAmnt}"/>
+                                </apex:outputText>
+                            </span></p>
+                        </td>
+                        <td style="padding: 6px;" colspan="3">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Total Merchants for this Daily Report</p>
+                            <p style="font-family: sans-serif; font-weight: bold; font-size: 14pt;">
+                                {!totalMerchants}
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px;" colspan="7" bgcolor="#3374FF">
+                            <p style="font-family: sans-serif; font-weight: bold; font-size: 14pt; color:white;">
+                            Merchant Details - Daily ACH Activity Report</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px;" bgcolor="#d0d5d8">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Merchant Name:</p>
+                        </td>
+                        <td style="padding: 6px;" bgcolor="#d0d5d8">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Funding Type:</p>
+                        </td>
+                            <td style="padding: 6px;" bgcolor="#d0d5d8">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Syn Amt Applied to RTR :</p>
+                        </td>
+                            <td style="padding: 6px;" bgcolor="#d0d5d8">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Mgmt Fee:</p>
+                        </td>
+                            <td style="padding: 6px;" bgcolor="#d0d5d8">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Syndicate Amt Paid</p>
+                        </td>
+                            <td style="padding: 6px;" bgcolor="#d0d5d8">
+                            <p style="color: #231F20; font-family: sans-serif; font-weight: normal; font-size: 8pt;">Syndicate RTR Bal:</p>
+                        </td>
+                    </tr>
+                    <apex:repeat value="{!payList}" var="pay" >
+                        <tr>
+                            <td style="padding: 6px;">
+                                <p style="font-family: sans-serif; font-weight: bold; font-size: 9pt;">{!pay.Cloufi__Opportunity__r.Name}</p>
+                            </td>
+                            <td style="padding: 6px;">
+                                <p style="font-family: sans-serif; font-weight: bold; font-size: 9pt;">{!pay.Cloufi__Opportunity__r.Type}</p>
+                            </td>
+                            <td style="padding: 6px;">
+                                <p style="font-family: sans-serif; font-weight: bold; font-size: 10pt;">
+                                    <!-- <apex:outputText value="${0,number,###,##0.00}"> -->
+                                        <!-- <!-- <apex:param value="{!pay.cmbsa__Total_Payable_Amt_Gross__c}"/> -->
+                                    <!-- </apex:outputText> -->
+                                    <apex:outputText value="${0,number,###,##0.00}">
+                                         <apex:param value="{!pay.Cloufi__Payment_Amount__c}"/>
+                                    </apex:outputText>
+                                </p>
+                                
+                            </td>
+                            <td style="padding: 6px;">
+                                <p style="font-family: sans-serif; font-weight: bold; font-size: 10pt;">
+                                    <apex:outputText value="${0,number,###,##0.00}">
+                                         <apex:param value="{!pay.CloufiServicing__Management_Fee_Paid__c}"/>
+                                    </apex:outputText>
+                                </p>
+                            </td>
+                            <td style="padding: 6px;">
+                                <p style="font-family: sans-serif; font-weight: bold; font-size: 10pt;">
+                                    <!-- <apex:outputText value="${0,number,###,##0.00}"> -->
+                                        <!-- <!-- <apex:param value="{!pay.cmbsa__Amount__c}"/> -->
+                                    <!-- </apex:outputText> -->
+                                    <apex:outputText value="${0,number,###,##0.00}">
+                                         <apex:param value="{!pay.Cloufi__Payment_Amount__c - pay.CloufiServicing__Management_Fee_Paid__c}"/>
+                                    </apex:outputText>
+                                </p>
+                            </td>
+                            <td style="padding: 6px;">
+                                <p style="font-family: sans-serif; font-weight: bold; font-size: 10pt;">
+                                    <apex:outputText value="${0,number,###,##0.00}">
+                                        <apex:param value="{!objSynd.CloufiServicing__Running_Balance__c}" />
+                                    </apex:outputText>
+                                </p>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </tbody>
+            </table>
+        </body>
+    </html>
+</apex:page>

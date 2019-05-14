@@ -1,0 +1,13 @@
+<messaging:emailTemplate subject="Chosen Offer Documents" recipientType="Lead" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br/><br/>
+
+        Following are the chosen Offer Documents for {!relatedTo.Name}<br/><br/>
+        Click on the document to view<br/>
+        <c:ChosenOfferComp Opp="{!relatedTo.Id}"/>
+        
+        
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

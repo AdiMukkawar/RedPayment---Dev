@@ -1,0 +1,579 @@
+<apex:page sidebar="false" showHeader="false" > 
+    <apex:form >
+        <html lang="en"> 
+        	<head>
+				<style>
+                    .wizard {
+                        margin: 20px auto;
+                        background: #fff;
+                    }
+
+                    .wizard .nav-tabs {
+                        position: relative;
+                        margin: 20px auto;
+                        margin-bottom: 0;
+                        border-bottom-color: #e0e0e0;
+                        border-bottom: none;
+                        width: 35%;
+                    }
+
+                    .wizard > div.wizard-inner {
+                        position: relative;
+                    }
+
+                    .connecting-line {
+                        height: 2px;
+                        background: #00a8aa;
+                        position: absolute;
+                        width: 28%;
+                        margin: 0 auto;
+                        left: 0;
+                        right: 0;
+                        top: 50%;
+                        z-index: 1;
+                    }
+
+                    .wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+                        color: #555555;
+                        cursor: default;
+                        border: 0;
+                        border-bottom-color: transparent;
+                    }
+
+                    span.round-tab {
+                        width: 40px;
+                        height: 40px;
+                        line-height: 36px;
+                        display: inline-block;
+                        border-radius: 100px;
+                        background: #f7f7f7;
+                        border: 2px solid #00a8aa;
+                        z-index: 2;
+                        position: absolute;
+                        left: 0;
+                        text-align: center;
+                        font-size: 16px;
+                    }
+                    span.round-tab i{
+                        color:#555555;
+                    }
+                    .wizard li.active span.round-tab {
+                        background: #17c8ca;
+                        border: 2px solid #00a8aa;
+                        color: #fff;
+                        font-weight: bold;
+                        
+                    }
+                    .wizard li.active span.round-tab i{
+                        color: #5bc0de;
+                    }
+
+                    span.round-tab:hover {
+                        color: #333;
+                        border: 2px solid #333;
+                    }
+
+                    .wizard .nav-tabs > li {
+                        width: 25%;
+                    }
+                    .wizard .nav-tabs > li a {
+                        width: 40px;
+                        height: 40px;
+                        margin: 10px auto;
+                        border-radius: 100%;
+                        padding: 0;
+                    }
+
+                    .wizard .nav-tabs > li a:hover {
+                        background: transparent;
+                    }
+
+                    .wizard .tab-pane {
+                        position: relative;
+                        padding-top: 30px;
+                    }
+
+                    .wizard h3 {
+                        margin-top: 0;
+                    }
+                    .dropselectsec {
+                        width: 68%;
+                        padding: 6px 5px;
+                        border: 1px solid #ccc;
+                        border-radius: 3px;
+                        color: #333;
+                        margin-left: 10px;
+                        outline: none;
+                        font-weight: normal;
+                    }
+                    .dropselectsec1 {
+                        width: 74%;
+                        padding: 6px 5px;
+                        border: 1px solid #ccc;
+                        border-radius: 3px;
+                        color: #333;
+                        margin-left: 10px;
+                        outline: none;
+                        font-weight: normal;
+                    }
+                    .mar_ned {
+                        margin-bottom:10px;
+                    }
+                    .wdth {
+                        width:25%;
+                    }
+                    .birthdrop {
+                        padding: 6px 5px;
+                        border: 1px solid #ccc;
+                        border-radius: 3px;
+                        color: #333;
+                        margin-left: 10px;
+                        width: 16%;
+                        outline: 0;
+                        font-weight: normal;
+                    }
+
+
+                    /* according menu */
+                    #accordion-container {
+                        font-size:13px
+                    }
+                    .accordion-header {
+                        font-size:13px;
+                        background:#ebebeb;
+                        margin:5px 0 0;
+                        padding:7px 20px;
+                        cursor:pointer;
+                        color:#fff;
+                        font-weight:400;
+                        -moz-border-radius:5px;
+                        -webkit-border-radius:5px;
+                        border-radius:5px
+                    }
+                    .unselect_img{
+                        width:18px;
+                        -webkit-user-select: none;  
+                        -moz-user-select: none;     
+                        -ms-user-select: none;      
+                        user-select: none; 
+                    }
+                    .active-header {
+                        -moz-border-radius:5px 5px 0 0;
+                        -webkit-border-radius:5px 5px 0 0;
+                        border-radius:5px 5px 0 0;
+                        background:#F53B27;
+                    }
+                    .active-header:after {
+                        content:"\f068";
+                        font-family:'FontAwesome';
+                        float:right;
+                        margin:5px;
+                        font-weight:400
+                    }
+                    .inactive-header {
+                        background:#333;
+                    }
+                    .inactive-header:after {
+                        content:"\f067";
+                        font-family:'FontAwesome';
+                        float:right;
+                        margin:4px 5px;
+                        font-weight:400
+                    }
+                    .accordion-content {
+                        display:none;
+                        padding:20px;
+                        background:#fff;
+                        border:1px solid #ccc;
+                        border-top:0;
+                        -moz-border-radius:0 0 5px 5px;
+                        -webkit-border-radius:0 0 5px 5px;
+                        border-radius:0 0 5px 5px
+                    }
+                    .accordion-content a{
+                        text-decoration:none;
+                        color:#333;
+                    }
+                    .accordion-content td{
+                        border-bottom:1px solid #dcdcdc;
+                    }
+
+
+
+                    @media( max-width : 585px ) {
+
+                        .wizard {
+                            width: 90%;
+                            height: auto !important;
+                        }
+                        .connecting-line {
+                            top: 36%;
+                            width: 70%;
+                        }
+                        .wizard .nav-tabs {
+                            width: 90%;
+                        }
+                        span.round-tab {
+                            font-size: 12px;
+                            width: 30px;
+                            height: 30px;
+                            line-height: 30px;
+                        }
+
+                        .wizard .nav-tabs > li a {
+                            width: 50px;
+                            height: 50px;
+                            line-height: 50px;
+                        }
+
+                        .wizard li.active:after {
+                            content: " ";
+                            position: absolute;
+                            left: 35%;
+                        }
+                    }
+                    
+                    /* The container */
+                    .container2 {
+                        display: block;
+                        position: relative;
+                        padding-left: 30px;
+                        margin-bottom: 12px;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight:normal;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        user-select: none;
+                    }
+
+                    /* Hide the browsers default checkbox */
+                    .container2 input {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                    }
+
+                    /* Create a custom checkbox */
+                    .checkmark {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 20px;
+                        width: 20px;
+                        border:1px solid #ccc;
+                    }
+
+                    /* On mouse-over, add a grey background color */
+                    .container2:hover input ~ .checkmark {
+                        background-color: #ccc;
+                    }
+
+                    /* When the checkbox is checked, add a blue background */
+                    .container2 input:checked ~ .checkmark {
+                        background-color: #2196F3;
+                    }
+
+                    /* Create the checkmark/indicator (hidden when not checked) */
+                    .checkmark:after {
+                        content: "";
+                        position: absolute;
+                        display: none;
+                    }
+
+                    /* Show the checkmark when checked */
+                    .container2 input:checked ~ .checkmark:after {
+                        display: block;
+                    }
+
+                    /* Style the checkmark/indicator */
+                    .container2 .checkmark:after {
+                        left: 7px;
+                        top: 3px;
+                        width: 5px;
+                        height: 9px;
+                        border: solid white;
+                        border-width: 0 3px 3px 0;
+                        -webkit-transform: rotate(45deg);
+                        -ms-transform: rotate(45deg);
+                        transform: rotate(45deg);
+                    }
+                    
+                    .shadow {
+                        width:100%;
+                        margin-bottom: 20px;
+                    }
+                    .btn-primary {
+                        color: #333 !important;
+                        background-color: #f7bf16!important;
+                        border-color: #f7bf16 !important;
+                        text-transform: uppercase;
+                        padding: 15px 40px;
+                        border-radius: 6px;
+                        font-size: 14px;
+                        box-shadow: 0 1px 1px rgba(0,0,0,0.2) !important;
+                        font-weight: 500;
+                        letter-spacing: 0.5px;
+                    }
+                    .btn-primary:hover {
+                        background-color: #ffc003 !important;
+                        color: #222 !important;
+                    }
+                    .btn-default {
+                        color: #144559;
+                        background-color: #fff;
+                        border-color: #f7bf16;
+                        border: 2px solid #f7bf16;
+                        text-transform: uppercase;
+                        padding: 10px 20px;
+                        border-radius: 2px;
+                        margin-bottom: 40px;
+                        margin-top: 20px;
+                    }
+                    .application-form .title {
+                        color: #144559;
+                        font-size: 22px;
+                        font-weight: bold;
+                        margin-bottom: 10px;
+                    }
+                    .application-form .sub-title {
+                        color:#144559;
+                    }
+                    .pd0 {
+                        padding:0;
+                    }
+                    .form-control {
+                        border: 1px solid #b7b7b7 !important;
+                        border-radius: 2px;
+                        height: 40px;
+                        background-color: transparent;
+                    }
+                    .input-group-addon {
+                        background-color: transparent;
+                        border: 1px solid #b7b7b7;
+                        border-radius: 2px;
+                        min-width: 40px;
+                        padding:6px;
+                    }
+                    label {
+                        color: #4f4f4f;
+                    }
+                    .form-row {
+                        margin-top: 24px;
+                    }
+                    /* layout.css Style */
+                    .upload-drop-zone {
+                        height: 150px;
+                        border-width: 2px;
+                        margin-bottom: 20px;
+                    }
+
+                    /* skin.css Style*/
+                    .upload-drop-zone {
+                        color: #ccc;
+                        border-style: dashed;
+                        border-color: #ccc;
+                        line-height: 150px;
+                        text-align: center
+                    }
+                    .upload-drop-zone.drop {
+                        color: #222;
+                        border-color: #222;
+                    }
+                    .list-group-item-success {
+                        background-color: #f7f7f7;
+                        margin-bottom: 10px;
+                        border-radius: 0 !important;
+                        color: #757575;
+                    }
+                    .alert-success {
+                        color: #3c763d;
+                        background-color: transparent;
+                        border-color: transparent;
+                    }
+                    .custom-select {
+                        width: 100%;
+                        border-radius: 2px;
+                        height: 40px;
+                    }
+                    .padding0 {
+                        padding:0;
+                    }
+                    .dateFormat{
+                        display: none;
+                    }
+                    .months-table table {
+                        width:100%;
+                    }
+                    .months-table table tr td label {
+                        margin-left:10px;
+                    }
+                    .fa-check {
+                        color: #0ca00c;
+                        font-size:22px;
+                    }
+                    .input-group {
+                        margin-bottom: 30px;
+                        background-color:#fff;
+                    }
+                    .datepicker {
+                        cursor:pointer;
+                    }
+
+                    .form-group.label-static label.control-label, .form-group.label-floating.is-focused label.control-label, .form-group.label-floating:not(.is-empty) label.control-label {
+                        color:#144559;
+                    }
+                    
+                    
+                    //Signature CSS
+                    .signature-component {
+                      text-align: left;
+                      display: inline-block;
+                      max-width: 100%;
+                      h1 {
+                        margin-bottom: 0;
+                      }
+                      h2 {
+                        margin: 0;
+                        font-size: 100%;
+                      }
+                      button {
+                        padding: 1em;
+                        background: transparent;
+                        box-shadow: 2px 2px 4px #777;
+                        margin-top: .5em;
+                        border: 1px solid #777;
+                        font-size: 1rem;
+                        
+                      }
+                      canvas {
+                        display: block;
+                        position: relative;
+                        border: 1px solid;    
+                      }
+                      img {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                      }
+                    }
+                    
+                    .date .form-group  {
+                        margin-bottom:0;
+                    }
+                    .date .form-group .form-control {
+                        width: 87%;
+                    }
+                    .date .form-group .input-group-addon {
+                        padding: 11px;
+                    }
+                    .col-md-3 .date .form-group .form-control {
+                        width: 80%;
+                    }
+                    
+                    .signpad-margin {
+                        margin-top:-60px;
+                    }
+                    
+                    @media screen and (max-width: 640px) and (min-width: 320px) {
+                        .btn-primary {
+                            padding: 15px 10px;
+                            font-size:12px;
+                        }
+                    }
+                    
+                    @media screen and (max-width: 900px) and (min-width: 320px) {
+                        .signpad-margin {
+                            margin-top:0px;
+                        }
+                    }
+                    
+                    @media screen and (max-width: 374px) and (min-width: 320px) {
+                        .date .form-group .form-control {
+                            width: 81%;
+                        }
+                    }
+                    
+                    
+                    @media screen and (max-width: 657px) and (min-width: 375px) {
+                        .date .form-group .form-control {
+                            width: 85%;
+                        }
+                        .col-md-3 .date .form-group .form-control {
+                            width: 85%;
+                        }
+                    }
+                    
+                    @media screen and (max-width: 640px) and (min-width: 568px) {
+                        .date .form-group .form-control {
+                            width: 90%;
+                        }
+                        .col-md-3 .date .form-group .form-control {
+                            width: 90%;
+                        }
+                    }
+                    
+                    input.error{
+                        border:1px solid red !important;
+                    }
+                    select.error{
+                        border:1px solid red !important;
+                    }
+                    
+                    /*.error{
+                        color:red !important;
+                    }*/
+                    label.error {
+                        position: absolute;
+                        left: 48px;
+                        top: 45px;
+                        font-weight: normal;
+                        color:red !important;
+                    }
+                    /*td, th {
+                        padding: 4px;
+                    }*/
+                    .form-group.label-floating label.control-label, .form-group.label-placeholder label.control-label {
+                        left:0;
+                    }
+                    .partof-year label.error {
+                        top: 120px;
+                    }
+                    .ageLimit label.error {
+                        left: 6px;
+                    }
+                    .docColumn{
+                        width: 60%;
+                        margin-left: 20%;
+                        margin-right: 20%;
+                    }
+                </style>
+        	</head>     
+			<body>
+                <div class="container" style="margin-left: 15%;margin-top: 3%;">
+                    <div class="row">
+                        <div class="wizard">
+                            <div class="tab-content application-form">
+                               <div class="tab-pane active" role="tabpanel">
+                                    <div class="header">
+                                        <apex:image id="theImage1" value="{!$Resource.Maple_Logo}" width="240" height="70"/>					                                                                               
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+				<div class="col-md-12" style="">
+                    <apex:image value="{!URLFOR($Resource.mapleapllicationresource,'img/bottom-shadow.png')}" styleclass="shadow"/>
+                </div>
+
+				<div align="center" class="row" style="position: fixed;top: 40%;left: 50%;transform: translate(-50%, -50%);">    	
+			        <apex:outputLabel value="Thank You!" style="font-size: xx-large;font-family: 'Poppins',sans-serif;color: #26a4a6;font-weight: 700;margin: 0;line-height: 1.17;letter-spacing: -0.01em;"/><br/><br/>
+			        <apex:outputLabel value="A MEMBER OF OUR GROW TEAM WILL CONTACT YOU SHORTLY" style="margin-top: 20px;font-size: 19px;line-height: 1.35;font-weight: 700;text-transform: uppercase;letter-spacing: -0.025em;color: #394959;"/>			        
+			    </div>
+            </body>
+	    </html>
+	</apex:form>
+</apex:page>

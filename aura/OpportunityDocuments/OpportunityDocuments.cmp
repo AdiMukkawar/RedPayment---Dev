@@ -1,0 +1,215 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd. (Prashant Mahajan)
+* Component Name: Opportunity Documents
+* Created Date: 28-August-2018
+* Description:  Component used on opportunity to display list of Documents
+*******************************************************************
+*Author  			| Date       | Description
+*Aditya Mukkawar    | 17/09/2018 | Send email to Opp owner with all the pending documents
+/-->
+<aura:component controller="OpportunityOffersController" implements="flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride,force:hasRecordId" access="global">
+    <aura:attribute name="offers" type="List"/>	
+    <aura:attribute name="sObj" type="String" default="Cloufi__UW_Document__c" required="true"/>
+    <aura:attribute name="fSetName" type="String" default="OpportunityDocuments" required="true"/>
+    <aura:attribute name="fieldlist" type="List"/>
+    <aura:attribute name="sObjWrapperlist" type="List"/>
+    <aura:attribute name="recordId" type="Id" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="userInfo" type="user"/>
+    <aura:attribute name="showHideReqDoc" type="Boolean" default="false"/>
+    <aura:attribute name="showPopup" type="Boolean" default="false"/>
+    <aura:attribute name="RemainingStips" type="Cloufi__UW_Document__c[]"/>
+	<aura:attribute name="funderAvailable" type="Boolean" default="false"/>
+    
+    <!-- Component Header Start -->
+	<div class="slds-page-header">
+		<div class="slds-page-header__row">
+			<div class="slds-page-header__col-title">
+				<div class="slds-media">
+					<div class="slds-media__figure">
+						<lightning:icon iconName="standard:account" alternativeText="Event" />
+					</div>
+					<div class="slds-media__body">
+						<div class="slds-page-header__name">
+							<div class="slds-page-header__name-title">
+								<h1>
+									<span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">UW Documents</span>
+								</h1>
+							</div>
+						</div>
+						<p class="slds-page-header__name-meta"></p>
+					</div>
+					<!-- Buttons Section Start -->
+					<div class="slds-button" style="float:right!important;">
+						<button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit"><a href="{!'/one/one.app#/alohaRedirect/apex/AddUWDocuments?id='+(v.recordId)}">Add UW Documents </a></button>
+					</div>
+					<aura:if isTrue="{!v.showHideReqDoc || v.userInfo.Profile.Name == 'System Administrator'}">
+						<!--<div class="slds-button" style="float:right!important;">
+							<button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit"><a href="{!'/one/one.app#/alohaRedirect/apex/RequestMissingStips?id='+(v.recordId)}">Request Stip</a></button>
+						</div>-->
+						<div class="slds-button" style="float:right!important;">
+							<button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.RequestStip}">Request Stip</button>
+						</div>
+					</aura:if>
+					<aura:if isTrue="{!v.showHideReqDoc || v.userInfo.Profile.Name == 'System Administrator'}">
+						<div class="slds-button" style="float:right!important;">
+							<button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.reqDocsUploaded}">Requested Docs Uploaded</button>
+						</div>
+					</aura:if>
+					<aura:if isTrue="{!v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator'}">
+						<div class="slds-button" style="float:right!important;">
+							<button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.sendMailToSalesRep}">Send Stip</button>
+						</div>
+					</aura:if>
+					<aura:if isTrue="{!and(v.funderAvailable, or(v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator'))}">
+						<div class="slds-button" style="float:right!important;">
+							<button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.openFinalUWPopUp}">Send for Final UW</button>
+						</div>
+					</aura:if>
+					<!-- Buttons Section End -->
+				</div>
+			</div>
+		</div>
+	</div><br/>
+    <!-- Component Header End -->
+	
+    <!-- Send for Final UW popup start -->
+    <aura:if isTrue="{!v.showPopup}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!--  MODAL BOX HEADER Start -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" alternativeText="close" variant="bare-inverse" class="slds-modal__close" onclick="{!c.closePopup}"/>
+                    <div class="slds-page-header">
+                        <p class="slds-page-header__title slds-truncate" title="">Send Documents to Lender</p>
+                    </div>
+                </header>
+                <!--  MODAL BOX HEADER End -->
+                <!-- MODAL BOX BODY Part Start-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+				<aura:if isTrue="{!not(empty(v.RemainingStips))}">
+					<table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                        <thead>
+                            <tr class="slds-text-title--caps">
+                                <th scope="col">
+                                    
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Stip Name">Stip Name</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <aura:iteration items="{!v.RemainingStips}" var="stip">
+                                <tr>
+                                    <td scope="row" class="slds-text-align--right" style="width:3.25rem;">
+                                        <div class="slds-form-element">
+                                            <div class="slds-form-element__control">
+                                                <label class="slds-checkbox">
+                                                    <ui:inputCheckbox text="{!stip.Id}" aura:id="selectedCheckbox" value="true" change="{!c.checkboxSelect}"/>
+                                                    <span class="slds-checkbox--faux"></span>
+                                                    <span class="slds-form-element__label text"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <th scope="row">
+                                        <div class="slds-truncate" title="{!stip.Stip_Name__c}">{!stip.Stip_Name__c}</div>
+                                    </th>
+                                </tr>
+                            </aura:iteration>
+                        </tbody>
+                    </table>
+					<aura:set attribute="else">
+						<p class="Stip-message-blank" title="">There are no stips to Send</p>
+					</aura:set>
+			    </aura:if> 
+                    
+                </div>
+                <!-- MODAL BOX BODY Part End-->
+                <!-- MODAL BOX FOOTER Part Start -->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.closePopup}"/>
+					<aura:if isTrue="{!not(empty(v.RemainingStips))}">
+						<button class="slds-button slds-button--brand" onclick="{!c.sendMailForSelectedStips}">Send</button>
+					</aura:if>
+                </footer>
+                <!-- MODAL BOX FOOTER Part End -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!-- Send for Final UW popup End -->
+    
+    <ui:scrollerWrapper class="scrollerSize">  
+        
+        <aura:if isTrue="{!(v.sObjWrapperlist == null) }">
+            No UW Documents At This Moment!!!
+        </aura:if>
+        <aura:if isTrue="{!(v.sObjWrapperlist != null) }">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <aura:iteration items="{!v.fieldlist}" var="f">
+                            <th scope="col">
+                                <div class="slds-truncate" title="{!f.fLabel}">{!f.fLabel}</div></th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.sObjWrapperlist}" var="obj">
+                        <tr>
+                            <aura:iteration items="{!obj}" var="obj2" >
+                                <td >
+                                    <div class="slds-truncate" >
+                                        <aura:if isTrue="{!obj2.fAPIname == 'Cloufi__View__c'}">
+                                            <!--<a href="{!obj2.Cloufi__URL__c}" target="_blank">View</a>-->
+                                        </aura:if>
+                                        <aura:if isTrue="{!obj2.fAPIname == 'Name'}">
+                                            <a href="{!'/one/one.app?#/sObject/'+ obj2.offerId + '/view'}" target="_blank">{!obj2.fvalue}</a>
+                                        </aura:if>                        
+                                        <!--<aura:if isTrue="{(!obj2.fDetails.type == 'string' || obj2.fDetails.type == 'picklist') AND obj2.fAPIname != 'Name'}">
+                                            <ui:outputText value="{!obj2.fvalue}" />
+                                        </aura:if>-->
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'datetime'}">
+                                            <ui:outputDateTime value="{!obj2.fvalue}" />
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{(!obj2.fDetails.type == 'string') AND (!obj2.fAPIname != 'Cloufi__View__c')}">
+                                            <ui:outputText value="{!obj2.fvalue}"/>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'url'}">
+                                            <a href="{!obj2.fvalue}" target="_blank">{!obj2.fvalue}</a>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'double'}">
+                                            <ui:outputNumber value="{!obj2.fvalue}" />
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'percent'}">
+                                            <ui:outputText value="{!obj2.fvalue}"/>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'picklist'}">
+                                            <ui:outputText value="{!obj2.fvalue}"/>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'int'}">
+                                            <ui:outputNumber value="{!obj2.fvalue}" format=".00"/>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'currency'}">
+                                            <ui:outputCurrency value="{!obj2.fvalue}" format="$#,###.00"/>
+                                        </aura:if>
+                                    </div>
+                                </td>
+                            </aura:iteration>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>    
+        </aura:if>
+    </ui:scrollerWrapper>
+</aura:component>

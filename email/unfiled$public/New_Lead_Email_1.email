@@ -1,0 +1,11 @@
+{!Lead.FirstName},
+
+I tried to contact you by phone today. I left you a message about how we can help your business grow with our funding. I'd like to talk to you about this opportunity.
+
+Feel free to reach out to me at your earliest convenience. Thank you and I look forward to helping you get the funding you are looking for!
+
+Best Regards,
+{!Lead.OwnerFullName}
+{!Lead_Owner_Company_Name__c}
+{!Lead.OwnerPhone}
+{!Lead.OwnerEmail}

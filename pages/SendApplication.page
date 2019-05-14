@@ -1,0 +1,419 @@
+<!--
+Author      | Date        | Description
+Pradeep     | 19-06-2018  | Send Application to Site User
+-->
+
+<apex:page standardController="Lead" extensions="SendApplicationController" id="thepage">
+    <head>
+            <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+         <!--   <script type="text/javascript">
+                function selectOnlyThis(isPhone,id) {
+                    
+                    //document.getElementById("thepage:theform:one").checked = false;
+                    //document.getElementById("thepage:theform:two").checked = false;
+                    
+                    if(isPhone =='Mobile'){
+                        //document.getElementById(id).checked = true;   
+                        if(document.getElementById("thepage:theform:two") != null){
+                            document.getElementById("thepage:theform:two").checked = false;
+                        }
+                    }
+                    
+                    if(isPhone =='Phone'){
+                        //document.getElementById(id).checked = true;   
+                        if(document.getElementById("thepage:theform:one") != null)
+                            document.getElementById("thepage:theform:one").checked = false;
+                    }
+                    
+                    
+                }
+            </script>           -->
+        
+        <style>
+            .pbSubheader.brandTertiaryBgr.tertiaryPalette {
+                background-color: #33A3EF;
+            }
+            .OpportunityTab .secondaryPalette, .individualPalette .OpportunityBlock .secondaryPalette {
+                background-color: #e5c130;
+                border-color: #33A3EF !important;
+            }
+
+            #container {
+                background: #6699FF;
+                margin: auto;
+                width: 500px;
+                height: 700px;
+                padding-top: 30px;
+                font-family: helvetica, arial, sans-serif;
+                }
+                
+                
+            h1 {
+                color: #0C8EFF;
+                }
+                .message .messageText h4 {
+                display: -moz-inline-grid;
+
+            }
+            .message .messageText {
+                font-size: 1.0em;
+                color: #fff !important;
+            }
+            .message {
+                background-color:#6e7170;/*#04844b;*/
+                border-style:none;
+                color:#fff;
+            }
+            .body, td{
+                color:#fff;
+            }
+            
+        </style>
+    </head>
+    <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+     
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        var j$ = jQuery.noConflict();
+        j$(document).ready(function() { 
+            overridePageMessages();
+        });
+        
+        //Lightning Design System for Page Messages    
+        function overridePageMessages(){    
+                         
+            j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+            j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+            j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+            j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                             
+            j$('.errorM3').removeClass('errorM3'); 
+            j$('.confirmM3').removeClass('confirmM3'); 
+            j$('.infoM3').removeClass('infoM3');   
+            j$('.warningM3').removeClass('warningM3');  
+        }
+
+        function disableButton(buttonId){
+            console.log('buttonId=>'+buttonId);
+            var inputVal = document.getElementById(buttonId);
+            console.log('inputVal=>'+inputVal);
+            var buttonVisible='{!showSend}';
+            console.log('buttonVisible=>'+buttonVisible);
+            if (inputVal != 'undefined'){
+                inputVal.style.display = "none";
+            } else {
+                inputVal.style.display = "block";
+            }
+        }
+    </script>
+    <style>
+        .customMessage {
+            margin: 5px 0!important;
+            opacity: 1!important;
+            width: 100%;
+            font-size: 15px;
+            border: 0px;
+            border-radius: 6px;
+            padding-left: 10px;
+        }
+        
+        /* The container */
+        .container2 {
+            display: block;
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight:normal;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Hide the browsers default checkbox */
+        .container2 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            border:1px solid #ccc;
+        }
+
+        /* On mouse-over, add a grey background color */
+        .container2:hover input ~ .checkmark {
+            background-color: #ccc;
+        }
+
+        /* When the checkbox is checked, add a blue background */
+        .container2 input:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .container2 input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .container2 .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    </style>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+             <meta charset="utf-8" />
+              <meta http-equiv="x-ua-compatible" content="ie=edge" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+        </head>
+        <body>
+            <apex:form styleClass="slds-form" id="theform">
+                <apex:slds />
+                <apex:pageMessages />
+
+                <apex:actionStatus id="statusOne">
+                    <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                        &nbsp;
+                    </div>
+                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                        <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px; margin-left: -60px;">
+                            <img src="/img/loading.gif" /><!--style="float: left; margin: 8px;" /-->
+                            <span>Sending...</span>
+                        </div>
+                    </div>
+                    </apex:facet>
+                </apex:actionStatus>
+
+                <!-- <center>
+                    <apex:commandButton value="Back" action="{!close}" immediate="true" styleClass="slds-button slds-button_brand"  style="font-size:12px;"/> 
+                </center>-->
+                <div class="slds-scope">
+
+                    <div class="slds-page-header">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-has-flexi-truncate">
+                                <div class="slds-media slds-no-space slds-grow">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon_container_circle slds-icon-action-description" title="">
+                                            <svg class="slds-icon" aria-hidden="true">
+                                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/action-sprite/svg/symbols.svg#description"></use>
+                                            </svg>
+                                        </span>                                             
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <p class="slds-text-title_caps slds-line-height_reset">Send Application</p>
+                                        <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">                                
+                                            <apex:outputText value="{!objLead.Name}" rendered="{!$ObjectType.Lead.fields.Name.Accessible}" />
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button--brand" style="font-size:12px;margin-left:-10%;" />&nbsp;&nbsp;
+                                <apex:outputPanel rendered="{!showSend}" id="sendButton">
+                                    <apex:commandButton value="Send" styleClass="slds-button slds-button_brand" action="{!SendApplication}" rendered="{!(objLead.MobilePhone !='' || objLead.Email !='')}" status="statusOne" reRender="theform" id="sendAppButton" onclick="disableButton('{!$Component.sendAppButton}');"/>
+                                </apex:outputPanel>
+                            </div>
+                        </div>
+                    </div><br/>
+                    
+                    <div class="slds-form-element" >
+                    
+                        <!-- Send Application section Start -->
+                        <div class="slds-section slds-is-open">
+                            <h3 class="slds-section__title">
+                                <section aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                                    <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                                    </svg>
+                                    <span class="slds-truncate" title="Section Title">Email Link</span>
+                                </section>
+                            </h3>
+                            <div aria-hidden="false" class="slds-section__content" id="expando-unique-id" style="margin-left: 24px;">
+                                <div class="col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="container2">
+                                            <apex:outputField value="{!objLead.Email}"/>
+                                            <!--<apex:outputPanel rendered="{!IF(objLead.Email !='', true, false)}">-->
+                                                <apex:inputCheckbox styleClass="checkbox" id="looped"  value="{!sendAppLink}" disabled="{!(objLead.Email =='')}"/>
+                                                <span class="checkmark"></span>
+                                            <!--</apex:outputPanel>-->
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Send Application section End -->
+                        
+                        <!-- Send PDF section Start -->
+                        <div class="slds-section slds-is-open">
+                            <h3 class="slds-section__title">
+                                <section aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                                    <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                                    </svg>
+                                    <span class="slds-truncate" title="Section Title">Email PDF</span>
+                                </section>
+                            </h3>
+                            <div aria-hidden="false" class="slds-section__content" id="expando-unique-id" style="margin-left: 24px;">
+                                <div class="col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="container2">
+                                            <apex:outputField value="{!objLead.Email}"/>
+                                            <!--<apex:outputPanel rendered="{!IF(objLead.Email !='', true, false)}">-->
+                                                <apex:inputCheckbox styleClass="checkbox" id="pdfCheck"  value="{!sendPDF}" disabled="{!(objLead.Email =='')}"/>
+                                                <span class="checkmark"></span>
+                                            <!--</apex:outputPanel>-->
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       <!-- Send PDF section End -->
+                       
+                        <!-- SMS Link section Start -->
+                        <div class="slds-section slds-is-open">
+                            <h3 class="slds-section__title">
+                                <section aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                                    <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                                    </svg>
+                                    <span class="slds-truncate" title="Section Title">SMS Link</span>
+                                </section>
+                            </h3>
+                            <div aria-hidden="false" class="slds-section__content" id="expando-unique-id" style="margin-left: 24px;">
+                                <div class="col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="container2">
+                                            
+                                            <apex:outputField value="{!objLead.MobilePhone}"/>                                          
+                                            <apex:outputPanel rendered="{!IF(objLead.MobilePhone !='', true, false)}">
+                                                <apex:inputCheckbox styleClass="checkbox myCheckboxClass" value="{!sendMobile}" disabled="{!(objLead.MobilePhone =='')}"  id="one" /><!-- onclick="selectOnlyThis('Mobile',this.id);"-->
+                                                <span class="checkmark"></span>
+                                            </apex:outputPanel>
+                                        </label>
+                                    </div>
+                                    <!--<div class="col-md-2">
+                                        <label class="container2">
+                                            <apex:outputField value="{!objLead.Phone}"/>
+                                            <apex:outputPanel rendered="{!IF(objLead.Phone !='', true, false)}">
+                                                <apex:inputCheckbox styleClass="checkbox myCheckboxClass" value="{!sendPhone}" disabled="{!(objLead.Phone =='')}" onclick="selectOnlyThis('Phone',this.id);" id="two" />
+                                                <span class="checkmark"></span>
+                                            </apex:outputPanel>
+                                        </label>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                       
+                       <!-- SMS Link section End -->
+
+                       <!-- <div class="slds-form-element__control">
+                            <div class="slds-grid slds-wrap slds-grid--pull-paddedd">
+                            <!--Start Of  Account -->
+                              <!--<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                      <div class="slds-media__figure">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact">
+                                          <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#account')}"></use>
+                                        </svg>
+                                      </div>
+                                      <div class="slds-media__body">
+                                        <p class="slds-text-title--caps slds-line-height--reset">Account</p>
+                                        <a id="theLink" name="theLink" href="/{!objAccount.id}">{!objAccount.Name}</a>
+                                      </div>
+                                    </div>
+                              </div>
+                              <!--End Of  Account -->
+                              
+                              
+                              <!--Start Of  Contact -->
+                             <!-- <div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                      <div class="slds-media__figure">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact">
+                                          <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#contact')}"></use>
+                                        </svg>
+                                      </div>
+                                      <div class="slds-media__body">
+                                        <p class="slds-text-title--caps slds-line-height--reset">Contact</p>
+                                        <a name="theLink" href="/{!objContact.id}">{!objContact.LastName}</a>
+                                      </div>
+                                    </div>
+                              </div>
+                              <!--End Of  Contact -->
+                            <!--</div>
+                        </div>
+                    </div>-->
+                    
+                    <!--<br/><br/>
+                    <div class="slds-form-element" >
+                        
+                        <div class="slds-form-element__control">
+                            <div class="slds-grid slds-wrap slds-grid--pull-paddedd">
+                            
+                                <!--Start Of  Opportunity -->
+                                <!--<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                      <div class="slds-media__figure">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact">
+                                          <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                        </svg>
+                                      </div>
+                                      <div class="slds-media__body">
+                                        <p class="slds-text-title--caps slds-line-height--reset">Opportunity</p>
+                                        <a id="theLink" name="theLink" href="/{!objOpportunity.id}">{!objOpportunity.Name}</a>
+                                      </div>
+                                    </div>
+                                </div>
+                                <!--End Of  Opportunity -->
+                              
+                              
+                                <!--Start Of  Application -->
+                                <!--<div class="slds-p-horizontal--small slds-size--1-of-1 slds-medium-size--1-of-2 slds-large-size--1-of-2">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                      <div class="slds-media__figure">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact">
+                                          <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#photo')}"></use>
+                                        </svg>
+                                      </div>
+                                      <div class="slds-media__body">
+                                        <p class="slds-text-title--caps slds-line-height--reset">Application</p>
+                                        <apex:outputLink value="/{!objApp.id}">{!objApp.Name}</apex:outputLink>
+                                      </div>
+                                    </div>
+                                </div>
+                                <!--End Of  Application -->
+                           <!-- </div>
+                        </div>  -->
+                    </div>
+                </div><br/>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

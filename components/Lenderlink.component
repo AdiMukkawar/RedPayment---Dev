@@ -1,0 +1,19 @@
+<apex:component controller="AcceptLenderLink" access="global">
+  <apex:attribute name="Funderlink" type="Id" description="Id of the Syndication" assignTo="{!synId}"/>
+  <apex:attribute name="accId" type="Id" description="Id of the account" assignTo="{!AccountID}"/>
+
+  <!--Sneha - Not used  but cannot remove as it gives error : Cannot remove global attribute offerId from managed application -->
+  <apex:attribute access="global" name="offerId" type="Id" description="Id of the Offer" assignTo="{!oId}"/>
+  <apex:attribute access="global" name="submissionId" type="Id" description="Id of the Submission" assignTo="{!sId}"/>
+ <div >
+ 
+     <!--<apex:repeat value="{!Syndicators}" var="syn"> 
+         <a style="color:#999999;" target="_blank" href = "http://mcaengine-developer-edition.na34.force.com/Syndication/SyndicationWizard_guest?Id={!syn.id}">Click Here </a><br/>
+     </apex:repeat>    -->  
+     
+     <b>To Review New Funding Request</b>
+     <a style="color:#999999;" target="_blank" href = "{!Syndicators}">Click Here </a>                                
+
+ </div>
+
+</apex:component>

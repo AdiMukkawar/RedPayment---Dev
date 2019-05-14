@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Twilio Setting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Twilio Setting</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account ID --></label>
+        <name>AccountId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auth Token --></label>
+        <name>Auth_Token__c</name>
+    </fields>
+    <fields>
+        <label><!-- Default Country Code --></label>
+        <name>Default_Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- From Number --></label>
+        <name>From_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- SMS Status Callback URL --></label>
+        <name>Status_Callback_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Phone Number --></label>
+        <name>Use_Phone_Number__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,9 @@
+Hello,
+
+Application {!Cloufi__Application__c.Name} Submitted by {!Cloufi__Application__c.Cloufi__First_Name__c} {!Cloufi__Application__c.Cloufi__Last_Name__c} <br/><br/>
+
+Please review from <a href="{!Cloufi__Application__c.Link}">link</a><br/><br/>
+
+Regards,<br/>
+<img src="https://redpaymentsorg2--dev--c.cs70.visual.force.com/resource/1529502612000/MapleLogo" width="130" height="80"/>
+</footer>

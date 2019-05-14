@@ -1,0 +1,18 @@
+<messaging:emailTemplate subject="Pending Control Sheets" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hi,<br /><br/>
+
+        The following control sheets are still currently outstanding. Please complete as soon as possible. Thank you for your prompted attention. <br/><br/>
+        
+        
+        <c:ControlSheetReminderComp /><br/>
+        Thank you!
+        <!--Best Regards,<br/><br/>
+        <b>{!relatedTo.Owner.Name}</b><br/>
+        {!relatedTo.Owner.Phone}<br/>
+        {!relatedTo.Owner.Email}<br/>
+        <img src="{!relatedTo.Owner.Company_Logo__c}"/>-->
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

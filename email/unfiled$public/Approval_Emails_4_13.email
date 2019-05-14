@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c}, 
+
+I’m excited to offer you funding for your business. Please call me back so we can discuss the offer.
+
+Best,
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName} 
+{!Opportunity.Opportunity_Owner_Company_Name__c}
+{!Opportunity.OwnerPhone} 
+{!Opportunity.OwnerEmail}

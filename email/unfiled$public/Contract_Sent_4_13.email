@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c},
+
+I just left you a voicemail and wanted to reach out about the funding agreement. You can simply email or fax me the signed agreement and remaining documents necessary to fund your account. Once we have these we can have a wire transfer initiated to get the funding in your account. I’m looking forward to growing a great long-term relationship with you!
+
+Best Wishes,
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName} 
+{!Opportunity.Opportunity_Owner_Company_Name__c}
+{!Opportunity.OwnerPhone} 
+{!Opportunity.OwnerEmail}

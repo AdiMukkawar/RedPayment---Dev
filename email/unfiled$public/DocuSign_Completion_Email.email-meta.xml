@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email to Owner 1 of an Application, after both Owners have signed</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>DocuSign Completion Email</name>
+    <style>none</style>
+    <subject>All owners have completed signing for {!Opportunity.Name}</subject>
+    <type>text</type>
+</EmailTemplate>

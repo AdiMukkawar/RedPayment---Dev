@@ -1,0 +1,41 @@
+.THIS.slds-spinner_container {  
+  z-index: 10000;
+  position: fixed;   
+}
+
+.THIS .input-Field {
+    width: 54% !important;
+}
+
+.THIS .slds-form-element__label {
+      display : none;
+      visibility : hidden;
+}
+
+.THIS .disableClass {
+	disabled : true;
+}
+
+.THIS .labelCLass .slds-form-element__label{
+    display: none!important;
+}
+
+@media (min-width:1025px) { /*Desktop Break point*/
+.THIS.slds-spinner_container {
+    top: 16% !important;
+    bottom: 16% !important;
+    }
+}
+
+.THIS .spinnerDiv{
+    top: 5% !important;
+    bottom: 5% !important; 
+}
+
+.THIS .doc-header {
+    font-size: 1em;
+    margin-bottom: 10px;
+    background-color: #f1f0f0;
+    padding: 6px;
+    padding-left: 10px;
+}

@@ -1,0 +1,9 @@
+Hi, it’s {!Lead.OwnerFirstName}, 
+
+I called and just left you a message. I wanted to give you a heads up about a financial service program that will help your business get the funding it needs to grow. Please either email me or feel free to call me so that we can discuss available funding options at your convenience.
+
+Best Regards,
+{!Lead.OwnerFullName} 
+{!Lead_Owner_Company_Name__c}
+{!Lead.OwnerPhone} 
+{!Lead.OwnerEmail}

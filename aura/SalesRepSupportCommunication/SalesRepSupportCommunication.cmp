@@ -1,0 +1,57 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd (Aditya Mukkawar)
+* Component Name: SalesRepSupportCommunication
+* Created Date:
+* Description:  Component used for communication between Sales Support and Sales Rep
+*******************************************************************
+/-->
+<aura:component controller="SalesRepSupportCommuController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="description" type="String" default=""/>
+    <aura:attribute name="tasks" type="Task[]" />
+    <aura:attribute name="headerlabel" type="String" default=""/>
+    <aura:attribute name="UserName" type="String"/>
+    <aura:attribute name="dateTimeZone" type="Double"/>
+    <aura:attribute name="userInfo" type="user"/>
+    
+    <ui:scrollerWrapper class="scrollerSize">
+        <lightning:card>
+            <aura:set attribute="title">
+                <lightning:icon iconName="utility:connected_apps" size="small" class="labelIcon"/>
+                {!v.headerlabel}
+            </aura:set>
+            <p class="slds-p-horizontal_small">
+                <aura:if isTrue="{!v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'Cash Advance Sales Agent'}">
+                    <span class="slds-form-element__label slds-m-bottom_none messageField">
+                        <!-- <lightning:input aura:id="Message" label="Message" name="Message" value="{!v.description}" variant = "label-hidden" placeholder="Type a message here..."/> -->
+                        <ui:inputTextArea aura:id="Message" label="Message" value="{!v.description}" placeholder="Type a message here..."/>
+                        <lightning:button variant="brand" label="Send" title="Send" onclick="{!c.SendMessage}"/>
+                    </span>
+                </aura:if>
+                <div class="slds-modal__content slds-p-around_small chat-main" id="modal-content-id-1">            
+                    <aura:iteration items="{!v.tasks}" var="task">
+                        <aura:if isTrue="{!task.Subject=='Task Assign to Sales Rep'}">
+                            <div class="slds-box slds-text-heading_small slds-grid slds-wrap message-box-first">
+                                <div class="slds-col slds-size_1-of-1 firstDiv">
+                                    <a href="JavaScript:void(0);" style="pointer-events: none; cursor: default; color:#b54e4e;">{!task.Owner.Name}</a>
+                                    &nbsp;<ui:outputDateTime value="{!task.CreatedDate+dateTimeZone}" /><br/>
+                                    <span class="description-Span">{!task.Description}</span>
+                                </div>
+                            </div>
+                         </aura:if>
+                        <aura:if isTrue="{!task.Subject=='Task Assign to Sales Support'}">
+                            <div class="slds-box slds-text-heading_small slds-grid slds-wrap message-box-second">                        
+                                <div class="slds-col slds-size_1-of-1 secondDiv">
+                                    <a href="JavaScript:void(0);"  style="pointer-events: none; cursor: default;">{!task.Owner.Name}</a>
+                                    &nbsp;<ui:outputDateTime value="{!task.CreatedDate+dateTimeZone}" /><br/>
+                                    <span class="description-Span">{!task.Description}</span>
+                                </div>
+                            </div>
+                        </aura:if>
+                    </aura:iteration>
+                </div>
+            </p>
+        </lightning:card>
+    </ui:scrollerWrapper>
+    
+</aura:component>

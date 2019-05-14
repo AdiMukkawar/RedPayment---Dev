@@ -1,0 +1,177 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Sheema Dhanraj)
+* VF Page Name: SyndicationHome
+* Created Date: 05-April-2019
+* Description: Short Application form
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author            |      Date      |   Description 
+* Sheema Dhanraj        08/04/2019       Vf page to confirm the access.
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<apex:page standardController="Account" extensions="SyndicatorController"  standardStylesheets="false" sidebar="false" showHeader="false">
+    <!-- Form to display records -->
+    <head>
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+        <style></style>
+    </head>
+    <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function() { 
+        overridePageMessages();
+    });
+    
+    //Lightning Design System for Page Messages    
+    function overridePageMessages(){    
+        
+        j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+        j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+        j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+        j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+        
+        j$('.errorM3').removeClass('errorM3'); 
+        j$('.confirmM3').removeClass('confirmM3'); 
+        j$('.infoM3').removeClass('infoM3');   
+        j$('.warningM3').removeClass('warningM3');  
+    }
+
+    window.onload = function(){
+        if(window.location.hash && window.location.hash == "#register") {
+            refreshFunction();
+        }
+    }
+    </script>
+    <style>
+        .customMessage {
+        margin: 5px 0!important;
+        opacity: 1!important;
+        width: 100%;
+        font-size: 15px;
+        border: 0px;
+        border-radius: 6px;
+        padding-left: 10px;
+        }
+    </style>
+    <html
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="{!URLFOR($Resource.mapleapllicationresource,'css/bootstrap.min.css')}"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/jquery.min.js')}"></script>
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/bootstrap.min.js')}"></script>
+            <script src="{!URLFOR($Resource.mapleapllicationresource,'js/jquery.bootstrap.js')}"></script>
+            <style>
+                .syndication-main {
+                    border: 1px solid #ccc;
+                    margin: 10px;
+                    padding: 15px;
+                    font-size: 14px;
+                }
+            .syndication-main .title {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            .scroll{
+                width: 500px;
+                height: 500px;
+                overflow: auto;
+            }
+            </style>
+        </head>
+        <body>
+            <p> Welcome {!accountName} to Syndication Portal</p>
+            <apex:form styleClass="slds-form" id="theform">
+                <apex:actionFunction action="{!Logout}" name="refreshFunction"/>
+                <apex:slds />
+                <apex:commandButton value="Logout" styleClass="slds-button slds-button--brand" style="margin-top:15px;" 
+                            rerender="none" status="actionStatus" action="{!Logout}"/>
+                <apex:pageMessages id="pgMsg"/>
+                <div class="container-fluid syndication-main">
+                    <apex:actionstatus id="actionStatus">
+                        <apex:facet name="start">
+                            <div class="waitingSearchDiv" id="el_loading" style="z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                                <div id="spinner" class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                </div>
+                            </div>
+                        </apex:facet>
+                    </apex:actionstatus>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="title">Opportunities</div>
+                            <p>{!initMsg}</p>
+                            <apex:pageBlock >
+                                <apex:outputPanel id="action1" rendered="{!displayOppPanel}">
+                                    <apex:pageBlockSection columns="1" id="pbs" >
+                                        <apex:pageBlockTable value="{!oppList}" var="opp" id="pt" styleClass="pTable">
+                                            <apex:column headerValue="Name">
+                                                <apex:commandLink value="{!opp.Name}" action="{!fetchSelectedOpportunityPayments}" rerender="panelId, action1" 
+                                                                                    status="actionStatus">
+                                                    <apex:param value="{!opp.Id}" name="idForConts" assignTo="{!recid}"
+                                                                                        />
+                                                </apex:commandLink>
+                                            </apex:column>
+                                        </apex:pageBlockTable>
+                                    </apex:pageBlockSection>
+                                </apex:outputPanel>
+                            </apex:pageBlock>
+                        </div>
+                        <apex:outputPanel id="panelId">
+                            <div class="col-md-8">
+                                <apex:outputPanel rendered="{!displayPaymentPanel}">
+                                    <div class="title">Payments</div>
+                                </apex:outputPanel>
+                                <p>{!msg}</p>
+                                <apex:outputPanel rendered="{!displayPanel}">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <apex:pageBlock >
+                                                <table id="example" class="slds-table slds-table_bordered slds-table_cell-buffer">
+                                                    <!-- Table Header start -->
+                                                    <thead>
+                                                        <tr class="slds-text-title_caps">
+                                                            <apex:repeat value="{!$ObjectType.Cloufi__Payments__c.FieldSets.Syndication_Portal_FieldSet}" var="f">
+                                                                <th scope="col">{!f.Label}</th>
+                                                            </apex:repeat>
+                                                        </tr>
+                                                    </thead>
+                                                    <!-- Table Header End -->
+                                                    <tbody>
+                                                        <apex:repeat value="{!paymentList}" var="App" >
+                                                            <tr>
+                                                                <apex:repeat value="{!$ObjectType.Cloufi__Payments__c.fieldsets.Syndication_Portal_FieldSet}" var="fieldValue">
+                                                                    <td>
+                                                                        <apex:outputText rendered="{!fieldValue.Label=='Payment#'}">{!App[fieldValue]}</apex:outputText>
+                                                                        <!--value="/{!URLFOR(App['Id'])}"-->
+                                                                        <apex:outputText rendered="{!(fieldValue.Label != 'Payment#') 
+                                                                        && (fieldValue.Label!='Effective Date') && (fieldValue.Label!='Expected Settlement Date') 
+                                                                        && (fieldValue.Label!='Created Date')}">
+                                                                 				{!App[fieldValue]}
+            															</apex:outputText>
+                                                                        <apex:outputText value="{0,date,dd/MM/yy}" rendered="{!(CONTAINS(fieldValue, 'Date'))}">
+                                                                            <apex:param value="{!App[fieldValue]}" />
+                                                                        </apex:outputText>
+                                                                    </td>
+                                                                </apex:repeat>
+                                                            </tr>
+                                                        </apex:repeat>
+                                                    </tbody>
+                                                </table>
+                                            </apex:pageBlock>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                </div>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

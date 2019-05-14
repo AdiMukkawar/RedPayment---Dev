@@ -1,0 +1,207 @@
+<apex:page standardController="Opportunity" extensions="CreateRenewalStackController" sidebar="false" showHeader="false" id="pge" cache="false" docType="html-5.0">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           overridePageMessages();    
+        });
+
+        function overridePageMessages(){    
+            var textureEffect = '';
+            $('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage '+textureEffect);          
+            $('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success  customMessage '+textureEffect);    
+            $('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage '+textureEffect);                  
+            $('.infoM3').addClass('slds-notify slds-notify--toast customMessage '+textureEffect);    
+            $('.errorM3').removeClass('errorM3'); 
+            $('.confirmM3').removeClass('confirmM3'); 
+            $('.infoM3').removeClass('infoM3');   
+            $('.warningM3').removeClass('warningM3');  
+        }
+    </script>
+    <apex:form id="frm">
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <head>
+                <apex:slds /> 
+            </head>
+            <apex:pageMessages id="msg"/>
+            <body>                
+
+                <apex:actionStatus id="statusOne">
+                    <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                         
+                    </div>
+                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                        <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px; margin-left: -60px;">
+                            <img src="/img/loading.gif" />
+                            <span>Please Wait...</span>
+                        </div>
+                    </div>
+                    </apex:facet>
+                </apex:actionStatus>
+
+                <div class="slds-scope">
+                    <div>
+                        <div class="slds-page-header">
+                            <div class="slds-grid">
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="slds-media__figure">                                            
+                                            <span class="slds-icon_container slds-icon_container_circle slds-icon-action-description" title="">
+                                                <svg class="slds-icon" aria-hidden="true">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/action-sprite/svg/symbols.svg#description"></use>
+                                                </svg>
+                                            </span>                                         
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <p class="slds-text-title_caps slds-line-height_reset">Create New/Renewal/Stack</p>
+                                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">                                
+                                                <apex:outputText value="{!objOpportunity.Name}" rendered="{!$ObjectType.Opportunity.fields.Name.Accessible}" />
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-no-flex slds-grid slds-align-top">                                    
+                                    <apex:commandButton value="Back" action="{!cancel}" immediate="true" html-formnovalidate="formnovalidate" styleClass="slds-button slds-button--brand" style="font-size:12px;margin-left:-10%;"/>
+                                    <apex:commandButton value="Save" rerender="frm, msg" action="{!saveRenewal}" status="actStatusId" styleClass="slds-button slds-button--brand" style="font-size:12px;" rendered="{!isValidForRenewal}" oncomplete="overridePageMessages();"/>
+                                </div>
+                            </div>
+                        </div><br/>    
+                    </div>
+                    <apex:outputPanel rendered="{!isValidForRenewal}">
+                        <div class="slds-form slds-form_compound">
+                            <div class="slds-section slds-is-open">
+                                <h3 class="slds-section__title">
+                                    <section aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                                        <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                                        </svg>
+                                        <span class="slds-truncate" title="Funding Type">Funding Type</span>
+                                    </section>
+                                </h3>
+                            </div>                        
+                            <fieldset class="slds-form-element">
+                                <div class="slds-form-element__group">
+                                    <div class="slds-grid slds-gutters" style="padding-left: 1%; padding-right: 1%;">
+                                        <div class="slds-col" style="width: 21%">
+                                            <label class="slds-form-element__label" for="fundingtype"><b>Funding Type</b></label><br/>                                                                          
+                                            <!-- <apex:inputField value="{!objProspectingOpportunity.Type}" styleClass="slds-input" id="fundingtype" required="true"/><br/><br/> -->
+                                            <apex:selectList size="1" value="{!selectedFundingType}" styleClass="slds-input">
+                                                <apex:selectOptions value="{!fundingTypes}" />
+                                            </apex:selectList>
+                                        </div>
+                                    </div>                                                           
+                                </div>
+                            </fieldset> 
+
+                            <!-- <div class="slds-section slds-is-open">
+                                <h3 class="slds-section__title">
+                                    <section aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action">
+                                        <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_left" aria-hidden="true">
+                                            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                                        </svg>
+                                        <span class="slds-truncate" title="Select UW Document">Select UW Document</span>
+                                    </section>
+                                </h3>
+                            </div>
+
+
+                            <apex:outputPanel rendered="{!uwDocWrapperList.size>0}">
+                                <div>
+                                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                                        <thead>
+                                            <tr class="slds-line-height_reset">
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Select">Select</div>
+                                                </th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="UW Document Name">UW Document Name</div>
+                                                </th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Type">Type</div>
+                                                </th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="Close Date">Status</div>
+                                                </th>
+                                                <th class="" scope="col">
+                                                    <div class="slds-truncate" title="View">View</div>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <apex:repeat value="{!uwDocWrapperList}" var="uwDocWrap">
+                                                <tr class="slds-hint-parent">
+                                                    <td data-label="Account Name">
+                                                        <div class="slds-truncate" title="Select">
+                                                            <apex:inputCheckbox value="{!uwDocWrap.isSelected}"/>
+                                                        </div>
+                                                    </td>
+                                                    <td data-label="UW Document Name" scope="row">
+                                                        <div class="slds-truncate" title="UW Document Name">
+                                                            <apex:outputlink value="/{!uwDocWrap.objUWDocument.Id}">{!uwDocWrap.objUWDocument.Name}</apex:outputlink>
+                                                        </div>
+                                                    </td>
+                                                    <td data-label="Type">
+                                                        <div class="slds-truncate" title="Type">{!uwDocWrap.objUWDocument.Cloufi__Type__c}</div>
+                                                    </td>
+                                                    <td data-label="Status">
+                                                        <div class="slds-truncate" title="Status">{!uwDocWrap.objUWDocument.Status__c}</div>
+                                                    </td>
+                                                    <td data-label="View">
+                                                        <div class="slds-truncate" title="View">
+                                                            <apex:outputlink value="{!uwDocWrap.objUWDocument.Cloufi__URL__c}">View</apex:outputlink>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </apex:repeat>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </apex:outputPanel> -->
+                        </div>
+                    </apex:outputPanel>                    
+                </div>
+            </body>
+            <apex:actionStatus id="actStatusId">
+                <apex:facet name="start">
+                    <div class="slds-spinner_container" style="position:fixed">
+                        <div role="status" class="slds-spinner slds-spinner_medium" style="position:fixed">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>          
+                </apex:facet>
+            </apex:actionStatus>
+        </html>
+    </apex:form> 
+    <style>
+        .lookupInput a{
+            position: absolute;
+            width: 33px !important; 
+            margin-left: 5px;
+            background-image: url(/img/setup/search-icon.png) !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+            display: inline-flex !important;
+        }
+        .lookupInput a img{
+            display:none !important;
+        }
+
+        .msgIcon {
+            display: none!important
+        }
+        .customMessage * {
+            color: #fff!important
+        }
+        .customMessage {
+            margin: 5px 0!important;
+            opacity: 1!important;
+            width: 100%;
+            font-size: 12px;
+            border: 0px;
+            padding-left: 10px;
+        }
+                 
+    </style>                                       
+</apex:page>

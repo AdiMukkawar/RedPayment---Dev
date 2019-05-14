@@ -1,0 +1,75 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd. (Prashant Mahajan)
+* Component Name: Opportunity Syndications
+* Created Date: 28-August-2018
+* Description:  Component used on opportunity to display list of Syndications
+*******************************************************************/-->
+<aura:component controller="OpportunityOffersController" implements="flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride,force:hasRecordId" access="global">
+        <aura:attribute name="offers" type="List"/>	
+    	<aura:attribute name="sObj" type="String" default="Cloufi__Offers__c" required="true"/>
+    	<aura:attribute name="fSetName" type="String" default="OpportunityOffers" required="true"/>
+    	<aura:attribute name="fieldlist" type="List"/>
+		<aura:attribute name="sObjWrapperlist" type="List"/>
+    	<aura:attribute name="recordId" type="Id" access="global"/>
+        <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+        
+    <ui:scrollerWrapper class="scrollerSize">   	
+        <div class="btn" style="float:right!important;">
+            <ui:button label="New Offer" press="{!c.createRecord}" /> <br/> <br/> 
+        </div> 
+        <aura:if isTrue="{!(v.sObjWrapperlist == null) }">
+            No Offers At This Moment!!!
+        </aura:if>
+        <aura:if isTrue="{!(v.sObjWrapperlist != null) }">
+        	<table class="slds-table slds-table_bordered slds-table_cell-buffer">
+        		<thead>
+					<tr class="slds-text-title_caps">
+						<aura:iteration items="{!v.fieldlist}" var="f">
+							<th scope="col">
+								<div class="slds-truncate" title="{!f.fLabel}">{!f.fLabel}</div></th>
+						</aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+		<aura:iteration items="{!v.sObjWrapperlist}" var="obj">
+			<tr>
+				<aura:iteration items="{!obj}" var="obj2" >
+				<td >
+					<div class="slds-truncate" >
+                       
+						<aura:if isTrue="{!obj2.fAPIname == 'Name'}">
+                            <a href="{!'/one/one.app?#/sObject/'+ obj2.offerId + '/view'}" target="_blank">{!obj2.fvalue}</a>
+                        </aura:if>                        
+						<aura:if isTrue="{(!obj2.fDetails.type == 'string' || obj2.fDetails.type == 'picklist') and obj2.fAPIname != 'Name'}">
+							<ui:outputText value="{!obj2.fvalue}" />
+						</aura:if>
+						 
+						<aura:if isTrue="{!obj2.fDetails.type == 'datetime'}">
+							<ui:outputDateTime value="{!obj2.fvalue}" />
+						</aura:if>
+                        
+                        <aura:if isTrue="{!obj2.fDetails.type == 'double'}">
+							<ui:outputNumber value="{!obj2.fvalue}" />
+						</aura:if>
+						 
+                        <aura:if isTrue="{!obj2.fDetails.type == 'percent'}">
+							<ui:outputText value="{!obj2.fvalue}"/>
+						</aura:if>
+                        
+						<aura:if isTrue="{!obj2.fDetails.type == 'int'}">
+							<ui:outputNumber value="{!obj2.fvalue}" format=".00"/>
+						</aura:if>
+						 
+						<aura:if isTrue="{!obj2.fDetails.type == 'currency'}">
+							<ui:outputCurrency value="{!obj2.fvalue}" format="$#,###.00"/>
+						</aura:if>
+					</div>
+				</td>
+				</aura:iteration>
+			</tr>
+		</aura:iteration>
+	</tbody>
+            </table>    
+        </aura:if> 
+        </ui:scrollerWrapper>
+      </aura:component>

@@ -1,0 +1,16 @@
+<messaging:emailTemplate subject="Message from {!relatedTo.Owner.Name} for {!relatedTo.Name}" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br /><br/>
+
+        <b>{!relatedTo.Owner.Name}</b> has sent you a message. Please check the correspondence and address the request.<br/><br/>
+        <!--<c:SalesSupportComp opportunityId="{!relatedTo.id}"/>-->
+        <b>Message -</b><br/>
+        MessageText
+        <br/><br/>
+        
+        Opportunity: <b><a target="_blank" href="{!$Label.Base_URL}/{!relatedTo.Id}">{!relatedTo.Name}</a></b><br/><br/>
+        Thank you,<br/>
+        <img src="{!relatedTo.Company_Logo__c}"/>        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

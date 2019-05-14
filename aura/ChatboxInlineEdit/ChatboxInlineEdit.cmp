@@ -1,0 +1,81 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd (Aditya Mukkawar)
+* Component Name: ChatboxInlineEdit
+* Created Date: 26/03/2019
+* Description: 
+*******************************************************************
+/-->
+<aura:component controller="ChatboxController">
+    
+    <aura:attribute name="singleChat" type="sobject" default="{'sobjectType' : 'Chat__c',
+                                                                   'User__r.Name' : '',
+                                                                   'CreatedDate': '',
+                                                                   'Message__c': '',
+                                                                   'User__c':''}"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="index" type="string"/>
+    <aura:attribute name="currentUserId" type="string"/>
+    <aura:attribute name="chatEditMode" type="boolean" default="false" />
+    <aura:attribute name="sourceComponent" type="string"/>
+    <aura:registerEvent name="cmpSaveCancelEvent" type="c:SaveCancelEvent"/>
+    <!-- <aura:attribute name="repaymentShowSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="operationalShowSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="salesRepShowSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="showErrorClass" type="boolean" default="false"/>-->
+    <aura:renderIf isTrue="{!v.currentUserId == v.singleChat.User__c}">
+        <div ondblclick="{!c.EditChat}">
+            <aura:if isTrue="{!v.chatEditMode == false}">
+                <div class="slds-box slds-text-heading_small slds-grid slds-wrap note-history">
+                    <div class="slds-col slds-size_1-of-1">
+                        <a href="JavaScript:void(0);" style="pointer-events: none; cursor: default; color:#b54e4e;">{!v.singleChat.User__r.Name}</a>
+                        &nbsp;<ui:outputDateTime value="{!v.singleChat.CreatedDate}" timeZone="{!$Locale.timezone}"/><br/>
+                        <span class="description-Span">
+                            <!-- <ui:outputRichText aura:id="outputRT" value="{!v.singleChat.Message__c}" /> -->
+                            <dd class="slds-tile">
+                                <p class="slds-text-longform tile__title red-txt">
+                                    <aura:unescapedHtml value="{!v.singleChat.Message__c}"/>
+                                </p>   
+                            </dd>
+                            <button onclick="{!c.EditChat}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small manage-button" tabindex="0" title="Edit Note">
+                                <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                            </button>
+                        </span>
+                        
+                    </div>
+                </div>            
+                <aura:set attribute="else">
+                    <lightning:inputRichText aura:id="editNote" label="Message" value="{!v.singleChat.Message__c}" placeholder="Type a message here..." onfocus="{!c.onChatChange}"><!--onblur="{!c.closeChatBox}"-->
+                        <lightning:insertImageButton/>
+                    </lightning:inputRichText>
+                    <aura:if isTrue="{!v.showSaveCancelBtn}">
+                        <lightning:buttonGroup class="slds-m-around_medium">
+                            <div class="slds-button" style="float:right!important;">
+                               <lightning:button variant="brand" label="Save" class="Float-right" title="Save" onclick="{!c.saveEvent}"/>
+                            </div>
+                            <div class="slds-button" style="float:right!important;">
+                               <lightning:button variant="brand" label="Cancel" class="Float-right" title="Cancel" onclick="{!c.cancelEvent}"/>
+                            </div>
+                        </lightning:buttonGroup>
+                    </aura:if>
+                </aura:set>
+            </aura:if>
+        </div>
+    </aura:renderIf>
+    <aura:renderIf isTrue="{!v.currentUserId != v.singleChat.User__c}">
+        <div class="slds-box slds-text-heading_small slds-grid slds-wrap note-history">
+            <div class="slds-col slds-size_1-of-1">
+                <a href="JavaScript:void(0);" style="pointer-events: none; cursor: default; color:#b54e4e;">{!v.singleChat.User__r.Name}</a>
+                &nbsp;<ui:outputDateTime value="{!v.singleChat.CreatedDate}" timeZone="{!$Locale.timezone}"/><br/>
+                <span class="description-Span">
+                    <!-- <ui:outputRichText aura:id="outputRT" value="{!v.singleChat.Message__c}" /> -->
+                    <dd class="slds-tile">
+                        <p class="slds-text-longform tile__title red-txt">
+                            <aura:unescapedHtml value="{!v.singleChat.Message__c}"/>
+                        </p>   
+                    </dd>
+                </span>
+                
+            </div>
+        </div> 
+    </aura:renderIf>
+</aura:component>

@@ -1,0 +1,122 @@
+<messaging:emailTemplate subject=" New Offer Available for {!relatedTo.Cloufi__Opportunity__r.Name}" recipientType="User" relatedToType="Cloufi__Offers__c">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br/><br/>
+        
+        We are pleased to announce that there is a new offer available for <b>{!relatedTo.Cloufi__Opportunity__r.Name}</b><br/><br/>        
+        
+        Offer Details:<br/>
+        <table border="1">
+            <tr>
+                <td>
+                    Product Name
+                </td>
+                <td>
+                    {!relatedTo.Product_Name__c}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Program Type
+                </td>
+                <td>
+                    {!relatedTo.Program_Type__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Advance Amount
+                </td>
+                <td>
+                    {!relatedTo.Cloufi__Funding_Amount__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Factor
+                </td>
+                <td>
+                    {!relatedTo.Factor_Rate__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Term
+                </td>
+                <td>
+                    {!relatedTo.Cloufi__Terms_In_Months__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Payback Amount
+                </td>
+                <td>
+                    {!relatedTo.Cloufi__Payback_Amount__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Daily Payback Amount
+                </td>
+                <td>
+                    {!relatedTo.Cloufi__Daily_PB_Amount__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Origination Fee
+                </td>
+                <td>
+                    {!relatedTo.Origination_Fee__c}
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    AdditionalFee
+                </td>
+                <td>
+                    {!relatedTo.Additional_Fees__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Holdback %
+                </td>
+                <td>
+                    {!relatedTo.Holdback_Per__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Payment Schedule
+                </td>
+                <td>
+                    {!relatedTo.Payment_Schedule__c}
+                </td>
+            </tr>
+        
+            <tr>
+                <td>
+                    Notes
+                </td>
+                <td>
+                    {!relatedTo.Cloufi__Notes__c}
+                </td>
+            </tr>
+        </table><br/><br/>
+        
+        <b>Offer: <a href="{!$Label.Base_URL}/{!relatedTo.Id}">{!relatedTo.Name}</a></b><br/><br/>
+        Please review the offer and update sales force accordingly.<br/>                 
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

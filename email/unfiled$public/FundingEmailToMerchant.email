@@ -1,0 +1,19 @@
+<messaging:emailTemplate subject="Congratulations! {!relatedTo.Name} has Funded!" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        Hello {!relatedTo.Owner_1_First_Name__c},<br/><br/>
+        
+        Congratulations!  We have received all necessary closing documents for your business, <b>{!relatedTo.Name}</b>. The funds of <b>${!relatedTo.CloufiServicing__Net_Funding_Amount__c}</b> are being transferred.<br/><br/>
+        
+        Please note that availability of funds may vary depending on the bank that your account is with.<br/><br/>
+        
+        Thank you for choosing {!relatedTo.Owner.CompanyName}, we look forward to working together.<br/><br/><br/>
+        
+        
+        Best Regards,<br/>
+        {!relatedTo.Owner.FirstName} {!relatedTo.Owner.LastName}<br/>
+        {!relatedTo.Owner.Phone}<br/>
+        {!relatedTo.Owner.Email}<br/>
+        <img src="{!relatedTo.Company_Logo__c}"/><br/>
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

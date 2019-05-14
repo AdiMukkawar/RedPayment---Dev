@@ -1,0 +1,1698 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>AddCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>AddToCampaign</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CallHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EmailHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EnableCustomerPortal</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EnablePartnerPortalUser</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>EnableSelfService</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ListClean</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Merge</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>NewContact</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>RequestUpdate</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Contact_Record_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewCustomerPortal</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewPartnerPortalUser</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>ViewSelfService</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>AVA__AVAAI_action_required__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This lead requires some action be taken by a rep</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This lead requires some action be taken by a rep</inlineHelpText>
+        <label>Conversica Action Required</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_action_required_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time it was determined action is required</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time it was determined action is required</inlineHelpText>
+        <label>Conversica Action Required Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_confirmed_phone_1__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The contact&apos;s phone number as verified or discovered by Conversica</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The contact&apos;s phone number as verified or discovered by Conversica</inlineHelpText>
+        <label>Conversica Confirmed Phone 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_confirmed_phone_2__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The contact&apos;s phone number as verified or discovered by Conversica</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The contact&apos;s phone number as verified or discovered by Conversica</inlineHelpText>
+        <label>Conversica Confirmed Phone 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversation_stage__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The current stage of the Conversica Conversation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The current stage of the Conversica Conversation</inlineHelpText>
+        <label>Conversation Stage</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversation_stage_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time the current Conversation Stage changed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the current Conversation Stage changed</inlineHelpText>
+        <label>Conversation Stage Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversation_status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The current status of the Conversica Conversation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The current status of the Conversica Conversation</inlineHelpText>
+        <label>Conversation Status</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversation_status_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time the current Conversation Status was set</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the current Conversation Status was set</inlineHelpText>
+        <label>Conversation Status Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversation_status_detail__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Deprecated Conversation Status Detail</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversation_status_detail_date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Deprecated Status Detail Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversica_lead_status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The current status of the contact in Conversica</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The current status of the contact in Conversica</inlineHelpText>
+        <label>Conversica Lead Status</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_conversica_lead_status_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time the current Conversation status was set</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the current Conversation status was set</inlineHelpText>
+        <label>Conversica Lead Status Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_date_added__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time Conversica received the lead</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time Conversica received the lead</inlineHelpText>
+        <label>Conversica Date Added</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_discovered_email_1__c</fullName>
+        <deprecated>false</deprecated>
+        <description>If a new email address is discovered in a Contact’s response, this field will be populated with the additional email address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If a new email address is discovered in a Contact’s response, this field will be populated with the additional email address.</inlineHelpText>
+        <label>Conversica Discovered Email 1</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_discovered_email_2__c</fullName>
+        <deprecated>false</deprecated>
+        <description>If a second new email address is discovered in a Contact’s response, this field will be populated with the additional email address.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If a second new email address is discovered in a Contact’s response, this field will be populated with the additional email address.</inlineHelpText>
+        <label>Conversica Discovered Email 2</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_discovered_name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>If a new first name is discovered in a Contact’s response, this field will be populated with the preferred first name.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If a new first name is discovered in a Contact’s response, this field will be populated with the preferred first name.</inlineHelpText>
+        <label>Conversica Discovered Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_first_message_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time Conversica first sent a message to the contact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time Conversica first sent a message to the contact</inlineHelpText>
+        <label>Conversica First Message Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_further_action__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Checked if the Contact is determined by your Conversica Assistant to have further questions or that they are waiting on actions from their assigned contact.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checked if the Contact is determined by your Conversica Assistant to have further questions or that they are waiting on actions from their assigned contact.</inlineHelpText>
+        <label>Conversica Further Action</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_further_action_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Date and time the Contact became a Conversica Further Action lead.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date and time the Contact became a Conversica Further Action lead.</inlineHelpText>
+        <label>Conversica Further Action Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_hot_lead__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>The contact is ready to be contacted by a rep</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The contact is ready to be contacted by a rep</inlineHelpText>
+        <label>Conversica Hot Lead</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_hot_lead_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time the contact became &quot;Hot&quot; in Conversica</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the contact became &quot;Hot&quot; in Conversica</inlineHelpText>
+        <label>Conversica Hot Lead Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_last_message_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time Conversica last sent a message to the contact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time Conversica last sent a message to the contact</inlineHelpText>
+        <label>Conversica Last Message Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_last_response_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time Conversica last received a response from the contact</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time Conversica last received a response from the contact</inlineHelpText>
+        <label>Conversica Last Response Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_lead_at_risk__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>The contact may lose interest if not contacted soon by a rep</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The contact  may lose interest if not contacted soon by a rep</inlineHelpText>
+        <label>Conversica Lead At Risk</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_lead_at_risk_date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The date and time the contact became &quot;At Risk&quot; in Conversica</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The date and time the contact became &quot;At Risk&quot; in Conversica</inlineHelpText>
+        <label>Conversica Lead At Risk Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_lead_profile__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A link to the Conversica Lead Profile page for the selected Contact.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>A link to the Conversica Lead Profile page for the selected Contact.</inlineHelpText>
+        <label>Conversica Lead Profile</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_options__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Options field for this object in Conversica</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Options field for this object in Conversica</inlineHelpText>
+        <label>Conversica Options</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Stop</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Skip to follow-up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_score__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The Conversica Score of an Conversica lead.</description>
+        <externalId>false</externalId>
+        <label>Deprecated Conversica Score</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Grey</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Green</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Red</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_sms_opt_out__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Checked if the Contact indicates they would no longer like to be messaged via SMS after having previously opted in.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Checked if the Contact indicates they would no longer like to be messaged via SMS after having previously opted in.</inlineHelpText>
+        <label>Conversica SMS Opt Out</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>AVA__AVAAI_status__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Status of an Conversica lead in the Conversica system</description>
+        <externalId>false</externalId>
+        <label>Deprecated Conversica Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>In Queue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Excluded</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Undeliverable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>AVA Stopped</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Client Stopped</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Messaging</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Response</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Awaiting Response</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Conversica Stopped</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Preparing Lead</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent Engagement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent Appt.</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent Feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sent Social</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received Engagement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received Appt.</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Received Social</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Messaging Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unsubscribed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Opt Out</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rep Stopped</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CRM Stopped</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Access_Code_Expiration__c</fullName>
+        <externalId>false</externalId>
+        <label>Access Code Expiration</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Access_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>Access Code</label>
+        <length>6</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AccountId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AssistantName</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>AssistantPhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Birthdate</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Cloufi_Twilio__Number_In_Use__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Twilio SMS record level setting</description>
+        <externalId>false</externalId>
+        <label>Number In Use</label>
+        <picklist>
+            <picklistValues>
+                <fullName>MobilePhone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Cloufi_Twilio__SMS_Opt_Out__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>SMS Opt Out</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contract__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Contract</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Control_sheet_Portal_Access__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Control sheet Portal Access</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Department</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Description</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>DialSource__DS_Owner_ID__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The record owner&apos;s Salesforce ID. Used in Campaign source reports to distribute the records using the Record Owner Distribution feature</description>
+        <externalId>false</externalId>
+        <formula>OwnerId</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>The record owner&apos;s Salesforce ID. Used in Campaign source reports to distribute the records using the Record Owner Distribution feature</inlineHelpText>
+        <label>DS Owner ID</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DialSource__Datetime_of_Last_Disposition_DS__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Time stamp of when the last Disposition was clicked</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Time stamp of when the last Disposition was clicked</inlineHelpText>
+        <label>Datetime of Last Disposition</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DialSource__Last_Call_Campaign_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the Call Campaign the record was last called from</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the Call Campaign the record was last called from</inlineHelpText>
+        <label>Last Call Campaign Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DialSource__Last_Disposition_DS__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Name of the last Disposition clicked</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Name of the last Disposition clicked</inlineHelpText>
+        <label>Last Disposition</label>
+        <length>140</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DialSource__Next_Call_DS__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Datetime field used to set the next call datetime for reference in automation or Reports/List Views</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Datetime field used to set the next call datetime for reference in automation or Reports/List Views</inlineHelpText>
+        <label>Next Call</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>DialSource__Total_Call_Count_DS__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Total number of calls made on this record</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Total number of calls made on this record</inlineHelpText>
+        <label>Total Call Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DoNotCall</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Email</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Fax</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfEmail</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>HasOptedOutOfFax</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>HomePhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>IndividualId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Jigsaw</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>LastCURequestDate</fullName>
+    </fields>
+    <fields>
+        <fullName>LastCUUpdateDate</fullName>
+    </fields>
+    <fields>
+        <fullName>Last_Login_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Login Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>LeadSource</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Advertisement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer Event</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employee Referral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Google AdWords</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Purchased List</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Website</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Maple Advance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>MailingAddress</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>MobilePhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Name</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>OtherAddress</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>OtherPhone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>OwnerId</fullName>
+        <trackFeedHistory>true</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Password__c</fullName>
+        <externalId>false</externalId>
+        <label>Password</label>
+        <length>25</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>ReportsToId</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Revision__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Revision</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Submission__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Submission</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Title</fullName>
+        <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>n2de__Distribution_count__c</fullName>
+        <deprecated>false</deprecated>
+        <description>The number of times this record has been assigned via Distribution Engine</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The number of times this record has been assigned via Distribution Engine</inlineHelpText>
+        <label>Distribution count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>n2de__Is_distributed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is distributed</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>n2de__Is_reassigned__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Is reassigned</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>n2de__Last_distributed__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Date last distributed to user</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>n2de__Last_reassigned__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Date last auto reassigned</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <listViews>
+        <fullName>AllContacts</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>CONTACT.TITLE</columns>
+        <columns>CONTACT.PHONE1</columns>
+        <columns>CONTACT.EMAIL</columns>
+        <columns>CORE.USERS.FIRST_NAME</columns>
+        <columns>CORE.USERS.LAST_NAME</columns>
+        <filterScope>Everything</filterScope>
+        <label>All Contacts</label>
+    </listViews>
+    <listViews>
+        <fullName>MyContacts</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>CONTACT.TITLE</columns>
+        <columns>CONTACT.PHONE1</columns>
+        <columns>CONTACT.EMAIL</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Mine</filterScope>
+        <label>My Contacts</label>
+    </listViews>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypes>
+        <fullName>Cloufi__Lender</fullName>
+        <active>true</active>
+        <label>Lender</label>
+        <picklistValues>
+            <picklist>AVA__AVAAI_options__c</picklist>
+            <values>
+                <fullName>Skip to follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stop</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AVA__AVAAI_score__c</picklist>
+            <values>
+                <fullName>Green</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grey</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Red</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AVA__AVAAI_status__c</picklist>
+            <values>
+                <fullName>AVA Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CRM Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conversica Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Excluded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Queue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Messaging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Messaging Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Opt Out</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preparing Lead</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Appt%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Engagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Social</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rep Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Appt%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Engagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Social</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undeliverable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unsubscribed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Cloufi_Twilio__Number_In_Use__c</picklist>
+            <values>
+                <fullName>MobilePhone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purchased List</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Cloufi__Merchant</fullName>
+        <active>true</active>
+        <label>Merchant</label>
+        <picklistValues>
+            <picklist>AVA__AVAAI_options__c</picklist>
+            <values>
+                <fullName>Skip to follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stop</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AVA__AVAAI_score__c</picklist>
+            <values>
+                <fullName>Green</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grey</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Red</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AVA__AVAAI_status__c</picklist>
+            <values>
+                <fullName>AVA Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CRM Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conversica Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Excluded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Queue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Messaging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Messaging Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Opt Out</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preparing Lead</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Appt%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Engagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Social</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rep Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Appt%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Engagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Social</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undeliverable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unsubscribed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Cloufi_Twilio__Number_In_Use__c</picklist>
+            <values>
+                <fullName>MobilePhone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purchased List</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Cloufi__Referral_Partner</fullName>
+        <active>true</active>
+        <label>Referral Partner</label>
+        <picklistValues>
+            <picklist>AVA__AVAAI_options__c</picklist>
+            <values>
+                <fullName>Skip to follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Stop</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AVA__AVAAI_score__c</picklist>
+            <values>
+                <fullName>Green</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Grey</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Red</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yellow</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>AVA__AVAAI_status__c</picklist>
+            <values>
+                <fullName>AVA Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Awaiting Response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CRM Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Client Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Conversica Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Excluded</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Queue</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Messaging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Messaging Complete</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Response</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Opt Out</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preparing Lead</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Appt%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Engagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Received Social</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rep Stopped</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Appt%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Engagement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sent Social</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Undeliverable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unsubscribed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Cloufi_Twilio__Number_In_Use__c</picklist>
+            <values>
+                <fullName>MobilePhone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>LeadSource</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Purchased List</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Name</picklist>
+            <values>
+                <fullName>Dr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mr%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mrs%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ms%2E</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Prof%2E</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>FULL_NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ACCOUNT.NAME</customTabListAdditionalFields>
+        <customTabListAdditionalFields>CONTACT.PHONE1</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>FULL_NAME</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE1</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE3</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE4</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE5</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE6</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>FULL_NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ACCOUNT.NAME</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.PHONE1</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.EMAIL</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <webLinks>
+        <fullName>Cloufi_Twilio__Send_Bulk_SMS</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>page</linkType>
+        <masterLabel>Send Bulk SMS</masterLabel>
+        <openType>replace</openType>
+        <page>Cloufi_Twilio__BulkSMSContact</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>Cloufi_Twilio__Send_SMS</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Send SMS</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <url>/apex/Cloufi_Twilio__SendSMS?id={!Contact.Id}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>DialSource__DS_InstaQueue</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>DS InstaQueue</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/22.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/22.0/apex.js&quot;)}
+var sid = &quot;{!JSENCODE($Api.Session_ID)}&quot;; 
+var loc = &quot;{!JSENCODE($Api.Partner_Server_URL_80)}&quot;; 
+var aid = &quot;{!JSENCODE($Organization.Id)}&quot;; 
+var uid = &quot;{!JSENCODE($User.Id)}&quot;; 
+var phone = &quot;{!JSENCODE(Contact.Phone)}&quot;; 
+var name = &quot;{!JSENCODE(Contact.Name)}&quot;; 
+var oid = &quot;{!JSENCODE(Contact.Id)}&quot;; 
+
+if({!$User.DialSource__DialSource_Development_Mode__c} == true) { 
+var url = &apos;https://websocket-dev-andrew.dialsource.com:8000/addToQueue?aid=&apos;+aid+&apos;&amp;uid=&apos;+uid+&apos;&amp;object_id=&apos;+oid; 
+
+} 
+else { 
+
+var url = &apos;https://ws.dialsource.com:8000/addToQueue?aid=&apos;+aid+&apos;&amp;uid=&apos;+uid+&apos;&amp;object_id=&apos;+oid; 
+} 
+console.log(url); 
+
+var result = sforce.apex.execute(&quot;DialSource.addToQueue&quot;,&quot;httpPOSTrecord&quot;, 
+{urlParams : url, phone : phone, name: name}); 
+
+//window.alert(&apos;Record successfully queued&apos;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>DialSource__DS_InstaQueue_List</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>DS InstaQueue List</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/22.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/22.0/apex.js&quot;)}
+var records = {!GETRECORDIDS($ObjectType.Contact)}; 
+var aid = &quot;{!JSENCODE($Organization.Id)}&quot;; 
+var uid = &quot;{!JSENCODE($User.Id)}&quot;; 
+var phoneField = &quot;Phone&quot;; 
+var list = records.join(); 
+var type = &quot;Contact&quot;; 
+var nameField = &quot;Name&quot;; 
+
+if (records[0] == null) { 
+alert(&quot;Please select at least one Contact to submit.&quot;); 
+} 
+else{ 
+
+var result = sforce.apex.execute(&quot;DialSource.addToQueue&quot;,&quot;httpPOSTlist&quot;, 
+{phoneField : phoneField, nameField : nameField, recordIDs : list, objectType : type, uid : uid, aid : aid}); 
+//window.alert(&apos;Records successfully queued&apos;); 
+} 
+
+if(result !=&quot;&quot;){ 
+alert(&quot;Records Not Added to Queue: \n&quot; + result); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleMaps</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google Maps</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://maps.google.com/maps?f=q&amp;hl=en&amp;q={!Contact_MailingStreet}+{!Contact_MailingCity}+{!Contact_MailingState}&amp;om=1</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GoogleSearch</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>600</height>
+        <isResizable>true</isResizable>
+        <linkType>url</linkType>
+        <masterLabel>Google Search</masterLabel>
+        <openType>newWindow</openType>
+        <position>none</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <url>http://www.google.com/search?q={!Contact_FirstName} {!Contact_LastName}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>dsfs__Send_with_DocuSign</fullName>
+        <availability>online</availability>
+        <description>This button will initiate a DocuSign Envelope that is linked to the Contact</description>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Send with DocuSign</masterLabel>
+        <openType>noSidebar</openType>
+        <page>dsfs__CreateEnvelopeFromContact</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

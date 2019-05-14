@@ -1,0 +1,87 @@
+<apex:page standardController="Opportunity" extensions="SendFundingEmailToMerchantControllerX" showHeader="false">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <apex:form id="formId">
+            <apex:stylesheet value="{!URLFOR($Resource.Cloufi__SLDS0105, '/assets/styles/salesforce-lightning-design-system-vf.css')}" />            
+            <head>
+                <script>
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function() { 
+                    overridePageMessages();
+                });
+                
+                //Lightning Design System for Page Messages    
+                function overridePageMessages(){    
+                    
+                    j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                    j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                    j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                    j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                    
+                    j$('.errorM3').removeClass('errorM3'); 
+                    j$('.confirmM3').removeClass('confirmM3'); 
+                    j$('.infoM3').removeClass('infoM3');   
+                    j$('.warningM3').removeClass('warningM3');  
+                }
+                </script>
+                <style>
+                    .customMessage {
+                    margin: 5px 0!important;
+                    opacity: 1!important;
+                    width: 100%;
+                    font-size: 15px;
+                    color: #ffffff;
+                    border: 0px;
+                    border-radius: 6px;
+                    padding-left: 10px;
+                    }
+                </style>
+            </head>
+            <body>
+                <apex:slds />
+                <apex:pageMessages id="pgMsg"/>
+                <apex:actionStatus id="statusOne">
+                    <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                        &nbsp;
+                    </div>
+                    <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                        <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px; margin-left: -60px;">
+                            <img src="/img/loading.gif" />
+                            <span>Sending Email...</span>
+                        </div>
+                    </div>
+                    </apex:facet>                   
+                </apex:actionStatus>
+
+                <div class="slds-page-header">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+                                        <svg aria-hidden="true" class="slds-icon">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-text-title_caps slds-line-height_reset">Resend Application</p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">
+                                        <apex:outputText value="{!Opportunity.Name}"/>
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                            <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button--brand" style="font-size:12px;margin-left:-10%;" />
+                            <apex:commandButton styleClass="slds-button slds-button--brand" value="Send" action="{!sendFundingEmailToMerchant}" status="statusOne" oncomplete="overridePageMessages();" reRender="pgMsg" style="float: right;"/>
+                        </div>
+                    </div>
+                </div><br/> 
+            </body>            
+        </apex:form>
+        <apex:includeScript value="{!URLFOR($Resource.ApplicationForm_Css_Js, 'assets/js/jquery-2.2.4.min.js')}"/>            
+        <apex:includeScript value="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.7/jquery.validate.min.js"/>
+        <apex:includeScript value="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.4.4.min.js"/>   
+    </html>     
+</apex:page>

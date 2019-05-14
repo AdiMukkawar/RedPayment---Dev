@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- From --></label>
+        <name>Cloufi_Twilio__From__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Scheduled --></label>
+        <name>Cloufi_Twilio__Is_Scheduled__c</name>
+    </fields>
+    <fields>
+        <label><!-- MessageSid --></label>
+        <name>Cloufi_Twilio__MessageSid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Message Date --></label>
+        <name>Cloufi_Twilio__Message_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Message Status --></label>
+        <name>Cloufi_Twilio__Message_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Message --></label>
+        <name>Cloufi_Twilio__Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- To --></label>
+        <name>Cloufi_Twilio__To__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Cloufi_Twilio__Type__c</name>
+    </fields>
+    <fields>
+        <label>Cloufi From</label>
+        <name>Cloufi__From__c</name>
+    </fields>
+    <fields>
+        <label>Cloufi Message Date</label>
+        <name>Cloufi__Message_Date__c</name>
+    </fields>
+    <fields>
+        <label>Cloufi Message</label>
+        <name>Cloufi__Message__c</name>
+    </fields>
+    <fields>
+        <label>Cloufi Message Status</label>
+        <name>Cloufi__Status__c</name>
+    </fields>
+    <fields>
+        <label>Cloufi To</label>
+        <name>Cloufi__To__c</name>
+    </fields>
+    <fields>
+        <label>Cloufi Type</label>
+        <name>Cloufi__Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- The name of the Call Campaign the record was called from --></help>
+        <label><!-- Call Campaign --></label>
+        <name>DialSource__Call_Campaign_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the disposition clicked for this call --></help>
+        <label><!-- Call Disposition --></label>
+        <name>DialSource__Call_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time stamp indicating when the call ended --></help>
+        <label><!-- Call Ended --></label>
+        <name>DialSource__Call_Ended_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- External ID for the logged call used for troubleshooting purposes --></help>
+        <label><!-- Call ID --></label>
+        <name>DialSource__Call_ID_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time stamp indicating when the call was initially placed --></help>
+        <label><!-- Call Placed --></label>
+        <name>DialSource__Call_Placed_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time stamp of when the call was connected to the prospect --></help>
+        <label><!-- Call Started --></label>
+        <name>DialSource__Call_Started_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Caller ID that appeared to the prospect --></help>
+        <label><!-- Caller ID --></label>
+        <name>DialSource__Caller_ID_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Link to the call recording --></help>
+        <label><!-- DS Get Recording --></label>
+        <name>DialSource__DS_Get_Recording__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time the agents were waiting to receive the inbound call --></help>
+        <label><!-- Inbound Agent Wait Time (secs) --></label>
+        <name>DialSource__Inbound_Agent_Wait_Time_secs__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name associated with the Inbound DNIS --></help>
+        <label><!-- Inbound DNIS Name --></label>
+        <name>DialSource__Inbound_DNIS_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- The Inbound Number that was dialed by the prospect --></help>
+        <label><!-- Inbound DNIS --></label>
+        <name>DialSource__Inbound_DNIS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time in which the prospect was waiting for an agent to answer --></help>
+        <label><!-- Inbound Prospect Wait Time (secs) --></label>
+        <name>DialSource__Inbound_Prospect_Wait_Time_secs__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Inbound Queue in which the Inbound DNIS is associated to --></help>
+        <label><!-- Inbound Queue --></label>
+        <name>DialSource__Inbound_Queue__c</name>
+    </fields>
+    <fields>
+        <help><!-- DialSource Agent Group ID used to track which RTPQ group the call was presented to --></help>
+        <label><!-- RTPQ Group ID --></label>
+        <name>DialSource__RTPQ_Group_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time in which the record sat in the queue before it was dialed by a rep --></help>
+        <label><!-- RTPQ Wait Time --></label>
+        <name>DialSource__RTPQ_Wait_Time__c</name>
+    </fields>
+    <fields>
+        <help><!-- External DialSource ID used to track the call recording --></help>
+        <label><!-- Recording ID --></label>
+        <name>DialSource__Recording_ID_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Datetime the related record is Recycled Until --></help>
+        <label><!-- Recycled Until --></label>
+        <name>DialSource__Recycled_Until_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- External DialSource ID used to reference the DS Session this call is related to --></help>
+        <label><!-- Session ID --></label>
+        <name>DialSource__Session_ID_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Voicemail recording that was left to the prospect --></help>
+        <label><!-- Voicemail --></label>
+        <name>DialSource__Voicemail_DS__c</name>
+    </fields>
+</CustomObjectTranslation>

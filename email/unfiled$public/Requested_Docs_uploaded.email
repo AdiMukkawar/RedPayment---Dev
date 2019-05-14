@@ -1,0 +1,14 @@
+<messaging:emailTemplate subject="New documents have been uploaded for {!relatedTo.Name}" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br/><br/>
+
+        New documents have been uploaded for <b>{!relatedTo.Name}</b>. Please review and update salesforce accordingly.<br/><br/>
+        
+        Opportunity: <b><a href="{!$Label.Base_URL}/{!relatedTo.Id}">{!relatedTo.Name}</a></b><br/><br/><br/>
+
+        Best Regards,<br/><br/>
+        <img src="{!relatedTo.Company_Logo__c}"/>
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

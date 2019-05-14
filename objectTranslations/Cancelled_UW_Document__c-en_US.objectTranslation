@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Cancelled UW Document</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Cancelled UW Documents</value>
+    </caseValues>
+    <fields>
+        <label><!-- Stip Name --></label>
+        <name>Stip_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Application - Document</masterLabel>
+            <translation><!-- Application - Document --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bank Statement</masterLabel>
+            <translation><!-- Bank Statement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Custom Document</masterLabel>
+            <translation><!-- Custom Document --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Offer - Document</masterLabel>
+            <translation><!-- Offer - Document --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Processing Statement</masterLabel>
+            <translation><!-- Processing Statement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stip</masterLabel>
+            <translation><!-- Stip --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- URL --></label>
+        <name>URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- UW Documents --></label>
+        <name>UW_Documents__c</name>
+        <relationshipLabel><!-- Cancelled UW Documents --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

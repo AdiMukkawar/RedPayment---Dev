@@ -1,0 +1,101 @@
+.THIS .Float-right {
+    float:right;
+}
+
+.THIS .messageField {
+    width: 100%;
+}
+.THIS .firstDiv{
+    font-size: 14px;
+    word-break: break-all;
+}
+.THIS .secondDiv {
+    width: 100%;
+    font-size:14px;
+    word-break: break-all;
+}
+.THIS .message-box-first {
+    margin-bottom: 6px;
+    width: 90%;
+    margin-left: 10%;
+}
+.THIS .note-history{
+    margin-bottom: 6px;
+}
+.THIS .message-box-second {
+    margin-bottom: 6px;
+    width: 90%;
+}
+.THIS.uiScrollerWrapper.scrollable {
+   max-height:350px;
+}
+.THIS .chat-main {
+    box-shadow:none;
+    margin-top: 20px;
+    padding:0;
+}
+.THIS .slds-text-heading_small{
+    white-space: normal;
+}
+@media screen and (max-width: 1380px) {
+    .THIS .messageField .slds-form-element {
+    	width: 75%;
+	}
+}
+.THIS .description-Span{
+    white-space: pre-line;
+}
+.THIS .scroll-bar {
+    height:auto;
+    overflow:auto;
+    max-height:200px;
+}
+.THIS .chat-header {
+    font-size: 1em;
+    margin-bottom: 10px;
+    background-color: #f1f0f0;
+    padding: 6px;
+    padding-left: 10px;
+}
+
+.THIS .uiOutputRichText {
+    word-break: break-all;
+}
+.THIS .slds-rich-text-area__content {
+    word-break: break-all;
+}
+.THIS .chatBoxDesign {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 6px;
+    font-size: 14px;
+}
+.THIS .repHeading {
+    color: #35861b;
+}
+
+.THIS .repChatHistory{
+    color: darkblue;
+}
+/*.THIS .skyblueBackground {
+    background-color: rgb(158, 198, 232);
+}
+.THIS .peechBackground{
+    background-color: rgb(218, 175, 189);
+}*/
+.THIS .peech-chat-header {-webkit-box-shadow: 0px 6px 12px -4px rgba(218,175,189,1);
+-moz-box-shadow: 0px 6px 12px -4px rgba(218,175,189,1);
+box-shadow: 0px 6px 12px -4px rgba(218,175,189,1);
+}
+.THIS .skyblue-chat-header {-webkit-box-shadow: 0px 6px 12px -4px rgba(158,198,232,0.66);
+-moz-box-shadow: 0px 6px 12px -4px rgba(158,198,232,0.66);
+box-shadow: 0px 6px 12px -4px rgba(158,198,232,0.66);
+}
+.THIS .peechBackground {-webkit-box-shadow: -8px 8px 10px 2px rgba(218,175,189,1);
+-moz-box-shadow: -8px 8px 10px 2px rgba(218,175,189,1);
+box-shadow: -8px 8px 10px 2px rgba(218,175,189,1);
+margin-bottom: 36px;}
+.THIS .skyblueBackground {    -webkit-box-shadow: -8px 8px 10px 2px rgba(158,198,232,0.66);
+-moz-box-shadow: -8px 8px 10px 2px rgba(158,198,232,0.66);
+box-shadow: -8px 8px 10px 2px rgba(158,198,232,0.66);
+margin-bottom: 36px;}

@@ -1,0 +1,7 @@
+Hi Sales Support, <br/><br/>
+
+UW has updated notes on Offer - {!Cloufi__Offers__c.Name} on Opportunity {!Cloufi__Offers__c.Cloufi__Opportunity__c}<br/> <br/>
+
+To check, view the Offer <a href="{!Cloufi__Offers__c.Link}">here </a><br/><br/>
+
+Thanks

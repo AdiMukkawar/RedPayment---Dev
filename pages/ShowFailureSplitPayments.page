@@ -1,0 +1,31 @@
+<apex:page standardController="Opportunity" extensions="CreateSplitPaymentControllerX" contentType="application/vnd.ms-excel">
+    <apex:form >
+       <apex:pageBlock >
+        <apex:pageBlockTable value="{!errorPayList}" var="pay">
+
+            <apex:column headerValue="Payment Type">
+                 <apex:outputField value="{!pay.Cloufi__Payment_Type__c}"/>
+            </apex:column>
+
+            <apex:column headerValue="Payment Method">
+                  <apex:outputField value="{!pay.Cloufi__Payment_Method__c}"/>
+            </apex:column>
+
+            <apex:column headerValue="Payment Amount">
+                  <apex:outputField value="{!pay.Cloufi__Payment_Amount__c}"/>
+            </apex:column>
+            
+             <apex:column headerValue="Merchant ID">
+                  <apex:outputField value="{!pay.Merchant_ID__c}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Error Message">
+                  <apex:outputField value="{!pay.Error_Message__c}"/>
+            </apex:column>
+            
+             
+            
+        </apex:pageBlockTable>
+            </apex:pageBlock>
+  </apex:form>
+</apex:page>

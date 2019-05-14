@@ -1,0 +1,76 @@
+<apex:page standardController="Cloufi__Offers__c" extensions="SendOfferToMerchantControllerX" action="{!presentOffer}">
+	<apex:pageMessages />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           overridePageMessages();    
+        });
+
+        function overridePageMessages(){    
+            var textureEffect = '';
+            $('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage '+textureEffect);          
+            $('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success  customMessage '+textureEffect);    
+            $('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage '+textureEffect);                  
+            $('.infoM3').addClass('slds-notify slds-notify--toast customMessage '+textureEffect);    
+            $('.errorM3').removeClass('errorM3'); 
+            $('.confirmM3').removeClass('confirmM3'); 
+            $('.infoM3').removeClass('infoM3');   
+            $('.warningM3').removeClass('warningM3');  
+        }
+    </script>
+    <apex:form id="frm">
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <head>
+                <apex:slds /> 
+            </head>
+            <body class="slds-scope">
+                <div>
+                    <div>
+                        <div class="slds-page-header">
+                            <div class="slds-grid">
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon_container_circle slds-icon-action-description" title="">
+                                                <svg class="slds-icon" aria-hidden="true">
+                                                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/action-sprite/svg/symbols.svg#description"></use>
+                                                </svg>
+                                            </span>                                             
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <p class="slds-text-title_caps slds-line-height_reset">Offer</p>
+                                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">                                
+                                                <apex:outputText value="{!objOffers.Name}" rendered="{!$ObjectType.Cloufi__Offers__c.fields.Name.Accessible}" />
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                                    <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button--brand" style="font-size:12px;margin-left:-10%;" />
+                                </div>
+                            </div>
+                        </div><br/>
+                    </div>
+                </div>
+            </body>
+        </html>
+    </apex:form>
+
+    <style>
+        .msgIcon {
+            display: none!important
+        }
+        .customMessage * {
+            color: #fff!important
+        }
+        .customMessage {
+            margin: 5px 0!important;
+            opacity: 1!important;
+            width: 100%;
+            font-size: 12px;
+            border: 0px;
+            padding-left: 10px;
+        }
+                 
+    </style>    
+</apex:page>

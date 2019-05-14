@@ -1,0 +1,11 @@
+Dear {!Opportunity.Owner},<br/><br/>
+
+Congratulations!  We have received all necessary closing documents for <b>{!Opportunity.Name}</b>. The funds of {!Opportunity.Net_Funded__c} are being transferred.<br/><br/>
+
+Please note that availability of funds may vary depending on the bank that the merchants account is with.<br/><br/>
+
+Thank you for choosing <b>{!Opportunity.Opportunity_Owner_Company_Name__c}</b>, we look forward to working together.<br/><br/><br/>
+
+
+Best Regards,<br/>
+<img src="{!Opportunity.Company_Logo__c}"/>

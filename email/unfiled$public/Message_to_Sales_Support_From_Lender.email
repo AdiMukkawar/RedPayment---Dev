@@ -1,0 +1,17 @@
+<messaging:emailTemplate subject="Message from Lender (Internal) for {!relatedTo.Name}" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br /><br/>
+
+        <b>Internal Lender</b> has sent you a message. Please check the correspondence and address the request.<br/><br/>
+        <!--<c:LenderToSalesSupportComp opportunityId="{!relatedTo.id}"/><br/><br/>-->
+        <b>Message -</b><br/>
+        MessageText
+        <br/><br/>
+        
+        Opportunity: <b><a target="_blank" href="{!$Label.Base_URL}/{!relatedTo.Id}">{!relatedTo.Name}</a></b><br/><br/>
+        Thank you,<br/>
+        <img src="{!relatedTo.Company_Logo__c}"/>
+        <!--<img src="https://www.dropbox.com/s/wh2m5sd0vm0wydz/image_1549529173589.png?dl=0"/>-->      
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

@@ -1,0 +1,29 @@
+<apex:component controller="NewOfferEmailComp_Ctl" access="global">
+    <apex:attribute name="offerId" type="Id" description="Id of the offer" assignTo="{!offid}"/>
+    <apex:attribute name="offerStatus" type="Id" description="Status of the offer"/>
+    
+    <table border="1px solid black" style="width:50%"> 
+        <apex:repeat var="f" value="{!$ObjectType.Cloufi__Offers__c.FieldSets.New_Offer_for_Support_Group}"> 
+            <tr> 
+                <th>
+                    <apex:outputText styleClass="bold" value="{!$ObjectType.Cloufi__Offers__c.Fields[f].label}"/>
+                </th> 
+                <apex:repeat var="off" value="{!Offer}"> 
+                    <td>
+                        <apex:outputField value="{!off[f]}" /> 
+                    </td> 
+                </apex:repeat>
+            </tr>
+        </apex:repeat>
+    </table><br/> <br/>
+        <!-- <apex:outputText Rendered="{!if(offerStatus == 'New',true,false)}">
+        <a style="color:#999999;" target="_blank" href = "{!OfferLink}">Click Here</a> to view New Offer.
+        </apex:outputText>
+         <apex:outputText Rendered="{!if(offerStatus == 'Reviewed',true,false)}">
+        <a style="color:#999999;" target="_blank" href = "{!OfferLink}">Click Here</a> to view Reviewed Offer.
+        </apex:outputText> -->
+        
+        <apex:outputText >
+        <a style="color:#999999;" target="_blank" href = "{!OfferLink}">Click Here</a> to view New Offer.
+        </apex:outputText>
+</apex:component>

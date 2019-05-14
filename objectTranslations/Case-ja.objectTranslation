@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Engineering Req Number --></label>
+        <name>Cloufi__EngineeringReqNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Potential Liability --></label>
+        <name>Cloufi__PotentialLiability__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Product --></label>
+        <name>Cloufi__Product__c</name>
+        <picklistValues>
+            <masterLabel>GC1020</masterLabel>
+            <translation><!-- GC1020 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC1040</masterLabel>
+            <translation><!-- GC1040 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC1060</masterLabel>
+            <translation><!-- GC1060 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC3020</masterLabel>
+            <translation><!-- GC3020 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC3040</masterLabel>
+            <translation><!-- GC3040 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC3060</masterLabel>
+            <translation><!-- GC3060 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC5020</masterLabel>
+            <translation><!-- GC5020 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC5040</masterLabel>
+            <translation><!-- GC5040 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GC5060</masterLabel>
+            <translation><!-- GC5060 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- SLA Violation --></label>
+        <name>Cloufi__SLAViolation__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Time stamp of when the last Disposition was clicked --></help>
+        <label><!-- Datetime of Last Disposition --></label>
+        <name>DialSource__Datetime_of_Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Call Campaign the record was last called from --></help>
+        <label><!-- Last Call Campaign Name --></label>
+        <name>DialSource__Last_Call_Campaign_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the last Disposition clicked --></help>
+        <label><!-- Last Disposition --></label>
+        <name>DialSource__Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Datetime field used to set the next call datetime for reference in automation or Reports/List Views --></help>
+        <label><!-- Next Call --></label>
+        <name>DialSource__Next_Call_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of calls made on this record --></help>
+        <label><!-- Total Call Count --></label>
+        <name>DialSource__Total_Call_Count_DS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distribution action --></label>
+        <name>n2de__Action__c</name>
+        <picklistValues>
+            <masterLabel>Contacted</masterLabel>
+            <translation><!-- Contacted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- The number of times this record has been assigned via Distribution Engine --></help>
+        <label><!-- Distribution count --></label>
+        <name>n2de__Distribution_count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is archived --></label>
+        <name>n2de__Is_archived__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is distributed --></label>
+        <name>n2de__Is_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is auto reassigned --></label>
+        <name>n2de__Is_reassigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trigger enabled --></label>
+        <name>n2de__Is_trigger_enabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is triggered --></label>
+        <name>n2de__Is_triggered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last archive date --></label>
+        <name>n2de__Last_archive_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last distributed to user --></label>
+        <name>n2de__Last_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last auto reassigned --></label>
+        <name>n2de__Last_reassigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source queue --></label>
+        <name>n2de__Source_queue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time to action (mins) --></label>
+        <name>n2de__Time_to_action_mins__c</name>
+    </fields>
+    <quickActions>
+        <label><!-- NewChildCase --></label>
+        <name>NewChildCase</name>
+    </quickActions>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+</CustomObjectTranslation>

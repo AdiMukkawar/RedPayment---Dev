@@ -1,0 +1,47 @@
+<apex:page standardController="Opportunity" extensions="submitToSalesCtrl" action="{!submitToSalesSupport}">
+    <html>
+        <head>
+            <title>Submit To Sales Support</title>            
+            <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>     
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script>
+            var j$ = jQuery.noConflict();
+            j$(document).ready(function() { 
+                overridePageMessages();
+            });
+            
+            //Lightning Design System for Page Messages    
+            function overridePageMessages(){    
+                
+                j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                
+                j$('.errorM3').removeClass('errorM3'); 
+                j$('.confirmM3').removeClass('confirmM3'); 
+                j$('.infoM3').removeClass('infoM3');   
+                j$('.warningM3').removeClass('warningM3');  
+            }
+            </script>
+            <style>
+                .customMessage {
+                margin: 5px 0!important;
+                opacity: 1!important;
+                width: 100%;
+                font-size: 15px;
+                border: 0px;
+                border-radius: 6px;
+                padding-left: 10px;
+                }
+            </style>
+        </head>
+        <body>
+            <apex:slds />
+            <apex:pageMessages />
+            <apex:form >
+                <apex:commandButton action="{!Cancel}" value="Back" styleClass="slds-button slds-button--brand"/>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

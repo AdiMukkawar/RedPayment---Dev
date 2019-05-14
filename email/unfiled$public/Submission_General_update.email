@@ -1,0 +1,11 @@
+<messaging:emailTemplate subject="General update for {!relatedTo.Name}" recipientType="User" relatedToType="Cloufi__Submission__c">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br/><br/>
+
+        General Updates<br/><br/>
+
+        Thank you!
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

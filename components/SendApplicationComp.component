@@ -1,0 +1,7 @@
+<apex:component controller="SendApplicationComp_Ctl" access="global">
+    <apex:attribute name="AppLink" type="Id" description="Id of the Lead" assignTo="{!leadId}"/>
+    <apex:attribute name="AppLicationID" type="Id" description="Id of the Application" assignTo="{!appid}"/> 
+    <div>
+        Please click on the <a style="color:#999999;" target="_blank" href = "{!Lead}">link</a> for providing further details of application to be processed.
+    </div>
+</apex:component>

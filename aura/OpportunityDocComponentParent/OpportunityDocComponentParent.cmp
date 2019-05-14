@@ -1,0 +1,423 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd.
+* Component Name: OpportunityDocComponentParent
+* Created Date: 28-August-2018
+* Description:  Component used on opportunity to display list of Documents
+*******************************************************************
+*Author             | Date       | Description
+*Aditya Mukkawar    | 17/09/2018 | Send email to Opp owner with all the pending documents
+/-->
+<aura:component Controller="OpportunityDocumentController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!--Init handler To Get the records on load--> 
+    <aura:handler name="init" value="{!this}" action="{!c.initRecords}"/>
+    <!--<aura:handler event="force:refreshView" action="{!c.doInit}" />-->
+    
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>
+
+     <aura:attribute name="showSpinner" type="boolean" default="false"/>
+    
+    <aura:attribute name="documentList" type="Cloufi__UW_Document__c[]" description="store account records list"/>
+    <aura:attribute name="uwDocsList" type="Cloufi__UW_Document__c[]" description="store URL"/>
+    <aura:attribute name="recordId" type="Id" access="global"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" description="show hide save and cancel" default="false"/>
+    <aura:attribute name="userInfo" type="user"/>
+    <aura:attribute name="showHideReqDoc" type="Boolean" default="false"/>
+    <aura:attribute name="showPopup" type="Boolean" default="false"/>
+    <aura:attribute name="RemainingStips" type="Cloufi__UW_Document__c[]"/>
+    <aura:attribute name="otherStips" type="Cloufi__UW_Document__c[]"/>
+    <aura:attribute name="funderAvailable" type="Boolean" default="false"/>
+    <aura:attribute name="documentsCompleted" type="Boolean" default="false"/>
+    <aura:attribute name="oppStage" type="Boolean" default="false"/>
+    <aura:attribute name="noteInput" type="string" default=""/>
+    <aura:attribute name="isVisbleReqStip" type="Boolean" default="false"/>
+    <aura:attribute name="mapNameValuesP" type="map" />
+    <aura:attribute name="mapValuesP" type="map" />
+    <aura:attribute name="sendForFinalUW" type="Boolean" default="true"/>
+
+    <!-- Download All Attributes Begin -->
+    <aura:attribute name="dropboxpath" type="Boolean" default="false"/>
+    <aura:attribute name="uwURL" type="Boolean" default="false"/>
+    <!-- Download All Attributes End -->
+
+
+    <!-- Share with Lender attribute section Start -->
+    <aura:attribute name="submissionList" type="String[]"/>
+    <aura:attribute name="lenderPopup" type="Boolean" default="false"/>   
+    <aura:attribute name="lenderSelected" type="Boolean" default="false"/>
+    <aura:attribute name="shareRemainingStips" type="Cloufi__UW_Document__c[]"/>
+    <aura:attribute name="shareOtherStips" type="Cloufi__UW_Document__c[]"/>
+    <!-- Share with Lender attribute section End -->
+    <!-- Static Resoureces -->    
+    <ltng:require scripts="{!$Resource.FileSaver}"/>
+    <ltng:require scripts="{!$Resource.JavascriptZip}"/>
+    
+    <!-- Component Header Start -->
+    <div class="slds-page-header">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning:icon iconName="standard:account" alternativeText="Event" />
+                    </div>
+                    <div class="slds-media__body">
+                        <div class="slds-page-header__name">
+                            <div class="slds-page-header__name-title">
+                                <h1>
+                                    <span class="slds-page-header__title slds-truncate" title="">UW Document</span>
+                                </h1>
+                            </div>
+                        </div>
+                        <p class="slds-page-header__name-meta"></p>
+                    </div>
+                    <!-- Buttons Section Start -->
+                    
+                    <!--loading spinner start... style=Brand Medium (blue dots)-->
+                    <aura:if isTrue="{!v.Spinner}">
+                        <div aura:id="spinnerId" class="slds-spinner_container">
+                            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                                <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </aura:if>
+                    <!-- Loading spinner end--> 
+
+                     <aura:if isTrue="{!v.showSpinner}">
+                        <div class="demo-only" style="z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                        <div role="status" class="slds-spinner slds-spinner_medium slds-spinner--brand">
+                        <span class="slds-assistive-text">Loading</span>
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                     </aura:if>
+                    <div class="btn" style="float:right!important;">
+                        <aura:if isTrue="{!v.dropboxpath}">
+                            <div class="slds-button" style="float:right!important;">
+                                <lightning:button variant="neutral" 
+                                                  label="Download All" 
+                                                  title="Download All" 
+                                                  onclick="{!c.downloadAllDocuments}"
+                                                  disabled="{!!v.uwURL}"
+                                                  class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit"/> 
+                            </div>
+                        </aura:if> 
+                        <div class="slds-button" style="float:right!important;">
+                            <lightning:button title="Add UW Documents" class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit"><a href="{!'/one/one.app#/alohaRedirect/apex/AddUWDocuments?id='+(v.recordId)}">Add UW Documents </a></lightning:button>
+                        </div>
+                        <aura:if isTrue="{!v.showHideReqDoc || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Customer Success' || v.userInfo.Profile.Name == 'Customer Success Manager'}">
+                            <div class="slds-button" style="float:right!important;">
+                                <button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.RequestStip}">Request Stip</button>
+                            </div>
+                        </aura:if>
+                        <!-- Visible Only to Under Writitng profile User Start-->
+                        <aura:if isTrue="{!v.userInfo.Profile.Name == 'Under Writing'}">
+                            <div class="slds-button" style="float:right!important;">
+                                <lightning:button disabled="{!!v.isVisbleReqStip}" variant="brand" label="Request Stip" title="Request Pending Docs" onclick="{!c.RequestStipFromUW}"/>
+                            </div>
+                        </aura:if>
+                        <!-- Visible Only to Under Writitng profile User End-->
+                        <aura:if isTrue="{!v.showHideReqDoc || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Customer Success' || v.userInfo.Profile.Name == 'Customer Success Manager'}">
+                            <div class="slds-button" style="float:right!important;">
+                                <button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.reqDocsUploaded}">Requested Docs Uploaded</button>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator'}">
+                            <div class="slds-button" style="float:right!important;">
+                                <button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.sendMailToSalesRep}">Send Stip</button>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!and(v.funderAvailable, or(v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Customer Success' || v.userInfo.Profile.Name == 'Customer Success Manager'))}">
+                            <div class="slds-button" style="float:right!important;">
+                                <button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.openFinalUWPopUp}">Send for Final UW</button>
+                            </div>
+                        </aura:if>
+
+                        <aura:if isTrue="{!or(v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Under Writing')}">
+                            <div class="slds-button" style="float:right!important;">
+                                <button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" onclick="{!c.openLenderSharePopUp}">Share with Lender</button>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.showSaveCancelBtn}">
+                            <div class="slds-button" style="float:right!important;">
+                                <lightning:button variant="brand" class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" label="Save" title="Save" onclick="{! c.save }" />
+                            </div>
+                            <div class="slds-button" style="float:right!important;">
+                                <lightning:button variant="brand" class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit" label="Cancel" title="Cancel" onclick="{! c.cancel }" />
+                            </div>                        
+                        </aura:if>
+
+                       
+                    </div> 
+                    
+                    <!-- Buttons Section End -->
+                </div>
+            </div>
+        </div>
+    </div><br/>
+
+    <!-- Share with Lender popup start -->
+    <aura:renderIf isTrue="{!v.lenderPopup}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!--  MODAL BOX HEADER Start -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" alternativeText="close" variant="bare-inverse" class="slds-modal__close" onclick="{!c.closeLenderSharePopup}"/>
+                    <div class="slds-page-header">
+                        <p class="slds-page-header__title slds-truncate" title="">Share Documents with Lender</p>
+                    </div>
+                </header>
+                <!--  MODAL BOX HEADER End -->
+                <!-- MODAL BOX BODY Part Start-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <lightning:select aura:id="lender" label="Select Lender" onchange="{!c.getDocumentList}">
+                        <option value="">...Select a Lender...</option>
+                        <aura:iteration items="{!v.submissionList}" var="item">
+                            <option value="{!item.Cloufi__Lender__c}">{!item.Cloufi__Lender__r.Name}</option>
+                        </aura:iteration>
+                    </lightning:select><br/>
+                    <aura:if isTrue="{!and(v.lenderSelected,or(not(empty(v.shareRemainingStips)),not(empty(v.shareOtherStips))))}">
+                        <aura:if isTrue="{!not(empty(v.shareRemainingStips))}">
+                            <h2 class="doc-header">Lender Documents</h2>
+                            <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                <thead>
+                                    <tr class="slds-text-title--caps">
+                                        <th scope="col">
+                                            
+                                        </th>
+                                        <th scope="col">
+                                            <div class="slds-truncate" title="Stip Name">Stip Name</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.shareRemainingStips}" var="stip">
+                                        <tr>
+                                            <td scope="row" class="slds-text-align--right" style="width:3.25rem;">
+                                            </td>
+                                            <th scope="row">
+                                                <div class="slds-truncate" title="{!stip.Stip_Name__c}">{!stip.Stip_Name__c}</div>
+                                            </th>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                        </aura:if>
+                        <aura:if isTrue="{!not(empty(v.shareOtherStips))}">
+                            <br/>
+                            <h2 class="doc-header">Other Documents</h2>
+                            <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                <thead>
+                                    <tr class="slds-text-title--caps">
+                                        <th scope="col">
+                                            
+                                        </th>
+                                        <th scope="col">
+                                            <!-- <div class="slds-truncate" title="Stip Name">Stip Name</div> -->
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <aura:iteration items="{!v.shareOtherStips}" var="stip">
+                                        <tr>
+                                            <td scope="row" class="slds-text-align--right" style="width:3.25rem;">
+                                                <div class="slds-form-element">
+                                                    <div class="slds-form-element__control">
+                                                        <label class="slds-checkbox">
+                                                            <ui:inputCheckbox text="{!stip.Id}" aura:id="shareWithLender" value="false" />
+                                                            <span class="slds-checkbox--faux"></span>
+                                                            <span class="slds-form-element__label text"></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <th scope="row">
+                                                <div class="slds-truncate" title="{!stip.Stip_Name__c}">{!stip.Stip_Name__c}</div>
+                                            </th>
+                                        </tr>
+                                    </aura:iteration>
+                                </tbody>
+                            </table>
+                            <aura:set attribute="else">
+                                <br/><p class="Stip-message-blank" title="">All Documents are already shared with Lender</p>
+                            </aura:set>
+                        </aura:if>
+                        <aura:set attribute="else">
+                            <p class="Stip-message-blank" title="">There are no stips to Share</p>
+                        </aura:set>
+                    </aura:if>
+                </div>
+                <!-- MODAL BOX BODY Part End-->
+                <!-- MODAL BOX FOOTER Part Start -->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.closeLenderSharePopup}"/>
+                    <aura:if isTrue="{!and(v.lenderSelected,not(empty(v.shareOtherStips)))}">
+                        <button class="slds-button slds-button--brand" onclick="{!c.shareDocumentsWithLender}">Share with Lender</button>
+                    </aura:if>
+                </footer>
+                <!-- MODAL BOX FOOTER Part End -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:renderIf>
+    <!-- Share with Lender popup End -->
+    
+    <!-- Send for Final UW popup start -->
+    <aura:if isTrue="{!v.showPopup}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!--  MODAL BOX HEADER Start -->
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" alternativeText="close" variant="bare-inverse" class="slds-modal__close" onclick="{!c.closePopup}"/>
+                    <div class="slds-page-header">
+                        <p class="slds-page-header__title slds-truncate" title="">Send Documents to Lender</p>
+                    </div>
+                </header>
+                <!--  MODAL BOX HEADER End -->
+                <!-- MODAL BOX BODY Part Start-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <aura:if isTrue="{!v.oppStage}">
+                        <aura:if isTrue="{!v.documentsCompleted}">
+                            <aura:if isTrue="{!not(empty(v.RemainingStips))}">
+                                <h2 class="doc-header">Lender Documents</h2>
+                                <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                    <thead>
+                                        <tr class="slds-text-title--caps">
+                                            <th scope="col">
+                                                
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Stip Name">Stip Name</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <aura:iteration items="{!v.RemainingStips}" var="stip">
+                                            <tr>
+                                                <td scope="row" class="slds-text-align--right" style="width:3.25rem;">
+                                                    <div class="slds-form-element">
+                                                        <div class="slds-form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <ui:inputCheckbox text="{!stip.Id}" aura:id="selectedCheckbox" value="true" />
+                                                                <span class="slds-checkbox--faux"></span>
+                                                                <span class="slds-form-element__label text"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <th scope="row">
+                                                    <div class="slds-truncate" title="{!stip.Stip_Name__c}">{!stip.Stip_Name__c}</div>
+                                                </th>
+                                            </tr>
+                                        </aura:iteration>
+                                    </tbody>
+                                </table>
+                                <aura:if isTrue="{!not(empty(v.otherStips))}">
+                                    <br/>
+                                    <h2 class="doc-header">Other Documents</h2>
+                                    <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                        <thead>
+                                            <tr class="slds-text-title--caps">
+                                                <th scope="col">
+                                                    
+                                                </th>
+                                                <th scope="col">
+                                                    <!-- <div class="slds-truncate" title="Stip Name">Stip Name</div> -->
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <aura:iteration items="{!v.otherStips}" var="stip">
+                                                <tr>
+                                                    <td scope="row" class="slds-text-align--right" style="width:3.25rem;">
+                                                        <div class="slds-form-element">
+                                                            <div class="slds-form-element__control">
+                                                                <label class="slds-checkbox">
+                                                                    <ui:inputCheckbox text="{!stip.Id}" aura:id="otherSelectedCheckbox" value="false" />
+                                                                    <span class="slds-checkbox--faux"></span>
+                                                                    <span class="slds-form-element__label text"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <th scope="row">
+                                                        <div class="slds-truncate" title="{!stip.Stip_Name__c}">{!stip.Stip_Name__c}</div>
+                                                    </th>
+                                                </tr>
+                                            </aura:iteration>
+                                        </tbody>
+                                    </table>
+                                </aura:if><br/>
+                                <ui:inputTextArea label="Notes" class="field" value="{!v.noteInput}" placeholder="Type Notes here..."/>
+                                <aura:set attribute="else">
+                                    <p class="Stip-message-blank" title="">There are no stips to Send</p>
+                                </aura:set>
+                            </aura:if>
+                            <aura:set attribute="else">
+                                <p class="Stip-message-blank" title="">Please review All documents first.</p>
+                            </aura:set>
+                        </aura:if>
+                        <aura:set attribute="else">
+                            <p class="Stip-message-blank" title="">Opportunity stage should be Contract Signed Partial or Final UW</p>
+                        </aura:set>
+                    </aura:if>
+                    
+                </div>
+                <!-- MODAL BOX BODY Part End-->
+                <!-- MODAL BOX FOOTER Part Start -->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.closePopup}"/>
+                    <aura:if isTrue="{!and(v.oppStage,v.documentsCompleted,not(empty(v.RemainingStips)))}"><!--{!not(empty(v.RemainingStips))}-->
+                        <button class="slds-button slds-button--brand" onclick="{!c.sendMailForSelectedStips}" disabled="{!!v.sendForFinalUW}">Send</button>
+                    </aura:if>
+                </footer>
+                <!-- MODAL BOX FOOTER Part End -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!-- Send for Final UW popup End -->
+    
+    <aura:if isTrue="{!(v.documentList == null) }">
+        No Documents At This Moment!!!
+    </aura:if>
+    <aura:if isTrue="{!(v.documentList != null) }">
+        
+        <div class="slds-m-around_large" style="margin-top: 0px; margin-right: 0px; margin-left: 0px;">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer white-space">
+                <thead>
+                    <tr class="slds-text-title--caps">
+                        <aura:if isTrue="{!v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator'}">
+                            <th scope="col"><!-- <div class="slds-truncate" title="del"></div> -->
+                                <a onclick="{!c.refreshList}" id="refreshButton">
+                                    <lightning:icon variant="refresh" iconName="utility:refresh" class="slds-icon slds-icon_small" size="xx-small" alternativeText="icon" title="Refresh Document List"/>
+                                    <span class="slds-assistive-text" title="Refresh Document List">Refresh Icon</span>
+                                </a>
+                            </th>
+                        </aura:if>  
+                        <th scope="col"><div class="slds-truncate" title="Id">Name</div></th>
+                        <aura:if isTrue="{!v.userInfo.Profile.Name != 'Cash Advance Sales Agent'}">
+                            <th scope="col"><div class="slds-truncate" title="Lender">Lender</div></th>
+                        </aura:if>
+                        <th scope="col"><div class="slds-truncate" title="View">View</div></th>
+                        <aura:if isTrue="{!v.userInfo.Profile.Name == 'Cash Advance Sales Agent' || v.userInfo.Profile.Name == 'System Administrator'}">
+                            <th scope="col"><div class="slds-truncate" title="Type">Type</div></th>
+                        </aura:if>
+                        <th scope="col"><div class="slds-truncate" title="Status">Status</div></th>
+                        <aura:if isTrue="{!v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Customer Success' || v.userInfo.Profile.Name == 'Customer Success Manager'}">
+                            <th scope="col"><div class="slds-truncate" title="Commment">Comment</div></th>
+                        </aura:if>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.documentList}" var="d" indexVar="index">
+                        <c:OpportunityDocComponent singleRec="{!d}" showSaveCancelBtn="{!v.showSaveCancelBtn}" documentList="{!v.documentList}" opportunityId="{!v.recordId}" mapNameValues="{!v.mapNameValuesP}" mapValues="{!v.mapValuesP}"/>
+                    </aura:iteration>
+                </tbody>
+            </table>           
+        </div>
+    </aura:if>
+</aura:component>

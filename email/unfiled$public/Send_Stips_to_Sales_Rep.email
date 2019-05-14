@@ -1,0 +1,15 @@
+<messaging:emailTemplate subject="{!relatedTo.Name} is Missing the Following Stipulations" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br /><br/>
+
+        The following documents are needed in order to complete the file for <b>{!relatedTo.Name}</b>.<br/>
+        
+        <c:SendStipstoSalesRepComp OpportunityId="{!relatedTo.Id}"/>
+        
+        Opportunity: <b><a style="color:#999999;" target="_blank" href = "https://merchantservices.my.salesforce.com/{!relatedTo.Id}">{!relatedTo.Name}</a></b><br/><br/><br/>
+        Best Regards,<br/>
+        <img src="{!relatedTo.Company_Logo__c}"/>
+                
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

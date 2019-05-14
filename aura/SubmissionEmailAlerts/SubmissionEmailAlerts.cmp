@@ -1,0 +1,52 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd.
+* Component Name: SubmissionEmailAlerts
+* Created Date: 24-September-2018
+* Description:  Component used to send an alerts to Lender
+*******************************************************************
+*Author  			| Date       | Description
+*
+/-->
+<aura:component controller="SubmissionEmailAlerts_ctl" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="email" type="String" default=""/>
+    <aura:attribute name="message" type="String" default=""/>
+    <aura:attribute name="selectedOption" type="String" default=""/>
+    <aura:attribute name="isLenderAvailable" type="boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <ui:scrollerWrapper class="scrollerSize">
+        <lightning:card>
+            <aura:set attribute="title">
+                <lightning:icon iconName="doctype:image" size="small" class="labelIcon"/> Alerts to Lender                
+            </aura:set>
+            <h2 class="header">Standard Message</h2>
+            <div class="button-section">
+                <!--<lightning:layout verticalAlign="center">-->
+                <lightning:button variant="Neutral" label="Offer Update" title="Offer Update" onclick="{!c.OfferUpdate}"/>
+                <lightning:button variant="Neutral" label="Contract Update" title="Contract Update" onclick="{!c.ContractUpdate}"/>
+                <lightning:button variant="Neutral" label="General Update" title="General Update" onclick="{!c.GeneralUpdate}"/>
+                <lightning:button variant="Neutral" label="Funding Update" title="Funding Update" onclick="{!c.FundingUpdate}"/>
+                <lightning:button variant="Neutral" label="Commission Update" title="Commission Update" onclick="{!c.CommissionUpdate}"/>
+                <!-- </lightning:layout>-->
+            </div>
+            <h2 class="header">Custom Message</h2>
+            <div class="email-section">
+                <div class="row">
+                    <!--<lightning:input name="Email" aura:id="emailField" label="Email" placeholder="Enter Email here" value="{!v.email}"/>-->
+                    <lightning:textarea name="message" value="{!v.message}" class="topText" label="Message" maxlength="300" placeholder="Type message here..."/>
+
+                </div>
+                <div class="option-button-section">
+                    <lightning:select name="select1" label="Select Option" value="{!v.selectedOption}">
+                        <option value="">choose one...</option>
+                        <option value="Submission">Submission</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Revision">Revision</option>
+                    </lightning:select>
+                    <lightning:button label="Send Mail" title="Neutral action" onclick="{!c.sendEmail}" aura:id="sendCustomMessage"/>
+                </div>
+                
+            </div>
+        </lightning:card>
+    </ui:scrollerWrapper>
+</aura:component>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Incomplete Application Alert</name>
+    <style>none</style>
+    <subject>Application form for {!Cloufi__Application__c.Cloufi__Business_Legal_Name__c}</subject>
+    <type>custom</type>
+</EmailTemplate>

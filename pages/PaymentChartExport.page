@@ -1,0 +1,14 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* VF Page Name: PaymentChart
+* Created Date: 04-Dec-2018
+* Description: To show data in CSS file
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - --
+Author  | Date       | Description
+
+-->
+<apex:page standardController="Opportunity" extensions="PaymentChartController" action="{!exportToCSV}" readOnly="true" contentType="application/vnd.ms-excel#PaymentChart.csv">Payments,Account Name,Payment Amount,Status,Record Type,Type,Effective Date,Settlement Date
+  <apex:repeat value="{!lstwrapper}" var="x">
+       {!x.name},{!x.account},{!x.paymentAmount},{!x.Status},{!x.RecordType},{!x.PaymentType},{!x.effectiveDate},{!x.settlementDate}
+  </apex:repeat>
+</apex:page>

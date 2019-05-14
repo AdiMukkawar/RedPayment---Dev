@@ -1,0 +1,7 @@
+<apex:component controller="NewCustomOfferEmailComp_Ctl" access="global">
+    <apex:attribute name="offerId" type="Id" description="Id of the offer" assignTo="{!offid}"/>
+        
+        <apex:outputText >
+        <a style="color:#999999;" target="_blank" href = "{!OfferLink}">Click Here</a> to view New Offer.
+        </apex:outputText>
+</apex:component>

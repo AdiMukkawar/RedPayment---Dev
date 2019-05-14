@@ -1,0 +1,15 @@
+Dear {!Cloufi__Application__c.Cloufi__First_Name__c} 
+ {!Cloufi__Application__c.Cloufi__Last_Name__c},<br/><br/>
+
+<p>Your application has been successfully submitted.</p>
+
+<ul>
+
+<li><b>Legal Name : </b>{!Cloufi__Application__c.Cloufi__Business_Legal_Name__c}</li>
+
+<li><b>Type of Business : </b>{!Cloufi__Application__c.Cloufi__Industry_Type__c}</li>
+</ul><br/><br/><br/>
+
+Regards,<br/>
+<img src="https://redpaymentsorg2--dev--c.cs70.content.force.com/servlet/servlet.ImageServer?id=0153D000000F82i&oid=00D3D0000009OmI&lastMod=1530686169000" width="130" height="80"/>
+</footer>

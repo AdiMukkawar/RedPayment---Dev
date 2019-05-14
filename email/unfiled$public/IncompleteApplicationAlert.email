@@ -1,0 +1,10 @@
+Hello {!Cloufi__Application__c.Cloufi__First_Name__c} {!Cloufi__Application__c.Cloufi__Last_Name__c},<br/><br/>
+
+Your application has been successfully submitted.<br/><br/>
+
+<a href="https://dev-merchantservices.cs70.force.com/CompleteApplicationForm?id={!Cloufi__Application__c.Id}">Click here </a>to update incomoplete Application.<br/><br/>
+
+
+Regards,<br/>
+<img src="https://redpaymentsorg2--dev--c.cs70.visual.force.com/resource/1529502612000/MapleLogo" width="130" height="80"/>
+</footer>

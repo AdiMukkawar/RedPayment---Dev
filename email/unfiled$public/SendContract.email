@@ -1,0 +1,18 @@
+<messaging:emailTemplate subject="Your Merchant Advance Contract for {!relatedTo.Name} is here!" recipientType="Lead" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        Hello {!relatedTo.Owner_1_First_Name__c},<br/><br/>
+        
+        We are pleased to inform you that the contract for <b>{!relatedTo.Name}</b> is attached below. <br/><br/>
+
+        <c:SendContractComp OpportunityID="{!relatedTo.id}"></c:SendContractComp><br/>
+        
+        If you have any questions, we will be happy to answer them.<br/><br/><br/>
+        
+        Best Regards,<br/>
+        {!relatedTo.Owner.Name}<br/>
+        {!relatedTo.Owner.Phone}<br/>
+        {!relatedTo.Owner.Email}<br/>
+        <img src="{!relatedTo.Owner.Company_Logo__c}"/>
+          
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

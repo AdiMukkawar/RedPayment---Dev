@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Request contract from chosen offer funder</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Request Contract</name>
+    <style>none</style>
+    <subject>Contract Request for {!Opportunity.Name}</subject>
+    <textOnly>Hi {!Opportunity.Cloufi__Funder__r},&lt;br/&gt;&lt;br/&gt;
+
+Offer is chosen for &lt;b&gt;{!Opportunity.Name}&lt;/b&gt;, Please send the contract for same. &lt;br/&gt;&lt;br/&gt;
+
+Regards,&lt;br/&gt;
+&lt;img src=&quot;{!Opportunity.Company_Logo__c}&quot;&gt;&lt;br/&gt;&lt;br/&gt;</textOnly>
+    <type>custom</type>
+</EmailTemplate>

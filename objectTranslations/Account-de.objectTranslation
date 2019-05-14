@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Access Code Expiration --></label>
+        <name>Access_Code_Expiration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Access Code --></label>
+        <name>Access_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Routing Number --></label>
+        <name>CloufiServicing__BankRoutingNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Number --></label>
+        <name>CloufiServicing__Bank_Number_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Number --></label>
+        <name>CloufiServicing__Bank_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Transit Number --></label>
+        <name>CloufiServicing__Bank_Transit_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Management Fee % --></label>
+        <name>CloufiServicing__Management_Fee_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Lender --></label>
+        <name>CloufiServicing__Primary_Lender__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transit Number --></label>
+        <name>CloufiServicing__Transit_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Backend Fees --></label>
+        <name>Cloufi__Backend_Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Account Number --></label>
+        <name>Cloufi__Bank_Account_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Name --></label>
+        <name>Cloufi__Bank_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Routing Number --></label>
+        <name>Cloufi__Bank_Routing_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Broker Commissions --></label>
+        <name>Cloufi__Broker_Commissions__c</name>
+        <picklistValues>
+            <masterLabel>50% split</masterLabel>
+            <translation><!-- 50% split --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>50% split - 10% max on recurring payments</masterLabel>
+            <translation><!-- 50% split - 10% max on recurring payments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>50% split - 10% on recurring</masterLabel>
+            <translation><!-- 50% split - 10% on recurring --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Business Address --></label>
+        <name>Cloufi__Business_DBA_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legal/Corporate Name --></label>
+        <name>Cloufi__Business_Legal_Corporate_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Start Date --></label>
+        <name>Cloufi__Business_Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Age --></label>
+        <name>Cloufi__Client_Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Person --></label>
+        <name>Cloufi__Contact_Person__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Signed Date --></label>
+        <name>Cloufi__Contract_Signed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Account Opened --></label>
+        <name>Cloufi__Date_Account_Opened_Bank_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fax --></label>
+        <name>Cloufi__Fax_Bank_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Federal Tax Id --></label>
+        <name>Cloufi__Federal_Tax_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Individual Identification Number --></label>
+        <name>Cloufi__Individual_Identification_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Locations --></label>
+        <name>Cloufi__NumberofLocations__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Processor --></label>
+        <name>Cloufi__Payment_Processor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Cloufi__Phone_Bank_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- SLA --></label>
+        <name>Cloufi__SLA__c</name>
+        <picklistValues>
+            <masterLabel>Bronze</masterLabel>
+            <translation><!-- Bronze --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Gold</masterLabel>
+            <translation><!-- Gold --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Platinum</masterLabel>
+            <translation><!-- Platinum --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Silver</masterLabel>
+            <translation><!-- Silver --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Syndication Fee --></label>
+        <name>Cloufi__SP_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Separate Payroll Account --></label>
+        <name>Cloufi__Separate_Payroll_Account__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Syndicator --></label>
+        <name>Cloufi__Syndicator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Title Banking Info --></label>
+        <name>Cloufi__Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trust Level --></label>
+        <name>Cloufi__Trust_Level__c</name>
+        <picklistValues>
+            <masterLabel>Fraud</masterLabel>
+            <translation><!-- Fraud --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High</masterLabel>
+            <translation><!-- High --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low</masterLabel>
+            <translation><!-- Low --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medium</masterLabel>
+            <translation><!-- Medium --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type Of Account --></label>
+        <name>Cloufi__Type_Of_Account__c</name>
+        <picklistValues>
+            <masterLabel>Current</masterLabel>
+            <translation><!-- Current --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Savings</masterLabel>
+            <translation><!-- Savings --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upfront Fees --></label>
+        <name>Cloufi__Upfront_Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <help><!-- The record owner&apos;s Salesforce ID. Used in Campaign source reports to distribute the records using the Record Owner Distribution feature --></help>
+        <label><!-- DS Owner ID --></label>
+        <name>DialSource__DS_Owner_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time stamp of when the last Disposition was clicked --></help>
+        <label><!-- Datetime of Last Disposition --></label>
+        <name>DialSource__Datetime_of_Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Call Campaign the record was last called from --></help>
+        <label><!-- Last Call Campaign Name --></label>
+        <name>DialSource__Last_Call_Campaign_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the last Disposition clicked --></help>
+        <label><!-- Last Disposition --></label>
+        <name>DialSource__Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Datetime field used to set the next call datetime for reference in automation or Reports/List Views --></help>
+        <label><!-- Next Call --></label>
+        <name>DialSource__Next_Call_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of calls made on this record --></help>
+        <label><!-- Total Call Count --></label>
+        <name>DialSource__Total_Call_Count_DS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Login Date --></label>
+        <name>Last_Login_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Password --></label>
+        <name>Password__c</name>
+    </fields>
+    <fields>
+        <label><!-- Renewal Eligibility % --></label>
+        <name>Renewal_Eligibility_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndication Portal Access --></label>
+        <name>Syndication_Portal_Access__c</name>
+    </fields>
+    <fields>
+        <help><!-- The number of times this record has been assigned via Distribution Engine --></help>
+        <label><!-- Distribution count --></label>
+        <name>n2de__Distribution_count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is distributed --></label>
+        <name>n2de__Is_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is reassigned --></label>
+        <name>n2de__Is_reassigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last distributed to user --></label>
+        <name>n2de__Last_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last auto reassigned --></label>
+        <name>n2de__Last_reassigned__c</name>
+    </fields>
+    <layouts>
+        <layout>Account Layout</layout>
+        <sections>
+            <label><!-- Account Summary --></label>
+            <section>Account Summary</section>
+        </sections>
+        <sections>
+            <label><!-- Bank Details --></label>
+            <section>Bank Details</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Child Account --></label>
+        <name>Child_Account</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Send Login Details --></label>
+        <name>Send_Login_Details</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- ISO --></label>
+        <name>ISO</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Lender --></label>
+        <name>Lender</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Merchant --></label>
+        <name>Merchant</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Referral Partner --></label>
+        <name>Referral_Partner</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- White Label --></label>
+        <name>White_Label</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- Send_Bulk_SMS --></label>
+        <name>Cloufi_Twilio__Send_Bulk_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_SMS --></label>
+        <name>Cloufi_Twilio__Send_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Syndication_Report --></label>
+        <name>Cloufi__Syndication_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DS_InstaQueue --></label>
+        <name>DialSource__DS_InstaQueue</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DS_InstaQueue_List --></label>
+        <name>DialSource__DS_InstaQueue_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+</CustomObjectTranslation>

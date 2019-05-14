@@ -1,0 +1,326 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* VF Page Name: ControlSheetPortal
+* Created Date: 11-April-2019
+* Description: Control Sheet Portal VF to show deals to upload control sheet file
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author            |      Date      |   Description 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<apex:page standardController="Contact" extensions="ControlSheetDeptLoginController"  standardStylesheets="false" sidebar="false" showHeader="false"><!--ControlSheetDeptLoginController/ControlSheetPortalController-->
+    <head>
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+        <style></style>
+    </head>
+    <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <apex:stylesheet value="{!URLFOR($Resource.Cloufi__SLDS0105, '/assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+    <script>
+    if(window.history.forward(1) != null)
+           window.history.forward(1);
+    
+    var j$ = jQuery.noConflict();
+    j$(document).ready(function() { 
+        overridePageMessages();
+    });
+    
+    //Lightning Design System for Page Messages    
+    function overridePageMessages(){    
+        
+        j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+        j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+        j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+        j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+        
+        j$('.errorM3').removeClass('errorM3'); 
+        j$('.confirmM3').removeClass('confirmM3'); 
+        j$('.infoM3').removeClass('infoM3');   
+        j$('.warningM3').removeClass('warningM3');  
+    }
+    </script>
+    <style>
+        .customMessage {
+        margin: 5px 0!important;
+        opacity: 1!important;
+        width: 100%;
+        font-size: 15px;
+        border: 0px;
+        border-radius: 6px;
+        padding-left: 10px;
+        }
+    </style>
+    
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <meta charset="utf-8" />
+            <meta http-equiv="x-ua-compatible" content="ie=edge" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="{!URLFOR($Resource.mapleapllicationresource,'css/bootstrap.min.css')}"/>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+            <style>
+                .sheet-main {
+                    border: 1px solid #ccc;
+                    margin: 10px;
+                    padding: 15px;
+                    font-size: 14px;
+                }
+	            .sheet-main .title {
+	                font-size: 16px;
+	                margin-bottom: 15px;
+	            }
+	            .scroll{
+	                width: 500px;
+	                height: 500px;
+	                overflow: auto;
+	            }
+	            .heading{
+	            	border-bottom: 1px solid #ccc;
+				    margin-bottom: 15px;
+				    padding-bottom: 10px;
+				    font-size: larger;
+	            }
+	            .slds-scope .slds-text-title_caps, .slds-scope .slds-text-title--caps{
+	            	font-size: 1.2rem;
+	            }
+            </style>
+        </head>
+        <body>
+
+            <apex:form styleClass="slds-form" id="theform" enctype="multipart/form-data">
+                <apex:slds />
+                <div class="container-fluid sheet-main">
+	            	<p style="margin-left: 40%;color: #c78521;"><b> Welcome {!contactName}</b>
+            			<apex:commandButton value="Logout" styleClass="slds-button slds-button--brand" style="margin-left: 61%;padding: 5px 15px;" action="{!Logout}"/><!--rerender="none" status="actionStatus" -->
+            			<apex:actionRegion >
+            				<apex:commandButton value="Refresh" styleClass="slds-button slds-button--brand" style="padding: 5px 15px;" rerender="oppListPanel,panelId" status="actionStatus" action="{!initializeOpportunityRecords}"/><!--init/initializeOpportunityRecords -->
+            			</apex:actionRegion>
+	             	</p>
+	            </div>
+                
+                <apex:pageMessages id="pgMsg"/>
+                <div class="container-fluid sheet-main">
+                    <apex:actionstatus id="actionStatus">
+                        <apex:facet name="start">
+                            <div class="waitingSearchDiv" id="el_loading" style="z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                                <div id="spinner" class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                </div>
+                            </div>
+                        </apex:facet>
+                    </apex:actionstatus>
+	                    <div class="row slds">
+	                        <div class="col-md-3">
+	                            <div class="title" style="font-size: 140%;color: #206f73;">Opportunities</div>
+	                            <p>{!initMsg}</p>
+	                            <apex:actionRegion >
+		                            <apex:pageBlock id="oppListPanel">
+		                                <apex:outputPanel id="action1" rendered="{!displayOppPanel}">
+		                                    <apex:pageBlockSection columns="1" id="pbs" >
+			                                    <apex:outPutPanel rendered="{!requestedOpportunityList.size!=0}">
+			                                    	<div Class="heading">Requested Opportunities</div>
+			                                        <apex:pageBlockTable value="{!requestedOpportunityList}" var="opp" id="reqOpp" styleClass="pTable">
+			                                            <apex:column ><!--headerValue="Requested Opportunities" styleClass="heading"-->
+			                                                    <div class="panel panel-default" style="margin-bottom: 3px;">
+							                                        <div class="panel-heading">
+							                                            <h4 class="panel-title">
+																			<apex:commandLink value="{!opp.Name}" action="{!fetchConrolSheet}" rerender="panelId, action1" status="actionStatus"> 
+			                                                    				<apex:param value="{!opp.Id}" name="reqOppId" assignTo="{!selectedOppId}"/>
+			                                                   				 </apex:commandLink>
+							                                            </h4>
+							                                        </div>
+							                                    </div>
+			                                            </apex:column>
+			                                        </apex:pageBlockTable><br/>
+			                                    </apex:outPutPanel>
+			                                    <apex:outPutPanel rendered="{!pendingOpportunityList.size!=0}">
+			                                    	<div Class="heading">Pending Opportunities</div>
+			                                        <apex:pageBlockTable value="{!pendingOpportunityList}" var="opp" id="rejOpp" styleClass="pTable">
+			                                            <apex:column >
+			                                                <div class="panel panel-default" style="margin-bottom: 3px;">
+							                                        <div class="panel-heading">
+							                                            <h4 class="panel-title">
+																			<apex:commandLink value="{!opp.Name}" action="{!fetchConrolSheet}" rerender="panelId, action1" status="actionStatus">
+							                                                    <apex:param value="{!opp.Id}" name="rejOppId" assignTo="{!selectedOppId}"
+							                                                    /> 
+							                                                </apex:commandLink>
+							                                            </h4>
+							                                        </div>
+							                                    </div>
+			                                            </apex:column>
+			                                        </apex:pageBlockTable>
+			                                    </apex:outPutPanel>
+		                                    </apex:pageBlockSection>
+		                                </apex:outputPanel>
+		                            </apex:pageBlock>
+		                        </apex:actionRegion>
+	                        </div>
+	                        <apex:outputPanel id="panelId">
+	                            <div class="col-md-9">
+	                                <apex:outputPanel rendered="{!!displaySheetPanel}">
+	                                    <div class="title"><p>{!msg}</p></div>
+	                                </apex:outputPanel>
+	                                
+	                                <apex:outputPanel rendered="{!displaySheetPanel}">
+		                                <div class="slds-page-header" role="banner">
+				                            <div class="slds-grid">               
+				                                <div class="slds-col slds-has-flexi-truncate">
+				                                    <div class="slds-media slds-no-space slds-grow">
+				                                        <div class="slds-media__figure">
+				                                            <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+				                                                <svg aria-hidden="true" class="slds-icon">
+				                                                    <use xlink:href="{!URLFOR($Asset.SLDS, '/apexpages/slds/latest/assets/icons/standard-sprite/svg/symbols.svg#account')}"></use>
+				                                                </svg>
+				                                            </span>
+				                                        </div>
+				                                        <div class="slds-media__body">
+				                                            <p class="slds-text-title_caps slds-line-height_reset">Control Sheet Upload</p>
+				                                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">
+				                                                <apex:outputText value="{!objOpportunity.Name}" />
+				                                            </h1>
+				                                        </div>
+				                                    </div>
+				                                </div>
+				                            </div>                              
+				                        </div>
+		                                <apex:outputPanel id="outputPanelOne" >
+				                            <div class="slds-tabs--default slds-p-horizontal--medium">
+				                                <ul class="slds-tabs--default__nav" role="tablist">
+				                                    <li class="slds-tabs--default__item slds-text-title--caps slds-active" title="Opportunity Details" role="presentation">
+				                                        <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Opportunity Details</a>
+				                                    </li>
+				                                    <li class="slds-tabs--default__item slds-text-title--caps" title="Documents" role="presentation">
+				                                        <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Documents</a>
+				                                    </li>
+				                                    <li class="slds-tabs--default__item slds-text-title--caps" title="Upload Control Sheet" role="presentation">
+				                                        <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-2__item">Upload Control Sheet</a>
+				                                    </li>
+				                                </ul>
+				                                <div id="tab-default-1" class="slds-tabs--default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+				                                    <div class="slds-grid slds-wrap">
+				                                        <div class="slds-form--inline">
+				                                            <apex:repeat value="{!$ObjectType.Opportunity.FieldSets.Cloufi__Funder_Offer_Calculate}" var="f">
+				                                                <div class="slds-form-element slds-p-horizontal--small  slds-size--1-of-2 slds-medium-size--1-of-4 slds-large-size--1-of-4" style="border: 1px solid lightgray;padding: 4px 10px;margin-bottom:10px">
+				                                                    <label class="slds-form-element__label" for="{!f.Label}">
+				                                                        <b>
+				                                                            <apex:outputText value="{!f.Label}" />
+				                                                        </b>
+				                                                    </label>
+				                                                    <div class="slds-form-element__control" >
+				                                                        <apex:outputField value="{!objOpportunity[f.fieldPath]}"/>
+				                                                    </div>
+				                                                </div>
+				                                            </apex:repeat>
+				                                        </div>
+				                                    </div>
+				                                </div>
+				                                <div id="tab-default-2" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+				                                    <apex:outputpanel id="Panel">
+				                                        <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+				                                            <thead>
+				                                                <tr class="slds-text-title--caps">
+				                                                    <th scope="col">
+				                                                        <div class="slds-truncate" title="UW Document Name">
+				                                                            <b>UW Document Name</b>
+				                                                        </div>
+				                                                    </th>
+				                                                    <th scope="col">
+				                                                        <div class="slds-truncate" title="View"></div>
+				                                                    </th>
+				                                                </tr>
+				                                            </thead>
+				                                            <tbody>
+				                                                <apex:repeat value="{!UWList}" var="stip">
+				                                                    <tr>
+				                                                        <td data-label="Stip Name">
+				                                                            <div class="" title="{!stip.Stip_Name__c}">
+				                                                                <apex:outputText value="{!stip.Stip_Name__c}"/>
+				                                                            </div>
+				                                                        </td>
+				                                                        <td data-label="View">
+				                                                            <div class="" title="{!stip.Cloufi__URL__c}">
+				                                                                <apex:outputLink target="_blank" value="{!stip.Cloufi__URL__c}" rendered="{!stip.Cloufi__URL__c!=null}">View</apex:outputLink>
+				                                                                <apex:outputText rendered="{!stip.Cloufi__URL__c==null}">Requested</apex:outputText>
+				                                                            </div>
+				                                                        </td>
+				                                                    </tr>
+				                                                </apex:repeat>
+				                                            </tbody>
+				                                        </table>
+				                                        <!--<apex:actionRegion >
+				                                             <apex:commandButton value="Download All" onclick="downloadSpecificFileZip();" status="actionStatus" rendered="{!showHideButton}" styleClass="slds-button slds-button--brand" style="margin-top:15px;" disabled="{!isDownloadSpecificButtonDisabled}" rerender="none"/>
+				                                        </apex:actionRegion> -->
+				                                    </apex:outputpanel>
+				                                </div>
+				                                <div id="tab-default-3" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">
+				                                    <apex:outputPanel id="controlPanel">
+				                                        <div class="table-responsive">
+				                                            <table class="slds-table slds-table--bordered slds-table--striped">
+				                                                <thead>
+				                                                    <tr >
+				                                                        <th scope="col">
+				                                                            <div>Name</div>
+				                                                        </th>
+				                                                        <th scope="col">
+				                                                            <div >Upload a File</div>
+				                                                        </th>
+				                                                    </tr>
+				                                                </thead>
+				                                                <tbody>                             
+				                                                    <apex:repeat value="{!controlSheet}" var="ctrlSheet">
+				                                                        <tr>
+				                                                            <td>
+				                                                                <apex:outputText value="{!ctrlSheet.Stip_Name__c}"/>
+				                                                            </td>
+				                                                            <td>
+				                                                                <apex:outputpanel rendered="{!ctrlSheet.Cloufi__URL__c!=null}">
+				                                                                    <apex:outputLink target="_blank" value="{!ctrlSheet.Cloufi__URL__c}" rendered="{!ctrlSheet.Cloufi__URL__c!=null}">View</apex:outputLink>
+				                                                                </apex:outputPanel>
+				                                                                <!-- <apex:actionRegion> -->
+					                                                                <apex:outputpanel rendered="{!ctrlSheet.Cloufi__URL__c=null}">
+					                                                                    <apex:inputFile id="filesInput" value="{!customStipFileBody}" filename="{!customStipFileName}" styleClass="input-file"/>
+					                                                                </apex:outputPanel>
+					                                                            <!-- </apex:actionRegion> -->
+				                                                            </td>
+				                                                        </tr>   
+				                                                    </apex:repeat>
+				                                                </tbody>  
+				                                            </table>
+				                                            <br/>
+				                                            <apex:actionRegion >
+					                                            <apex:outputPanel rendered="{!objControlSheet.Cloufi__URL__c=null}">
+					                                                <apex:commandButton value="Upload Sheet" action="{!uploadControlSheet}" styleClass="slds-button slds-button--brand" status="actionStatus" style="padding: 5px 15px;"/>
+					                                            </apex:outputPanel>
+					                                        </apex:actionRegion>
+				                                        </div>
+				                                    </apex:outputPanel>
+				                                </div>
+				                            </div>
+				                            <!-- Other JS plugins can be included here -->
+				                            <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"/>
+				                            <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+										    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+										    <apex:stylesheet value="{!URLFOR($Resource.Cloufi__SLDS0105, '/assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+						                    <script>
+							                    /*SLDS Tabs JS*/
+							                    $('.slds-tabs--default__link,.slds-tabs--scoped__link').click(function(){
+							                        $(this).parent().parent().find('.slds-tabs--default__link,.slds-tabs--scoped__link').attr('aria-selected','false');
+							                        $(this).attr('aria-selected','true');
+							                        $(this).parent().parent().find('.slds-tabs--default__link,.slds-tabs--scoped__link').attr('tabindex','-1');
+							                        $(this).attr('tabindex','0');
+							                        $(this).parent().addClass('slds-active').siblings().removeClass('slds-active');
+							                        $(this).parent().parent().parent().find('.'+$(this).parent().parent().parent().find('.slds-tabs--default__content,.slds-tabs--scoped__content')[0].classList[0]).removeClass('slds-show').addClass('slds-hide');
+							                        $(this).parent().parent().parent().find('#'+$(this).attr('aria-controls')).removeClass('slds-hide').addClass('slds-show');
+							                    });
+							                     /*SLDS Tabs JS*/
+							                </script>		                   
+				                        </apex:outputPanel>
+			                        </apex:outputPanel>
+	                            </div>
+	                        </apex:outputPanel>
+	                    </div>
+                </div>
+            </apex:form>
+        </body>
+    </html>
+</apex:page>

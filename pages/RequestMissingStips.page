@@ -1,0 +1,85 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* VF Page Name: RequestMissingStips
+* Created Date: 14-September-2018
+* Description: To send Missing Documents
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author       |      Date      |   Description 
+*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<apex:page sidebar="false" standardController="Opportunity" extensions="RequestMissingStipsController" action="{!sendMissingDocs}" docType="html-5.0" standardStylesheets="true" showHeader="false">
+    
+    <apex:form id="FormId" styleClass="slds-scope">
+        <apex:slds />
+        <apex:stylesheet value="{!URLFOR($Resource.Cloufi__SLDS0105, '/assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+        <!--<link rel="stylesheet" href="/resources/demos/style.css" />-->
+        <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>     
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+            <title>Request Documents</title>
+            <script>
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function() {
+                    overridePageMessages();
+                });
+                
+                //Lightning Design System for Page Messages    
+                function overridePageMessages(){    
+                                 
+                    j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                    j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                    j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                    j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                                     
+                    j$('.errorM3').removeClass('errorM3'); 
+                    j$('.confirmM3').removeClass('confirmM3'); 
+                    j$('.infoM3').removeClass('infoM3');   
+                    j$('.warningM3').removeClass('warningM3');  
+                }
+            </script>
+            <style>
+                .customMessage {
+                    margin: 5px 0!important;
+                    opacity: 1!important;
+                    width: 100%;
+                    font-size: 15px;
+                    border: 0px;
+                    border-radius: 6px;
+                    padding-left: 10px;
+                }
+            </style>
+            </head>
+            <body>
+                <div class="slds-scope">
+                    <div class="slds-page-header" role="banner">
+                        <div class="slds-grid">               
+                            <div class="slds-col slds-has-flexi-truncate">
+                                <div class="slds-media slds-no-space slds-grow">
+                                    <div class="slds-media__figure">
+                                        <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+                                            <svg aria-hidden="true" class="slds-icon">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <p class="slds-text-title_caps slds-line-height_reset">Request Missing Documents</p>
+                                        <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">
+                                            <apex:outputText value="{!Opportunity.Name}"/>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                              
+                    </div>
+                    <apex:pagemessages /><br/><br/>
+                    <center>
+                        <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button_brand"/>
+                    </center>
+                </div>
+            </body>
+        </html>
+    </apex:form>
+</apex:page>

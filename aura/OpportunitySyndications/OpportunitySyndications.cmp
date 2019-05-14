@@ -1,0 +1,119 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd. (Prashant Mahajan)
+* Component Name: Opportunity Syndications
+* Created Date: 28-August-2018
+* Description:  Component used on opportunity to display list of Syndications
+*******************************************************************
+Author           | Date              | Description
+Aditya Mukkawar  | 28-September-2018 | "Syndication wizard" button will not be visible to Sales Agent
+/-->
+<aura:component controller="OpportunityOffersController" implements="flexipage:availableForRecordHome,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,lightning:actionOverride,force:hasRecordId" access="global">
+    <aura:attribute name="offers" type="List"/>	
+    <aura:attribute name="sObj" type="String" default="CloufiServicing__Syndication__c" required="true"/>
+    <aura:attribute name="fSetName" type="String" default="OpportunitySyndications" required="true"/>
+    <aura:attribute name="fieldlist" type="List"/>
+    <aura:attribute name="displayRecs" type="List"/>
+    <aura:attribute name="sObjWrapperlist" type="List"/>
+    <aura:attribute name="recordId" type="Id" access="global"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<aura:attribute name="userInfo" type="user"/>
+    
+    <ui:scrollerWrapper class="scrollerSize">
+		<!-- Component Header Start -->
+		<div class="slds-page-header">
+			<div class="slds-page-header__row">
+				<div class="slds-page-header__col-title">
+					<div class="slds-media">
+						<div class="slds-media__figure">
+							<lightning:icon iconName="standard:account" alternativeText="Event" />
+						</div>
+						<div class="slds-media__body">
+							<div class="slds-page-header__name">
+								<div class="slds-page-header__name-title">
+									<h1>
+										<span class="slds-page-header__title slds-truncate" title="Syndication">Syndication</span>
+									</h1>
+								</div>
+							</div>
+							<p class="slds-page-header__name-meta"></p>
+						</div>
+						<!-- Buttons Section Start -->
+						<aura:if isTrue="{!v.userInfo.Profile.Name != 'Cash Advance Sales Agent'}">
+							<div class="slds-button" style="float:right!important;">
+								<button class="slds-m-top_xx-small slds-button slds-button_neutral btnSubmit"><a href="{!'/one/one.app#/alohaRedirect/apex/CloufiServicing__SyndicationWizard?id='+(v.recordId)}">Syndication Wizard </a></button>
+							</div>
+						</aura:if>
+						<!-- Buttons Section End -->
+					</div>
+				</div>
+			</div>
+		</div><br/>
+		<!-- Component Header End -->
+        
+        <aura:if isTrue="{!(v.sObjWrapperlist == null) }">
+            No Syndications At This Moment!!!
+        </aura:if>    
+        <aura:if isTrue="{!(v.sObjWrapperlist != null) }">
+            
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <aura:iteration items="{!v.fieldlist}" var="f">
+                            <th scope="col">
+                                <div class="slds-truncate" title="{!f.fLabel}">{!f.fLabel}</div></th>
+                        </aura:iteration>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.sObjWrapperlist}" var="obj">
+                        <tr>
+                            <aura:iteration items="{!obj}" var="obj2" >
+                                <td >
+                                    <div class="slds-truncate" >
+                                        <!--<aura:if isTrue="{!obj2.fAPIname == 'Name'}">
+                            <a href="{!'/one/one.app?#/sObject/'+ obj2.offerId + '/view'}" target="_blank">{!obj2.fvalue}</a>
+                        </aura:if>
+      <aura:if isTrue="{!obj2.fAPIname != 'Name'}">
+       <ui:outputText value="{!obj2.fvalue}" />
+      </aura:if>-->
+                                        <aura:if isTrue="{!obj2.fAPIname == 'Name'}">
+                                            <a href="{!'/one/one.app?#/sObject/'+ obj2.offerId + '/view'}" target="_blank">{!obj2.fvalue}</a>
+                                        </aura:if>
+                                        <aura:if isTrue="{!obj2.fAPIname == 'CloufiServicing__Syndicating_Account__c'}">
+                                            <!-- <a href="{!'/one/one.app?#/sObject/'+ obj2.fvalue + '/view'}" target="_blank">{!obj2.offerName}</a> -->
+                                            
+                                            <ui:outputUrl value="{!'/one/one.app?#/sObject/'+ obj2.fvalue + '/view'}" target="_blank" label="{!obj2.childName}" />
+                                        </aura:if>
+                                        <aura:if isTrue="{(!obj2.fDetails.type == 'string' || obj2.fDetails.type == 'picklist') and obj2.fAPIname != 'Name'}">
+                                            <ui:outputText value="{!obj2.fvalue}" />
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'datetime'}">
+                                            <ui:outputDateTime value="{!obj2.fvalue}" />
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'double'}">
+                                            <ui:outputNumber value="{!obj2.fvalue}" />
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'percent'}">
+                                            <ui:outputText value="{!obj2.fvalue}"/>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'int'}">
+                                            <ui:outputNumber value="{!obj2.fvalue}" format=".00"/>
+                                        </aura:if>
+                                        
+                                        <aura:if isTrue="{!obj2.fDetails.type == 'currency'}">
+                                            <ui:outputCurrency value="{!obj2.fvalue}" format="$#,###.00"/>
+                                        </aura:if>
+                                    </div>
+                                </td>
+                            </aura:iteration>
+                        </tr>
+                    </aura:iteration>                 
+                </tbody>
+            </table>    
+        </aura:if>
+    </ui:scrollerWrapper>
+</aura:component>

@@ -1,0 +1,417 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd.
+* VF Page Name: ControlSheetUpload
+* Created Date: 24-August-2018
+* Description: Page hosted on sites to upload control sheet
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<apex:page sidebar="false" tabStyle="Opportunity" standardController="Opportunity"  extensions="ControlSheetUploadController" id="PriceCal" docType="html-5.0" standardStylesheets="true" showHeader="false" cache="false">
+    
+    <apex:form id="FormId">
+        <apex:slds />
+        <apex:pagemessages id="msg"/>
+        <apex:stylesheet value="{!URLFOR($Resource.Cloufi__SLDS0105, '/assets/styles/salesforce-lightning-design-system-vf.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.Cloufi__wizardjs, '/js/jquery-1.11.1.js')}" />
+        <apex:includeScript value="{!URLFOR($Resource.Cloufi__wizardjs, '/js/jquery-ui-1.10.3.js')}" />
+        <apex:stylesheet value="{!$Resource.Cloufi__RepaymentListingCSS}"/>
+         <apex:includeScript value="{!$Resource.FileSaver}"/>
+        <apex:includeScript value="{!$Resource.JavascriptZip}"/>
+        <!--<link rel="stylesheet" href="/resources/demos/style.css" />-->
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+            <!-- JS to update field Starts Here -->  
+            <head>
+                <title>Control Sheet Upload</title>
+                
+                <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>     
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                <script>
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function() { 
+                    overridePageMessages();
+                });
+                
+                //Lightning Design System for Page Messages    
+                function overridePageMessages(){    
+                    
+                    j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                    j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                    j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                    j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                    
+                    j$('.errorM3').removeClass('errorM3'); 
+                    j$('.confirmM3').removeClass('confirmM3'); 
+                    j$('.infoM3').removeClass('infoM3');   
+                    j$('.warningM3').removeClass('warningM3');  
+                }
+                
+                var zip;
+                var filePaths;
+                var a;
+                var i = 0;
+                var dropboxToken;
+                var map;
+                var folder;
+                window.onload = function(){
+                    zip = new JSZip();
+                    folder = zip.folder('{!loan.Name}');
+                    map = new Map();
+                    dropboxToken = '{!$Setup.Cloufi__Dropbox_Settings__c.Cloufi__Access_Token__c}';
+                    filePaths = '{!filesPathList}';
+                    a = filePaths.replace('[','').replace(']','').split(",");
+                }
+                
+                function downloadSpecificFileZip(){
+                    document.getElementById("sldsSpinner").style.display = "block";
+                    if(a.length == 0){
+                        alert('No files to download');
+                    }else if(a.length > 0){
+                        if(a[i] != null && a[i] !='')
+                            getFiles(decodeURIComponent(a[i].trim()));
+                    }
+                }
+                
+                function getFiles(filePath){             
+                    var xhr = new XMLHttpRequest();                    
+                    console.log(JSON.stringify({
+                        path: filePath
+                    }));
+                    var fileName = filePath.split('/');
+                    xhr.open('POST', 'https://content.dropboxapi.com/2/files/download');
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + dropboxToken);
+                    xhr.setRequestHeader('Dropbox-API-Arg', JSON.stringify({
+                        path: filePath
+                    }));
+                    xhr.responseType = "arraybuffer";
+                    xhr.onreadystatechange = function() {
+                        if(xhr.readyState == 4) {
+                            if(xhr.status === 200){
+                                map.set(fileName[fileName.length-1], xhr.response);
+                            }
+                            i++;
+                            if(i < a.length){
+                                getFiles(decodeURIComponent(a[i].trim()));
+                            }else if(i == a.length){
+                                a.forEach((url)=> {
+                                    var fileName = decodeURIComponent(url).split('/');
+                                    if(map.has(fileName[fileName.length-1])){
+                                        folder.file(fileName[fileName.length-1], map.get(fileName[fileName.length-1]));
+                                    }
+                                })
+                                zip.generateAsync({type:"blob"})
+                                    .then(blob => saveAs(blob, '{!loan.Name}'))
+                                    .catch(e => document.getElementById('mainHeading').innerHTML = e);
+                                    document.getElementById("sldsSpinner").style.display = "none";
+                                    window.location.reload();
+                            }
+                        }
+                    }
+                    xhr.send();
+                }
+                </script>
+                <style>
+                    .customMessage {
+                    margin: 5px 0!important;
+                    opacity: 1!important;
+                    width: 100%;
+                    font-size: 15px;
+                    border: 0px;
+                    border-radius: 6px;
+                    padding-left: 10px;
+                    }
+                </style>
+            </head>
+            <body>
+                <apex:outputPanel id="panelId" >
+                    <div class="slds">
+                     <!-- SPINNER -->
+                        <div id="sldsSpinner" class="slds-spinner_container slds-is-relative" style="display: none;z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%; ">
+                            <div role="status" class="slds-spinner slds-spinner--medium slds-spinner--brand">
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    <!-- / SPINNER -->
+                        <apex:actionstatus id="actionStatus">
+                            <apex:facet name="start">
+                                <div class="waitingSearchDiv" id="el_loading" style="z-index:3;background-color: #000;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                                    <div role="status" class="slds-spinner slds-spinner--medium">
+                                        <span class="slds-assistive-text">Loading</span>
+                                        <div class="slds-spinner__dot-a"></div>
+                                        <div class="slds-spinner__dot-b"></div>
+                                    </div>
+                                </div>
+                            </apex:facet>
+                        </apex:actionstatus>
+                        
+                        <div class="slds-page-header" role="banner">
+                            <div class="slds-grid">               
+                                <div class="slds-col slds-has-flexi-truncate">
+                                    <div class="slds-media slds-no-space slds-grow">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+                                                <svg aria-hidden="true" class="slds-icon">
+                                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <p class="slds-text-title_caps slds-line-height_reset"> Control Sheet Upload</p>
+                                            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">
+                                                <apex:outputText value="{!Opportunity.Name}" />
+                                            </h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                              
+                        </div>
+                        <apex:outputPanel id="outputPanelOne" >
+                            <div class="slds-tabs--default slds-p-horizontal--medium">
+                                <ul class="slds-tabs--default__nav" role="tablist">
+                                    <li class="slds-tabs--default__item slds-text-title--caps slds-active" title="Opportunity Details" role="presentation">
+                                        <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Opportunity Details</a>
+                                    </li>
+                                    <li class="slds-tabs--default__item slds-text-title--caps" title="Documents" role="presentation">
+                                        <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Documents</a>
+                                    </li>
+                                    <li class="slds-tabs--default__item slds-text-title--caps" title="Upload Control Sheet" role="presentation">
+                                        <a class="slds-tabs--default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-2__item">Upload Control Sheet</a>
+                                    </li>
+                                </ul>
+                                <div id="tab-default-1" class="slds-tabs--default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+                                    <div class="slds-grid slds-wrap">
+                                        <div class="slds-form--inline">
+                                            <apex:repeat value="{!$ObjectType.Opportunity.FieldSets.Cloufi__Funder_Offer_Calculate}" var="f">
+                                                <div class="slds-form-element slds-p-horizontal--small  slds-size--1-of-2 slds-medium-size--1-of-4 slds-large-size--1-of-4" style="border: 1px solid lightgray;padding: 4px 10px;margin-bottom:10px">
+                                                    <label class="slds-form-element__label" for="{!f.Label}">
+                                                        <b>
+                                                            <apex:outputText value="{!f.Label}" />
+                                                        </b>
+                                                    </label>
+                                                    <div class="slds-form-element__control" >
+                                                        <apex:outputField value="{!Opportunity[f]}"/>
+                                                    </div>
+                                                </div>
+                                            </apex:repeat>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tab-default-2" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+                                    <apex:outputpanel id="Panel">
+                                        <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+                                            <thead>
+                                                <tr class="slds-text-title--caps">
+                                                    <th scope="col">
+                                                        <div class="slds-truncate" title="UW Document Name">
+                                                            <b>UW Document Name</b>
+                                                        </div>
+                                                    </th>
+                                                    <th scope="col">
+                                                        <div class="slds-truncate" title="View"></div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!UWList}" var="stip">
+                                                    <tr>
+                                                        <td data-label="Stip Name">
+                                                            <div class="" title="{!stip.Stip_Name__c}">
+                                                                <apex:outputText value="{!stip.Stip_Name__c}"/>
+                                                            </div>
+                                                        </td>
+                                                        <td data-label="View">
+                                                            <div class="" title="{!stip.Cloufi__URL__c}">
+                                                                <apex:outputLink target="_blank" value="{!stip.Cloufi__URL__c}" rendered="{!stip.Cloufi__URL__c!=null}">View</apex:outputLink>
+                                                                <apex:outputText rendered="{!stip.Cloufi__URL__c==null}">Requested</apex:outputText>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </apex:repeat>
+                                            </tbody>
+                                        </table>
+                                        <apex:actionRegion >
+                                            <apex:commandButton value="Download All" onclick="downloadSpecificFileZip();" rendered="{!showHideButton}" styleClass="slds-button slds-button--brand" style="margin-top:15px;" disabled="{!isDownloadSpecificButtonDisabled}" rerender="none"/>
+                                        </apex:actionRegion>
+                                    </apex:outputpanel>
+                                </div>
+                                <div id="tab-default-3" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">
+                                    <apex:outputPanel id="controlPanel">
+                                        <div class="table-responsive">
+                                            <table class="slds-table slds-table--bordered slds-table--striped">
+                                                <thead>
+                                                    <tr >
+                                                        <th scope="col">
+                                                            <div>Name</div>
+                                                        </th>
+                                                        <th scope="col">
+                                                            <div >Upload a File</div>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>                             
+                                                    <apex:repeat value="{!controlSheet}" var="ctrlSheet">
+                                                        <tr>
+                                                            <td>
+                                                                <apex:outputText value="{!ctrlSheet.Stip_Name__c}"/>
+                                                            </td>
+                                                            <td >
+                                                                <apex:outputpanel rendered="{!ctrlSheet.Cloufi__URL__c!=null}">
+                                                                    <apex:outputLink target="_blank" value="{!ctrlSheet.Cloufi__URL__c}" rendered="{!ctrlSheet.Cloufi__URL__c!=null}">View</apex:outputLink>
+                                                                </apex:outputPanel>
+                                                                <apex:outputpanel rendered="{!ctrlSheet.Cloufi__URL__c=null}">
+                                                                    <!-- <apex:inputFile value="{!myfile.body}" filename="{!myfile.Name}" />  -->
+                                                                    <apex:inputFile id="filesInput" styleclass="filesInput" value="{!customStipFileBody}" filename="{!customStipFileName}" />
+                                                                </apex:outputPanel>
+                                                            </td>
+                                                        </tr>   
+                                                    </apex:repeat>
+                                                </tbody>  
+                                            </table>
+                                            <br/>
+                                            <apex:outputPanel rendered="{!objControlSheet.Cloufi__URL__c=null}">
+                                                <apex:commandButton value="Upload Sheet" action="{!uploadControlSheet}" styleClass="slds-button slds-button--brand" status="loadingStatus"/>
+                                            </apex:outputPanel>
+                                            
+                                            <!--apex:actionRegion >
+                                                <apex:commandLink styleClass="slds-button slds-button--brand" status="loadingStatus" value="Back" reRender="controlPanel,msg" immediate="true" />
+                                            </apex:actionRegion-->
+                                        </div>
+                                    </apex:outputPanel>
+                                </div>
+                            </div>
+                        </apex:outputPanel>
+                    </div>
+                    <!-- Ending SLDS TAG -->
+
+                    
+
+<!-- Other JS plugins can be included here -->
+                    <script>
+                    /*SLDS Tabs JS*/
+                    $('.slds-tabs--default__link,.slds-tabs--scoped__link').click(function(){
+                        $(this).parent().parent().find('.slds-tabs--default__link,.slds-tabs--scoped__link').attr('aria-selected','false');
+                        $(this).attr('aria-selected','true');
+                        $(this).parent().parent().find('.slds-tabs--default__link,.slds-tabs--scoped__link').attr('tabindex','-1');
+                        $(this).attr('tabindex','0');
+                        $(this).parent().addClass('slds-active').siblings().removeClass('slds-active');
+                        $(this).parent().parent().parent().find('.'+$(this).parent().parent().parent().find('.slds-tabs--default__content,.slds-tabs--scoped__content')[0].classList[0]).removeClass('slds-show').addClass('slds-hide');
+                        $(this).parent().parent().parent().find('#'+$(this).attr('aria-controls')).removeClass('slds-hide').addClass('slds-show');
+                    }); 
+                    /*SLDS Tabs JS*/
+                    </script>
+                </apex:outputPanel>
+            </body>
+        </html>
+    </apex:form>
+    <style>
+        [hidden],
+        template {
+        display: block !important;
+        }
+        
+        .headerwrapper {
+        background-color: #6c6c6c;
+        min-height: 60px;
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
+        .popupBackground {
+        /* Background color */
+        background-color: black;
+        opacity: 0.20;
+        filter: alpha(opacity=20);
+        /* Dimensions */
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        /* Mouse */
+        cursor: wait;
+        }
+        /* This is for the message DIV */
+        .PopupPanel {
+        /* Background color */
+        border: solid 2px blue;
+        background-color: white;
+        /* Dimensions */
+        left: 50%;
+        width: 200px;
+        margin-left: -100px;
+        top: 50%;
+        height: 50px;
+        margin-top: -25px;
+        z-index: 999;
+        position: fixed;
+        /* Mouse */
+        cursor: pointer;
+        }
+        }
+        
+        .slds .slds-table td {
+        white-space: normal;
+        }
+        
+        .slds .offer-table {
+        border-collapse: initial;
+        }
+        
+        .offer-table tr td:first-child {
+        width: 220px;
+        }
+        
+        .offer-table tr td {
+        width: 220px;
+        }
+        
+        .slds .offer-table th {
+        border-right: 1px solid #d8dde6;
+        }
+        
+        .slds .offer-table td {
+        border-right: 1px solid #d8dde6;
+        }
+        
+        .slds-grid {
+        padding: 0 10px;
+        }
+        
+        .message .messageText h4 {
+        display: -moz-inline-grid;
+        }
+        
+        .message .messageText {
+        /* font-size: 0.5em;*/
+        color: #fff !important;
+        }
+        
+        .message {
+        background-color: #04844b;
+        border-style: none;
+        color: #fff;
+        }
+        
+        .slds-text-heading--large {
+        padding: 0 10px;
+        }
+        
+        .ui-state-default,
+        .ui-widget-content .ui-state-default,
+        .ui-widget-header .ui-state-default {
+        background: #0070d2 none repeat scroll 0 0;
+        border: 1px solid #0070d2;
+        }
+        
+        .ui-widget-content {
+        border: 1px solid #d8dde6;
+        }
+        
+        .slider-success {
+        margin-right: 20px;
+        }
+        /*Css update for this page only*/
+        .slds .slds-large-size--1-of-4 {
+        width: 24%;
+        }
+    </style>
+</apex:page>

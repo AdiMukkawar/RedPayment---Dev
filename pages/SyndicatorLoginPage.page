@@ -1,0 +1,88 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Sheema Dhanraj)
+* VF Page Name: SyndicatorLoginPage
+* Created Date: 05-April-2019
+* Description: Login page to login into Syndication portal.
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author            |      Date      |   Description 
+* 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" standardController="Account" 
+           extensions="SyndicatorController">
+    <head>
+        <script>
+        window.onload=function(){
+            browser.history.deleteAll();
+        }
+        </script>
+        <apex:stylesheet value="{!$Resource.SyndicatorLoginStyle}"/>
+        <style>
+            input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {  -webkit-box-shadow: 0 0 0 1000px #e5e7e9 inset;margin: 2px;}
+            input{ font-family: 'Tahoma'; font-size: 18px; }
+            ul li{ display: block;}
+            ::-webkit-input-placeholder { /* WebKit browsers */
+            color:    black;
+            font-size:18px;
+            }
+            :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+            color:    black;
+            opacity:  1;
+            font-size:18px;
+            }
+            ::-moz-placeholder { /* Mozilla Firefox 19+ */
+            color:    black;
+            opacity:  1;
+            font-size:18px;
+            }
+            :-ms-input-placeholder { /* Internet Explorer 10+ */
+            color:    black;
+            font-size:18px;
+            }
+            input {
+            line-height: 3.2em;
+            }
+            button {
+            border-top:none;
+            box-shadow:none;
+            text-shadow:none;
+            background:#f1592a;
+            cursor:pointer;
+            padding: 6px;
+            font-size: 1.2em;
+            }
+            button:hover {
+            background:#e34413;
+            }
+        </style>
+    </head>
+    <body>
+        <br />
+        <br />
+        <br />
+        <div class="ribbon"></div>
+        <div class="login">
+            <!--<img src="{!$Resource.Logo_Transparent}" style="width: 200px;margin-bottom: 20px;margin-top: 10px;"/>-->
+            <!--<h1>Employee Login</h1>-->
+            <p style="color:black;">
+                Syndicator Login</p>
+            <apex:form >
+                <p>
+                    <apex:messages />
+                </p>
+                <apex:actionFunction action="{!LoginUser}" name="LoginUser"/>
+                <div class="input">
+                    <div class="blockinput">
+                        <i class="icon-envelope-alt"></i>
+                        <apex:inputText value="{!username}" html-placeholder="Email"  id="Email" />
+                    </div>
+                    <div class="blockinput">
+                        <i class="icon-unlock"></i>
+                        <apex:inputSecret value="{!password}" html-placeholder="Password" id="Password" />
+                    </div>
+                </div>
+                <button onclick="LoginUser(); return false;"> Login </button>
+                <apex:commandButton value="Forgot password?" action="{!forgetPassword}" id="theCommandLink" style="cursor:pointer; color:#bf1e2d;"/>
+            </apex:form>
+        </div>
+    </body>
+</apex:page>

@@ -1,0 +1,9 @@
+Dear {!Cloufi__Application__c.Cloufi__First_Name__c} 
+ {!Cloufi__Application__c.Cloufi__Last_Name__c},<br/><br/>
+
+<p>Thank you for completing Application form.</p>
+<br/><br/>
+
+Regards,<br/>
+<img src="https://redpaymentsorg2--dev--c.cs70.content.force.com/servlet/servlet.ImageServer?id=0153D000000F82i&oid=00D3D0000009OmI&lastMod=1530686169000" width="130" height="80"/>
+</footer>

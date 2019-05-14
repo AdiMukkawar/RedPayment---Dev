@@ -1,0 +1,204 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd (Aditya Mukkawar)
+* Component Name: OpportunityDocComponent
+* Created Date: 
+* Description:  Component used on opportunity to display list of Documents
+*******************************************************************
+/-->
+
+<aura:component Controller="OpportunityDocumentController">
+	 <!-- on component load, fetch picklist values dynamically from apex controller -->  
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--declare aura attributes-->
+    <aura:attribute name="objInfoForPicklistValues" type="Cloufi__UW_Document__c" default="{sobjectType : 'Cloufi__UW_Document__c'}" description="object information to fetch picklist values"/>
+    <aura:attribute name="ratingPicklistOpts" type="string[]" description="store picklist options values"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="documentList" type="Cloufi__UW_Document__c[]"/>
+    <aura:attribute name="showDeletePopup" type="Boolean" default="false"/>
+    <aura:attribute name="showErrorClass" type="boolean" default="false"/>
+    <aura:attribute name="uwIDToDelete" type="string"/>
+    <aura:attribute name="uwName" type="string"/>
+    <aura:attribute name="userInfo" type="user"/>
+    <aura:attribute name="singleRec" type="sobject" default="{'sobjectType' : 'Cloufi__UW_Document__c',
+                                                             'id':'',
+                                                             'Name' : '',
+															 'Lender' : '',
+                                                             'Cloufi__View__c' : '',
+                                                             'Cloufi__Type__c' :'',
+                                                             'Status__c': '',
+                                                             'Comment__c': ''
+                                                             }"/>
+    <aura:attribute name="ratingEditMode" type="boolean" default="false" />
+    <aura:attribute name="commentEditMode" type="boolean" default="false" />
+    <aura:attribute name="mapValues" type="map" />
+    <aura:attribute name="mapNameValues" type="map" />
+    <aura:attribute name="opportunityId" type="Id"/>    
+
+    <!-- UW Delete popup start -->
+    <aura:if isTrue="{!v.showDeletePopup}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- MODAL BOX BODY Part Start-->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    Are you sure you want to delete <b>{!v.uwName}</b><br/><br/>
+                </div>
+                <!-- MODAL BOX BODY Part End-->
+                <!-- MODAL BOX FOOTER Part Start -->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{!c.closeUWDeletePopup}"/>
+                    <lightning:button variant="neutral" label="Delete" title="Delete" onclick="{!c.delUW}"/>
+                </footer>
+                <!-- MODAL BOX FOOTER Part End -->
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+    <!-- UW Delete popup End -->
+    
+    <!--Table Row Start-->
+    <tr>
+		<aura:if isTrue="{!v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'System Administrator'}">
+			<td>
+				<aura:if isTrue="{!or(v.singleRec.Cloufi__Type__c == 'Bank Statement', v.singleRec.Stip_Name__c == 'Signed Application')}">
+				   <td></td>
+					<aura:set attribute="else">
+						<a onclick="{!c.openUWDeletePopup}" id="{!v.singleRec.Id}">
+						   <lightning:icon variant="error" iconName="utility:delete" class="slds-icon slds-icon_small" size="xx-small" alternativeText="icon"/>
+						   <span class="slds-assistive-text">Delete Icon</span>
+						</a>
+					</aura:set>
+				</aura:if>
+				
+			</td>
+		</aura:if>	
+        <td><div class="slds-truncate"><a href="{!'/one/one.app?#/sObject/'+ v.singleRec.Id + '/view'}" target="_blank">{!v.singleRec.Name}</a></div></td>
+        <aura:if isTrue="{!v.userInfo.Profile.Name != 'Cash Advance Sales Agent'}">
+    		<aura:if isTrue="{!and(v.singleRec.Cloufi__URL__c != null, v.singleRec.Cloufi__URL__c != '')}">
+    			<td>
+                    <!-- <aura:iteration items="{!v.mapNameValues}" var="mapKey" indexVar="key">
+                        <aura:renderif isTrue="{!mapKey.key == v.singleRec.Id}">
+                                <aura:if isTrue="{!mapKey.value.length>1}">
+                                    <lightning:button variant="base" label="Multiple" title="{!mapKey.value}"/>
+                                <aura:set attribute="else">
+                                    <aura:iteration items="{!mapKey.value}" var="mapValue">
+                                        <div class="slds-truncate"><a href="{!'/one/one.app?#/sObject/'+ mapValue.Id + '/view'}" target="_blank">{!mapValue}</a></div>
+                                    </aura:iteration>
+                                </aura:set>
+                            </aura:if>
+                        </aura:renderif>
+                    </aura:iteration> -->
+
+                    <aura:iteration items="{!v.mapValues}" var="mapKey" indexVar="key">
+                        <aura:renderif isTrue="{!mapKey.key == v.singleRec.Id}">
+                                <aura:if isTrue="{!mapKey.value.length>1}">
+                                    <lightning:button variant="base" label="Multiple" title="Multiple Lenders"/><!--{!mapKey.value.key.name}-->
+                                <aura:set attribute="else">
+                                    <aura:iteration items="{!mapKey.value}" var="mapValue">
+                                        <div class="slds-truncate"><a href="{!'/one/one.app?#/sObject/'+ mapValue.Id + '/view'}" target="_blank">{!mapValue.Name}</a></div>
+                                    </aura:iteration>
+                                </aura:set>
+                            </aura:if>
+                        </aura:renderif>
+                    </aura:iteration>
+                   <!-- <aura:iteration items="{!v.mapValues}" var="mapKey" indexVar="key">
+                       <aura:renderif isTrue="{!mapKey.key == v.singleRec.Id}">
+                            <aura:iteration items="{!v.mapNameValues}" var="mapKey1" indexVar="key1">
+
+                                <aura:if isTrue="{!and(mapKey.value.length>1, mapKey.key == mapKey1.key1)}">
+                                    <aura:if isTrue="{!mapKey.key == mapKey1.key1}">
+                                        <lightning:button variant="base" label="Multiple" title="{!v.mapKey1.value}"/>
+                                    </aura:if>
+                                    <aura:set attribute="else">
+                                        <aura:iteration items="{!mapKey.value}" var="mapValue">
+                                            <div class="slds-truncate"><a href="{!'/one/one.app?#/sObject/'+ mapValue.Id + '/view'}" target="_blank">{!mapValue.Name}</a></div>
+                                        </aura:iteration>
+                                    </aura:set>
+                              </aura:if>
+                            </aura:iteration>
+                        </aura:renderif>
+                    </aura:iteration> -->
+    			</td>
+    			<aura:set attribute="else">
+    				<td><div class="slds-truncate"></div></td>
+    			</aura:set>
+    		</aura:if>
+        </aura:if>
+        <aura:if isTrue="{! and(v.singleRec.Cloufi__URL__c != null, v.singleRec.Cloufi__URL__c != '')}">
+            <td><div class="slds-truncate"><a href="{!v.singleRec.Cloufi__URL__c}" target="_blank">View</a></div></td>
+            <aura:set attribute="else">
+                <td><div class="slds-truncate"></div></td>
+            </aura:set>
+        </aura:if>
+        <aura:if isTrue="{!v.userInfo.Profile.Name == 'Cash Advance Sales Agent' || v.userInfo.Profile.Name == 'System Administrator'}">
+			<td><div class="slds-truncate">{!v.singleRec.Cloufi__Type__c}</div></td>
+            <!-- <aura:set attribute="else">
+                <td><div class="slds-truncate"></div></td>
+            </aura:set> -->
+		</aura:if>
+  
+        <td ondblclick="{!c.inlineEditRating}" class="slds-cell-edit" style="width: 187px;">
+            <span class="slds-grid slds-grid_align-spread">
+                <!-- show input and output section based on boolean flag -->
+                <aura:if isTrue="{!v.ratingEditMode == false}">
+                    <span class="slds-truncate" title="Rating">{!v.singleRec.Status__c}</span>
+                        <button onclick="{!c.inlineEditRating}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Rating" style="border-right-width: 84px;">
+                            <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                        </button>
+           
+                    <!-- Inline Edit Section in else case-->
+                    <aura:set attribute="else">                 
+                            <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px; width:90%; height:30%; margin-top:0px; padding-top:0px;">
+                                <div class="slds-popover__body">
+                                    <div class="slds-form-element slds-grid slds-wrap">
+                                        <div class="slds-form-element__control slds-grow">
+                                            <label class="slds-form-element__label"></label>
+                                            <ui:inputSelect aura:id="accRating"
+                                                            class="slds-select inputFieldWidth"
+                                                            blur="{!c.closeRatingBox}"
+                                                            change="{!c.onRatingChange}"
+                                                            value="{!v.singleRec.Status__c}"
+                                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <span id="form-end" tabindex="0"></span>
+                            </section>                   
+                    </aura:set>
+                </aura:if>
+            </span>
+        </td>
+        <aura:if isTrue="{!v.userInfo.Profile.Name == 'Sales Support' || v.userInfo.Profile.Name == 'Under Writing' || v.userInfo.Profile.Name == 'System Administrator' || v.userInfo.Profile.Name == 'Customer Success' || v.userInfo.Profile.Name == 'Customer Success Manager'}">
+            <td ondblclick="{!c.inlineEditComment}" class="slds-cell-edit">
+                <span class="slds-grid slds-grid_align-spread">
+                    <!-- show input and output section based on boolean flag --> 
+                    <aura:if isTrue="{!v.commentEditMode == false}">
+                        <span class="slds-truncate" title="Comment" style="white-space: normal;word-break: break-all;">
+                        	<ui:outputTextArea value="{!v.singleRec.Comment__c}"/>
+                        </span><!--style="width: 137px !important;"-->
+                        <button onclick="{!c.inlineEditComment}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Comment">
+                            <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                        </button>
+                       
+                        <!-- Inline Edit Section in else case-->  
+                        <aura:set attribute="else">
+                            <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                                <div class="slds-popover__body">
+                                    <div class="slds-form-element slds-grid slds-wrap">
+                                        <div class="slds-form-element__control slds-grow">
+                                            <ui:inputTextArea class="slds-input inputFieldWidth"
+                                                          aura:id="CommentId"
+                                                          blur="{!c.closeCommentBox}"
+                                                          change="{!c.onCommentChange}"
+                                                          value="{!v.singleRec.Comment__c}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <span id="form-end" tabindex="0"></span>
+                            </section>  
+                        </aura:set>  
+                    </aura:if> 
+                </span>
+            </td>
+        </aura:if>
+    </tr>
+</aura:component>

@@ -1,0 +1,76 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd (Aditya Mukkawar)
+* Component Name: LeadNotebox
+* Created Date: 03/15/2019
+* Description: Lead Note box Component
+*******************************************************************
+/-->
+<aura:component controller="LeadNoteboxController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!-- Aura Attributes Begin -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="userInfo" type="user"/>
+
+    <!-- Sales Representative Note Attributes Begin -->
+    <aura:attribute name="salesRepNoteList" type="Chat__c[]" />
+    <aura:attribute name="salesRepNoteDescription" type="String" default=""/>
+    <aura:attribute name="SaveRepresentativeNote" type="Boolean" default="true"/>
+    <!-- Sales Representative Note Attributes End -->
+
+    <!-- Aura Attributes End -->
+    
+    <!-- Chatbox Component for Sales Representative Note Begin -->
+    <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Cash Advance Sales Agent' || v.userInfo.Profile.Name == 'Cash Advance Sales Manager' || v.userInfo.Profile.Name == 'System Administrator')}">
+        <div class="container-fluid">
+            <lightning:layout verticalAlign="stretch" multipleRows="true" class="x-large chatBoxDesign skyblueBackground">
+                <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                    <ui:scrollerWrapper class="scrollerSize">
+                        <lightning:card>
+                            <aura:set attribute="title">
+                                <h2 class="chat-header skyblue-chat-header">
+                                    <lightning:icon iconName="utility:connected_apps" size="small" class="labelIcon"/>
+                                    Sales Representative Note
+                                </h2>
+                            </aura:set>
+                            
+                            <p class="slds-p-horizontal_small">
+                                <aura:renderIf isTrue="{!or(v.userInfo.Profile.Name == 'Cash Advance Sales Manager' || v.userInfo.Profile.Name == 'Cash Advance Sales Agent' || v.userInfo.Profile.Name == 'System Administrator')}">
+                                    <span class="slds-form-element__label slds-m-bottom_none messageField slds-size_1-of-1">
+                                        <lightning:inputRichText aura:id="salesRepNote" label="Message" value="{!v.salesRepNoteDescription}" placeholder="Type a message here...">
+                                            <lightning:insertImageButton/>
+                                        </lightning:inputRichText>
+                                        <br/>
+                                        <lightning:button variant="brand" label="Save" class="Float-right skyblueBackground" title="Save" onclick="{!c.saveSalesRepNote}" disabled="{!!v.SaveRepresentativeNote}"/>
+                                    </span><br/>
+                                </aura:renderIf>
+                                <!-- Message Section Begin -->
+                                    <div class="slds-p-around_small chat-main slds-size_1-of-1" id="modal-content-id-1">
+                                        <h2 class="chat-header skyblue-chat-header">Note History</h2>
+                                        <div class="scroll-bar">
+                                            <aura:iteration items="{!v.salesRepNoteList}" var="chat">
+                                                <div class="slds-box slds-text-heading_small slds-grid slds-wrap note-history">
+                                                    <div class="slds-col slds-size_1-of-1">
+                                                        <a href="JavaScript:void(0);" style="pointer-events: none; cursor: default; color:#b54e4e;">{!chat.User__r.Name}</a>
+                                                        &nbsp;<ui:outputDateTime value="{!chat.CreatedDate}" timeZone="{!$Locale.timezone}"/><br/>
+                                                        <span class="description-Span">
+                                                            <!-- <ui:outputRichText aura:id="outputRT" value="{!chat.Message__c}" /> -->
+                                                            <dd class="slds-tile">
+                                                                <p class="slds-text-longform tile__title red-txt">
+                                                                    <aura:unescapedHtml value="{!chat.Message__c}"/>
+                                                                </p>   
+                                                            </dd>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                <!-- Message Section End -->
+                            </p>
+                        </lightning:card>
+                    </ui:scrollerWrapper>
+                </lightning:layoutItem>
+            </lightning:layout>
+        </div>
+    </aura:renderIf>
+    <!-- Chatbox Component for Sales Representative Note End -->
+</aura:component>

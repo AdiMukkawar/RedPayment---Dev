@@ -1,0 +1,82 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* Class Name: ControlSheetDeptLogin
+* Created Date: 11-April-2019
+* Description: Control Sheet Department Portal
+*******************************************************************
+*Author             | Date       | Description
+*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" standardController="Contact" extensions="ControlSheetDeptLoginController">
+	<head>
+	<!--<script>
+	    window.history.forward();
+	    function noBack() { 
+	        window.history.forward(); 
+	    }
+    </script>-->
+	<apex:stylesheet value="{!$Resource.SyndicatorLoginStyle}"/>
+	<style>
+	      input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {  -webkit-box-shadow: 0 0 0 1000px #e5e7e9 inset;margin: 2px;}
+	      input{ font-family: 'Tahoma'; font-size: 18px; }
+	      ul li{ display: block;}
+	      ::-webkit-input-placeholder { /* WebKit browsers */
+	            color:    black;
+	            font-size:18px;
+	        }
+	        :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+	           color:    black;
+	           opacity:  1;
+	           font-size:18px;
+	        }
+	        ::-moz-placeholder { /* Mozilla Firefox 19+ */
+	           color:    black;
+	           opacity:  1;
+	           font-size:18px;
+	        }
+	        :-ms-input-placeholder { /* Internet Explorer 10+ */
+	           color:    black;
+	           font-size:18px;
+	        }
+	        input {
+	            line-height: 3.2em;
+	        }
+	        button {
+	            border-top:none;
+	            box-shadow:none;
+	            text-shadow:none;
+	            background:#f1592a;
+	            cursor:pointer;
+	            padding: 6px;
+	            font-size: 1.2em;
+	        }
+	        button:hover {
+	            background:#e34413;
+	        }
+	  </style>
+	</head>
+	<body ><br/><br/><br/><!--onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload=""-->
+		<div class="ribbon"></div>
+		<div class="login">
+		  	<p style="color:black;">Control Sheet Department Login</p>
+		  	<apex:form >
+			    <p>
+			      <apex:messages />
+			    </p>
+			    <apex:actionFunction action="{!LoginUser}" name="LoginUser"/>
+			    <div class="input">
+				    <div class="blockinput">
+				        <i class="icon-envelope-alt"></i>
+				        <apex:inputText value="{!username}" html-placeholder="Email"  id="Email" />
+				    </div>
+			      	<div class="blockinput">
+			        	<i class="icon-unlock"></i>
+			        	<apex:inputSecret value="{!password}" html-placeholder="Password" id="Password" />
+			      	</div>
+			    </div>
+			    <button onclick="LoginUser(); return false;">Login</button>
+			    <apex:commandButton value="Forgot password?" action="{!forgetPassword}" id="theCommandLink" style="cursor:pointer; color:#bf1e2d;"/>
+		  	</apex:form>
+		</div>
+	</body>
+</apex:page>

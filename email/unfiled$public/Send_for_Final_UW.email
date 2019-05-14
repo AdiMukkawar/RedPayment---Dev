@@ -1,0 +1,24 @@
+<messaging:emailTemplate subject="Documentation Completed for {!relatedTo.Name}" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br /><br/>
+
+        All stipulations for <b>{!relatedTo.Name}</b> are now completed.<br/><br/> 
+        InputNoteBySalesSupport
+
+        You may review the signed contract along with the provided documentation that was requested in the link below.<br/>
+        
+        <!-- <c:SendForFinalUW OpportunityId="{!relatedTo.Id}" /><br/><br/> -->
+        StipulationList
+        
+        <b><a style="color:#999999;" target="_blank" href = "MerchantStipPageLink">Click Here</a> to see the Completed Documents.</b><br/><br/>
+        
+        <!--<b><a style="color:#999999;" target="_blank" href = "OpportunityLink">Click Here</a> to go to the Opportunity</b><br/><br/>-->
+        Please let us know if there is anything else that you might need for funding.<br/><br/><br/>
+        
+        Thank you,<br/>
+        <img src="{!relatedTo.Owner.Company_Logo__c}"/>
+        
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

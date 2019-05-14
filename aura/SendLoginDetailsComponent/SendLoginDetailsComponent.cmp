@@ -1,0 +1,25 @@
+<!--/*****************************************************************
+* Author: Techila Global Services Pvt Ltd. (Sheema Dhanraj)
+* Component Name: SendLoginDetailsComponent
+* Created Date: 01-08-2019
+* Description:  Component used on Account to send login details to syndicator
+*******************************************************************
+/-->
+<aura:component controller="SendLoginDetailsController" 
+                implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,force:hasRecordId"  access="global" >
+    <!-- attribute -->
+    <aura:attribute name="recordId" type="Id"/>
+    <!-- handler -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <!-- hide popup modal start -->
+    <aura:html tag="style">
+        .slds-backdrop {
+        background: rgba(43, 40, 38, 0) !important;  
+        }
+        .slds-fade-in-open {
+        display:none !important;
+        }
+    </aura:html>
+    <!-- hide popup modal end -->
+</aura:component>

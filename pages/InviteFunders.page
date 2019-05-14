@@ -1,0 +1,357 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd.
+* VF Page Name: InviteFunder
+* Created Date: 22-Jan-2018
+* Description: Page for inviting funders
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+Author  | Date       | Description
+Neha    | 14/04/2018 | Updated page header and applied lightning CSS to the page message 
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+<apex:page standardController="Opportunity" extensions="InviteFundersCtrl" sidebar="false" showHeader="false">
+    <apex:form id="formId">
+        <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <head>
+                <apex:slds />
+                <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>
+     
+                <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+                <script>
+                    var j$ = jQuery.noConflict();
+                    j$(document).ready(function() { 
+                        overridePageMessages();
+                    });
+                    
+                    //Lightning Design System for Page Messages    
+                    function overridePageMessages(){    
+                                     
+                        j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                        j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                        j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                        j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                                         
+                        j$('.errorM3').removeClass('errorM3'); 
+                        j$('.confirmM3').removeClass('confirmM3'); 
+                        j$('.infoM3').removeClass('infoM3');   
+                        j$('.warningM3').removeClass('warningM3');  
+                    }
+                </script>
+                <style>
+                    .customMessage {
+                        margin: 5px 0!important;
+                        opacity: 1!important;
+                        width: 100%;
+                        font-size: 15px;
+                        color: #ffffff;
+                        border: 0px;
+                        border-radius: 6px;
+                        padding-left: 10px;
+                    }
+                </style>
+            </head>
+            <body class="slds-scope">
+                <apex:actionstatus id="loadingStatus" >
+                    <apex:facet name="start">
+                        <div class="waitingSearchDiv" id="el_loading" style="z-index:3;background-color: #000;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                            <div role="status" class="slds-spinner slds-spinner--medium">
+                                <span class="slds-assistive-text">Loading</span>
+                                <div class="slds-spinner__dot-a"></div>
+                                <div class="slds-spinner__dot-b"></div>
+                            </div>
+                        </div>
+                    </apex:facet>
+                </apex:actionstatus>
+                <div>
+                    <apex:pageMessages id="pgMsg"/>
+                </div>
+                <div class="slds-page-header">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-has-flexi-truncate">
+                            <div class="slds-media slds-no-space slds-grow">
+                                <div class="slds-media__figure">
+                                    <span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+                                        <svg aria-hidden="true" class="slds-icon">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                        </svg>
+                                    </span>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-text-title_caps slds-line-height_reset">Invite Funder</p>
+                                    <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="this should match the Record Title">
+                                        <apex:outputText value="{!Opportunity.Name}" rendered="{!$ObjectType.Opportunity.fields.Name.Accessible}" />
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                       <div class="slds-col slds-no-flex slds-grid slds-align-top">
+                            <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button--brand" style="font-size:12px;margin-left:-10%;" />
+                            <apex:commandButton styleClass="slds-button slds-button--brand" value="Invite" action="{!inviteFunders}" status="loadingStatus" rendered="{!$ObjectType.Cloufi__Product__c.Createable}" oncomplete="overridePageMessages();" style="float: right;" reRender="pgMsg"/>
+                        </div>
+                    </div>
+                </div><br/>
+                <apex:outputPanel rendered="{!showPage}" id="opPanelOne">
+                    <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                        <!--Opportunity Section -->
+                        <thead>
+                            <tr style="background: #f4f6f9;">
+                                <th scope="col" colspan="4">
+                                    <div class="">
+                                        <h3 class="slds-section__title">
+                                            <span class="slds-truncate" title="Section Title">Opportunity</span>
+                                        </h3>
+                                    </div>
+                                </th>
+                                <apex:repeat value="{!listProgramCriteria}" var="criteria" >
+                                    <th scope="col" class="slds-text-title_caps">
+                                        <div class="slds-truncate" title="">{!$ObjectType.Opportunity.fields[criteria.Cloufi__Opportunity__c].label}</div>
+                                    </th>
+                                </apex:repeat>
+                                <th scope="col" class=""></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row" data-label="Account" colspan="4">
+                                    <div class="slds-truncate" title="Cloudhub"></div>
+                                </td>
+                                <apex:repeat value="{!listProgramCriteria}" var="criteria" >
+                                    <td data-label="Program">
+                                        <div class="slds-truncate" title="Program">
+                                            <apex:outputField value="{!loan[criteria.Cloufi__Opportunity__c]}" rendered="{!$ObjectType.Opportunity.fields[criteria.Cloufi__Opportunity__c].Accessible}"/>
+                                        </div>
+                                    </td>
+                                </apex:repeat>
+                                <td></td>
+                            </tr>
+                            <tr style="background: #f4f6f9;">
+                                <td colspan="{!listProgramCriteria.size+4}" >
+                                    <div class="">
+                                        <h3 class="slds-section__title">
+                                            <span class="slds-truncate" title="Section Title">Programs</span>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                        <!--/table-->
+                        <!--Program Section>
+                        <table class="slds-table slds-table_bordered slds-table_cell-buffer" -->
+                        <thead>
+                            <tr class="slds-text-title_caps">
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Select">Select</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Account">Account</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Program">Program</div>
+                                </th>
+                                <th scope="col">
+                                    <div class="slds-truncate" title="Percentage">Percentage</div>
+                                </th>                                
+                                <apex:repeat value="{!listProgramCriteria}" var="criteria" >
+                                    <th scope="col">
+                                        <div class="slds-truncate" title="">{!$ObjectType.Cloufi__Product__c.fields[criteria.Cloufi__Program_Field__c].label}</div>
+                                    </th>
+                                </apex:repeat>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <apex:outputPanel rendered="{!appCount==1 && bankStmtCount>0}">
+                            <apex:repeat value="{!listProgramCustom}" var="programCustom" >
+                                <tr>
+                                    <td>
+                                        <apex:inputCheckbox value="{!programCustom.isSelected}" disabled="{!If(programCustom.showFunder==true,true,false)}"/>
+                                    </td>
+                                    <td scope="row" data-label="Account">
+                                        <div class="slds-truncate" >
+                                            <apex:outputField style="float:left;padding-right: 10px;" value="{!programCustom.program.Cloufi__Account__c}" rendered="{!$ObjectType.Cloufi__Product__c.fields.Cloufi__Account__c.Accessible}"/>
+                                            <apex:outputPanel styleClass="emailHover" rendered="{!programCustom.contactEmail!=null}" title="{!programCustom.contactEmail}">
+                                                <span class="slds-icon_container slds-icon-standard-email" >
+                                                    <svg class="slds-icon slds-icon--x-small" aria-hidden="true">
+                                                        <use xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/standard-sprite/svg/symbols.svg#email_chatter')}"></use>
+                                                    </svg>
+                                                </span>
+                                            </apex:outputPanel>
+                                        </div>
+                                    </td>
+                                    <td data-label="Program">
+                                        <div class="slds-truncate" title="Program">
+                                            <apex:outputLink value="/{!programCustom.program.Id}">{!programCustom.program.Name}</apex:outputLink>
+                                        </div>
+                                    </td>
+                                    <td >
+                                        <div title="{!programCustom.percent}%">
+                                            <apex:outputText styleClass="label-info-{!IF(programCustom.percent>75,'75',IF(programCustom.percent>50,'50',IF(programCustom.percent>25,'25','0')))}" value="{!programCustom.percent}%"/>
+                                        </div>
+                                    </td>                                    
+                                    <apex:repeat value="{!listProgramCriteria}" var="criteria" >
+                                        <td >
+                                            <apex:outputPanel rendered="{!$ObjectType.Cloufi__Product__c.fields[criteria.Cloufi__Program_Field__c].type=='boolean'}">
+                                                <apex:outputPanel style="float:left;padding-right: 10px;"  rendered="{!programCustom.mapCriteriaMatch[LOWER(criteria.Cloufi__Program_Field__c)]}">
+                                                    <span class="slds-icon_container slds-icon-action-approval slds-icon_container--circle">
+                                                        <svg class="slds-icon slds-icon--xx-small xxx-small" aria-hidden="true">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/action-sprite/svg/symbols.svg#approval')}"></use>
+                                                        </svg>
+                                                    </span>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel style="float:left;padding-right: 10px;"  rendered="{!!programCustom.mapCriteriaMatch[LOWER(criteria.Cloufi__Program_Field__c)]}">
+                                                    <span class="slds-icon_container slds-icon-action-close slds-icon_container--circle">
+                                                        <svg class="slds-icon slds-icon--xx-small xxx-small" aria-hidden="true">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/action-sprite/svg/symbols.svg#close')}"></use>
+                                                        </svg>
+                                                    </span>
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+
+                                            <apex:outputPanel rendered="{!criteria.Hide_Value__c}">
+                                                <apex:outputPanel style="float:left;padding-right: 10px;"  rendered="{!IF(programCustom.mapCriteriaMatch[LOWER(criteria.Cloufi__Program_Field__c)],'true','false')}" title="{!programCustom.program[criteria.Cloufi__Program_Field__c]}">
+                                                    <span class="slds-icon_container slds-icon-action-approval slds-icon_container--circle">
+                                                        <svg class="slds-icon slds-icon--xx-small xxx-small" aria-hidden="true">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/action-sprite/svg/symbols.svg#approval')}"></use>
+                                                        </svg>
+                                                    </span>
+                                                </apex:outputPanel>
+                                                <apex:outputPanel style="float:left;padding-right: 10px;"  rendered="{!IF(programCustom.mapCriteriaMatch[LOWER(criteria.Cloufi__Program_Field__c)],'false','true')}" title="{!programCustom.program[criteria.Cloufi__Program_Field__c]}">
+                                                    <span class="slds-icon_container slds-icon-action-close slds-icon_container--circle">
+                                                        <svg class="slds-icon slds-icon--xx-small xxx-small" aria-hidden="true">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS,'/assets/icons/action-sprite/svg/symbols.svg#close')}"></use>
+                                                        </svg>
+                                                    </span>
+                                                </apex:outputPanel>
+                                            </apex:outputPanel>
+
+                                            <apex:outputPanel rendered="{!!criteria.Hide_Value__c}">
+                                                <div title="{!programCustom.program[criteria.Cloufi__Program_Field__c]}">
+                                                    <apex:outputText styleClass="label-info-{!IF(programCustom.mapCriteriaMatch[LOWER(criteria.Cloufi__Program_Field__c)],'yes','no')}" value="{!programCustom.program[criteria.Cloufi__Program_Field__c]}" rendered="{! ($ObjectType.Cloufi__Product__c.fields[criteria.Cloufi__Program_Field__c].type!='boolean') && ($ObjectType.Cloufi__Product__c.fields[criteria.Cloufi__Program_Field__c].Accessible)}" />
+                                                </div>
+                                            </apex:outputPanel> 
+                                        </td>
+                                    </apex:repeat>
+                                </tr>
+                            </apex:repeat>
+                        </apex:outputPanel>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <div class="slds-card__header slds-grid">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                            <div class="slds-media__figure">
+                                <span class="slds-icon_container slds-icon-standard-contact" title="description of icon when needed">
+                                    <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/standard-sprite/svg/symbols.svg#service_contract" />
+                                    </svg>
+                                </span>
+                            </div>
+                            <div class="slds-media__body">
+                                <h2>
+                                    <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="[object Object]">
+                                        <span class="slds-text-heading_small">Select Documents/Stips</span>
+                                    </a>
+                                </h2>
+                            </div>
+                        </header>                   
+                    </div>
+                    <table class="slds-table slds-table_fixed-layout slds-table_bordered slds-no-row-hover slds-table_cell-buffer">
+                        <thead>
+                            <th scope="col" style="width: 20%;">
+                                <div class="slds-truncate" title="Select">Select</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Name">Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class="slds-truncate" title="Link">Link</div>
+                            </th>
+                        </thead>
+                        <tbody>
+                            <apex:repeat value="{!lstStipWrapper}" var="stip">
+                                <tr>
+                                    <td>
+                                        <apex:inputCheckbox value="{!stip.IsSelected}" disabled="{! If(stip.Stip.Cloufi__URL__c == null,true,false)}"/>
+                                    </td>
+                                    <td data-label="Name">
+                                        <div title="{!stip.Stip.Stip_Name__c}">
+                                            <apex:outputText value="{!stip.Stip.Stip_Name__c}" />
+                                        </div>
+                                    </td>
+                                    <td data-label="View">
+                                        <div class="" title="{!stip.Stip.Cloufi__URL__c}">
+                                            <apex:outputLink target="_blank" value="{!stip.Stip.Cloufi__URL__c}" rendered="{!stip.Stip.Cloufi__URL__c!=null}">View</apex:outputLink>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                        </tbody>
+                    </table>
+                </apex:outputPanel>
+            </body>
+        </html>
+    </apex:form>
+    <style>
+        .xxx-small{
+            width: 0.6rem !important;
+            height: 0.6rem !important; 
+        }
+        .slds-icon_container--circle{
+            border-radius: 10% !important;
+            padding: 0.4em 0.4em !important;
+        }
+        .slds-icon-action-approval{
+            background-color:#42b725 !important;
+        }
+        .slds-truncate{
+            white-space: normal !important;
+        }
+        .label-info-yes{
+            background-color: #42b725;
+            padding: 0.15em 0.6em;
+            border-radius: .25em;
+            color: white;
+        }
+        .label-info-no{
+            background-color: #ec6060;
+            padding: 0.15em 0.6em;
+            border-radius: .25em;
+            color: white;
+        }
+
+        .label-info-75{
+            background-color: #42b725;
+            padding: 0.15em 0.6em;
+            border-radius: .25em;
+            color: white;
+        }
+        .label-info-50{
+            background-color: #3c95e4;
+            padding: 0.15em 0.6em;
+            border-radius: .25em;
+            color: white;
+        }
+
+        .label-info-25{
+            padding: 0.15em 0.6em;
+            border-radius: .25em;
+            color: white;
+            background-color: #e6bf2c;
+        }
+
+        .label-info-0{
+            background-color: #ec6060;
+            padding: 0.15em 0.6em;
+            border-radius: .25em;
+            color: white;
+        }
+
+        .hoverItems { 
+        display: none;
+        }
+
+        .emailHover:hover .hoverItems {
+            display: inline-block;
+        }
+        
+      </style>    
+</apex:page>

@@ -1,0 +1,14 @@
+<messaging:emailTemplate subject="New custom offer created" recipientType="User" relatedToType="Cloufi__Offers__c">
+    <messaging:htmlEmailBody >
+       
+        Hello,<br/><br/>
+    
+        Custom offer has been created :<br/><br/>
+        
+        
+         <c:NewCustomOfferEmailComp offerId="{!relatedTo.Id}" /><br/><br/>
+        
+        Thank you!
+        
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

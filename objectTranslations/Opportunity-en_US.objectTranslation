@@ -1,0 +1,3694 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- Agent Name --></label>
+        <name>Agent_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount Requested --></label>
+        <name>Amount_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- Any Lawsuits,Tax Liens,Judgments Pending --></label>
+        <name>Any_Lawsuits_or_Judgments_Pending_agains__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Are You In A Current Consumer Proposal? --></label>
+        <name>Any_open_State_Federal_Tax_Liens_Against__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- App In Missing Info Stage Date/Time --></label>
+        <name>App_In_Missing_Info_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- App In Missing Info Stage Date --></label>
+        <name>App_In_Missing_Info_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- App Sent Stage Date/Time --></label>
+        <name>App_Sent_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- App Sent Stage Date --></label>
+        <name>App_Sent_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Application Sent by Rep --></label>
+        <name>Application_Sent_by_Rep__c</name>
+    </fields>
+    <fields>
+        <label><!-- Application Status --></label>
+        <name>Application_Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Application URL --></label>
+        <name>Application_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved Stage Date/Time --></label>
+        <name>Approved_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved Stage Date --></label>
+        <name>Approved_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned Legal Associate --></label>
+        <name>Assigned_Legal_Associate__c</name>
+        <relationshipLabel><!-- Opportunities (Assigned Legal Associate) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Assigned Underwiter --></label>
+        <name>Assigned_Underwiter__c</name>
+        <relationshipLabel><!-- Opportunities (Assigned Underwiter) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Average Monthly Credit Card Sales --></label>
+        <name>Average_Monthly_Credit_Card_Sales__c</name>
+        <picklistValues>
+            <masterLabel>$0 - $4,999</masterLabel>
+            <translation><!-- $0 - $4,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$10,000 - $24,999</masterLabel>
+            <translation><!-- $10,000 - $24,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$100,000 - $249,999</masterLabel>
+            <translation><!-- $100,000 - $249,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$25,000 - $49,999</masterLabel>
+            <translation><!-- $25,000 - $49,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$250,000+</masterLabel>
+            <translation><!-- $250,000+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$5,000 - $9,999</masterLabel>
+            <translation><!-- $5,000 - $9,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$50,000 - $99,999</masterLabel>
+            <translation><!-- $50,000 - $99,999 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Average Monthly Revenue --></label>
+        <name>Average_Monthly_Revenue__c</name>
+        <picklistValues>
+            <masterLabel>$0 - $4,999</masterLabel>
+            <translation><!-- $0 - $4,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$10,000 - $24,999</masterLabel>
+            <translation><!-- $10,000 - $24,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$100,000 - $249,999</masterLabel>
+            <translation><!-- $100,000 - $249,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$25,000 - $49,999</masterLabel>
+            <translation><!-- $25,000 - $49,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$250,000+</masterLabel>
+            <translation><!-- $250,000+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$5,000 - $9,999</masterLabel>
+            <translation><!-- $5,000 - $9,999 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>$50,000 - $99,999</masterLabel>
+            <translation><!-- $50,000 - $99,999 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Balance --></label>
+        <name>Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank statements Email to Sales Support --></label>
+        <name>Bank_statements_Email_to_Sales_Support__c</name>
+    </fields>
+    <fields>
+        <label><!-- Base URL --></label>
+        <name>Base_URL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Broker Fee Payable --></label>
+        <name>Broker_Fee_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Broker Fee Received --></label>
+        <name>Broker_Fee_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Broker Fee --></label>
+        <name>Broker_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Confirmed --></label>
+        <name>Budget_Confirmed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Physical Address --></label>
+        <name>Business_Address_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Physical City --></label>
+        <name>Business_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Fax Number --></label>
+        <name>Business_Fax_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Landlord or Mortgage Bank --></label>
+        <name>Business_Landlord_or_Mortgage_Bank__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Phone Number --></label>
+        <name>Business_Phone_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Business Started --></label>
+        <name>Business_Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- State/Province --></label>
+        <name>Business_State_Prov__c</name>
+        <picklistValues>
+            <masterLabel>Alberta</masterLabel>
+            <translation><!-- Alberta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>British Columbia</masterLabel>
+            <translation><!-- British Columbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manitoba</masterLabel>
+            <translation><!-- Manitoba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Brunswick</masterLabel>
+            <translation><!-- New Brunswick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newfoundland Labrador</masterLabel>
+            <translation><!-- Newfoundland Labrador --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nova Scotia</masterLabel>
+            <translation><!-- Nova Scotia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ontario</masterLabel>
+            <translation><!-- Ontario --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prince Edward Island</masterLabel>
+            <translation><!-- Prince Edward Island --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quebec</masterLabel>
+            <translation><!-- Quebec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saskatchewan</masterLabel>
+            <translation><!-- Saskatchewan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Physical Postal Code/Zip Code --></label>
+        <name>Business_Zip_Postal_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- CS Agent Email --></label>
+        <name>CS_Agent_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- CS Agent Phone --></label>
+        <name>CS_Agent_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- CS Agent --></label>
+        <name>CS_Agent__c</name>
+        <relationshipLabel><!-- Opportunities (CS Agent) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Cancelled Dropbox Folder Path --></label>
+        <name>Cancelled_Dropbox_Folder_Path__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chat --></label>
+        <name>Chat__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Lost Stage Date/Time --></label>
+        <name>Closed_Lost_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Lost Stage Date --></label>
+        <name>Closed_Lost_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Reason --></label>
+        <name>Closed_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Accessive Negative Days/NSF</masterLabel>
+            <translation><!-- Accessive Negative Days/NSF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BK/Taxes/CRA/Judge</masterLabel>
+            <translation><!-- BK/Taxes/CRA/Judge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bad Ratings</masterLabel>
+            <translation><!-- Bad Ratings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Behind on Rent</masterLabel>
+            <translation><!-- Behind on Rent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate</masterLabel>
+            <translation><!-- Duplicate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fraud</masterLabel>
+            <translation><!-- Fraud --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High Open Balance</masterLabel>
+            <translation><!-- High Open Balance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High Rates</masterLabel>
+            <translation><!-- High Rates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low Deposit Count</masterLabel>
+            <translation><!-- Low Deposit Count --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low Sales Volume</masterLabel>
+            <translation><!-- Low Sales Volume --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low and Inconsistent Balance</masterLabel>
+            <translation><!-- Low and Inconsistent Balance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month to Date</masterLabel>
+            <translation><!-- Month to Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Negative Background Check</masterLabel>
+            <translation><!-- Negative Background Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not In Biz</masterLabel>
+            <translation><!-- Not In Biz --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Ready</masterLabel>
+            <translation><!-- Not Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Offer Expired</masterLabel>
+            <translation><!-- Offer Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Over-leveraged for Additional Positions</masterLabel>
+            <translation><!-- Over-leveraged for Additional Positions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Poor Repayment History</masterLabel>
+            <translation><!-- Poor Repayment History --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Poor/No Credit</masterLabel>
+            <translation><!-- Poor/No Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Restricted Industry</masterLabel>
+            <translation><!-- Restricted Industry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Time In Business</masterLabel>
+            <translation><!-- Time In Business --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>With Competitor</masterLabel>
+            <translation><!-- With Competitor --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Active Repayment Schedule --></label>
+        <name>CloufiServicing__Active_Repayment_Schedule__c</name>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Additional Fees --></label>
+        <name>CloufiServicing__Additional_Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Routing Number --></label>
+        <name>CloufiServicing__BankRoutingNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Account Type --></label>
+        <name>CloufiServicing__Bank_Account_Type__c</name>
+        <picklistValues>
+            <masterLabel>Checking</masterLabel>
+            <translation><!-- Checking --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saving</masterLabel>
+            <translation><!-- Saving --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Bank Number --></label>
+        <name>CloufiServicing__Bank_Number_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Number --></label>
+        <name>CloufiServicing__Bank_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Routing Number --></label>
+        <name>CloufiServicing__Bank_Routing_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Transit Number --></label>
+        <name>CloufiServicing__Bank_Transit_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Card Processor --></label>
+        <name>CloufiServicing__Credit_Card_Processor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Generator(s) --></label>
+        <name>CloufiServicing__CurrentGenerators__c</name>
+    </fields>
+    <fields>
+        <label><!-- Delivery/Installation Status --></label>
+        <name>CloufiServicing__DeliveryInstallationStatus__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In progress</masterLabel>
+            <translation><!-- In progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yet to begin</masterLabel>
+            <translation><!-- Yet to begin --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Existing New Version --></label>
+        <name>CloufiServicing__Existing_New_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Failed Payment Count --></label>
+        <name>CloufiServicing__Failed_Payment_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Date --></label>
+        <name>CloufiServicing__Funding_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Origination % --></label>
+        <name>CloufiServicing__ISO_Origination_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Risk Assessment Fee % --></label>
+        <name>CloufiServicing__ISO_Risk_Assessment_Fee_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Risk Assessment Fee --></label>
+        <name>CloufiServicing__ISO_Risk_Assessment_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO --></label>
+        <name>CloufiServicing__ISO__c</name>
+        <relationshipLabel><!-- Opportunities (ISO) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Latest Opportunity --></label>
+        <name>CloufiServicing__Latest_Opportunity__c</name>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Main Competitor(s) --></label>
+        <name>CloufiServicing__MainCompetitors__c</name>
+    </fields>
+    <fields>
+        <label><!-- Merchant ID --></label>
+        <name>CloufiServicing__Merchant_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Funding Amount --></label>
+        <name>CloufiServicing__Net_FundingAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Funding Amount --></label>
+        <name>CloufiServicing__Net_Funding_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Next Opportunity --></label>
+        <name>CloufiServicing__Next_Opportunity__c</name>
+        <relationshipLabel><!-- Opportunities (Next Opportunity) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Order Number --></label>
+        <name>CloufiServicing__OrderNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee --></label>
+        <name>CloufiServicing__Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Opportunity --></label>
+        <name>CloufiServicing__Parent_Opportunity__c</name>
+        <relationshipLabel><!-- Opportunities (Parent Opportunity) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Payment Installment --></label>
+        <name>CloufiServicing__Payment_Installment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Method --></label>
+        <name>CloufiServicing__Payment_Method__c</name>
+        <picklistValues>
+            <masterLabel>ACH</masterLabel>
+            <translation><!-- ACH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Check</masterLabel>
+            <translation><!-- Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Split funding</masterLabel>
+            <translation><!-- Split funding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wire</masterLabel>
+            <translation><!-- Wire --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Previous Opportunity --></label>
+        <name>CloufiServicing__Previous_Opportunity__c</name>
+        <relationshipLabel><!-- Opportunities (Previous Opportunity) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Renewal Payoffs --></label>
+        <name>CloufiServicing__Renewal_Payoffs__c</name>
+    </fields>
+    <fields>
+        <label><!-- Renewal Version --></label>
+        <name>CloufiServicing__Renewal_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Repayment Status --></label>
+        <name>CloufiServicing__Repayment_Schedule_Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed With Settlement</masterLabel>
+            <translation><!-- Completed With Settlement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pause</masterLabel>
+            <translation><!-- Pause --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Recovery</masterLabel>
+            <translation><!-- Recovery --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Send To Collections</masterLabel>
+            <translation><!-- Send To Collections --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Write Off</masterLabel>
+            <translation><!-- Write Off --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Risk Assessment Fee --></label>
+        <name>CloufiServicing__Risk_Assessment_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stack Version --></label>
+        <name>CloufiServicing__Stack_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submission Country --></label>
+        <name>CloufiServicing__Submission_Country__c</name>
+        <picklistValues>
+            <masterLabel>Canada</masterLabel>
+            <translation><!-- Canada --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Puerto Rico</masterLabel>
+            <translation><!-- Puerto Rico --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>United States</masterLabel>
+            <translation><!-- United States --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Used in batch class for not including those Opportunities which are already been processed for checking Syndicate payments. --></help>
+        <label><!-- Syndicate Payment Check Completed --></label>
+        <name>CloufiServicing__Syndicate_Payment_Check_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndication Updated --></label>
+        <name>CloufiServicing__Syndication_Updated__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Syndication % --></label>
+        <name>CloufiServicing__Total_Syndication_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tracking Number --></label>
+        <name>CloufiServicing__TrackingNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transit Number --></label>
+        <name>CloufiServicing__Transit_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Version --></label>
+        <name>CloufiServicing__Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- White Label Origination Fee % --></label>
+        <name>CloufiServicing__White_Label_Origination_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- White Label Origination Fee --></label>
+        <name>CloufiServicing__White_Label_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- White Label Risk Assessment Fee % --></label>
+        <name>CloufiServicing__White_Label_Risk_Assessment_Fee_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- White Label Risk Assessment Fee --></label>
+        <name>CloufiServicing__White_Label_Risk_Assessment_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- White Label --></label>
+        <name>CloufiServicing__White_Label__c</name>
+        <relationshipLabel><!-- Opportunities (White Label) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Cloufi_Twilio__Country__c</name>
+        <picklistValues>
+            <masterLabel>IN</masterLabel>
+            <translation><!-- IN --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Number In Use --></label>
+        <name>Cloufi_Twilio__Number_In_Use__c</name>
+        <picklistValues>
+            <masterLabel>Owner 1 Cell</masterLabel>
+            <translation><!-- Owner 1 Cell --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Owner 2 Cell</masterLabel>
+            <translation><!-- Owner 2 Cell --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Owner 1 Cell --></label>
+        <name>Cloufi_Twilio__Owner_1_Cell__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 2 Cell --></label>
+        <name>Cloufi_Twilio__Owner_2_Cell__c</name>
+    </fields>
+    <fields>
+        <label><!-- SMS Opt Out --></label>
+        <name>Cloufi_Twilio__SMS_Opt_Out__c</name>
+    </fields>
+    <fields>
+        <label><!-- ACH Fee --></label>
+        <name>Cloufi__ACH_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Client Account --></label>
+        <name>Cloufi__Account__c</name>
+        <relationshipLabel><!-- Loans (Account Name) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Annual Revenue --></label>
+        <name>Cloufi__Annual_Revenue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Avg Daily Bank Bal --></label>
+        <name>Cloufi__Avg_Daily_Bank_Bal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Backend Fees --></label>
+        <name>Cloufi__Backend_Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Account # --></label>
+        <name>Cloufi__Bank_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Name --></label>
+        <name>Cloufi__Bank_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Phone --></label>
+        <name>Cloufi__Bank_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Borrower Email --></label>
+        <name>Cloufi__Borrower_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Borrower Name --></label>
+        <name>Cloufi__Borrower_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Borrower Number --></label>
+        <name>Cloufi__Borrower_Phone_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business DBA Name --></label>
+        <name>Cloufi__Business_DBA_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Years At Location --></label>
+        <name>Cloufi__Business_DBA_Years_At_Location__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11</masterLabel>
+            <translation><!-- 11 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12</masterLabel>
+            <translation><!-- 12 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>13</masterLabel>
+            <translation><!-- 13 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>14</masterLabel>
+            <translation><!-- 14 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>15</masterLabel>
+            <translation><!-- 15 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>16</masterLabel>
+            <translation><!-- 16 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>17</masterLabel>
+            <translation><!-- 17 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>18</masterLabel>
+            <translation><!-- 18 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>19</masterLabel>
+            <translation><!-- 19 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>20</masterLabel>
+            <translation><!-- 20 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>21</masterLabel>
+            <translation><!-- 21 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>22</masterLabel>
+            <translation><!-- 22 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>23</masterLabel>
+            <translation><!-- 23 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>24</masterLabel>
+            <translation><!-- 24 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>25</masterLabel>
+            <translation><!-- 25 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>26</masterLabel>
+            <translation><!-- 26 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>27</masterLabel>
+            <translation><!-- 27 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>28</masterLabel>
+            <translation><!-- 28 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>29</masterLabel>
+            <translation><!-- 29 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>30</masterLabel>
+            <translation><!-- 30 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>31</masterLabel>
+            <translation><!-- 31 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>32</masterLabel>
+            <translation><!-- 32 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>33</masterLabel>
+            <translation><!-- 33 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>34</masterLabel>
+            <translation><!-- 34 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>35</masterLabel>
+            <translation><!-- 35 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>36</masterLabel>
+            <translation><!-- 36 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>37</masterLabel>
+            <translation><!-- 37 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>38</masterLabel>
+            <translation><!-- 38 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>39</masterLabel>
+            <translation><!-- 39 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>40</masterLabel>
+            <translation><!-- 40 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>41</masterLabel>
+            <translation><!-- 41 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>42</masterLabel>
+            <translation><!-- 42 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>43</masterLabel>
+            <translation><!-- 43 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>44</masterLabel>
+            <translation><!-- 44 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>45</masterLabel>
+            <translation><!-- 45 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>46</masterLabel>
+            <translation><!-- 46 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>47</masterLabel>
+            <translation><!-- 47 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>48</masterLabel>
+            <translation><!-- 48 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>49</masterLabel>
+            <translation><!-- 49 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>50</masterLabel>
+            <translation><!-- 50 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>51</masterLabel>
+            <translation><!-- 51 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>52</masterLabel>
+            <translation><!-- 52 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>53</masterLabel>
+            <translation><!-- 53 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>54</masterLabel>
+            <translation><!-- 54 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>55</masterLabel>
+            <translation><!-- 55 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>56</masterLabel>
+            <translation><!-- 56 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>57</masterLabel>
+            <translation><!-- 57 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>58</masterLabel>
+            <translation><!-- 58 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>59</masterLabel>
+            <translation><!-- 59 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>60</masterLabel>
+            <translation><!-- 60 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>61</masterLabel>
+            <translation><!-- 61 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>62</masterLabel>
+            <translation><!-- 62 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>63</masterLabel>
+            <translation><!-- 63 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>64</masterLabel>
+            <translation><!-- 64 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>65</masterLabel>
+            <translation><!-- 65 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>66</masterLabel>
+            <translation><!-- 66 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>67</masterLabel>
+            <translation><!-- 67 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>68</masterLabel>
+            <translation><!-- 68 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>69</masterLabel>
+            <translation><!-- 69 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>70</masterLabel>
+            <translation><!-- 70 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>71</masterLabel>
+            <translation><!-- 71 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>72</masterLabel>
+            <translation><!-- 72 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>73</masterLabel>
+            <translation><!-- 73 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>74</masterLabel>
+            <translation><!-- 74 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>75</masterLabel>
+            <translation><!-- 75 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>76</masterLabel>
+            <translation><!-- 76 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>77</masterLabel>
+            <translation><!-- 77 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>78</masterLabel>
+            <translation><!-- 78 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>79</masterLabel>
+            <translation><!-- 79 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>80</masterLabel>
+            <translation><!-- 80 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>81</masterLabel>
+            <translation><!-- 81 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>82</masterLabel>
+            <translation><!-- 82 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>83</masterLabel>
+            <translation><!-- 83 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>84</masterLabel>
+            <translation><!-- 84 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>85</masterLabel>
+            <translation><!-- 85 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>86</masterLabel>
+            <translation><!-- 86 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>87</masterLabel>
+            <translation><!-- 87 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>88</masterLabel>
+            <translation><!-- 88 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>89</masterLabel>
+            <translation><!-- 89 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9</masterLabel>
+            <translation><!-- 9 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>90</masterLabel>
+            <translation><!-- 90 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>91</masterLabel>
+            <translation><!-- 91 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>92</masterLabel>
+            <translation><!-- 92 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>93</masterLabel>
+            <translation><!-- 93 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>94</masterLabel>
+            <translation><!-- 94 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>95</masterLabel>
+            <translation><!-- 95 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>96</masterLabel>
+            <translation><!-- 96 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>97</masterLabel>
+            <translation><!-- 97 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>98</masterLabel>
+            <translation><!-- 98 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>99</masterLabel>
+            <translation><!-- 99 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Years In Business --></label>
+        <name>Cloufi__Business_DBA_Years_In_Business__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Sales % --></label>
+        <name>Cloufi__Business_Sales__c</name>
+    </fields>
+    <fields>
+        <label><!-- Commission % --></label>
+        <name>Cloufi__Commission__c</name>
+    </fields>
+    <fields>
+        <label><!-- CompanyId --></label>
+        <name>Cloufi__CompanyId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Consumer Sales % --></label>
+        <name>Cloufi__Consumer_Sales__c</name>
+    </fields>
+    <fields>
+        <label>Bank Contact Person</label>
+        <name>Cloufi__Contact_Person__c</name>
+    </fields>
+    <fields>
+        <label><!-- Credit Score --></label>
+        <name>Cloufi__Credit_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Daily Payback Amt --></label>
+        <name>Cloufi__Daily_Payback_Amt__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Account Opened --></label>
+        <name>Cloufi__Date_Account_Opened_Bank_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dilution --></label>
+        <name>Cloufi__Dilution_finance_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dropbox Folder Path --></label>
+        <name>Cloufi__Dropbox_Folder_Path__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email Address --></label>
+        <name>Cloufi__Email_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Equipment Value --></label>
+        <name>Cloufi__Equipment_Value_finance_value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Equity --></label>
+        <name>Cloufi__Equity_finance_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Export Sales % --></label>
+        <name>Cloufi__Export_Sales__c</name>
+    </fields>
+    <fields>
+        <label><!-- Factor Rate --></label>
+        <name>Cloufi__Factor_Rate__c</name>
+    </fields>
+    <fields>
+        <label>Bank Fax</label>
+        <name>Cloufi__Fax_Bank_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fico Score --></label>
+        <name>Cloufi__Fico_Score__c</name>
+        <picklistValues>
+            <masterLabel>600-500</masterLabel>
+            <translation><!-- 600-500 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>680-600</masterLabel>
+            <translation><!-- 680-600 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>750+</masterLabel>
+            <translation><!-- 750+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>750-680</masterLabel>
+            <translation><!-- 750-680 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Below 500</masterLabel>
+            <translation><!-- Below 500 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Sure</masterLabel>
+            <translation><!-- Not Sure --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Financial Period # Of Months --></label>
+        <name>Cloufi__Financial_Period_Of_Months_finance_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fiscal Year End --></label>
+        <name>Cloufi__Fiscal_Year_End__c</name>
+        <picklistValues>
+            <masterLabel>April</masterLabel>
+            <translation><!-- April --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>August</masterLabel>
+            <translation><!-- August --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>December</masterLabel>
+            <translation><!-- December --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>February</masterLabel>
+            <translation><!-- February --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>January</masterLabel>
+            <translation><!-- January --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>July</masterLabel>
+            <translation><!-- July --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>June</masterLabel>
+            <translation><!-- June --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>March</masterLabel>
+            <translation><!-- March --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>May</masterLabel>
+            <translation><!-- May --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>November</masterLabel>
+            <translation><!-- November --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>October</masterLabel>
+            <translation><!-- October --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>September</masterLabel>
+            <translation><!-- September --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Frequency --></label>
+        <name>Cloufi__Frequency__c</name>
+        <picklistValues>
+            <masterLabel>Daily</masterLabel>
+            <translation><!-- Daily --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monthly</masterLabel>
+            <translation><!-- Monthly --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>One Time</masterLabel>
+            <translation><!-- One Time --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weekly</masterLabel>
+            <translation><!-- Weekly --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Funder Date --></label>
+        <name>Cloufi__Funder_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funder --></label>
+        <name>Cloufi__Funder__c</name>
+        <relationshipLabel><!-- Loans (Funder) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Funding Type --></label>
+        <name>Cloufi__Funding_Type__c</name>
+        <picklistValues>
+            <masterLabel>ACH</masterLabel>
+            <translation><!-- ACH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CC Split</masterLabel>
+            <translation><!-- CC Split --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Gross Margin --></label>
+        <name>Cloufi__Gross_Margin__c</name>
+    </fields>
+    <fields>
+        <label>Average Monthly Total Deposits</label>
+        <name>Cloufi__Gross_Profit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Gross RTR --></label>
+        <name>Cloufi__Gross_RTR__c</name>
+    </fields>
+    <fields>
+        <label><!-- Industry --></label>
+        <name>Cloufi__Industry__c</name>
+        <picklistValues>
+            <masterLabel>Accommodation and Food Services</masterLabel>
+            <translation><!-- Accommodation and Food Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Administrative and Support and Waste Management and Re-mediation Services</masterLabel>
+            <translation><!-- Administrative and Support and Waste Management and Re-mediation Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Agriculture, Forestry, Fishing and Hunting</masterLabel>
+            <translation><!-- Agriculture, Forestry, Fishing and Hunting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arts, Entertainment, and Recreation</masterLabel>
+            <translation><!-- Arts, Entertainment, and Recreation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Construction</masterLabel>
+            <translation><!-- Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Educational Services</masterLabel>
+            <translation><!-- Educational Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finance and Insurance</masterLabel>
+            <translation><!-- Finance and Insurance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care and Social Assistance</masterLabel>
+            <translation><!-- Health Care and Social Assistance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Information</masterLabel>
+            <translation><!-- Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Management of Companies and Enterprises</masterLabel>
+            <translation><!-- Management of Companies and Enterprises --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mining, Quarrying, and Oil and Gas Extraction</masterLabel>
+            <translation><!-- Mining, Quarrying, and Oil and Gas Extraction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other Services (except Public Administration)</masterLabel>
+            <translation><!-- Other Services (except Public Administration) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Professional, Scientific, and Technical Services</masterLabel>
+            <translation><!-- Professional, Scientific, and Technical Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Public Administration</masterLabel>
+            <translation><!-- Public Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Real Estate and Rental and Leasing</masterLabel>
+            <translation><!-- Real Estate and Rental and Leasing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retail Trade</masterLabel>
+            <translation><!-- Retail Trade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation and Warehousing</masterLabel>
+            <translation><!-- Transportation and Warehousing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Utilities</masterLabel>
+            <translation><!-- Utilities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wholesale Trade / Distribution</masterLabel>
+            <translation><!-- Wholesale Trade / Distribution --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Interest Charges --></label>
+        <name>Cloufi__Interest_Charges_finance_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Introducer Account --></label>
+        <name>Cloufi__Introducer_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Inventory Cost Value --></label>
+        <name>Cloufi__Inventory_Cost_Value_finance_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsActive --></label>
+        <name>Cloufi__IsActive__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- IsInvited --></label>
+        <name>Cloufi__IsInvited__c</name>
+    </fields>
+    <fields>
+        <label>Lawsuits, Tax Liens, judgements Details</label>
+        <name>Cloufi__Judgement__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Activity Date --></label>
+        <name>Cloufi__Last_Activity_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legal/Corporate Name --></label>
+        <name>Cloufi__Legal_Corporate_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Loan Term --></label>
+        <name>Cloufi__Loan_Term__c</name>
+    </fields>
+    <fields>
+        <label><!-- Loan Type --></label>
+        <name>Cloufi__Loan_Type__c</name>
+        <picklistValues>
+            <masterLabel>Asset Based Lending</masterLabel>
+            <translation><!-- Asset Based Lending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Business Advance</masterLabel>
+            <translation><!-- Business Advance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Commercial Real Estate</masterLabel>
+            <translation><!-- Commercial Real Estate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Equipment Finance</masterLabel>
+            <translation><!-- Equipment Finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Factoring</masterLabel>
+            <translation><!-- Factoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Floor Planning</masterLabel>
+            <translation><!-- Floor Planning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hard Money</masterLabel>
+            <translation><!-- Hard Money --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inventory Finance</masterLabel>
+            <translation><!-- Inventory Finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Merchant Cash Advance</masterLabel>
+            <translation><!-- Merchant Cash Advance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Production Finance</masterLabel>
+            <translation><!-- Production Finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Purchase Order Finance</masterLabel>
+            <translation><!-- Purchase Order Finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SBA Loan</masterLabel>
+            <translation><!-- SBA Loan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Supply Chain Finance</masterLabel>
+            <translation><!-- Supply Chain Finance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Trade Finance</masterLabel>
+            <translation><!-- Trade Finance --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Main Customers --></label>
+        <name>Cloufi__Main_Customers__c</name>
+    </fields>
+    <fields>
+        <label><!-- Manual Fill --></label>
+        <name>Cloufi__Manual_Fill__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max % Gross --></label>
+        <name>Cloufi__Max_Gross__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Monthly PMT --></label>
+        <name>Cloufi__Max_Monthly_PMT__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mobile --></label>
+        <name>Cloufi__Mobile__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly CC Vol $ --></label>
+        <name>Cloufi__Monthly_CC_Vol__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Gross Sale --></label>
+        <name>Cloufi__Monthly_Gross_Sale__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Revenue --></label>
+        <name>Cloufi__Monthly_Revenue__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Other Income / Expense --></label>
+        <name>Cloufi__Net_Other_Income_Expense_finance_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number Of Customers --></label>
+        <name>Cloufi__Number_Of_Customers__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payback Amount --></label>
+        <name>Cloufi__Payback_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Processor --></label>
+        <name>Cloufi__Payment_Processor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Percentage Of Gross --></label>
+        <name>Cloufi__Percentage_Of_Gross__c</name>
+    </fields>
+    <fields>
+        <label><!-- Real Estate Value --></label>
+        <name>Cloufi__Real_Estate_Value_finance_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Partner Account --></label>
+        <name>Cloufi__Referral_Partner_Account__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referral Partner --></label>
+        <name>Cloufi__Referral_Partner__c</name>
+        <relationshipLabel><!-- Opportunities (Referral Partner) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Representative --></label>
+        <name>Cloufi__Representative__c</name>
+        <relationshipLabel><!-- Loans (Contact) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sales, General And Admin Expenses --></label>
+        <name>Cloufi__Sales_General_And_Admin_Expenses_Finance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Rep --></label>
+        <name>Cloufi__Sales_Rep__c</name>
+        <relationshipLabel><!-- Opportunities (Sales Rep) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Sector --></label>
+        <name>Cloufi__Sector__c</name>
+        <picklistValues>
+            <masterLabel>Accommodation and Food Services</masterLabel>
+            <translation><!-- Accommodation and Food Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Administrative and Support and Waste Management and Re-mediation Services</masterLabel>
+            <translation><!-- Administrative and Support and Waste Management and Re-mediation Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Agriculture, Forestry, Fishing and Hunting</masterLabel>
+            <translation><!-- Agriculture, Forestry, Fishing and Hunting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arts, Entertainment, and Recreation</masterLabel>
+            <translation><!-- Arts, Entertainment, and Recreation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Construction</masterLabel>
+            <translation><!-- Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Educational Services</masterLabel>
+            <translation><!-- Educational Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Finance and Insurance</masterLabel>
+            <translation><!-- Finance and Insurance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Care and Social Assistance</masterLabel>
+            <translation><!-- Health Care and Social Assistance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Information</masterLabel>
+            <translation><!-- Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Management of Companies and Enterprises</masterLabel>
+            <translation><!-- Management of Companies and Enterprises --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manufacturing</masterLabel>
+            <translation><!-- Manufacturing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mining, Quarrying, and Oil and Gas Extraction</masterLabel>
+            <translation><!-- Mining, Quarrying, and Oil and Gas Extraction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other Services (except Public Administration)</masterLabel>
+            <translation><!-- Other Services (except Public Administration) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Professional, Scientific, and Technical Services</masterLabel>
+            <translation><!-- Professional, Scientific, and Technical Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Public Administration</masterLabel>
+            <translation><!-- Public Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Real Estate and Rental and Leasing</masterLabel>
+            <translation><!-- Real Estate and Rental and Leasing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retail Trade</masterLabel>
+            <translation><!-- Retail Trade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation and Warehousing</masterLabel>
+            <translation><!-- Transportation and Warehousing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Utilities</masterLabel>
+            <translation><!-- Utilities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wholesale Trade / Distribution</masterLabel>
+            <translation><!-- Wholesale Trade / Distribution --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Separate Payroll Account --></label>
+        <name>Cloufi__Separate_Payroll_Account__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- State Of Incorporation --></label>
+        <name>Cloufi__State_Of_Incorporation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stip Request --></label>
+        <name>Cloufi__Stip_Request__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tax Liens $ --></label>
+        <name>Cloufi__Tax_Liens__c</name>
+    </fields>
+    <fields>
+        <label><!-- Taxes --></label>
+        <name>Cloufi__Taxes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Terms Of Sale --></label>
+        <name>Cloufi__Terms_Of_Sale__c</name>
+    </fields>
+    <fields>
+        <label><!-- Title --></label>
+        <name>Cloufi__Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Management Fee Collected --></label>
+        <name>Cloufi__Total_Management_Fee_Collected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Number Of Syndicator --></label>
+        <name>Cloufi__Total_Number_Of_Syndicator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Payments --></label>
+        <name>Cloufi__Total_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tracking Number --></label>
+        <name>Cloufi__TrackingNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type of Business --></label>
+        <name>Cloufi__Type_of_Business__c</name>
+        <picklistValues>
+            <masterLabel>Automotive</masterLabel>
+            <translation><!-- Automotive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Construction</masterLabel>
+            <translation><!-- Construction --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Home-Based</masterLabel>
+            <translation><!-- Home-Based --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lodging</masterLabel>
+            <translation><!-- Lodging --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Restaurant/Bar</masterLabel>
+            <translation><!-- Restaurant/Bar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retail</masterLabel>
+            <translation><!-- Retail --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Services</masterLabel>
+            <translation><!-- Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wholesale</masterLabel>
+            <translation><!-- Wholesale --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Underwriter --></label>
+        <name>Cloufi__Underwriter1__c</name>
+        <relationshipLabel><!-- Opportunities (Underwriter) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Underwriter --></label>
+        <name>Cloufi__Underwriter__c</name>
+        <picklistValues>
+            <masterLabel>Daniel Israel</masterLabel>
+            <translation><!-- Daniel Israel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jeff Blum</masterLabel>
+            <translation><!-- Jeff Blum --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Marcus Ferrari</masterLabel>
+            <translation><!-- Marcus Ferrari --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Upfront Fees --></label>
+        <name>Cloufi__Upfront_Fees__c</name>
+    </fields>
+    <fields>
+        <label><!-- Upload Stips --></label>
+        <name>Cloufi__Upload_Stips__c</name>
+    </fields>
+    <fields>
+        <label><!-- Commission Amount --></label>
+        <name>Commission_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Commission Payable --></label>
+        <name>Commission_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Commission Received --></label>
+        <name>Commission_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Company Logo --></label>
+        <name>Company_Logo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Completed Stage Date/Time --></label>
+        <name>Completed_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Completed Stage Date --></label>
+        <name>Completed_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contact Name and/or Account No --></label>
+        <name>Contact_Name_and_or_Account_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Received Stage Date/Time --></label>
+        <name>Contract_Received_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Received Stage Date --></label>
+        <name>Contract_Received_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Requested Stage Date/Time --></label>
+        <name>Contract_Requested_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Requested Stage Date --></label>
+        <name>Contract_Requested_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Sent Stage Date/Time --></label>
+        <name>Contract_Sent_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Sent Stage Date --></label>
+        <name>Contract_Sent_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Signed Partial Stage Date/Time --></label>
+        <name>Contract_Signed_Partial_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Contract Signed Partial Stage Date --></label>
+        <name>Contract_Signed_Partial_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Years of Ownership --></label>
+        <name>Corporate_Length_of_Ownership__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10+</masterLabel>
+            <translation><!-- 10+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9</masterLabel>
+            <translation><!-- 9 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Owner 2 credit info --></label>
+        <name>Corporate_credit_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Country --></label>
+        <name>Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- CC Processing --></label>
+        <name>Credit_Card_Processing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Balance --></label>
+        <name>Current_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current Processing Company --></label>
+        <name>Current_Processing_Company__c</name>
+        <picklistValues>
+            <masterLabel>CPS</masterLabel>
+            <translation><!-- CPS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chase Payment Tech</masterLabel>
+            <translation><!-- Chase Payment Tech --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dejardins</masterLabel>
+            <translation><!-- Dejardins --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Elavon</masterLabel>
+            <translation><!-- Elavon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>First Data</masterLabel>
+            <translation><!-- First Data --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Global Payment</masterLabel>
+            <translation><!-- Global Payment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moneris</masterLabel>
+            <translation><!-- Moneris --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PayPal</masterLabel>
+            <translation><!-- PayPal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Square</masterLabel>
+            <translation><!-- Square --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Stripe</masterLabel>
+            <translation><!-- Stripe --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TD Merchant Services</masterLabel>
+            <translation><!-- TD Merchant Services --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Daily PB Amount --></label>
+        <name>Daily_PB_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Lease Ends --></label>
+        <name>Date_Lease_Ends__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Paid --></label>
+        <name>Date_Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Received --></label>
+        <name>Date_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deal Type --></label>
+        <name>Deal_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Declined/Closed Lost Reviewed By --></label>
+        <name>Declined_Closed_Lost_Reviewed_By__c</name>
+        <relationshipLabel><!-- Opportunities (Declined/Closed Lost Reviewed By) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Declined/Closed Lost Reviewed Date --></label>
+        <name>Declined_Closed_Lost_Reviewed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Declined Stage Date/Time --></label>
+        <name>Declined_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Declined Stage Date --></label>
+        <name>Declined_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description ROI --></label>
+        <name>Description_ROI__c</name>
+    </fields>
+    <fields>
+        <label><!-- Details for CRA --></label>
+        <name>Details_Do_You_Owe_Money_To_The_CRA__c</name>
+    </fields>
+    <fields>
+        <label><!-- Details for Consumer Proposal --></label>
+        <name>Details_State_Federal_Tax_Liens__c</name>
+    </fields>
+    <fields>
+        <label><!-- Details for Closing The Business --></label>
+        <name>Details_for_close_the_business__c</name>
+    </fields>
+    <fields>
+        <help><!-- The record owner&apos;s Salesforce ID. Used in Campaign source reports to distribute the records using the Record Owner Distribution feature --></help>
+        <label><!-- DS Owner ID --></label>
+        <name>DialSource__DS_Owner_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Time stamp of when the last Disposition was clicked --></help>
+        <label><!-- Datetime of Last Disposition --></label>
+        <name>DialSource__Datetime_of_Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the Call Campaign the record was last called from --></help>
+        <label><!-- Last Call Campaign Name --></label>
+        <name>DialSource__Last_Call_Campaign_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the last Disposition clicked --></help>
+        <label><!-- Last Disposition --></label>
+        <name>DialSource__Last_Disposition_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Datetime field used to set the next call datetime for reference in automation or Reports/List Views --></help>
+        <label><!-- Next Call --></label>
+        <name>DialSource__Next_Call_DS__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of calls made on this record --></help>
+        <label><!-- Total Call Count --></label>
+        <name>DialSource__Total_Call_Count_DS__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discovery Completed --></label>
+        <name>Discovery_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Do You Owe Money To The CRA? --></label>
+        <name>Do_You_Owe_Money_To_The_CRA__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you Own/Lease/Rent Your Terminals --></label>
+        <name>Do_you_Own_Lease_your_terminals__c</name>
+        <picklistValues>
+            <masterLabel>Lease</masterLabel>
+            <translation><!-- Lease --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Own</masterLabel>
+            <translation><!-- Own --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rent</masterLabel>
+            <translation><!-- Rent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Do you Process Credit card --></label>
+        <name>Do_you_Process_Credit_card__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Business Closes During Part Of The Year? --></label>
+        <name>Do_you_usually_close_the_business_during__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Eligible --></label>
+        <name>Eligible__c</name>
+    </fields>
+    <fields>
+        <label><!-- Est ReNewal Date --></label>
+        <name>Est_ReNewal_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expected Commission --></label>
+        <name>Expected_Commission__c</name>
+    </fields>
+    <fields>
+        <label><!-- Factor Rate --></label>
+        <name>Factor_Rate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fax Number --></label>
+        <name>Fax_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Final UW Stage Date/Time --></label>
+        <name>Final_UW_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Final UW Stage Date --></label>
+        <name>Final_UW_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funded Amount --></label>
+        <name>Funded_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funded Stage Date/Time --></label>
+        <name>Funded_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funded Stage Date --></label>
+        <name>Funded_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Funding Notes --></label>
+        <name>Funding_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- GST/HST/TAX ID --></label>
+        <name>GST_HST__c</name>
+    </fields>
+    <fields>
+        <label><!-- Halfway to Renewal --></label>
+        <name>Halfway_to_Renewal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hold Back % --></label>
+        <name>Hold_Back__c</name>
+    </fields>
+    <fields>
+        <label><!-- Holdback % --></label>
+        <name>Holdback_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- How will you use the loan? --></label>
+        <name>How_will_you_use_the_loan__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Commission Payable --></label>
+        <name>ISO_Commission_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Commission % --></label>
+        <name>ISO_Commission__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Contact --></label>
+        <name>ISO_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Date Paid --></label>
+        <name>ISO_Date_Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Name --></label>
+        <name>ISO_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Origination Fee Payable --></label>
+        <name>ISO_Origination_Fee_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Origination Fee % --></label>
+        <name>ISO_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Risk Fee Payable --></label>
+        <name>ISO_Risk_Fee_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Risk Fee % --></label>
+        <name>ISO_Risk_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO Total Payable --></label>
+        <name>ISO_Total_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- ISO&apos;s WL Owner --></label>
+        <name>ISO_s_WL_Owner__c</name>
+        <relationshipLabel><!-- Opportunities (ISO&apos;s WL Owner) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Income % --></label>
+        <name>Income_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Internal Lender --></label>
+        <name>Internal_Lender__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Settlement Effective Date --></label>
+        <name>Last_Settlement_Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Opportunities --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Lender Name --></label>
+        <name>Lender_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Commission Amount --></label>
+        <name>Lender_s_Commission_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Funded Amount --></label>
+        <name>Lender_s_Funded_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Funded % --></label>
+        <name>Lender_s_Funded_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Income --></label>
+        <name>Lender_s_Income__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Origination --></label>
+        <name>Lender_s_Origination__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Payback Amount --></label>
+        <name>Lender_s_Payback_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Remaining Balance --></label>
+        <name>Lender_s_Remaining_Balance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lender&apos;s Settled Payments --></label>
+        <name>Lender_s_Settled_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Years of Ownership --></label>
+        <name>Length_of_Ownership__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10+</masterLabel>
+            <translation><!-- 10+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9</masterLabel>
+            <translation><!-- 9 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Line of Credit --></label>
+        <name>Line_of_Credit_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Line of Credit/ Overdraft Protection --></label>
+        <name>Line_of_Credit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lost Reason --></label>
+        <name>Lost_Reason__c</name>
+        <picklistValues>
+            <masterLabel>BK / Taxes / CRA / Judge</masterLabel>
+            <translation><!-- BK / Taxes / CRA / Judge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bad Ratings</masterLabel>
+            <translation><!-- Bad Ratings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate</masterLabel>
+            <translation><!-- Duplicate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High Rates</masterLabel>
+            <translation><!-- High Rates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lost to Competitor</masterLabel>
+            <translation><!-- Lost to Competitor --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Budget / Lost Funding</masterLabel>
+            <translation><!-- No Budget / Lost Funding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No Decision / Non-Responsive</masterLabel>
+            <translation><!-- No Decision / Non-Responsive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Ready</masterLabel>
+            <translation><!-- Not Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not in Biz</masterLabel>
+            <translation><!-- Not in Biz --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Price</masterLabel>
+            <translation><!-- Price --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>With Competitor</masterLabel>
+            <translation><!-- With Competitor --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Mailing City --></label>
+        <name>Mailing_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Province --></label>
+        <name>Mailing_State__c</name>
+        <picklistValues>
+            <masterLabel>Alberta</masterLabel>
+            <translation><!-- Alberta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>British Columbia</masterLabel>
+            <translation><!-- British Columbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manitoba</masterLabel>
+            <translation><!-- Manitoba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Brunswick</masterLabel>
+            <translation><!-- New Brunswick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newfoundland and Labrador</masterLabel>
+            <translation><!-- Newfoundland and Labrador --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nova Scotia</masterLabel>
+            <translation><!-- Nova Scotia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ontario</masterLabel>
+            <translation><!-- Ontario --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prince Edward Island</masterLabel>
+            <translation><!-- Prince Edward Island --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quebec</masterLabel>
+            <translation><!-- Quebec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saskatchewan</masterLabel>
+            <translation><!-- Saskatchewan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address --></label>
+        <name>Mailing_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Zip Code --></label>
+        <name>Mailing_Zip_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Master Payoff % --></label>
+        <name>Master_Payoff_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Monthly Rent and/or Mortgage Payments $ --></label>
+        <name>Monthly_Rent_or_Mortgage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Near Renewal --></label>
+        <name>Near_Renewal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Net Funded --></label>
+        <name>Net_Funded__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Answer Counter --></label>
+        <name>No_Answer__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. of Positions --></label>
+        <name>No_of_Positions__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. of terminals --></label>
+        <name>No_of_terminals__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10</masterLabel>
+            <translation><!-- 10 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10+</masterLabel>
+            <translation><!-- 10+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5</masterLabel>
+            <translation><!-- 5 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6</masterLabel>
+            <translation><!-- 6 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7</masterLabel>
+            <translation><!-- 7 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8</masterLabel>
+            <translation><!-- 8 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9</masterLabel>
+            <translation><!-- 9 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Offer Notes --></label>
+        <name>Offer_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bank Number/Mobile Number --></label>
+        <name>Office_Mobile_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opener Name --></label>
+        <name>Opener_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Owner Company Name --></label>
+        <name>Opportunity_Owner_Company_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Owner Manager --></label>
+        <name>Opportunity_Owner_Manager__c</name>
+        <relationshipLabel><!-- Opportunities (Opportunity Owner Manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Owner Name --></label>
+        <name>Opportunity_Owner_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Owner: Role: Name --></label>
+        <name>Opportunity_Owner_Role_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity Stage Age --></label>
+        <name>Opportunity_Stage_Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Original Owner --></label>
+        <name>Original_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee Payable --></label>
+        <name>Origination_Fee_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination Fee Received --></label>
+        <name>Origination_Fee_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Origination % --></label>
+        <name>Origination_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Own/Rent --></label>
+        <name>Own_or_Lease__c</name>
+        <picklistValues>
+            <masterLabel>Own</masterLabel>
+            <translation><!-- Own --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rent</masterLabel>
+            <translation><!-- Rent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Ownership % --></label>
+        <name>Owner1Ownership__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ownership % --></label>
+        <name>Owner1_Ownership__c</name>
+        <picklistValues>
+            <masterLabel>100</masterLabel>
+            <translation><!-- 100 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>51 - 70</masterLabel>
+            <translation><!-- 51 - 70 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>71 - 99</masterLabel>
+            <translation><!-- 71 - 99 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Less than 50</masterLabel>
+            <translation><!-- Less than 50 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Owner1 credit info --></label>
+        <name>Owner1_credit_info__c</name>
+    </fields>
+    <fields>
+        <label><!-- Home Address 1 --></label>
+        <name>Owner_1_Address_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 1 Cell --></label>
+        <name>Owner_1_CellPhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 1 City --></label>
+        <name>Owner_1_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 1 Credit Score --></label>
+        <name>Owner_1_Credit_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner Date Of Birth --></label>
+        <name>Owner_1_DOB__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 1 Email --></label>
+        <name>Owner_1_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Name --></label>
+        <name>Owner_1_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 1: Full Name --></label>
+        <name>Owner_1_Full_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Name --></label>
+        <name>Owner_1_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Onwer&apos;s Home Phone Number --></label>
+        <name>Owner_1_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 1 Province --></label>
+        <name>Owner_1_State_Prov__c</name>
+        <picklistValues>
+            <masterLabel>Alberta</masterLabel>
+            <translation><!-- Alberta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>British Columbia</masterLabel>
+            <translation><!-- British Columbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manitoba</masterLabel>
+            <translation><!-- Manitoba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Brunswick</masterLabel>
+            <translation><!-- New Brunswick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newfoundland and Labrador</masterLabel>
+            <translation><!-- Newfoundland and Labrador --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nova Scotia</masterLabel>
+            <translation><!-- Nova Scotia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ontario</masterLabel>
+            <translation><!-- Ontario --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prince Edward Island</masterLabel>
+            <translation><!-- Prince Edward Island --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quebec</masterLabel>
+            <translation><!-- Quebec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saskatchewan</masterLabel>
+            <translation><!-- Saskatchewan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Owner Postal Code/Zip Code --></label>
+        <name>Owner_1_Zip_Postal_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Home Address --></label>
+        <name>Owner_2_Address_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cell Phone Number --></label>
+        <name>Owner_2_CellPhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>Owner_2_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 2 Credit Score --></label>
+        <name>Owner_2_Credit_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Corporate Date Of Birth --></label>
+        <name>Owner_2_DOB__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 2 Email --></label>
+        <name>Owner_2_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner First Name --></label>
+        <name>Owner_2_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner Last Name --></label>
+        <name>Owner_2_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ownership % --></label>
+        <name>Owner_2_Ownership__c</name>
+    </fields>
+    <fields>
+        <label><!-- Corporate Home Phone Number --></label>
+        <name>Owner_2_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner Social Security Number/SIN Number --></label>
+        <name>Owner_2_SIN_SS_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Owner 2 Province --></label>
+        <name>Owner_2_State_Prov__c</name>
+        <picklistValues>
+            <masterLabel>Alberta</masterLabel>
+            <translation><!-- Alberta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>British Columbia</masterLabel>
+            <translation><!-- British Columbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manitoba</masterLabel>
+            <translation><!-- Manitoba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Brunswick</masterLabel>
+            <translation><!-- New Brunswick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newfoundland and Labrador</masterLabel>
+            <translation><!-- Newfoundland and Labrador --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nova Scotia</masterLabel>
+            <translation><!-- Nova Scotia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ontario</masterLabel>
+            <translation><!-- Ontario --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prince Edward Island</masterLabel>
+            <translation><!-- Prince Edward Island --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quebec</masterLabel>
+            <translation><!-- Quebec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saskatchewan</masterLabel>
+            <translation><!-- Saskatchewan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Corporate Postal Code/Zip Code --></label>
+        <name>Owner_2_Zip_Postal_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Paid Off --></label>
+        <name>Paid_Off__c</name>
+    </fields>
+    <fields>
+        <label><!-- % Paid --></label>
+        <name>Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pay Off Amount --></label>
+        <name>Pay_Off_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payback (Total) --></label>
+        <name>Payback_Total__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Schedule Amount --></label>
+        <name>Payment_Schedule_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Schedule --></label>
+        <name>Payment_Schedule__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payoff % Image --></label>
+        <name>Payoff_Image__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payoff %(Time) Image --></label>
+        <name>Payoff_Per_Time_Image__c</name>
+    </fields>
+    <fields>
+        <help><!-- Used to show the Percentage of time to get the estimation of Payoff --></help>
+        <label><!-- Payoff % (Time) --></label>
+        <name>Payoff_Percentage_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payoff Time Test --></label>
+        <name>Payoff_Time_Test__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payoff % --></label>
+        <name>Payoff__c</name>
+    </fields>
+    <fields>
+        <label><!-- Percentage Of Gross --></label>
+        <name>Percentage_Of_Gross__c</name>
+    </fields>
+    <fields>
+        <label><!-- Principle % --></label>
+        <name>Principle_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prior/Current Cash Advance Company --></label>
+        <name>Prior_Current_Cash_Advance_Company__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product Name --></label>
+        <name>Product_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Product/Service Sold --></label>
+        <name>Product_Service_Sold__c</name>
+    </fields>
+    <fields>
+        <label><!-- Program Type --></label>
+        <name>Program_Type__c</name>
+        <picklistValues>
+            <masterLabel>ACH</masterLabel>
+            <translation><!-- ACH --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loan</masterLabel>
+            <translation><!-- Loan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MCA</masterLabel>
+            <translation><!-- MCA --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Prospecting Stage Date/Time --></label>
+        <name>Prospecting_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Prospecting Stage Date --></label>
+        <name>Prospecting_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Province of Registration --></label>
+        <name>Province_of_Registration__c</name>
+        <picklistValues>
+            <masterLabel>Alberta</masterLabel>
+            <translation><!-- Alberta --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>British Columbia</masterLabel>
+            <translation><!-- British Columbia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Manitoba</masterLabel>
+            <translation><!-- Manitoba --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Brunswick</masterLabel>
+            <translation><!-- New Brunswick --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newfoundland and Labrador</masterLabel>
+            <translation><!-- Newfoundland and Labrador --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nova Scotia</masterLabel>
+            <translation><!-- Nova Scotia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ontario</masterLabel>
+            <translation><!-- Ontario --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prince Edward Island</masterLabel>
+            <translation><!-- Prince Edward Island --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quebec</masterLabel>
+            <translation><!-- Quebec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Saskatchewan</masterLabel>
+            <translation><!-- Saskatchewan --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- ROI Analysis Completed --></label>
+        <name>ROI_Analysis_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- ReNewal Notes --></label>
+        <name>ReNewal_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Receivable Cleared --></label>
+        <name>Receivable_Cleared__c</name>
+    </fields>
+    <fields>
+        <label><!-- Receivable Pulled --></label>
+        <name>Receivable_Pulled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Renewal Closed Reason --></label>
+        <name>Renewal_Closed_Reason__c</name>
+        <picklistValues>
+            <masterLabel>Accessive Negative Days/NSF</masterLabel>
+            <translation><!-- Accessive Negative Days/NSF --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BK/Taxes/CRA/Judge</masterLabel>
+            <translation><!-- BK/Taxes/CRA/Judge --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Bad Ratings</masterLabel>
+            <translation><!-- Bad Ratings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Behind on Rent</masterLabel>
+            <translation><!-- Behind on Rent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Duplicate</masterLabel>
+            <translation><!-- Duplicate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fraud</masterLabel>
+            <translation><!-- Fraud --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High Open Balance</masterLabel>
+            <translation><!-- High Open Balance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>High Rates</masterLabel>
+            <translation><!-- High Rates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low Deposit Count</masterLabel>
+            <translation><!-- Low Deposit Count --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low Sales Volume</masterLabel>
+            <translation><!-- Low Sales Volume --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Low and Inconsistent Balance</masterLabel>
+            <translation><!-- Low and Inconsistent Balance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month to Date</masterLabel>
+            <translation><!-- Month to Date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Negative Background Check</masterLabel>
+            <translation><!-- Negative Background Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not In Biz</masterLabel>
+            <translation><!-- Not In Biz --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Ready</masterLabel>
+            <translation><!-- Not Ready --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Offer Expired</masterLabel>
+            <translation><!-- Offer Expired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Over-leveraged for Additional Positions</masterLabel>
+            <translation><!-- Over-leveraged for Additional Positions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Poor Repayment History</masterLabel>
+            <translation><!-- Poor Repayment History --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Poor/No Credit</masterLabel>
+            <translation><!-- Poor/No Credit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Restricted Industry</masterLabel>
+            <translation><!-- Restricted Industry --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Time In Business</masterLabel>
+            <translation><!-- Time In Business --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>With Competitor</masterLabel>
+            <translation><!-- With Competitor --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Renewal Eligibility % --></label>
+        <name>Renewal_Eligibility_Per__c</name>
+    </fields>
+    <fields>
+        <label><!-- Renewal Status --></label>
+        <name>Renewal_Status__c</name>
+        <picklistValues>
+            <masterLabel>Closed Lost</masterLabel>
+            <translation><!-- Closed Lost --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Declined</masterLabel>
+            <translation><!-- Declined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal Created</masterLabel>
+            <translation><!-- Renewal Created --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Revived Stage Date/Time --></label>
+        <name>Revived_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Revived Stage Date --></label>
+        <name>Revived_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Assessment Fee % --></label>
+        <name>Risk_Assessment_Fee_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Fee Payable --></label>
+        <name>Risk_Fee_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Risk Fee Received --></label>
+        <name>Risk_Fee_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- SIC Code --></label>
+        <name>SIC_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SIC Description --></label>
+        <name>SIC_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Your Social Security Number / SIN Number --></label>
+        <name>SIN_SS_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Support Email --></label>
+        <name>Sales_Support_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sales Team --></label>
+        <name>Sales_Team__c</name>
+    </fields>
+    <fields>
+        <label><!-- Split/Lockbox Details --></label>
+        <name>Split_Lockbox_Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stage Date --></label>
+        <name>Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndicator&apos;s Commission Amount --></label>
+        <name>Syndicator_s_Commission_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndicator&apos;s Funded Amount --></label>
+        <name>Syndicator_s_Funded_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndicator&apos;s Funded % --></label>
+        <name>Syndicator_s_Funded_Percentage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndicator&apos;s Management Fee --></label>
+        <name>Syndicator_s_Management_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndicator&apos;s Net Payback Amount --></label>
+        <name>Syndicator_s_Net_Payback_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Syndicator&apos;s Payback Amount --></label>
+        <name>Syndicator_s_Payback_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Task Comment --></label>
+        <name>Task_Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Task Subject --></label>
+        <name>Task_Subject__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time in Business --></label>
+        <name>Time_in_Business__c</name>
+        <picklistValues>
+            <masterLabel>0-3 Months</masterLabel>
+            <translation><!-- 0-3 Months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>1-3 Years</masterLabel>
+            <translation><!-- 1-3 Years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10+ Years</masterLabel>
+            <translation><!-- 10+ Years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3-5 Years</masterLabel>
+            <translation><!-- 3-5 Years --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 months – 1 year</masterLabel>
+            <translation><!-- 4 months – 1 year --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5-10 Years</masterLabel>
+            <translation><!-- 5-10 Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Amount Settled --></label>
+        <name>Total_Amount_Settled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Fee Received --></label>
+        <name>Total_Fee_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total From Syndicates --></label>
+        <name>Total_From_Syndicates__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Merchant Payments --></label>
+        <name>Total_Merchant_Payments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Outstanding Amount --></label>
+        <name>Total_Outstanding_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ownership % --></label>
+        <name>Total_Ownership__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Payable --></label>
+        <name>Total_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type of Entity --></label>
+        <name>Type_of_Entity__c</name>
+        <picklistValues>
+            <masterLabel>Cooperative</masterLabel>
+            <translation><!-- Cooperative --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Corporation</masterLabel>
+            <translation><!-- Corporation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partnership</masterLabel>
+            <translation><!-- Partnership --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sole Proprietorship</masterLabel>
+            <translation><!-- Sole Proprietorship --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- UCC Filed --></label>
+        <name>UCC_Filed__c</name>
+    </fields>
+    <fields>
+        <label><!-- UW Approved Date --></label>
+        <name>UW_Approved_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- UW Declined Date --></label>
+        <name>UW_Declined_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- UW Stage Date/Time --></label>
+        <name>UW_Stage_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- UW Stage Date --></label>
+        <name>UW_Stage_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Value Add --></label>
+        <name>Value_Add__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Commission Payable --></label>
+        <name>WL_Commission_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Commission % --></label>
+        <name>WL_Commission__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Contact --></label>
+        <name>WL_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Date Paid --></label>
+        <name>WL_Date_Paid__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Manager --></label>
+        <name>WL_Manager__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Name --></label>
+        <name>WL_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Origination Fee Payable --></label>
+        <name>WL_Origination_Fee_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Origination Fee % --></label>
+        <name>WL_Origination_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Risk Fee Payable --></label>
+        <name>WL_Risk_Fee_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Risk Fee % --></label>
+        <name>WL_Risk_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- WL Total Payable --></label>
+        <name>WL_Total_Payable__c</name>
+    </fields>
+    <fields>
+        <label><!-- Website Address --></label>
+        <name>Website__c</name>
+    </fields>
+    <fields>
+        <label><!-- Welcome Call --></label>
+        <name>Welcome_Call__c</name>
+    </fields>
+    <fields>
+        <label><!-- White Label --></label>
+        <name>White_Label_Custom__c</name>
+        <relationshipLabel><!-- Opportunities (White Label) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Years In Business --></label>
+        <name>Years_In_Business__c</name>
+    </fields>
+    <fields>
+        <help><!-- The number of times this record has been assigned via Distribution Engine --></help>
+        <label><!-- Distribution count --></label>
+        <name>n2de__Distribution_count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is distributed to user --></label>
+        <name>n2de__Is_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is auto reassigned --></label>
+        <name>n2de__Is_reassigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is rejected --></label>
+        <name>n2de__Is_rejected__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trigger enabled --></label>
+        <name>n2de__Is_trigger_enabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is triggered --></label>
+        <name>n2de__Is_triggered__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last distributed to user --></label>
+        <name>n2de__Last_distributed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date last auto reassigned --></label>
+        <name>n2de__Last_reassigned__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date &amp; time that the DE assignment of this opportunity was last rejected --></help>
+        <label><!-- Last rejected --></label>
+        <name>n2de__Last_rejected__c</name>
+    </fields>
+    <layouts>
+        <layout>Opportunity Layout</layout>
+        <sections>
+            <label><!-- BANK ACCOUNT DETAILS --></label>
+            <section>BANK ACCOUNT DETAILS</section>
+        </sections>
+        <sections>
+            <label><!-- BUSINESS INFORMATION FOR APPLICATION --></label>
+            <section>BUSINESS INFORMATION FOR APPLICATION</section>
+        </sections>
+        <sections>
+            <label><!-- BUSINESS PROPERTY INFORMATION --></label>
+            <section>BUSINESS PROPERTY INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- COMMISSION --></label>
+            <section>COMMISSION</section>
+        </sections>
+        <sections>
+            <label><!-- CREDIT CARD PROCESSING --></label>
+            <section>CREDIT CARD PROCESSING</section>
+        </sections>
+        <sections>
+            <label><!-- DIALSOURCE --></label>
+            <section>DIALSOURCE</section>
+        </sections>
+        <sections>
+            <label><!-- FUNDING INFO --></label>
+            <section>FUNDING INFO</section>
+        </sections>
+        <sections>
+            <label><!-- ISO --></label>
+            <section>ISO</section>
+        </sections>
+        <sections>
+            <label><!-- OTHER INFORMATION --></label>
+            <section>OTHER INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 1 INFORMATION --></label>
+            <section>OWNER 1 INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 2 INFORMATION --></label>
+            <section>OWNER 2 INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- PAYMENT DETAILS --></label>
+            <section>PAYMENT DETAILS</section>
+        </sections>
+        <sections>
+            <label><!-- RENEWAL INFO --></label>
+            <section>RENEWAL INFO</section>
+        </sections>
+        <sections>
+            <label><!-- WHITE LABEL INFO --></label>
+            <section>WHITE LABEL INFO</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sales Rep</layout>
+        <sections>
+            <label><!-- BUSINESS INFORMATION FOR APPLICATION --></label>
+            <section>BUSINESS INFORMATION FOR APPLICATION</section>
+        </sections>
+        <sections>
+            <label><!-- BUSINESS PROPERTY INFORMATION --></label>
+            <section>BUSINESS PROPERTY INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- CREDIT CARD PROCESSING --></label>
+            <section>CREDIT CARD PROCESSING</section>
+        </sections>
+        <sections>
+            <label><!-- DIALSOURCE --></label>
+            <section>DIALSOURCE</section>
+        </sections>
+        <sections>
+            <label><!-- FUNDING INFO --></label>
+            <section>FUNDING INFO</section>
+        </sections>
+        <sections>
+            <label><!-- OTHER INFORMATION --></label>
+            <section>OTHER INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 1 INFORMATION --></label>
+            <section>OWNER 1 INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 2 INFORMATION --></label>
+            <section>OWNER 2 INFORMATION</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Sales Support</layout>
+        <sections>
+            <label><!-- ADDITIONAL INFO --></label>
+            <section>ADDITIONAL INFO</section>
+        </sections>
+        <sections>
+            <label><!-- BANK ACCOUNT DETAILS --></label>
+            <section>BANK ACCOUNT DETAILS</section>
+        </sections>
+        <sections>
+            <label><!-- BUSINESS INFORMATION FOR APPLICATION --></label>
+            <section>BUSINESS INFORMATION FOR APPLICATION</section>
+        </sections>
+        <sections>
+            <label><!-- BUSINESS PROPERTY INFORMATION --></label>
+            <section>BUSINESS PROPERTY INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- COMMISSION --></label>
+            <section>COMMISSION</section>
+        </sections>
+        <sections>
+            <label><!-- CREDIT CARD PROCESSING --></label>
+            <section>CREDIT CARD PROCESSING</section>
+        </sections>
+        <sections>
+            <label><!-- DIALSOURCE --></label>
+            <section>DIALSOURCE</section>
+        </sections>
+        <sections>
+            <label><!-- FUNDING INFO --></label>
+            <section>FUNDING INFO</section>
+        </sections>
+        <sections>
+            <label><!-- ISO --></label>
+            <section>ISO</section>
+        </sections>
+        <sections>
+            <label><!-- OTHER INFORMATION --></label>
+            <section>OTHER INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 1 INFORMATION --></label>
+            <section>OWNER 1 INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 2 INFORMATION --></label>
+            <section>OWNER 2 INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- PAYMENT DETAILS --></label>
+            <section>PAYMENT DETAILS</section>
+        </sections>
+        <sections>
+            <label><!-- RENEWAL INFO --></label>
+            <section>RENEWAL INFO</section>
+        </sections>
+        <sections>
+            <label><!-- WHITE LABEL INFO --></label>
+            <section>WHITE LABEL INFO</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Testing Layout</layout>
+        <sections>
+            <label><!-- BANK ACCOUNT DETAILS --></label>
+            <section>BANK ACCOUNT DETAILS</section>
+        </sections>
+        <sections>
+            <label><!-- BUSINESS INFORMATION FOR APPLICATION --></label>
+            <section>BUSINESS INFORMATION FOR APPLICATION</section>
+        </sections>
+        <sections>
+            <label><!-- BUSINESS PROPERTY INFORMATION --></label>
+            <section>BUSINESS PROPERTY INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- COMMISSION --></label>
+            <section>COMMISSION</section>
+        </sections>
+        <sections>
+            <label><!-- CREDIT CARD PROCESSING --></label>
+            <section>CREDIT CARD PROCESSING</section>
+        </sections>
+        <sections>
+            <label><!-- DIALSOURCE --></label>
+            <section>DIALSOURCE</section>
+        </sections>
+        <sections>
+            <label><!-- FUNDING INFO --></label>
+            <section>FUNDING INFO</section>
+        </sections>
+        <sections>
+            <label><!-- ISO --></label>
+            <section>ISO</section>
+        </sections>
+        <sections>
+            <label><!-- OTHER INFORMATION --></label>
+            <section>OTHER INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 1 INFORMATION --></label>
+            <section>OWNER 1 INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- OWNER 2 INFORMATION --></label>
+            <section>OWNER 2 INFORMATION</section>
+        </sections>
+        <sections>
+            <label><!-- PAYMENT DETAILS --></label>
+            <section>PAYMENT DETAILS</section>
+        </sections>
+        <sections>
+            <label><!-- RENEWAL INFO --></label>
+            <section>RENEWAL INFO</section>
+        </sections>
+        <sections>
+            <label><!-- WHITE LABEL INFO --></label>
+            <section>WHITE LABEL INFO</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Request Contract --></label>
+        <name>Request_Contract</name>
+    </quickActions>
+    <validationRules>
+        <errorMessage><!-- Please enter a lost reason before closing the Opportunity --></errorMessage>
+        <name>Lost_Reason_Check</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Don&apos;t use comma in Name --></errorMessage>
+        <name>Opportunity_Name</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Stage can not be change from Funded to its previous stages --></errorMessage>
+        <name>Stage_can_not_be_change</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Add_UW_Documents --></label>
+        <name>Add_UW_Documents</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Complete_Deal --></label>
+        <name>CloufiServicing__Complete_Deal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_New_Renewal_Stack --></label>
+        <name>CloufiServicing__Create_New_Renewal_Stack</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_Repayment_Schedule --></label>
+        <name>CloufiServicing__Create_Repayment_Schedule</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Fund_Deal --></label>
+        <name>CloufiServicing__Fund_Deal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Invite_Syndicators --></label>
+        <name>CloufiServicing__Invite_Syndicators</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Repayment_Chart --></label>
+        <name>CloufiServicing__Repayment_Chart</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Syndication_Wizard --></label>
+        <name>CloufiServicing__Syndication_Wizard</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Bulk_SMS --></label>
+        <name>Cloufi_Twilio__Send_Bulk_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_SMS --></label>
+        <name>Cloufi_Twilio__Send_SMS</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Add_UW_Documents --></label>
+        <name>Cloufi__Add_UW_Documents</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Commission_Calculator --></label>
+        <name>Cloufi__Commission_Calculator</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Funding_Checklist --></label>
+        <name>Cloufi__Funding_Checklist</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Offers --></label>
+        <name>Cloufi__Generate_Offers</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Invite_Funders --></label>
+        <name>Cloufi__Invite_Funders</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Invite_Syndicators --></label>
+        <name>Cloufi__Invite_Syndicators</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Loan_Syndicator_Report --></label>
+        <name>Cloufi__Loan_Syndicator_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Merchant_Interview --></label>
+        <name>Cloufi__Merchant_Interview</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Repayment_Chart --></label>
+        <name>Cloufi__Repayment_Chart</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Syndication_Deal --></label>
+        <name>Cloufi__Syndication_Deal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_Renewal_Stack_Deal --></label>
+        <name>Create_Renewal_Stack_Deal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Download_UW_Documents --></label>
+        <name>Download_UW_Documents</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Invite_Funders --></label>
+        <name>Invite_Funders</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Request_Contract --></label>
+        <name>Request_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Request_Stip --></label>
+        <name>Request_Stip</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Resend_Application --></label>
+        <name>Resend_Application</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Contract --></label>
+        <name>Send_Contract</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_For_Funding --></label>
+        <name>Send_For_Funding</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_Funding_Email_To_Merchant --></label>
+        <name>Send_Funding_Email_To_Merchant</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_to_Control_Sheet_Dept --></label>
+        <name>Send_to_Control_Sheet_Dept</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Submit_To_Sales_Support --></label>
+        <name>Submit_To_Sales_Support</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+</CustomObjectTranslation>

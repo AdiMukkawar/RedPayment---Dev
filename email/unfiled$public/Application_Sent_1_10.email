@@ -1,0 +1,9 @@
+Hi {!Opportunity.Owner_1_First_Name__c},<br/><br/>
+
+I tried calling you today but was unable to reach you. Please complete your application <b><a href="{!Opportunity.Application_URL__c}">here</a></b>. I’d like to get a quick decision for you and help your business get the funding it needs. Please call me if you need any help with the application.<br/><br/><br/>
+
+Best Wishes,<br/>
+{!Opportunity.OwnerFirstName} {!Opportunity.OwnerLastName}<br/>
+{!Opportunity.Opportunity_Owner_Company_Name__c}<br/>
+{!Opportunity.OwnerPhone}<br/>
+{!Opportunity.OwnerEmail}<br/>

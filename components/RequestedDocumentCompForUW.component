@@ -1,0 +1,10 @@
+<apex:component controller="RequestedDocumentComp_Ctl" access="global">
+    <apex:attribute name="OpportunityId" type="Id" description="Id of the Opportunity" assignTo="{!oppid}"/>
+    
+    <div>
+        <apex:repeat value="{!MissingDocs}" var="uw">
+            <li style="list-style-type:disc">{!uw}</li>
+        </apex:repeat><br/>
+    </div>
+    
+</apex:component>

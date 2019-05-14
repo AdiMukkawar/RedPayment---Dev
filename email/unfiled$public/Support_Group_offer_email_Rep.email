@@ -1,0 +1,115 @@
+Hello,<br/><br/>
+
+We are pleased to announce that there is a new offer available for  <b>{!Cloufi__Offers__c.Cloufi__Opportunity__c}</b><br/><br/>
+
+Offer Details:<br/>
+<table border="1">
+	<tr>
+		<td>
+			Product Name
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Product_Name__c}
+		</td>
+	</tr>
+	<tr>
+		<td>
+			Program Type
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Program_Type__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Advance Amount
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Cloufi__Funding_Amount__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Factor
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Factor_Rate__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Term
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Cloufi__Terms_In_Months__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Payback Amount
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Cloufi__Payback_Amount__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Daily Payback Amount
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Cloufi__Daily_PB_Amount__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Origination Fee
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Origination_Fee__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			AdditionalFee
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Additional_Fees__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Holdback %
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Holdback_Per__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Payment Schedule
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Payment_Schedule__c}
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			Notes
+		</td>
+		<td>
+			{!Cloufi__Offers__c.Cloufi__Notes__c}
+		</td>
+	</tr>
+</table><br/><br/><br/>
+Offer: <b><a target="_blank" href = "{!$Label.Base_URL}/{!Cloufi__Offers__c.Id}"+>{!Cloufi__Offers__c.Name}</a></b><br/><br/>
+Please review the offer and update sales force accordingly.

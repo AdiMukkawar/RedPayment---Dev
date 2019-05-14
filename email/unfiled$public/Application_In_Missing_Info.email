@@ -1,0 +1,8 @@
+Hello,<br/><br/>
+
+Please review the New Application from <b>{!Opportunity.Cloufi__Legal_Corporate_Name__c}</b> for <b>{!Opportunity.Name}</b> which is now in <b>App In Missing Info</b> stage.<br/></br>
+
+Opportunity: <a href="https://merchantservices.my.salesforce.com/{!Opportunity.Id}">{!Opportunity.Name}</a><br/><br/>
+
+Best Regards,<br/>
+<img src="{!Opportunity.Company_Logo__c}"/>

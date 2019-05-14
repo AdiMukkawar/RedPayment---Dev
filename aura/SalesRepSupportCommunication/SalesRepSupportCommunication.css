@@ -1,0 +1,47 @@
+.THIS {
+}
+.THIS .messageField {
+    width: 100%;
+}
+.THIS .messageField .slds-form-element {
+    float: left;
+    width: 80%;
+    margin-right: 4%;
+}
+.THIS .firstDiv{
+    font-size: 14px;
+    word-break: break-all;
+}
+.THIS .secondDiv {
+    width: 100%;
+    font-size:14px;
+    word-break: break-all;
+}
+.THIS .message-box-first {
+    margin-bottom: 6px;
+    width: 90%;
+    margin-left: 10%;
+}
+.THIS .message-box-second {
+    margin-bottom: 6px;
+    width: 90%;
+}
+.THIS.uiScrollerWrapper.scrollable {
+   max-height:350px;
+}
+.THIS .chat-main {
+    box-shadow:none;
+    margin-top: 20px;
+    padding:0;
+}
+.THIS .slds-text-heading_small{
+    white-space: normal;
+}
+@media screen and (max-width: 1380px) {
+    .THIS .messageField .slds-form-element {
+        width: 75%;
+    }
+}
+.THIS .description-Span{
+    white-space: pre-line;
+}

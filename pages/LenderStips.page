@@ -1,0 +1,317 @@
+<!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author: Techila Global Services Pvt Ltd. (Aditya Mukkawar)
+* VF Page Name: LenderStips
+* Created Date: 01/09/2019
+* Description: To show Completed Documents
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Author       |      Date      |   Description 
+*
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+<apex:page standardController="Opportunity" extensions="LenderStipsController" sidebar="false" showHeader="false" html-autocomplete="off">
+    <apex:pageMessages id="pgMsg" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <apex:includeScript value="{!$Resource.FileSaver}"/>
+    <apex:includeScript value="{!$Resource.JavascriptZip}"/>
+    <script> 
+        var zip;
+        var filePaths;
+        var a;
+        var i = 0;
+        var dropboxToken;
+        var map;
+        var folder;
+        window.onload = function(){
+            zip = new JSZip();
+            folder = zip.folder('{!objOpp.Name}');
+            map = new Map();
+            dropboxToken = '{!$Setup.Cloufi__Dropbox_Settings__c.Cloufi__Access_Token__c}';
+            filePaths = '{!filesPathList}';
+            a = filePaths.replace('[','').replace(']','').split(",");
+        }
+        
+        function downloadSpecificFileZip(){
+            document.getElementById("sldsSpinner").style.display = "block";
+            if(a.length == 0){
+                alert('No files to download');
+            }else if(a.length > 0){
+                if(a[i] != null && a[i] !='')
+                    getFiles(decodeURIComponent(a[i].trim()));
+            }
+        }
+        
+        function getFiles(filePath){                    
+            var xhr = new XMLHttpRequest();                    
+            console.log(JSON.stringify({
+                path: filePath
+            }));
+            var fileName = filePath.split('/');
+            xhr.open('POST', 'https://content.dropboxapi.com/2/files/download');
+            xhr.setRequestHeader('Authorization', 'Bearer ' + dropboxToken);
+            xhr.setRequestHeader('Dropbox-API-Arg', JSON.stringify({
+                path: filePath
+            }));
+            xhr.responseType = "arraybuffer";                       
+            xhr.onreadystatechange = function() {
+                if(xhr.readyState == 4) {
+                    if(xhr.status === 200){
+                        console.log('fileName '+fileName[fileName.length-1]);
+                        map.set(fileName[fileName.length-1], xhr.response);
+                    }
+                    i++;
+                    console.log('map value '+map.size);
+                    console.log('value of I ->  '+i);
+                    console.log('a.length '+a.length);
+                    if(i < a.length){
+                        getFiles(decodeURIComponent(a[i].trim()));
+                    }else if(i == a.length){
+                        a.forEach((url)=> {
+                            var fileName = decodeURIComponent(url).split('/');
+                            if(map.has(fileName[fileName.length-1])){
+                                folder.file(fileName[fileName.length-1], map.get(fileName[fileName.length-1]));
+                            }
+                        })
+                        
+                        //document.getElementById('mainHeading').innerHTML = "Zip document folder downloaded successfully";
+                        zip.generateAsync({type:"blob"})
+                        .then(blob => saveAs(blob, '{!objOpp.Name}'))
+                        .catch(e => document.getElementById('mainHeading').innerHTML = e);
+                        document.getElementById("sldsSpinner").style.display = "none";
+                        window.location.reload();
+                    }
+                }
+            }
+            xhr.send();
+        }
+
+        $(document).ready(function(){
+            overridePageMessages();    
+        });
+
+        function overridePageMessages(){    
+            var textureEffect = '';
+            $('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage '+textureEffect);          
+            $('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success  customMessage '+textureEffect);    
+            $('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage '+textureEffect);                  
+            $('.infoM3').addClass('slds-notify slds-notify--toast customMessage '+textureEffect);    
+            $('.errorM3').removeClass('errorM3'); 
+            $('.confirmM3').removeClass('confirmM3'); 
+            $('.infoM3').removeClass('infoM3');   
+            $('.warningM3').removeClass('warningM3');  
+        }
+
+
+    
+    </script>
+    <style>
+        .msgIcon {
+        display: none!important
+        }
+        .customMessage * {
+        color: #fff!important
+        }
+        .customMessage {
+        margin: 5px 0!important;
+        opacity: 1!important;
+        width: 100%;
+        font-size: 14px;
+        border: 0px;
+        padding-left: 10px;
+        }
+    </style>
+    <apex:form id="formId">
+        <html
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <apex:actionstatus id="actionStatus">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%;">
+                        <div id="spinner" class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                            <span class="slds-assistive-text">Loading</span>
+                            <div class="slds-spinner__dot-a"></div>
+                            <div class="slds-spinner__dot-b"></div>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+            <!-- SPINNER -->
+            <div id="sldsSpinner" class="slds-spinner_container slds-is-relative" style="display: none;z-index:3;background-color: white;height: 100%; width:100%; top:0;position:fixed; left:0;opacity:0.65;width:100%; ">
+                <div role="status" class="slds-spinner slds-spinner--medium slds-spinner--brand">
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+            <!-- / SPINNER -->
+            <head>
+                <title>Merchant Documents</title>
+                <apex:slds />
+            </head>
+            <body class="slds-scope">
+                <apex:outputPanel id="bodyPage">
+                    <apex:outputPanel rendered="{!IF(showPage==true, true, false)}">
+                        <!-- Header Starts Here -->
+                        <div class="slds-page-header">
+                            <div class="slds-page-header__row">
+                                <div class="slds-page-header__col-title">
+                                    <div class="slds-media">
+                                        <div class="slds-media__figure">
+                                            <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                                                <svg aria-hidden="true" class="slds-icon">
+                                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#opportunity')}"></use>
+                                                </svg>
+                                            </span>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <div class="slds-page-header__name">
+                                                <div class="slds-page-header__name-title">
+                                                    <h1>
+                                                        <span class="slds-page-header__title slds-truncate" title="{!objOpp.Name}">{!objOpp.Name}</span>
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                            <p class="slds-page-header__name-meta">Merchant Documents</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Header Ends Here  -->
+                        <!-- Documents Section Starts Here -->
+                        <apex:outputPanel id="docPanel">
+                            <table class="slds-table slds-table_bordered slds-table_cell-buffer" style="padding: 12px;">
+                                <!--<h2>List of Completed Documents</h2>-->
+                                <thead>
+                                    <th>Document Name</th>
+                                    <th>URL</th>
+                                </thead>
+                                <tbody>
+                                    <apex:repeat value="{!stipWrapperList}" var="stip">
+                                        <apex:outputPanel rendered="{!IF(stip.documentURL!=null, true, false)}">
+                                            <tr>
+                                                <td data-label="Stip Name">
+                                                    <div class="" title="{!stip.stipName}">
+                                                        <apex:outputText value="{!stip.stipName}"/>
+                                                    </div>
+                                                </td>
+                                                <td data-label="View">
+                                                    <div class="" title="{!stip.documentURL}">
+                                                        <apex:outputLink target="_blank" value="{!stip.documentURL}" rendered="{!stip.documentURL!=null}">View</apex:outputLink>
+                                                        <apex:outputText rendered="{!stip.documentURL==null}">Requested</apex:outputText>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </apex:outputPanel>
+                                    </apex:repeat>
+                                    <br/>
+                                    <apex:repeat value="{!stipWrapperList}" var="stip">
+                                        <apex:outputPanel rendered="{!IF(stip.documentURL==null, true, false)}">
+                                            <tr>
+                                                <td data-label="Stip Name">
+                                                    <div class="" title="{!stip.stipName}">
+                                                        <apex:outputText value="{!stip.stipName}"/>
+                                                    </div>
+                                                </td>
+                                                <td data-label="View">
+                                                    <div class="" title="{!stip.documentURL}">
+                                                        <apex:outputLink target="_blank" value="{!stip.documentURL}" rendered="{!stip.documentURL!=null}">View</apex:outputLink>
+                                                        <apex:outputText rendered="{!stip.documentURL==null}">Requested</apex:outputText>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </apex:outputPanel>
+                                    </apex:repeat>
+                                    <br/>
+                                </tbody>
+                            </table>
+                        </apex:outputPanel>
+                        <!-- Documents Section Ends Here -->
+                        <apex:outputPanel id="requestStipDiv" layout="block" styleClass="slds-m-around--medium">
+                            <apex:outputPanel rendered="{!isRequestStip}">
+                                <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-m-around--medium">
+                                    <thead>
+                                        <tr class="slds-text-title--caps">
+                                            <th scope="col">
+                                                <b>Select</b>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Display Size">
+                                                    <b>Name</b>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Type">
+                                                    <b>Comment</b>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <apex:repeat value="{!lstStipTypeWrapper}" var="stip">
+                                            <tr>
+                                                <td>
+                                                    <apex:inputCheckbox value="{!stip.IsSelected}"/>
+                                                </td>
+                                                <td data-label="Type">
+                                                    <div title="{!stip.stipType}">
+                                                        <apex:outputText value="{!stip.stipType}" rendered="{!$ObjectType.Cloufi__UW_Document__c.Accessible}" >
+                                                            <apex:param name="custom" value="false" assignTo="{!stip.isCustom}"/>
+                                                        </apex:outputText>
+                                                    </div>
+                                                </td>
+                                                <td data-label="Comment">
+                                                    <div  title="Comment">
+                                                        <apex:inputText value="{!stip.strComment}" rendered="{!$ObjectType.Cloufi__UW_Document__c.Accessible}" styleClass="slds-input"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </apex:repeat>
+                                    </tbody>
+                                </table>
+                                <apex:commandButton action="{!requestStipsSave}" styleClass="slds-button slds-button--brand" status="actionStatus" value="Submit Request" style="margin-top:15px;" reRender="docPanel,requestStipDiv,pgMsg"/>
+                                <apex:commandButton rendered="{!!isAddstip}" action="{!AddCustomStip}" styleClass="slds-button slds-button--brand" status="loadingStatus" value="Add Custom UW Document" style="margin-top:15px;" reRender="AddStipDiv,requestStipDiv, pgMsg" />
+                                <apex:commandButton action="{!requestStipShowCancel}" styleClass="slds-button slds-button--neutral" status="loadingStatus" value="Cancel" style="margin-top:15px;" reRender="requestStipDiv,pgMsg" />
+                            </apex:outputPanel>
+                            <apex:commandButton rendered="{!!isRequestStip}" action="{!requestStipShow}"  styleClass="slds-button slds-button--brand" status="loadingStatus" value="Request more UW Documents" style="margin-top:15px;" reRender="requestStipDiv,pgMsg, none"/>
+                            <apex:commandButton value="Download All" onclick="downloadSpecificFileZip();" rendered="{!showHideButton}" styleClass="slds-button slds-button--brand" style="margin-top:15px;" disabled="{!isDownloadSpecificButtonDisabled}" rerender="none"/>
+                        </apex:outputPanel>
+                        <apex:outputPanel id="AddStipDiv" layout="block" styleClass="slds-m-around--medium">
+                            <apex:outputPanel rendered="{!isAddstip}">
+                                <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-m-around--medium">
+                                    <thead>
+                                        <tr class="slds-text-title--caps">
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Display Size">
+                                                    <b>Name</b>
+                                                </div>
+                                            </th>
+                                            <th scope="col">
+                                                <div class="slds-truncate" title="Type">
+                                                    <b>Comment</b>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td data-label="Type">
+                                                <div title="Type">
+                                                    <apex:inputText value="{!StipType}" styleClass="slds-input"/>
+                                                </div>
+                                            </td>
+                                            <td data-label="Comment">
+                                                <div title="Comment">
+                                                    <apex:inputText value="{!StipComment}" styleClass="slds-input"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <apex:commandButton action="{!AddcustomStipsSave}" styleClass="slds-button slds-button--brand" status="loadingStatus" value="Save" style="margin-top:15px;" reRender="docPanel,AddStipDiv,pgMsg,requestStipDiv"/>
+                                <apex:commandButton action="{!AddCustomStipCancel}" styleClass="slds-button slds-button--neutral" status="loadingStatus" value="Cancel" style="margin-top:15px;" reRender="AddStipDiv,pgMsg" />
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                    </apex:outputPanel>
+                </apex:outputPanel>
+            </body>
+        </html>
+    </apex:form>
+</apex:page>

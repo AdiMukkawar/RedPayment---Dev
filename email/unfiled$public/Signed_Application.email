@@ -1,0 +1,14 @@
+<messaging:emailTemplate subject="New Application {!relatedTo.Name} has been Received" recipientType="User" relatedToType="Opportunity">
+    <messaging:htmlEmailBody >
+        
+        Hello,<br/><br/>
+        
+        Please review the New Application from <b>{!relatedTo.Cloufi__Legal_Corporate_Name__c}</b> for <b>{!relatedTo.Name}</b> which is now in <b>App In Missing Info</b> stage.<br/><br/>
+        
+        Opportunity: <b><a href="{!$Label.Base_URL}/{!relatedTo.Id}">{!relatedTo.Name}</a></b><br/><br/><br/>
+        
+        Best Regards,<br/><br/>
+        <img src="{!relatedTo.Company_Logo__c}"/>
+       
+    </messaging:htmlEmailBody>
+</messaging:emailTemplate>

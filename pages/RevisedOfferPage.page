@@ -1,0 +1,48 @@
+<apex:page standardController="Cloufi__Offers__c" extensions="RevisedOfferController" action="{!notifyLender}">
+    <apex:form >
+    <apex:slds />
+    <apex:pageMessages id="msg"/>
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <head>
+                <title>Send Revision</title>
+                
+                <script type="text/javascript" src="//code.jquery.com/jquery.min.js"></script>     
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script>
+                var j$ = jQuery.noConflict();
+                j$(document).ready(function() { 
+                    overridePageMessages();
+                });
+                
+                //Lightning Design System for Page Messages    
+                function overridePageMessages(){    
+                                 
+                    j$('.warningM3').addClass('slds-notify slds-notify--toast slds-theme--warning customMessage ');          
+                    j$('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success customMessage  ');    
+                    j$('.errorM3').addClass('slds-notify slds-notify--alert slds-theme--error customMessage ');                  
+                    j$('.infoM3').addClass('slds-notify slds-notify--toast customMessage ');    
+                                     
+                    j$('.errorM3').removeClass('errorM3'); 
+                    j$('.confirmM3').removeClass('confirmM3'); 
+                    j$('.infoM3').removeClass('infoM3');   
+                    j$('.warningM3').removeClass('warningM3');  
+                }
+            </script>
+            <style>
+                .customMessage {
+                    margin: 5px 0!important;
+                    opacity: 1!important;
+                    width: 100%;
+                    font-size: 15px;
+                    border: 0px;
+                    border-radius: 6px;
+                    padding-left: 10px;
+                }
+            </style>
+            </head>
+         <center>             
+            <apex:commandButton value="Back" action="{!cancel}" styleClass="slds-button slds-button_brand"/>
+         </center>
+         </html>
+    </apex:form>
+</apex:page>

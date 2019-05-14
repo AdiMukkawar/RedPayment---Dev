@@ -1,0 +1,6 @@
+Hi,<br/><br/>
+
+Opportunity - <a href="{!Opportunity.Link}">{!Opportunity.Name}</a> is Revived.<br/>
+Please review it and take actions accordingly.<br/><br/>
+
+Thanks

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>Application Owner Form Received</name>
+    <style>none</style>
+    <subject>Application {!Cloufi__Application__c.Name} Submitted by {!Cloufi__Application__c.Cloufi__First_Name__c} {!Cloufi__Application__c.Cloufi__Last_Name__c}</subject>
+    <type>custom</type>
+</EmailTemplate>

@@ -5,7 +5,7 @@ public class ApplicationTriggerHandler{
         Set<Id> opportunityIdSet = new Set<Id>();
         Map<Id, Set<String>> opportunityUWDocumentMap = new Map<Id, Set<String>>();
         Map<Id, Id> applicationOpportunityMap = new Map<Id, Id>();
-
+	//Test
         for(Cloufi__Application__c objApplication : applicationList){
             applicationIdSet.add(objApplication.Id);
             if(objApplication.Cloufi__Opportunity__c != null){
